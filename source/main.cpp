@@ -13,7 +13,7 @@ int main()
 	BCSTM file;
 	file.openFromFile("sdmc:/music.bcstm");
 	file.play();
-	if(!aptIsSleepAllowed)
+	if(!aptIsSleepAllowed())
 	{
 		aptSetSleepAllowed();
 	}
