@@ -1,4 +1,4 @@
-# BCSTM-Player
+# BCSTM-Player ![Github latest downloads](https://img.shields.io/github/downloads/NPI-D7/BCSTM-Player/total.svg)
  BCSTM-Player for 3ds
  ### if you find any bug, report it in an issue!
 # Known Bugs:
