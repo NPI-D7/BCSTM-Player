@@ -15,7 +15,7 @@ int main()
 	file.play();
 	if(!aptIsSleepAllowed())
 	{
-		aptSetSleepAllowed();
+		aptSetSleepAllowed(true);
 	}
 	while (aptMainLoop())
 	{
