@@ -13,10 +13,9 @@ int main()
 	BCSTM file;
 	file.openFromFile("sdmc:/music.bcstm");
 	file.play();
-	if(!aptIsSleepAllowed())
-	{
-		aptSetSleepAllowed(true);
-	}
+	osSetSpeedupEnable(true);
+	aptSetSleepAllowed(false);
+	aptSetHomeAllowed(false);
 	while (aptMainLoop())
 	{
 		file.tick();
