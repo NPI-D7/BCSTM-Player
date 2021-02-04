@@ -9,7 +9,7 @@ int main()
     gfxInitDefault();
 	ndspInit();
 	consoleInit(GFX_TOP, NULL);
-	printf("BCSTM-Player by Tobi-D7\n\nPress X to Stop Player!\nPress Y to reopen file!\nPress Start to exit!\n");
+	printf("BCSTM-Player by Tobi-D7\nVersion:0.2.0\n\nPress X to Stop Player!\nPress Y to reopen file!\nPress Start to exit!\n");
 	BCSTM file;
 	file.openFromFile("sdmc:/music.bcstm");
 	file.play();
