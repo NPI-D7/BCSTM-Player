@@ -6,10 +6,16 @@
 
 <a href="https://github.com/NPI-D7/BCSTM-Player/releases"><img height="28" src="https://img.shields.io/github/tag/NPI-D7/BCSTM-Player.svg?style=for-the-badge"/></a>&nbsp;
 
- BCSTM-Player for 3ds
+
+
+
+
+ 
+
+
  ### if you find any bug, report it in an issue!
 # Known Bugs:
-
+yew
 # Todo:
 - add pause/play feature.
 - add ui.
