@@ -13,7 +13,7 @@
 
  ### if you find any bug, report it in an issue!
 # Known Bugs:
-yew
+
 # Todo:
 - add pause/play feature.
 - add ui.
