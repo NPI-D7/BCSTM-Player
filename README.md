@@ -17,6 +17,6 @@
 - add ui.
 - add file selector.
 
-# Nightly Cia Build
+# Latest Nightly Cia Build
 
 <img src="https://raw.githubusercontent.com/NPI-D7/nightlys/master/builds/BCSTM-Player/BCSTM-Player.png">
