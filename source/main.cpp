@@ -24,6 +24,9 @@ Result Init()
 	Gui::init();
 	romfsInit();
 	cfguInit();
+	BCSTM file;
+	file.openFromFile("sdmc:/music.bcstm");
+	file.play();
 	Gui::setScreen(std::unique_ptr<MainMenu>(), true, false);
 	return 0;
 
@@ -38,9 +41,7 @@ Result Exit()
 }
 int main()
 {
-	BCSTM file;
-	file.openFromFile("sdmc:/music.bcstm");
-	file.play();	
+		
     Init();
 	while (aptMainLoop())
 	{
