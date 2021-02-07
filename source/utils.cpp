@@ -75,20 +75,21 @@ std::string UTF16toUTF8(const std::u16string& src)
 	return utf16DataToUtf8(src.data(), src.size());
 }
 
-std::string format(std::string fmt_str, ...)
-{
-	va_list ap;
-	char* fp = NULL;
-	va_start(ap, fmt_str);
-	vasprintf(&fp, fmt_str.c_str(), ap);
-	va_end(ap);
-	std::unique_ptr<char, decltype(free)*> formatted(fp, free);
-	return std::string(formatted.get());
-}
-
-std::string timeStr(void)
-{
-	time_t unixTime       = time(NULL);
-	struct tm* timeStruct = gmtime((const time_t*)&unixTime);
-	return format("%02i:%02i:%02i", timeStruct->tm_hour, timeStruct->tm_min);
-}
+//std::string format(std::string fmt_str, ...)
+//{
+//	va_list ap;
+//	char* fp = NULL;
+//	va_start(ap, fmt_str);
+//	vasprintf(&fp, fmt_str.c_str(), ap);
+//	va_end(ap);
+//	std::unique_ptr<char, decltype(free)*> formatted(fp, free);
+//	return std::string(formatted.get());
+//}
+//
+//std::string timeStr(void)
+//{
+//	time_t unixTime       = time(NULL);
+//	struct tm* timeStruct = gmtime((const time_t*)&unixTime);
+//	return format("%02i:%02i:%02i", timeStruct->tm_hour, timeStruct->tm_min);
+//}
+//
