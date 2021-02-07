@@ -17,7 +17,6 @@ bool exiting = false;
 
 Result Init()
 {
-	BCSTM file;
 	fadealpha = 255;
 	fadein = true;
 	gfxInitDefault();
@@ -42,6 +41,9 @@ int main()
    Init();
 	while (aptMainLoop())
 	{
+		BCSTM file;
+		file.openFromFile("sdmc:/music.bcstm");
+		file.play();
 		file.tick();
 		hidScanInput();
 		u32 hDown = hidKeysDown();
