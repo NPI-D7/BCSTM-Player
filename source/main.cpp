@@ -73,4 +73,5 @@ int main()
 		Gui::fadeEffects(6, 6, false);
 	}
 	Exit();
+        return 0;
 }
