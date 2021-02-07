@@ -41,7 +41,7 @@ RSF := $(TOPDIR)/$(RESOURCES)/template.rsf
 ARCH := -march=armv6k -mtune=mpcore -mfloat-abi=hard
 
 COMMON_FLAGS := -g -Wall -Wno-strict-aliasing -O3 -mword-relocations -fomit-frame-pointer -ffast-math $(ARCH) $(INCLUDE) -DARM11 -D_3DS $(BUILD_FLAGS)
-CFLAGS := $(COMMON_FLAGS) -std=gnu99 -D_GNU_SOURCE=1
+CFLAGS := $(COMMON_FLAGS) -std=gnu99 -D_GNU_SOURCE=1 -DARM11 -D_3DS
 CXXFLAGS := $(COMMON_FLAGS) -std=gnu++17
 ifeq ($(ENABLE_EXCEPTIONS),)
 	CXXFLAGS += -fno-rtti -fno-exceptions
@@ -50,7 +50,7 @@ endif
 ASFLAGS := -g $(ARCH)
 LDFLAGS = -specs=3dsx.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)
 
-LIBS := -lctru -lm -lcitro2d -lcitro3d
+LIBS := lcitro2d -lcitro3d -lctru -lm 
 LIBDIRS := $(PORTLIBS) $(CTRULIB) ./lib
 
 #---------------------------------------------------------------------------------
