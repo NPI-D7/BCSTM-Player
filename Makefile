@@ -13,7 +13,7 @@ endif
 
 include $(DEVKITARM)/3ds_rules
 
-IP3DS := 192.168.0.48
+IP3DS := 192.168.2.127
 
 #---------------------------------------------------------------------------------
 # Directory Setup
@@ -23,7 +23,7 @@ OUTPUT := output
 RESOURCES := resources
 DATA := data
 ROMFS := romfs
-SOURCES := source BCSTM
+SOURCES := source BCSTM Universal-Core
 INCLUDES := $(SOURCES) include
 
 #---------------------------------------------------------------------------------
@@ -41,7 +41,7 @@ RSF := $(TOPDIR)/$(RESOURCES)/template.rsf
 ARCH := -march=armv6k -mtune=mpcore -mfloat-abi=hard
 
 COMMON_FLAGS := -g -Wall -Wno-strict-aliasing -O3 -mword-relocations -fomit-frame-pointer -ffast-math $(ARCH) $(INCLUDE) -DARM11 -D_3DS $(BUILD_FLAGS)
-CFLAGS := $(COMMON_FLAGS) -std=gnu99
+CFLAGS := $(COMMON_FLAGS) -std=gnu99 -D_GNU_SOURCE=1
 CXXFLAGS := $(COMMON_FLAGS) -std=gnu++17
 ifeq ($(ENABLE_EXCEPTIONS),)
 	CXXFLAGS += -fno-rtti -fno-exceptions

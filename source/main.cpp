@@ -2,48 +2,67 @@
 #include <3ds.h>
 #include <stdio.h>
 
+#include "common.hpp"
+
 #include "BCSTM.hpp"
 #include "TitleManager.hpp"
+#include "mainMenu.hpp"
 
+bool touching(touchPosition touch, Structs::ButtonPos button) {
+	if (touch.px >= button.x && touch.px <= (button.x + button.w) && touch.py >= button.y && touch.py <= (button.y + button.h))	return true;
+	else	return false;
+}
+
+bool exiting = false;
+
+Result Init()
+{
+	fadealpha = 255;
+	fadein = true;
+	gfxInitDefault();
+	ndspInit();
+	Gui::init();
+	romfsInit();
+	cfguInit();
+	Gui::setScreen(std::unique_ptr<MainMenu>(), true, false);
+	return 0;
+
+}
+Result Exit()
+{
+	Gui::exit();
+	gfxExit();
+	cfguExit();
+	romfsExit();
+	return 0;
+}
 int main()
 {
-    gfxInitDefault();
-	ndspInit();
-	consoleInit(GFX_TOP, NULL);
-	printf("Scan SD!");
-	TitleManager::ScanSD();
-	consoleClear();
-	printf("BCSTM-Player by Tobi-D7\nVersion:0.2.0\n\nPress X to Stop Player!\nPress Y to reopen file!\nPress Start to exit!\n");
-	BCSTM file;
-	file.openFromFile("sdmc:/music.bcstm");
-	file.play();
-	osSetSpeedupEnable(true);
-	aptSetSleepAllowed(false);
-	aptSetHomeAllowed(false);
+   Init();
 	while (aptMainLoop())
 	{
 		file.tick();
 		hidScanInput();
 		u32 hDown = hidKeysDown();
+		u32 hHeld = hidKeysHeld();
+		touchPosition touch;
+		hidTouchRead(&touch);
 
-		
-		if (hDown & KEY_X)
-		{
-			file.stop();
+		Gui::clearTextBufs(); // Clear Text Buffer before.
+		C2D_TargetClear(Top, C2D_Color32(0, 0, 0, 0));
+		C2D_TargetClear(Bottom, C2D_Color32(0, 0, 0, 0));
+
+		// Screen Logic & Draw.
+		C3D_FrameBegin(C3D_FRAME_SYNCDRAW);
+		Gui::DrawScreen(false);
+		Gui::ScreenLogic(hDown, hHeld, touch, true, false);
+		C3D_FrameEnd(0);
+		if (exiting) {
+			if (!fadeout)	break;
 		}
-		if (hDown & KEY_Y)
-		{
-			file.openFromFile("sdmc:/music.bcstm");
-			file.play();
-		}
-		if (hDown & KEY_START)
-		{
-			break;
-		}
+
+		// Call the fade effects here. :D
+		Gui::fadeEffects(6, 6, false);
 	}
-    file.stop();
-	gfxExit();
-	ndspExit();
-	aptExit();
-	return 0;
+	Exit();
 }
