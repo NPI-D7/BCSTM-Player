@@ -38,12 +38,13 @@ Result Exit()
 }
 int main()
 {
-   Init();
+	BCSTM file;
+	file.openFromFile("sdmc:/music.bcstm");
+	file.play();	
+    Init();
 	while (aptMainLoop())
 	{
-		BCSTM file;
-		file.openFromFile("sdmc:/music.bcstm");
-		file.play();
+
 		file.tick();
 		hidScanInput();
 		u32 hDown = hidKeysDown();
