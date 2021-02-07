@@ -5,20 +5,6 @@
 #include "BCSTM.hpp"
 #include "TitleManager.hpp"
 
-std::shared_ptr<Title> titleFromIndex(int i) const
-{
-	if (i == -2)
-	{
-		return nullptr;
-	}
-	else if ((size_t)i < TitleManager::sdtitles.size())
-	{
-		return TitleManager::sdtitles[i];
-	}
-	return nullptr;
-}
-	
-
 int main()
 {
     gfxInitDefault();
