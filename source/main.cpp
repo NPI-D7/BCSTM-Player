@@ -13,6 +13,8 @@ bool touching(touchPosition touch, Structs::ButtonPos button) {
 	else	return false;
 }
 
+extern BCSTM file;
+
 bool exiting = false;
 
 Result Init()
