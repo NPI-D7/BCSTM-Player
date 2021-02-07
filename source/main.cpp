@@ -17,6 +17,7 @@ bool exiting = false;
 
 Result Init()
 {
+	BCSTM file;
 	fadealpha = 255;
 	fadein = true;
 	gfxInitDefault();
