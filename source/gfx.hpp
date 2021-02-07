@@ -28,7 +28,7 @@
 #define GFX_HPP
 
 #include "gui.hpp"
-#include "sprites.h"
+//#include "sprites.h"
 
 #include <citro2d.h>
 
