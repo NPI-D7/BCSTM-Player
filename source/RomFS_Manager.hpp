@@ -1,7 +1,7 @@
 #include <3ds.h>
 #include <iostream>
 
-namespace RomFS
-{
-    Result Mount(id, mediatype, name);
-}
+//namespace RomFS
+//{
+//    Result Mount(u32 id, mediatype, name);
+//}
