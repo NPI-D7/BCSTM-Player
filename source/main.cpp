@@ -26,9 +26,11 @@ Result Init()
 	Gui::init();
 	romfsInit();
 	cfguInit();
+	osSetSpeedupEnable(true);
+	aptSetSleepAllowed(false);
 	file.openFromFile("sdmc:/music.bcstm");
 	file.play();
-	Gui::setScreen(std::unique_ptr<MainMenu>(), true, false);
+	Gui::setScreen(std::unique_ptr<MainMenu>(), false, false);
 	return 0;
 
 }
