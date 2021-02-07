@@ -42,7 +42,7 @@ ARCH := -march=armv6k -mtune=mpcore -mfloat-abi=hard
 
 COMMON_FLAGS := -g -Wall -Wno-strict-aliasing -O3 -mword-relocations -fomit-frame-pointer -ffast-math $(ARCH) $(INCLUDE) -DARM11 -D_3DS $(BUILD_FLAGS)
 CFLAGS := $(COMMON_FLAGS) -std=gnu99
-CXXFLAGS := $(COMMON_FLAGS) -std=gnu++11
+CXXFLAGS := $(COMMON_FLAGS) -std=gnu++17
 ifeq ($(ENABLE_EXCEPTIONS),)
 	CXXFLAGS += -fno-rtti -fno-exceptions
 endif
