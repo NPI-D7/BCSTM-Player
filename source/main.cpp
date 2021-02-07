@@ -13,7 +13,7 @@ bool touching(touchPosition touch, Structs::ButtonPos button) {
 	else	return false;
 }
 
-extern BCSTM file;
+BCSTM file;
 
 bool exiting = false;
 
@@ -26,7 +26,6 @@ Result Init()
 	Gui::init();
 	romfsInit();
 	cfguInit();
-	BCSTM file;
 	file.openFromFile("sdmc:/music.bcstm");
 	file.play();
 	Gui::setScreen(std::unique_ptr<MainMenu>(), true, false);
