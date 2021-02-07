@@ -65,7 +65,3 @@ void GFX::DrawFileBrowseBG(bool isTop) {
 		Gui::Draw_Rect(0, 213, 320, 27, C2D_Color32(0, 160, 210, 255));
 	}
 }
-
-void GFX::DrawSprite(int img, int x, int y, float ScaleX, float ScaleY) {
-	Gui::DrawSprite(sprites, img, x, y, ScaleX, ScaleY);
-}

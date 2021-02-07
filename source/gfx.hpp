@@ -40,8 +40,7 @@ namespace GFX {
 	void DrawBottom(void);
 	void DrawFileBrowseBG(bool isTop = true);
 	
-	// Draw Sprites.
-	void DrawSprite(int img, int x, int y, float ScaleX = 1, float ScaleY = 1);
+	
 }
 
 #endif
