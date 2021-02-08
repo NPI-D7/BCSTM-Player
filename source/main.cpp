@@ -30,7 +30,7 @@ Result Init()
 	aptSetSleepAllowed(false);
 	file.openFromFile("sdmc:/music.bcstm");
 	file.play();
-	Gui::setScreen(std::unique_ptr<MainMenu>(), false, false);
+	Gui::setScreen(std::unique_ptr<MainMenu>(), false, true);
 	return 0;
 
 }
