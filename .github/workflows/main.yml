@@ -87,7 +87,7 @@ jobs:
         run: |
           ID=$(jq --raw-output '.release.id' $GITHUB_EVENT_PATH)
           for file in ${{ github.workspace }}/build/*; do
-            AUTH_HEADER="Authorization: token ${{ secrets.GITHUB_TOKEN }}"
+            AUTH_HEADER="Authorization: token ${{ secrets.TOKEN }}"
             CONTENT_LENGTH="Content-Length: $(stat -c%s $file)"
             CONTENT_TYPE="Content-Type: application/7z-x-compressed"
             UPLOAD_URL="https://uploads.github.com/repos/${{ github.repository }}/releases/$ID/assets?name=$(basename $file)"
