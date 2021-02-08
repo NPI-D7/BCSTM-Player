@@ -16,6 +16,7 @@
 - add pause/play feature.
 - add ui.
 - add file selector.
+- mount romfs from installed Titles / Gamecard ising D7-Menu Core.
 
 # Latest Nightly Cia Build
 
