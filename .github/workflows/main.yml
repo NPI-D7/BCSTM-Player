@@ -110,21 +110,21 @@ jobs:
           git commit -m "BCSTM-Player | $COMMIT_HASH"
           git tag v$CURRENT_DATE
           git push origin master v$CURRENT_DATE
-      #- name: Release to NPI-D7/nightlys
-      #  run: |
-      #    AUTH_HEADER="Authorization: token ${{ secrets.TOKEN }}"
-      #    CONTENT_TYPE="Content-Type: application/json"
-      #    API_URL="https://api.github.com/repos/NPI-D7/nightlys/releases"
-      #    RELEASE_INFO="{\"tag_name\": \"v${{ steps.commit.outputs.current_date }}\", \"name\": \"BCSTM-Player | $COMMIT_HASH\", \"body\": \"$AUTHOR_NAME - $COMMIT_MESSAGE\", \"prerelease\": true}"
-      #    RESPONSE=$(curl -XPOST -H "$AUTH_HEADER" -H "$CONTENT_TYPE" "$API_URL" -d "$RELEASE_INFO")
-      #    ID=$(echo $RESPONSE | jq --raw-output '.id')
-      #    for file in ${{ github.workspace }}/build/*; do
-      #      AUTH_HEADER="Authorization: token ${{ secrets.TOKEN }}"
-      #      CONTENT_LENGTH="Content-Length: $(stat -c%s $file)"
-      #      CONTENT_TYPE="Content-Type: application/7z-x-compressed"
-      #      UPLOAD_URL="https://uploads.github.com/repos/NPI-D7/nigtlys/releases/$ID/assets?name=$(basename $file)"
-      #      curl -XPOST -H "$AUTH_HEADER" -H "$CONTENT_LENGTH" -H "$CONTENT_TYPE" --upload-file "$file" "$UPLOAD_URL"
-      #    done
+      - name: Release to NPI-D7/nightlys
+        run: |
+          AUTH_HEADER="Authorization: token ${{ secrets.TOKEN }}"
+          CONTENT_TYPE="Content-Type: application/json"
+          API_URL="https://api.github.com/repos/NPI-D7/nightlys/releases"
+          RELEASE_INFO="{\"tag_name\": \"v${{ steps.commit.outputs.current_date }}\", \"name\": \"BCSTM-Player | $COMMIT_HASH\", \"body\": \"$AUTHOR_NAME - $COMMIT_MESSAGE\", \"prerelease\": true}"
+          RESPONSE=$(curl -XPOST -H "$AUTH_HEADER" -H "$CONTENT_TYPE" "$API_URL" -d "$RELEASE_INFO")
+          ID=$(echo $RESPONSE | jq --raw-output '.id')
+          for file in ${{ github.workspace }}/build/*; do
+            AUTH_HEADER="Authorization: token ${{ secrets.TOKEN }}"
+            CONTENT_LENGTH="Content-Length: $(stat -c%s $file)"
+            CONTENT_TYPE="Content-Type: application/7z-x-compressed"
+            UPLOAD_URL="https://uploads.github.com/repos/NPI-D7/nigtlys/releases/$ID/assets?name=$(basename $file)"
+            curl -XPOST -H "$AUTH_HEADER" -H "$CONTENT_LENGTH" -H "$CONTENT_TYPE" --upload-file "$file" "$UPLOAD_URL"
+          done
 # lol
   send_webhook:
     runs-on: ubuntu-latest
