@@ -24,23 +24,16 @@
 *         reasonable ways as different from the original version.
 */
 
-#ifndef GFX_HPP
-#define GFX_HPP
+#ifndef INIT_HPP
+#define INIT_HPP
 
-#include "gui.hpp"
-//#include "sprites.h"
+#include <3ds.h>
 
-#include <citro2d.h>
-
-#define WHITE C2D_Color32(255, 255, 255, 255)
-
-namespace GFX {
-	// Draw Basic GUI.
-	void DrawTop(void);
-	void DrawBottom(void);
-	void DrawFileBrowseBG(bool isTop = true);
-	
-	
+namespace Init {
+	// Init, Mainloop & Exit.
+	Result Initialize();
+	Result MainLoop();
+	Result Exit();
 }
 
 #endif

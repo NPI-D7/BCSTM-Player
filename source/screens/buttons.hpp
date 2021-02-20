@@ -1,6 +1,6 @@
 /*
-*   This file is part of HomeMen3D
-*   Copyright (C) 2019 DeadPhoenix8091, Epicpkmn11, Flame, RocketRobz, StackZ, TotallyNotGuy
+*   This file is part of Universal-Core-Example
+*   Copyright (C) 2020 SuperSaiyajinStackie
 *
 *   This program is free software: you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -24,17 +24,30 @@
 *         reasonable ways as different from the original version.
 */
 
-#ifndef UTILS_HPP
-#define UTILS_HPP
+#ifndef BUTTONS_HPP
+#define BUTTONS_HPP
 
-#include "smdh.hpp"
+#include "common.hpp"
+#include "structs.hpp"
 
-#include <3ds.h>
-#include <string>
+#include <vector>
 
-std::u16string UTF8toUTF16(const char* src);
-std::string UTF16toUTF8(const std::u16string& src);
-std::string format(std::string fmt_str, ...);
-std::string timeStr(void);
+class Buttons : public Screen {
+public:
+	void Draw(void) const override;
+	void Logic(u32 hDown, u32 hHeld, touchPosition touch) override;
+private:
+	int Selection = 0;
+	// Define Button X, Y, W, H here.
+	std::vector<Structs::ButtonPos> buttons = {
+		{10, 40, 140, 35}, // Button 1.
+		{10, 100, 140, 35}, // Button 2.
+		{10, 160, 140, 35}, // Button 3.
+
+		{170, 40, 140, 35}, // Button 4.
+		{170, 100, 140, 35}, // Button 5.
+		{170, 160, 140, 35}, // Button 6.
+	};
+};
 
 #endif

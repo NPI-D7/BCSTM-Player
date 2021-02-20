@@ -1,6 +1,6 @@
 /*
-*   This file is part of Universal-Core-Example
-*   Copyright (C) 2020 SuperSaiyajinStackie
+*   This file is part of HomeMen3D
+*   Copyright (C) 2019 DeadPhoenix8091, Epicpkmn11, Flame, RocketRobz, StackZ, TotallyNotGuy
 *
 *   This program is free software: you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -24,6 +24,17 @@
 *         reasonable ways as different from the original version.
 */
 
-#include "init.hpp"
+#ifndef UTILS_HPP
+#define UTILS_HPP
 
-int main() { Init::MainLoop(); }
+#include "smdh.hpp"
+
+#include <3ds.h>
+#include <string>
+
+std::u16string UTF8toUTF16(const char* src);
+std::string UTF16toUTF8(const std::u16string& src);
+//std::string format(std::string fmt_str, ...);
+//std::string timeStr(void);
+
+#endif

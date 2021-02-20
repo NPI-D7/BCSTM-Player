@@ -24,6 +24,26 @@
 *         reasonable ways as different from the original version.
 */
 
-#include "init.hpp"
+#include "mainMenu.hpp"
+#include "stack.hpp"
 
-int main() { Init::MainLoop(); }
+void Stack::Draw(void) const {
+	Gui::ScreenDraw(Top);
+	Gui::Draw_Rect(0, 0, 400, 240, WHITE);
+	GFX::DrawSprite(sprites_dev_by_idx, 7.5, 7.5);
+	Gui::DrawString(8, 218, 0.50, C2D_Color32(0, 0, 0, 255), "2020");
+	if (fadealpha > 0) Gui::Draw_Rect(0, 0, 400, 240, C2D_Color32(fadecolor, fadecolor, fadecolor, fadealpha)); // Fade in/out effect
+	Gui::ScreenDraw(Bottom);
+	Gui::Draw_Rect(0, 0, 320, 240, WHITE);
+	GFX::DrawSprite(sprites_universal_core_idx, 0, 26);
+	if (fadealpha > 0) Gui::Draw_Rect(0, 0, 320, 240, C2D_Color32(fadecolor, fadecolor, fadecolor, fadealpha)); // Fade in/out effect
+}
+
+
+void Stack::Logic(u32 hDown, u32 hHeld, touchPosition touch) {
+	this->delay++;
+	// If the delay is larger than 130 -> Switch screen.
+	if (this->delay > 130) {
+		Gui::setScreen(std::make_unique<MainMenu>(), true, false);
+	}
+}

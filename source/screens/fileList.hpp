@@ -24,6 +24,22 @@
 *         reasonable ways as different from the original version.
 */
 
-#include "init.hpp"
+#ifndef FILELIST_HPP
+#define FILELIST_HPP
 
-int main() { Init::MainLoop(); }
+#include "common.hpp"
+#include "structs.hpp"
+
+#include <vector>
+
+class FileList : public Screen {
+public:
+	void Draw(void) const override;
+	void Logic(u32 hDown, u32 hHeld, touchPosition touch) override;
+	FileList();
+private:
+	int Selection = 0;
+	std::vector<std::string> exampleVector;
+};
+
+#endif

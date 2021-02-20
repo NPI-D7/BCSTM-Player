@@ -24,6 +24,17 @@
 *         reasonable ways as different from the original version.
 */
 
-#include "init.hpp"
+#ifndef STACK_HPP
+#define STACK_HPP
 
-int main() { Init::MainLoop(); }
+#include "common.hpp"
+
+class Stack : public Screen {
+public:
+	void Draw(void) const override;
+	void Logic(u32 hDown, u32 hHeld, touchPosition touch) override;
+private:
+	int delay = 0;
+};
+
+#endif

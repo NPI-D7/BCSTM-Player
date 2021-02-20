@@ -25,7 +25,7 @@
 */
 
 // Screens.
-
+#include "buttons.hpp"
 #include "fileList.hpp"
 #include "mainMenu.hpp"
 
@@ -66,7 +66,7 @@ void MainMenu::Logic(u32 hDown, u32 hHeld, touchPosition touch) {
 		if (this->Selection == 0) {
 			Gui::setScreen(std::make_unique<FileList>(), true, false);
 		} else if (this->Selection == 1) {
-			
+			Gui::setScreen(std::make_unique<Buttons>(), true, false);
 		}
 	}
 
@@ -75,7 +75,7 @@ void MainMenu::Logic(u32 hDown, u32 hHeld, touchPosition touch) {
 		if (touching(touch, this->mainButtons[0])) {
 			Gui::setScreen(std::make_unique<FileList>(), true, false);
 		} else if (touching(touch, this->mainButtons[1])) {
-			
+			Gui::setScreen(std::make_unique<Buttons>(), true, false);
 		}
 	}
 
