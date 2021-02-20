@@ -64,7 +64,7 @@ endif
 ifneq ($(shell echo $(shell git describe --tags) | head -c 4 | tail -c 1),)
 VERSION_MINOR := $(shell echo $(shell git describe --tags) | head -c 4 | tail -c 1)
 else
-VERSION_MINOR := 0
+VERSION_MINOR := 1
 endif
 
 ifneq ($(shell echo $(shell git describe --tags) | head -c 6 | tail -c 1),)
