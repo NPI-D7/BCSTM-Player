@@ -1,6 +1,6 @@
 BasicInfo:
   Title                   : BCSTM-Player
-  ProductCode             : $(APP_PRODUCT_CODE)
+  ProductCode             : CTR-B-CSTM
   Logo                    : Nintendo # Nintendo / Licensed / Distributed / iQue / iQueForSystem
 
 #RomFs:
@@ -9,7 +9,7 @@ BasicInfo:
 
 TitleInfo:
   Category                : Application
-  UniqueId                : $(APP_UNIQUE_ID)
+  UniqueId                : 0x78933
 
 Option:
   UseOnSD                 : true # true if App is to be installed to SD
