@@ -44,8 +44,8 @@ jobs:
         run: |
           make
           mkdir -p ~/artifacts
-          cp output/BCSTM-Player.3dsx ~/artifacts
-          cp output/BCSTM-Player.cia ~/artifacts
+          cp BCSTM-Player.3dsx ~/artifacts
+          cp BCSTM-Player.cia ~/artifacts
           echo ::set-output name=commit_tag::$(git describe --abbrev=0 --tags)
           echo ::set-output name=commit_hash::$(git log --format=%h -1)
           # Webhook info
