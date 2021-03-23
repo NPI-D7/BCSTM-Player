@@ -20,6 +20,11 @@
 - add file selector.
 - mount romfs from installed Titles / Gamecard ising D7-Menu Core.
 
-# Latest Nightly Cia Build
+# Nightly builds
+
+
+<a href="https://github.com/NPI-D7/nightlys/raw/master/builds/BCSTM-Player/BCSTM-Player.3dsx"> <img height ="22" src ="https://img.shields.io/badge/Download-3dsx-green?style=for-the-badge">
+
+
 
 <img src="https://raw.githubusercontent.com/NPI-D7/nightlys/master/builds/BCSTM-Player/BCSTM-Player.png">
