@@ -36,8 +36,8 @@ include $(DEVKITARM)/3ds_rules
 # External tools
 #---------------------------------------------------------------------------------
 ifeq ($(OS),Windows_NT)
-MAKEROM 	?= ../makerom.exe
-BANNERTOOL 	?= ../bannertool.exe
+MAKEROM 	?= C:/devkitpro/tools/bin/makerom.exe
+BANNERTOOL 	?= C:/devkitpro/tools/bin/bannertool.exe
 
 else
 MAKEROM 	?= makerom
@@ -55,30 +55,34 @@ endif
 #---------------------------------------------------------------------------------
 # Version number
 #---------------------------------------------------------------------------------
-VERSION_MAJOR := 0
-VERSION_MINOR := 1
+
+VERSION_MAJOR := 1
+
+VERSION_MINOR := 0
+
 VERSION_MICRO := 0
 
-VERSION_STRING := "v$(VERSION_MAJOR).$(VERSION_MINOR).$(VERSION_MICRO)"
+
 #---------------------------------------------------------------------------------
 TARGET		:=	BCSTM-Player
 BUILD		:=	build
-UNIVCORE	:=	Universal-Core BCSTM
-SOURCES		:=	$(UNIVCORE) source source/gui source/screens
+UNIVCORE	:=	RenderD7-alpha0-3-0 BCSTM
+SOURCES		:=	$(UNIVCORE) source
 DATA		:=	data
-INCLUDES	:=	$(UNIVCORE) $(SOURCES)
-GRAPHICS	:=	assets/gfx
+INCLUDES	:=	$(UNIVCORE) source 
+GRAPHICS	:=	gfx
 #GFXBUILD	:=	$(BUILD)
-APP_AUTHOR	:=	NPI-D7
-APP_DESCRIPTION := Standalone BCSTM Player for 3ds
-ICON		:=	resources/icon.png
 ROMFS		:=	romfs
 GFXBUILD	:=	$(ROMFS)/gfx
-BNR_IMAGE	:=  resources/banner.png
-BNR_AUDIO	:=	resources/audio.wav
-RSF_FILE	:=	resources/template.rsf
+APP_AUTHOR	:=	Tobi-D7
+APP_DESCRIPTION :=      BCSTM MusicPlayer for the 3ds.
+ICON		:=	app/icon.png
+BNR_IMAGE	:=  app/banner.png
+BNR_AUDIO	:=	app/BannerAudio.wav
+RSF_FILE	:=	app/build-cia.rsf
 
-
+#---------------------------------------------------------------------------------
+IP			:=  192.168.2.130
 #---------------------------------------------------------------------------------
 # options for code generation
 #---------------------------------------------------------------------------------
@@ -96,7 +100,7 @@ CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++17
 ASFLAGS	:=	-g $(ARCH)
 LDFLAGS	=	-specs=3dsx.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)
 
-LIBS	:= -lm -lz -lcitro2d -lcitro3d -lctru -lstdc++
+LIBS	:= -lcurl -lmbedtls -lmbedx509 -lmbedcrypto -larchive -lbz2 -llzma -lm -lz -lcitro2d -lcitro3d -lSDL_mixer -lSDL -lmpg123 -lvorbisidec -logg -lmikmod -lmad -lctru -lstdc++
 
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
@@ -207,6 +211,13 @@ clean:
 	@rm -fr $(BUILD) $(TARGET).elf
 	@rm -fr $(OUTDIR)
 
+#---------------------------------------------------------------------------------
+send:
+	@3dslink -a $(IP) $(TARGET).3dsx
+#---------------------------------------------------------------------------------
+run:
+	@flatpak run org.citra_emu.citra $(TARGET).3dsx
+#---------------------------------------------------------------------------------
 
 #---------------------------------------------------------------------------------
 cia: $(BUILD)
@@ -237,11 +248,11 @@ all: $(OUTPUT).cia $(OUTPUT).elf $(OUTPUT).3dsx
 $(OUTPUT).elf	:	$(OFILES)
 
 $(OUTPUT).cia	:	$(OUTPUT).elf $(OUTPUT).smdh
-	$(BANNERTOOL) makebanner -i "../resources/banner.png" -a "../resources/audio.wav" -o "../resources/banner.bin"
+	$(BANNERTOOL) makebanner -i "../app/banner.png" -a "../app/BannerAudio.wav" -o "../app/banner.bin"
 
-	$(BANNERTOOL) makesmdh -i "../resources/icon.png" -s "$(TARGET)" -l "$(APP_DESCRIPTION)" -p "$(APP_AUTHOR)" -o "../resources/icon.bin"
+	$(BANNERTOOL) makesmdh -i "../app/icon.png" -s "$(TARGET)" -l "$(APP_DESCRIPTION)" -p "$(APP_AUTHOR)" -o "../app/icon.bin"
 
-	$(MAKEROM) -f cia -target t -exefslogo -o "../BCSTM-Player.cia" -elf "../BCSTM-Player.elf" -rsf "../resources/template.rsf" -banner "../resources/banner.bin" -icon "../resources/icon.bin" -logo "../resources/logo.bcma.lz" -DAPP_ROMFS="$(TOPDIR)/$(ROMFS)" -major $(VERSION_MAJOR) -minor $(VERSION_MINOR) -micro $(VERSION_MICRO) -DAPP_VERSION_MAJOR="$(VERSION_MAJOR)"
+	$(MAKEROM) -f cia -target t -exefslogo -o "../BCSTM-Player.cia" -elf "../BCSTM-Player.elf" -rsf "../app/build-cia.rsf" -banner "../app/banner.bin" -icon "../app/icon.bin" -logo "../app/splash.bin" -DAPP_ROMFS="$(TOPDIR)/$(ROMFS)" -major $(VERSION_MAJOR) -minor $(VERSION_MINOR) -micro $(VERSION_MICRO) -DAPP_VERSION_MAJOR="$(VERSION_MAJOR)"
 #---------------------------------------------------------------------------------
 # you need a rule like this for each extension you use as binary data
 #---------------------------------------------------------------------------------
