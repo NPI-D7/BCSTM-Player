@@ -17,7 +17,7 @@ There is a Bug in the Filebrowser
 
 # Todo:
 - add pause/play feature.
-- mount romfs from installed Titles / Gamecard ising D7-Menu Core.
+- mount romfs from installed Titles / Gamecard using D7-Menu Core.
 
 # Nightly builds
 
