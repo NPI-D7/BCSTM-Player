@@ -13,11 +13,10 @@
 
  ### if you find any bug, report it in an issue!
 # Known Bugs:
+There is a Bug in the Filebrowser
 
 # Todo:
 - add pause/play feature.
-- add ui.
-- add file selector.
 - mount romfs from installed Titles / Gamecard ising D7-Menu Core.
 
 # Nightly builds
