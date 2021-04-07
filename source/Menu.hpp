@@ -1,0 +1,63 @@
+#include "renderd7.hpp"
+
+
+class MMM : public RenderD7::Scene
+{
+    public:
+    void Draw(void) const override;
+    void Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch) override;
+    private:
+    std::vector<RenderD7::TObject> buttons = 
+    {
+        {90, 50, 140, 35, "Browse", -8, 10},
+        {90, 100, 140, 35, "Credits", -10, 12},
+        {90, 150, 140, 35, "Exit", 4, 10}
+    };
+    int Selection = 0;
+};
+
+class Browse : public RenderD7::Scene
+{
+    public:
+    void Draw(void) const override;
+    void Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch) override;
+    Browse();
+    private:
+    std::vector<RenderD7::DirContent> dircontent;
+    int dirsel = 0;
+    bool changeddir = false;
+};
+
+class Credits : public RenderD7::Scene
+{
+    public:
+    void Draw(void) const override;
+    void Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch) override;
+    
+    private:
+    
+    
+};
+
+class Titles : public RenderD7::Scene
+{
+    public:
+    void Draw(void) const override;
+    void Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch) override;
+    
+    private:
+    std::shared_ptr<Title> titleFromIndex(int i) const
+	{
+		if (i == -2)
+		{
+			return nullptr;
+		}
+		else if ((size_t)i < TitleManager::sdtitles.size())
+		{
+			return TitleManager::sdtitles[i];
+		}
+		return nullptr;
+	}
+    
+    
+};
