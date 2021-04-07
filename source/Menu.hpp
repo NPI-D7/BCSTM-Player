@@ -39,25 +39,3 @@ class Credits : public RenderD7::Scene
     
 };
 
-class Titles : public RenderD7::Scene
-{
-    public:
-    void Draw(void) const override;
-    void Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch) override;
-    
-    private:
-    std::shared_ptr<Title> titleFromIndex(int i) const
-	{
-		if (i == -2)
-		{
-			return nullptr;
-		}
-		else if ((size_t)i < TitleManager::sdtitles.size())
-		{
-			return TitleManager::sdtitles[i];
-		}
-		return nullptr;
-	}
-    
-    
-};

@@ -1,4 +1,4 @@
-name: Build BCSTM-Player
+name: Build BCSTM-Player-dev
 
 on:
   push:
@@ -101,9 +101,9 @@ jobs:
           git config --global user.email "nintenplayid7@gmail.com"
           git config --global user.name "Tobi-D7"
           git clone --depth 1 https://${{ secrets.TOKEN }}@github.com/NPI-D7/nightlys.git
-          mkdir -p nightlys/builds/BCSTM-Player/
-          cd nightlys/builds/BCSTM-Player/
-          qrencode -o BCSTM-Player.png https://github.com/NPI-D7/nightlys/raw/v$CURRENT_DATE/builds/BCSTM-Player/BCSTM-Player.cia
+          mkdir -p nightlys/builds/BCSTM-Player-dev/
+          cd nightlys/builds/BCSTM-Player-dev/
+          qrencode -o BCSTM-Player.png https://github.com/NPI-D7/nightlys/raw/v$CURRENT_DATE/builds/BCSTM-Player-dev/BCSTM-Player.cia
           qrencode -o BCSTM-Player-release.png https://github.com/NPI-D7/nightlys/releases/download/$COMMIT_TAG/BCSTM-Player.cia
           cp ${{ github.workspace }}/build/* .
           git stage .
@@ -143,7 +143,7 @@ jobs:
         run: |
           curl -o send.sh https://raw.githubusercontent.com/NPI-D7/discord-webhooks/master/send-ghactions.sh
           chmod +x send.sh
-          export IMAGE=https://raw.githubusercontent.com/NPI-D7/nigtlys/v$CURRENT_DATE/builds/BCSTM-Player/BCSTM-Player.png
+          export IMAGE=https://raw.githubusercontent.com/NPI-D7/nigtlys/v$CURRENT_DATE/builds/BCSTM-Player-dev/BCSTM-Player.png
           ./send.sh success ${{ secrets.WEBHOOK_URL }}
       - name: Send failure webhook
         if: ${{ failure() }}
