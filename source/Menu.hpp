@@ -9,9 +9,10 @@ class MMM : public RenderD7::Scene
     private:
     std::vector<RenderD7::TObject> buttons = 
     {
-        {90, 50, 140, 35, "Browse", -8, 10},
-        {90, 100, 140, 35, "Credits", -10, 12},
-        {90, 150, 140, 35, "Exit", 4, 10}
+        {90, 20, 140, 35, "Browse", -8, 10},
+        {90, 70, 140, 35, "Titles", 0, 12},
+        {90, 120, 140, 35, "Credits", -4, 10},
+        {90, 170, 140, 35, "Exit", 4, 10}
     };
     int Selection = 0;
 };
@@ -39,3 +40,14 @@ class Credits : public RenderD7::Scene
     
 };
 
+class Titles : public RenderD7::Scene
+{
+    public:
+    void Draw(void) const override;
+    void Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch) override;
+    Titles();
+    
+    private:
+    
+    
+};

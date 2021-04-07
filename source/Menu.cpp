@@ -37,7 +37,7 @@ void MMM::Draw(void) const
 }
 void MMM::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
 {
-    if((hDown & KEY_DOWN && Selection < 2))
+    if((hDown & KEY_DOWN && Selection < 3))
     {
         Selection ++;
     }
@@ -51,9 +51,13 @@ void MMM::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
     }
     if (hDown & KEY_A && Selection == 1)
     {
-        RenderD7::Scene::Load(std::make_unique<Credits>());
+        RenderD7::Scene::Load(std::make_unique<Titles>());
     }
     if ((hDown & KEY_A && Selection == 2))
+    {
+        RenderD7::Scene::Load(std::make_unique<Credits>());
+    }
+    if ((hDown & KEY_A && Selection == 3))
     {
         RenderD7::ExitApp();
     }
@@ -63,7 +67,7 @@ void MMM::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
     }
     if (RenderD7::touchTObj(touch, buttons[2]))
     {
-        RenderD7::ExitApp();
+        RenderD7::Scene::Load(std::make_unique<Credits>());
     }
     if (RenderD7::touchTObj(touch, buttons[0]))
     {
@@ -71,7 +75,11 @@ void MMM::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
     }
     if (RenderD7::touchTObj(touch, buttons[1]))
     {
-        RenderD7::Scene::Load(std::make_unique<Credits>());
+        RenderD7::Scene::Load(std::make_unique<Titles>());
+    }
+    if (RenderD7::touchTObj(touch, buttons[3]))
+    {
+        RenderD7::ExitApp();
     }
     if(hDown & KEY_Y)
     {
@@ -236,6 +244,28 @@ void Credits::Draw(void) const
 }
 
 void Credits::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
+{
+    if (hDown & KEY_B)
+    {
+        RenderD7::Scene::Back();
+    }
+}
+
+Titles::Titles()
+{
+    RenderD7::Msg::Display("BCSTM-Player: Scanning SDCard", "", Top);
+    TitleManager::ScanSD();
+}
+
+void Titles::Draw(void) const
+{
+    RenderD7::OnScreen(Top);
+    RenderD7::OnScreen(Bottom);
+
+
+}
+
+void Titles::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
 {
     if (hDown & KEY_B)
     {
