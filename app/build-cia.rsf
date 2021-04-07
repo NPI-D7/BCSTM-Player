@@ -1,6 +1,6 @@
 BasicInfo:
-  Title                   : "BCSTM-Player"
-  ProductCode             : "CTR-B-CSTM"
+  Title                   : "BCSTM"
+  ProductCode             : "CTR-H-BCST"
   Logo                    : Homebrew # Nintendo / Licensed / Distributed / iQue / iQueForSystem
 
 RomFs:

@@ -1,29 +1,25 @@
-/*
-*   This file is part of Universal-Core-Example
-*   Copyright (C) 2020 SuperSaiyajinStackie
-*
-*   This program is free software: you can redistribute it and/or modify
-*   it under the terms of the GNU General Public License as published by
-*   the Free Software Foundation, either version 3 of the License, or
-*   (at your option) any later version.
-*
-*   This program is distributed in the hope that it will be useful,
-*   but WITHOUT ANY WARRANTY; without even the implied warranty of
-*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*   GNU General Public License for more details.
-*
-*   You should have received a copy of the GNU General Public License
-*   along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*
-*   Additional Terms 7.b and 7.c of GPLv3 apply to this file:
-*       * Requiring preservation of specified reasonable legal notices or
-*         author attributions in that material or in the Appropriate Legal
-*         Notices displayed by works containing it.
-*       * Prohibiting misrepresentation of the origin of that material,
-*         or requiring that modified versions of such material be marked in
-*         reasonable ways as different from the original version.
-*/
+#include "Menu.hpp"
+#include "BCSTM.hpp"
 
-#include "init.hpp"
+extern BCSTM player;
+RenderD7::Sheet sheet;
 
-int main() { Init::MainLoop(); }
+
+int main()
+{
+    RenderD7::Init::Main();
+    RenderD7::Init::NdspFirm(true);
+    aptSetSleepAllowed(false);
+    sheet.Load("romfs:/gfx/sprites.t3x");
+    RenderD7::Scene::Load(std::make_unique<MMM>());
+    while(RenderD7::MainLoop())
+    {
+        RenderD7::Scene::doDraw();
+        RenderD7::Scene::doLogic(d7_hDown, d7_hHeld, d7_hUp, d7_touch);
+        player.tick();
+        C3D_FrameEnd(0);
+    }
+    sheet.Free();
+    RenderD7::Exit::NdspFirm();
+    RenderD7::Exit::Main();
+}
