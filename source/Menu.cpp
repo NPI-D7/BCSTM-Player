@@ -220,7 +220,9 @@ void Credits::Draw(void) const
     RenderD7::DrawRect(0, 0, 400, 26, RenderD7::Color::Hex("#222222"));
     RenderD7::DrawRect(0, 240, 400, -26, RenderD7::Color::Hex("#222222"));
     RenderD7::DrawTextCentered(40, 2, 0.7f, RenderD7::Color::Hex("#FFFFFF"), "BCSTM-Player->Credits", 400);
-    RenderD7::DrawTextCentered(40, 218, 0.7f, RenderD7::Color::Hex("#FFFFFF"), "Version: 1.0.0", 400);
+    std::string version = "Version: ";
+    version += V_STRING;
+    RenderD7::DrawTextCentered(40, 218, 0.7f, RenderD7::Color::Hex("#FFFFFF"), version, 400);
     RenderD7::DrawText(5, 30, 0.7f, RenderD7::Color::Hex("#000000"), "- Tobi-D7\n- devkitpro\n- citro2d\n- citro3d\n\nThis Project was made\nwith RenderD7.");
     RenderD7::OnScreen(Bottom);
     RenderD7::DrawRect(0, 0, 320, 240, RenderD7::Color::Hex("#222222"));

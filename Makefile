@@ -208,8 +208,9 @@ all: $(BUILD) $(GFXBUILD) $(DEPSDIR) $(ROMFS_T3XFILES) $(T3XHFILES)
 #------------------------------------------------------------------------------
 clean:
 	@echo clean ...
-	@rm -fr $(BUILD) $(TARGET).elf
+	@rm -fr $(BUILD) $(TARGET).elf $(TARGET).cia $(TARGET).smdh $(TARGET).3dsx app/icon.bin app/banner.bin
 	@rm -fr $(OUTDIR)
+	@rm -fr romfs/*.t3x $(GFXBUILD)/*.t3x
 
 #---------------------------------------------------------------------------------
 send:
