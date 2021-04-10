@@ -117,7 +117,7 @@ void Browse::Draw(void) const
         } 
     }
     for (uint i = 0; i < ((this->dircontent.size() < 10) ? 10 - this->dircontent.size() : 0); i++) {
-		dirs += "\n\n";
+		dirs += "\n";
 	}
 
     RenderD7::DrawText(10, 30, 0.6f, RenderD7::Color::Hex("#111111"), dirs.c_str());
