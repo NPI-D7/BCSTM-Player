@@ -141,7 +141,6 @@ void Browse::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
 		RenderD7::GetDirContentsExt(temp, {"bcstm"});
 
 		for(uint i = 0; i < temp.size(); i++) {
-            this->dircontent.clear();
 			this->dircontent.push_back(temp[i]);
 		}
 
