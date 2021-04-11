@@ -9,7 +9,7 @@ class MMM : public RenderD7::Scene
     std::vector<RenderD7::TObject> buttons = 
     {
         {90, 50, 140, 35, "Browse", -8, 10},
-        {90, 100, 140, 35, "Credits", -10, 12},
+        {90, 100, 140, 35, "Credits", -10, 10},
         {90, 150, 140, 35, "Exit", 4, 10}
     };
     int Selection = 0;
