@@ -22,8 +22,6 @@ There is a Bug in the Filebrowser
 # Nightly builds
 
 
-<a href="https://github.com/NPI-D7/nightlys/raw/master/builds/BCSTM-Player/BCSTM-Player.3dsx"> <img height ="22" src ="https://img.shields.io/badge/Download-3dsx-green?style=for-the-badge">
-
 
 
 <img src="https://raw.githubusercontent.com/NPI-D7/nightlys/master/builds/BCSTM-Player/BCSTM-Player.png">
