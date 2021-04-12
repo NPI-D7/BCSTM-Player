@@ -75,6 +75,7 @@ void MMM::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
     {
         if (playing)
         {
+	    currentlypl.clear();
             player.stop();
         }
     }
