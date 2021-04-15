@@ -66,7 +66,8 @@ VERSION_MICRO := 0
 #---------------------------------------------------------------------------------
 TARGET		:=	BCSTM-Player
 BUILD		:=	build
-UNIVCORE	:=	RenderD7-alpha0-3-0 BCSTM
+LIBTWEEN	:=  $(CURDIR)RenderD7-alpha0-6-0/external/tween-engine/
+UNIVCORE	:=	RenderD7-alpha0-6-0 RenderD7-alpha0-6-0/internal BCSTM RenderD7-alpha0-6-0/external RenderD7-alpha0-6-0/external/tween-engine/include/ RenderD7-alpha0-6-0/external/tween-engine/include/TweenEngine RenderD7-alpha0-6-0/external/tween-engine/source D7-Menu-Core
 SOURCES		:=	$(UNIVCORE) source
 DATA		:=	data
 INCLUDES	:=	$(UNIVCORE) source 
@@ -95,18 +96,18 @@ CFLAGS	:=	-g -Wall -Wno-psabi -O2 -mword-relocations \
 
 CFLAGS	+=	$(INCLUDE) -DARM11 -D_3DS -D_GNU_SOURCE=1
 
-CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++17
+CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++17 
 
 ASFLAGS	:=	-g $(ARCH)
 LDFLAGS	=	-specs=3dsx.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)
 
-LIBS	:= -lcurl -lmbedtls -lmbedx509 -lmbedcrypto -larchive -lbz2 -llzma -lm -lz -lcitro2d -lcitro3d -lSDL_mixer -lSDL -lmpg123 -lvorbisidec -logg -lmikmod -lmad -lctru -lstdc++
+LIBS	:= -lcurl -lstdc++ -lm -lcitro2d -lcitro3d -lctru
 
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
 # include and lib
 #---------------------------------------------------------------------------------
-LIBDIRS	:= $(PORTLIBS) $(CTRULIB)
+LIBDIRS	:= $(PORTLIBS) $(CTRULIB) $(LIBTWEEN)
 
 
 #---------------------------------------------------------------------------------
@@ -208,9 +209,8 @@ all: $(BUILD) $(GFXBUILD) $(DEPSDIR) $(ROMFS_T3XFILES) $(T3XHFILES)
 #------------------------------------------------------------------------------
 clean:
 	@echo clean ...
-	@rm -fr $(BUILD) $(TARGET).elf $(TARGET).cia $(TARGET).smdh $(TARGET).3dsx app/icon.bin app/banner.bin
+	@rm -fr $(BUILD) $(TARGET).elf $(TARGET).3dsx $(TARGET).cia $(TARGET).smdh app/*.bin 
 	@rm -fr $(OUTDIR)
-	@rm -fr romfs/*.t3x $(GFXBUILD)/*.t3x
 
 #---------------------------------------------------------------------------------
 send:
@@ -219,7 +219,9 @@ send:
 run:
 	@flatpak run org.citra_emu.citra $(TARGET).3dsx
 #---------------------------------------------------------------------------------
-
+andsend:
+	@make all
+	@3dslink -a $(IP) $(TARGET).3dsx
 #---------------------------------------------------------------------------------
 cia: $(BUILD)
 	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile cia
@@ -253,7 +255,7 @@ $(OUTPUT).cia	:	$(OUTPUT).elf $(OUTPUT).smdh
 
 	$(BANNERTOOL) makesmdh -i "../app/icon.png" -s "$(TARGET)" -l "$(APP_DESCRIPTION)" -p "$(APP_AUTHOR)" -o "../app/icon.bin"
 
-	$(MAKEROM) -f cia -target t -exefslogo -o "../BCSTM-Player.cia" -elf "../BCSTM-Player.elf" -rsf "../app/build-cia.rsf" -banner "../app/banner.bin" -icon "../app/icon.bin" -logo "../app/splash.bin" -DAPP_ROMFS="$(TOPDIR)/$(ROMFS)" -major $(VERSION_MAJOR) -minor $(VERSION_MINOR) -micro $(VERSION_MICRO) -DAPP_VERSION_MAJOR="$(VERSION_MAJOR)"
+	$(MAKEROM) -f cia -target t -exefslogo -o "../BCSTM-Player.cia" -elf "../BCSTM-Player.elf" -rsf "../app/build-cia.rsf" -banner "../app/banner.bin" -icon "../app/icon.bin" -logo "../app/splash.lz" -DAPP_ROMFS="$(TOPDIR)/$(ROMFS)" -major $(VERSION_MAJOR) -minor $(VERSION_MINOR) -micro $(VERSION_MICRO) -DAPP_VERSION_MAJOR="$(VERSION_MAJOR)"
 #---------------------------------------------------------------------------------
 # you need a rule like this for each extension you use as binary data
 #---------------------------------------------------------------------------------
