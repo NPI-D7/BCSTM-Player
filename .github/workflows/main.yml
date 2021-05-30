@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: universalteam/devkitarm
+    container: devkitpro/devkitarm
     name: Build with Docker using devkitARM
     outputs:
       commit_tag: ${{ steps.build.outputs.commit_tag }}
@@ -29,7 +29,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install p7zip-full -y
-          curl -L https://github.com/Steveice10/bannertool/releases/download/1.1.0/bannertool.zip -o bannertool.zip
+          curl -L https://github.com/Steveice10/bannertool/releases/download/1.2.0/bannertool.zip -o bannertool.zip
           sudo 7z e bannertool.zip linux-x86_64/bannertool
           sudo chmod +x bannertool
           mv bannertool /usr/local/bin
@@ -101,9 +101,9 @@ jobs:
           git config --global user.email "tobid7@outlook.de"
           git config --global user.name "Tobi-D7"
           git clone --depth 1 https://${{ secrets.TOKEN }}@github.com/NPI-D7/nightlys.git
-          mkdir -p nightlys/builds/BCSTM-Player/
-          cd nightlys/builds/BCSTM-Player/
-          qrencode -o BCSTM-Player.png https://github.com/NPI-D7/nightlys/raw/v$CURRENT_DATE/builds/BCSTM-Player/BCSTM-Player.cia
+          mkdir -p nightlys/builds/BCSTM-Player/bak1/$CURRENT_DATE
+          cd nightlys/builds/BCSTM-Player/bak1/$CURRENT_DATE
+          qrencode -o BCSTM-Player.png https://github.com/NPI-D7/nightlys/raw/v$CURRENT_DATE/builds/BCSTM-Player/bak1/$CURRENT_DATE/BCSTM-Player.cia
           qrencode -o BCSTM-Player-release.png https://github.com/NPI-D7/nightlys/releases/download/$COMMIT_TAG/BCSTM-Player.cia
           cp ${{ github.workspace }}/build/* .
           git stage .
