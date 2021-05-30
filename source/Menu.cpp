@@ -117,7 +117,7 @@ void Browse::Draw(void) const
             dirs += this->dircontent[i].name + "\n";
         } 
     }
-    for (uint i = 0; i < ((this->dircontent.size() < 10) ? 10 - this->dircontent.size() : 0); i++) {
+    for (uint i = 0; i < ((this->dircontent.size() < 9) ? 9 - this->dircontent.size() : 0); i++) {
 		dirs += "\n";
 	}
 
@@ -127,6 +127,10 @@ void Browse::Draw(void) const
     if(playing)
     {
         RenderD7::DrawText(5, 218, 0.7f, RenderD7::Color::Hex("#111111"), "Playing: " + currentlypl);
+    }
+    if (this->changeddir) 
+    {
+        dirs.clear();
     }
     
 }
