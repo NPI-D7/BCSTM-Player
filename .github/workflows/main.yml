@@ -119,6 +119,7 @@ jobs:
           RELEASE_INFO="{\"tag_name\": \"v${{ steps.commit.outputs.current_date }}\", \"name\": \"BCSTM-Player | $COMMIT_HASH\", \"body\": \"$AUTHOR_NAME - $COMMIT_MESSAGE\", \"prerelease\": true}"
           RESPONSE=$(curl -XPOST -H "$AUTH_HEADER" -H "$CONTENT_TYPE" "$API_URL" -d "$RELEASE_INFO")
           ID=$(echo $RESPONSE | jq --raw-output '.id')
+          echo id: $ ID
           for file in ${{ github.workspace }}/build/*; do
             AUTH_HEADER="Authorization: token ${{ secrets.TOKEN }}"
             CONTENT_LENGTH="Content-Length: $(stat -c%s $file)"
