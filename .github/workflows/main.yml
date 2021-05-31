@@ -101,7 +101,6 @@ jobs:
           git config --global user.email "tobid7@outlook.de"
           git config --global user.name "Tobi-D7"
           git clone --depth 1 https://${{ secrets.TOKEN }}@github.com/NPI-D7/nightlys.git
-    #      ./nightlys/nightlytool nightlys/management/BCSTM-Player.txt build/BCSTM-Player/bak1/v$CURRENT_DATE/BCSTM-Player.3dsx
           mkdir -p nightlys/builds/BCSTM-Player/bak1/v$CURRENT_DATE
           cd nightlys/builds/BCSTM-Player/bak1/v$CURRENT_DATE
           qrencode -o BCSTM-Player.png https://github.com/NPI-D7/nightlys/raw/v$CURRENT_DATE/builds/BCSTM-Player/bak1/$CURRENT_DATE/BCSTM-Player.cia
