@@ -103,10 +103,8 @@ jobs:
           git clone --depth 1 https://${{ secrets.TOKEN }}@github.com/NPI-D7/nightlys.git
           echo hi
           sudo chmod +x nightlys/nightlytool
-          echo installing
-          sudo cp nightlys/nightlytool /usr/local/bin/
           echo running
-          nightlytool nightlys/management/BCSTM-Player.ini BCSTM-Player NPI-D7 nightlys v$CURRENT_DATE $COMMIT_MESSAGE $COMMIT_HASH
+          ./nightlys/nightlytool nightlys/management/BCSTM-Player.ini BCSTM-Player NPI-D7 nightlys v$CURRENT_DATE $COMMIT_MESSAGE $COMMIT_HASH
           echo creating dirs
           mkdir -p nightlys/builds/BCSTM-Player/bak1/v$CURRENT_DATE
           cd nightlys/builds/BCSTM-Player/bak1/v$CURRENT_DATE
