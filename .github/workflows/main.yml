@@ -136,6 +136,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./*.3dsx ./*.cia
+          asset_name: BCSTM-Player
       - name: Publish release
         uses: StuYarrow/publish-release@v1
         env:
