@@ -120,7 +120,7 @@ jobs:
           git push origin master v$CURRENT_DATE
           mkdir ../cn
           cp ${{ github.workspace }}/build/* ../cn
-          cd cd ..
+          cd ..
       - name: release to nightlys
         uses: svenstaro/upload-release-action@v2
         with:
