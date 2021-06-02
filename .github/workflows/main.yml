@@ -125,7 +125,19 @@ jobs:
           # A personal access token for the GitHub repository in which the release will be created and edited.
           # It is recommended to create the access token with the following scopes: `repo, user, admin:repo_hook`.
           repo_token: ${{ secrets.TOKEN }}
-          file: BCSTM-Player.3dsx BCSTam-Player.cia
+          file: ./BCSTM-Player.3dsx
+          tag: v$CURRENT_DATE
+          prerelease: true
+          overwrite: true
+          body: "Bak1_Version"
+      - name: release to nightlys
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_name: NPI-D7/nightlys2
+          # A personal access token for the GitHub repository in which the release will be created and edited.
+          # It is recommended to create the access token with the following scopes: `repo, user, admin:repo_hook`.
+          repo_token: ${{ secrets.TOKEN }}
+          file: ./BCSTM-Player.cia
           tag: v$CURRENT_DATE
           prerelease: true
           overwrite: true
