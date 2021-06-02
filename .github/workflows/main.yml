@@ -118,7 +118,7 @@ jobs:
           git commit -m "BCSTM-Player | $COMMIT_HASH"
           git tag v$CURRENT_DATE
           git push origin master v$CURRENT_DATE
-      - name: release to nightlys
+    - name: release to nightlys
       uses: svenstaro/upload-release-action@v2
       with:
         repo_name: NPI-D7/nightlys
@@ -127,6 +127,7 @@ jobs:
         repo_token: ${{ secrets.TOKEN }}
         file: ${{ github.workspace }}/build/*
         tag: v$CURRENT_DATE
+        prerelease: true
         overwrite: true
         body: "Bak1_Version"
 # lol
