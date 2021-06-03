@@ -82,17 +82,17 @@ jobs:
         with:
           name: build
           path: build
-      #- name: Upload to ${{ github.repository }} release
-       # if: ${{ startsWith(github.ref, 'refs/tags') }}
-       # run: |
-       #   ID=$(jq --raw-output '.release.id' $GITHUB_EVENT_PATH)
-      #    for file in ${{ github.workspace }}/build/*; do
-       #     AUTH_HEADER="Authorization: token ${{ secrets.TOKEN }}"
-        #    CONTENT_LENGTH="Content-Length: $(stat -c%s $file)"
-       #     CONTENT_TYPE="Content-Type: application/7z-x-compressed"
-        #    UPLOAD_URL="https://uploads.github.com/repos/${{ github.repository }}/releases/$ID/assets?name=$(basename $file)"
-       #     curl -XPOST -H "$AUTH_HEADER" -H "$CONTENT_LENGTH" -H "$CONTENT_TYPE" --upload-file "$file" "$UPLOAD_URL"
-       #   done
+      - name: Upload to ${{ github.repository }} release
+        if: ${{ startsWith(github.ref, 'refs/tags') }}
+        run: |
+          ID=$(jq --raw-output '.release.id' $GITHUB_EVENT_PATH)
+          for file in ${{ github.workspace }}/build/*; do
+            AUTH_HEADER="Authorization: token ${{ secrets.TOKEN }}"
+            CONTENT_LENGTH="Content-Length: $(stat -c%s $file)"
+            CONTENT_TYPE="Content-Type: application/7z-x-compressed"
+            UPLOAD_URL="https://uploads.github.com/repos/${{ github.repository }}/releases/$ID/assets?name=$(basename $file)"
+            curl -XPOST -H "$AUTH_HEADER" -H "$CONTENT_LENGTH" -H "$CONTENT_TYPE" --upload-file "$file" "$UPLOAD_URL"
+          done
       - name: Commit and push to NPI-D7/nightlys
         id: commit
         run: |
@@ -101,8 +101,16 @@ jobs:
           git config --global user.email "tobid7@outlook.de"
           git config --global user.name "Tobi-D7"
           git clone --depth 1 https://${{ secrets.TOKEN }}@github.com/NPI-D7/nightlys.git
-          mkdir -p nightlys/builds/BCSTM-Player/
-          cd nightlys/builds/BCSTM-Player/
+          echo hi
+          cd nightlys
+          sudo chmod +x nightlytool
+          echo running
+          ./nightlytool management/BCSTM-Player.ini BCSTM-Player NPI-D7 nightlys v$CURRENT_DATE $COMMIT_HASH \\$COMMIT_SUBJECT\\$COMMIT_MESSAGE nn nn nn
+          echo creating dirs
+          ls -R
+          git stage management/BCSTM-Player.ini
+          mkdir -p builds/BCSTM-Player/
+          cd builds/BCSTM-Player/
           qrencode -o BCSTM-Player.png https://github.com/NPI-D7/nightlys/raw/v$CURRENT_DATE/builds/BCSTM-Player/BCSTM-Player.cia
           qrencode -o BCSTM-Player-release.png https://github.com/NPI-D7/nightlys/releases/download/$COMMIT_TAG/BCSTM-Player.cia
           cp ${{ github.workspace }}/build/* .
@@ -110,19 +118,20 @@ jobs:
           git commit -m "BCSTM-Player | $COMMIT_HASH"
           git tag v$CURRENT_DATE
           git push origin master v$CURRENT_DATE
-      - name: Release to NPI-D7/nightlys
+      - name: Release to idk
         run: |
+          ls ${{ github.workspace }}/build
           AUTH_HEADER="Authorization: token ${{ secrets.TOKEN }}"
           CONTENT_TYPE="Content-Type: application/json"
           API_URL="https://api.github.com/repos/NPI-D7/nightlys/releases"
-          RELEASE_INFO="{\"tag_name\": \"v${{ steps.commit.outputs.current_date }}\", \"name\": \"BCSTM-Player | $COMMIT_HASH\", \"body\": \"$AUTHOR_NAME - $COMMIT_MESSAGE\", \"prerelease\": true}"
+          RELEASE_INFO="{\"tag_name\": \"v${{ steps.commit.outputs.current_date }}\", \"name\": \"BCSTM-Player | $COMMIT_HASH\", \"body\": \"$AUTHOR_NAME - $COMMIT_SUBJECT\\n\\n$COMMIT_MESSAGE\", \"prerelease\": true}"
           RESPONSE=$(curl -XPOST -H "$AUTH_HEADER" -H "$CONTENT_TYPE" "$API_URL" -d "$RELEASE_INFO")
           ID=$(echo $RESPONSE | jq --raw-output '.id')
           for file in ${{ github.workspace }}/build/*; do
             AUTH_HEADER="Authorization: token ${{ secrets.TOKEN }}"
             CONTENT_LENGTH="Content-Length: $(stat -c%s $file)"
             CONTENT_TYPE="Content-Type: application/7z-x-compressed"
-            UPLOAD_URL="https://uploads.github.com/repos/NPI-D7/nigtlys/releases/$ID/assets?name=$(basename $file)"
+            UPLOAD_URL="https://uploads.github.com/repos/NPI-D7/nightlys/releases/$ID/assets?name=$(basename $file)"
             curl -XPOST -H "$AUTH_HEADER" -H "$CONTENT_LENGTH" -H "$CONTENT_TYPE" --upload-file "$file" "$UPLOAD_URL"
           done
 # lol
