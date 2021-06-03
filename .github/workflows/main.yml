@@ -105,7 +105,7 @@ jobs:
           cd nightlys
           sudo chmod +x nightlytool
           echo running
-          ./nightlytool management/BCSTM-Player-bak1.ini BCSTM-Player NPI-D7 nightlys v$CURRENT_DATE $COMMIT_HASH Bak1_Version\\n\\$COMMIT_SUBJECT\\n\\$COMMIT_MESSAGE nn nn nn
+          ./nightlytool management/BCSTM-Player-bak1.ini BCSTM-Player NPI-D7 nightlys v$CURRENT_DATE $COMMIT_HASH Bak1_Version\\\\$COMMIT_MESSAGE nn nn nn
           echo creating dirs
           ls -R
           git stage management/BCSTM-Player-bak1.ini
