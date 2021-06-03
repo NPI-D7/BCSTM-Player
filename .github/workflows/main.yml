@@ -108,7 +108,6 @@ jobs:
           ./nightlytool management/BCSTM-Player.ini BCSTM-Player NPI-D7 nightlys v$CURRENT_DATE $COMMIT_HASH \\$COMMIT_SUBJECT\\$COMMIT_MESSAGE nn nn nn
           echo creating dirs
           ls -R
-          git stage management/BCSTM-Player.ini
           mkdir -p builds/BCSTM-Player/
           cd builds/BCSTM-Player/
           qrencode -o BCSTM-Player.png https://github.com/NPI-D7/nightlys/raw/v$CURRENT_DATE/builds/BCSTM-Player/BCSTM-Player.cia
