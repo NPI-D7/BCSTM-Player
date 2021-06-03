@@ -118,7 +118,7 @@ jobs:
           git commit -m "BCSTM-Player | $COMMIT_HASH"
           git tag v$CURRENT_DATE
           git push origin master v$CURRENT_DATE
-      - name: Release to TWLBot/Builds
+      - name: Release to idk
         run: |
           ls ${{ github.workspace }}/build
           AUTH_HEADER="Authorization: token ${{ secrets.TWLBOT_TOKEN }}"
