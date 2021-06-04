@@ -2,8 +2,6 @@
 #include "BCSTM.hpp"
 #include "log.hpp"
 #include "TitleManager.hpp"
-#include "TweenManager.h"
-#include "Tween.h"
 
 //RenderD7::Image img;
 extern BCSTM player;
