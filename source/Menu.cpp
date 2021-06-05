@@ -341,7 +341,7 @@ void Titles::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
     {
         RenderD7::Msg::Display("BCSTM-Player", "Mounting romfs of " + TitleManager::sdtitles[selection]->name(), Top);
         romfsUnmount("h:");
-        romfsMountFromTitle(TitleManager::sdtitles[selection]->ID(), TitleManager::sdtitles[selection]->mediatype(), "h:");
+        romfsMountFromTitle(TitleManager::sdtitles[selection]->ID(), TitleManager::sdtitles[selection]->mediatype(), "h");
     }
     if (hDown & KEY_DOWN && selection < maxtitles)
     {
