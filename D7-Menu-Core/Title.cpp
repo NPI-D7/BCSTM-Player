@@ -28,7 +28,7 @@ void D7TM::CardLoop()
 		{
 			CardTypeStatus = "CTR";
 		}
-		else
+		else if (type == CARRD_NTR)
 		{
 			CardTypeStatus == "TWL(Not Supportet)";
 		}
