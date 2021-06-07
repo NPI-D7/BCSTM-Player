@@ -32,6 +32,10 @@ void D7TM::CardLoop()
 		{
 			CardTypeStatus == "TWL(Not Supportet)";
 		}
+		else
+		{
+			CardTypeStatus == "Not Found";
+		}
 	}
 	else 
 	{
