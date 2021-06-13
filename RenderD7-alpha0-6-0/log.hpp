@@ -1,4 +1,4 @@
-
+#pragma once
 #include <fstream>
 #include <stdarg.h>
 #include <string>
