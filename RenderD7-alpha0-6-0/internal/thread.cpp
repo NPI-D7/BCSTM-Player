@@ -74,4 +74,4 @@ namespace RenderD7 {
         data.m_function(data.m_parameter);
         *data.m_running = false;
     }
-} /* m3d */
+}
