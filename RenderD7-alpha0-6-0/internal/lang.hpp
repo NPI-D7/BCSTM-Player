@@ -1,3 +1,4 @@
+#pragma omce
 #include "json.hpp"
 
 #include <string>
