@@ -24,7 +24,8 @@ void D7TM::CardLoop()
 		checked = true;
 		CardStatus = "Inserted";
 		FSUSER_GetCardType(&type);
-		if (type == CARD_CTR)
+                CardTypeStatus = type? "TWL" : "CTR";
+		/*if (type == CARD_CTR)
 		{
 			CardTypeStatus = "CTR";
 		}
@@ -35,7 +36,7 @@ void D7TM::CardLoop()
 		else
 		{
 			CardTypeStatus == "Not Found";
-		}
+		}*/
 	}
 	else 
 	{
