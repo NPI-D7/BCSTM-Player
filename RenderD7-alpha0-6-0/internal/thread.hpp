@@ -85,7 +85,7 @@ namespace RenderD7 {
 
     private:
         struct ThreadData {
-            m3d::Parameter m_parameter;
+            RenderD7::Parameter m_parameter;
             std::function<void(RenderD7::Parameter)> m_function;
             std::atomic<bool>* m_running;
         };
