@@ -8,6 +8,15 @@ extern BCSTM player;
 RenderD7::Sheet sheet;
 extern Log cachelog;
 
+void CardScan(RenderD7::Parameter param) {
+    int id = param.get<int>();
+
+    while (true) {
+        D7TM::CardLoop();
+        RenderD7::Thread::sleep(1000 * id); // wait; also, this is needed to allow for concurrency (refer to the documentation for m3d::Thread::sleep())
+    }
+}
+
 int main()
 {
     RenderD7::Init::Main();
@@ -20,9 +29,11 @@ int main()
     aptSetSleepAllowed(false);
     sheet.Load("romfs:/gfx/sprites.t3x");
     RenderD7::Scene::Load(std::make_unique<MMM>());
+    RenderD7::Thread t1(CardScan, 1);
+    t1.start();
     while(RenderD7::MainLoop())
     {
-        D7TM::CardLoop();
+        //D7TM::CardLoop();
         RenderD7::Scene::doDraw();
         RenderD7::Scene::doLogic(d7_hDown, d7_hHeld, d7_hUp, d7_touch);
         player.tick();
