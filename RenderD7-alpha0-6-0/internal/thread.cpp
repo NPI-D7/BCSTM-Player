@@ -70,7 +70,7 @@ namespace RenderD7 {
 
     // private methods
     void Thread::threadFunction(void* arg) {
-        m3d::Thread::ThreadData data = *static_cast<RenderD7::Thread::ThreadData*>(arg);
+        RenderD7::Thread::ThreadData data = *static_cast<RenderD7::Thread::ThreadData*>(arg);
         data.m_function(data.m_parameter);
         *data.m_running = false;
     }
