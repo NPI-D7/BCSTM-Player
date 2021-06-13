@@ -7,10 +7,25 @@ RenderD7::Image img;
 //extern RenderD7::Image img;
 BCSTM player;
 
-
 extern RenderD7::Sheet sheet;
 bool playing = false;
 std::string currentlypl;
+
+void FS_Thread(RenderD7::Parameter param) {
+    int id = param.get<int>();
+
+    while (true) {
+        chdir("sdmc:/");
+        std::vector<RenderD7::DirContent> temp;
+        RenderD7::GetDirContentsExt(temp, {"bcstm"});
+        for (uint i = 0; i < temp.size(); i++)
+        {
+            this->dircontent.push_back(temp[i]);
+        } 
+        this->changeddir = false;
+        RenderD7::Thread::sleep(1000 * id); // wait; also, this is needed to allow for concurrency (refer to the documentation for m3d::Thread::sleep())
+    }
+}
 
 void clearCache()
 {
@@ -121,14 +136,8 @@ void MMM::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
 Browse::Browse()
 {
     RenderD7::Msg::Display("BCSTM-Player", "Loading Directory: sd:/", Top);
-    chdir("sdmc:/");
-    std::vector<RenderD7::DirContent> temp;
-    RenderD7::GetDirContentsExt(temp, {"bcstm"});
-    for (uint i = 0; i < temp.size(); i++)
-    {
-        this->dircontent.push_back(temp[i]);
-    } 
-    this->changeddir = false;
+    RenderD7::Thread f1(FS_Thread, 1);
+    f1.start();
 }
 
 void Browse::Draw(void) const
