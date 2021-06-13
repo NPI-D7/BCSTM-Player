@@ -25,6 +25,7 @@ class Browse : public RenderD7::Scene
     void Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch) override;
     Browse();
     private:
+    void FS_Thread(RenderD7::Parameter param);
     std::vector<RenderD7::DirContent> dircontent;
     int dirsel = 0;
     bool changeddir = false;
