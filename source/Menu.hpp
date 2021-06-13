@@ -1,6 +1,8 @@
 #include "renderd7.hpp"
 
-
+std::vector<RenderD7::DirContent> dircontentz;
+int dirselz = 0;
+bool changeddirz = false;
 class MMM : public RenderD7::Scene
 {
     public:
@@ -24,7 +26,7 @@ class Browse : public RenderD7::Scene
     void Draw(void) const override;
     void Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch) override;
     Browse();
-    static void FS_Thread(RenderD7::Parameter param);
+   // static void FS_Thread(RenderD7::Parameter param);
     private:
     
     std::vector<RenderD7::DirContent> dircontent;
