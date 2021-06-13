@@ -135,7 +135,7 @@ void MMM::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
 
 Browse::Browse()
 {
-    RenderD7::Msg::Display("BCSTM-Player", "Loading Directory: sd:/", Top);
+    //RenderD7::Msg::Display("BCSTM-Player", "Loading Directory: sd:/", Top);
     RenderD7::Thread f1(FS_Thread, 1);
     f1.start();
 }
