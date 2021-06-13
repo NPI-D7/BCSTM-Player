@@ -4,7 +4,7 @@ namespace RenderD7 {
                 m_started(false),
                 m_running(false) { /* do nothing */ }
 
-    Thread::Thread(std::function<void(m3d::Parameter)> t_function, m3d::Parameter t_parameter, bool t_autostart, bool t_detached, unsigned long long int t_stackSize) :
+    Thread::Thread(std::function<void(RenderD7::Parameter)> t_function, RenderD7::Parameter t_parameter, bool t_autostart, bool t_detached, unsigned long long int t_stackSize) :
                 m_started(false),
                 m_running(false) {
         initialize(t_function, t_parameter, t_autostart, t_detached, t_stackSize);
@@ -16,7 +16,7 @@ namespace RenderD7 {
         if (m_started) threadFree(m_thread);
     }
 
-    void Thread::initialize(std::function<void(m3d::Parameter)> t_function, m3d::Parameter t_parameter, bool t_autostart, bool t_detached, unsigned long long int t_stackSize) {
+    void Thread::initialize(std::function<void(RenderD7::Parameter)> t_function, RenderD7::Parameter t_parameter, bool t_autostart, bool t_detached, unsigned long long int t_stackSize) {
         m_stackSize = t_stackSize;
         m_data.m_parameter = t_parameter;
         m_data.m_function = t_function;
@@ -70,7 +70,7 @@ namespace RenderD7 {
 
     // private methods
     void Thread::threadFunction(void* arg) {
-        m3d::Thread::ThreadData data = *static_cast<m3d::Thread::ThreadData*>(arg);
+        m3d::Thread::ThreadData data = *static_cast<RenderD7::Thread::ThreadData*>(arg);
         data.m_function(data.m_parameter);
         *data.m_running = false;
     }
