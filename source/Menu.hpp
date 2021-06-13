@@ -24,7 +24,7 @@ class Browse : public RenderD7::Scene
     void Draw(void) const override;
     void Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch) override;
     Browse();
-    void FS_Thread(RenderD7::Parameter param);
+    static void FS_Thread(RenderD7::Parameter param);
     private:
     
     std::vector<RenderD7::DirContent> dircontent;
