@@ -1,3 +1,4 @@
+#pragma once
 #include <3ds.h>
 #include <citro2d.h>
 #include <citro3d.h>
@@ -16,8 +17,10 @@
 #include "external/fs.h"
 #include <codecvt>
 #include "lang.hpp"
+#include "parameter.hpp"
+#include "thread.hpp"
 
-#define RENDERD7VSTRING "0.6.0"
+#define RENDERD7VSTRING "0.6.1"
 #define DEFAULT_CENTER 0.5f
 
 extern C3D_RenderTarget* Top;
