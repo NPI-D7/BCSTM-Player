@@ -39,6 +39,7 @@ int main()
         player.tick();
         C3D_FrameEnd(0);
     }
+    t1.detach();
     sheet.Free();
     RenderD7::Exit::NdspFirm();
     RenderD7::Exit::Main();
