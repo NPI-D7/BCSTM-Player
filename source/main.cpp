@@ -33,7 +33,6 @@ int main()
     t1.start();
     while(RenderD7::MainLoop())
     {
-        //D7TM::CardLoop();
         RenderD7::Scene::doDraw();
         RenderD7::Scene::doLogic(d7_hDown, d7_hHeld, d7_hUp, d7_touch);
         player.tick();
