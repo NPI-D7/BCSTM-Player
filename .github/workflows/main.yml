@@ -105,7 +105,7 @@ jobs:
           cd nightlys
           sudo chmod +x nightlytool
           echo running
-          ./nightlytool management/BCSTM-Player.ini BCSTM-Player NPI-D7 nightlys v$CURRENT_DATE $COMMIT_HASH "\\$COMMIT_SUBJECT\\$COMMIT_MESSAGE\\"
+          ./nightlytool management/BCSTM-Player.ini BCSTM-Player NPI-D7 nightlys v$CURRENT_DATE $COMMIT_HASH "\\$COMMIT_SUBJECT\\$COMMIT_MESSAGE\\" 0
           echo creating dirs
           ls -R
           mkdir -p builds/BCSTM-Player/
