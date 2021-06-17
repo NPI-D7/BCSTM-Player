@@ -23,6 +23,7 @@ void FS_Thread(RenderD7::Parameter param) {
            dircontentz.push_back(temp[i]);
         } 
         changeddirz = false;
+        break;
         //RenderD7::Thread::sleep(1000 * id); // wait; also, this is needed to allow for concurrency (refer to the documentation for m3d::Thread::sleep())
     }
 }
