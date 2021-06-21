@@ -289,7 +289,7 @@ void Credits::Draw(void) const
     std::string stdzeitverschwendung2 = "nightly: " V_STRING;
     RenderD7::DrawTextCentered(40, 2, 0.7f, RenderD7::Color::Hex("#FFFFFF"), "BCSTM-Player->Credits", 400);
     RenderD7::DrawText(5, 218, 0.7f, RenderD7::Color::Hex("#FFFFFF"), stdzeitverschwendung);
-    RenderD7::DrawText(400 - RenderD7::GetTextWidth(0.7f, stdzeitverschwendung2), 218, 0.7f, RenderD7::Color::Hex("#FFFFFF"), stdzeitverschwendung2);
+    RenderD7::DrawTextLeft(395, 218, 0.7f, RenderD7::Color::Hex("#FFFFFF"), stdzeitverschwendung2);
     RenderD7::DrawText(5, 30, 0.7f, RenderD7::Color::Hex("#000000"), "- Tobi-D7\n- devkitpro\n- citro2d\n- citro3d\n\n" + RenderD7::Lang::get("TPWMR"));
     RenderD7::OnScreen(Bottom);
     RenderD7::DrawRect(0, 0, 320, 240, RenderD7::Color::Hex("#222222"));

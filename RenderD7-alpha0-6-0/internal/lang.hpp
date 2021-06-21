@@ -1,7 +1,7 @@
-#pragma omce
+#pragma once
+#include <string>
 #include "json.hpp"
 
-#include <string>
 
 namespace RenderD7::Lang
 {

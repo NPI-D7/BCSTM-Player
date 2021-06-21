@@ -446,7 +446,10 @@ void RenderD7::DrawText(float x, float y, float size, u32 color, std::string Tex
 		}
 	}
 }
-
+void RenderD7::DrawTextLeft(float x, float y, float size, u32 color, std::string Text, int maxWidth, int maxHeight, C2D_Font fnt)
+{
+	RenderD7::DrawText(x - RenderD7::GetTextWidth(size, Text, fnt), y, size, color, Text, maxWidth, maxHeight, fnt);
+}
 // Get String or Text Width.
 float RenderD7::GetTextWidth(float size, std::string Text, C2D_Font fnt) {
 	float width = 0;

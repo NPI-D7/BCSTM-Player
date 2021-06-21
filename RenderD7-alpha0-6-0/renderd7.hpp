@@ -20,7 +20,8 @@
 #include "parameter.hpp"
 #include "thread.hpp"
 
-#define RENDERD7VSTRING "0.6.1"
+#define RENDERD7VSTRING "0.6.2"
+#define CHANGELOG "6.0.2: Fix Code in lang.hpp\nadd Draw Text Left Function.\nadd changelog\n6.0.1: add Threading system."
 #define DEFAULT_CENTER 0.5f
 
 extern C3D_RenderTarget* Top;
@@ -134,6 +135,7 @@ namespace RenderD7
     bool DrawRect(float x, float y, float w, float h, u32 color);
     void DrawTextCentered(float x, float y, float size, u32 color, std::string Text, int maxWidth = 0, int maxHeight = 0, C2D_Font fnt = nullptr);
 	void DrawText(float x, float y, float size, u32 color, std::string Text, int maxWidth = 0, int maxHeight = 0, C2D_Font fnt = nullptr);
+    void DrawTextLeft(float x, float y, float size, u32 color, std::string Text, int maxWidth = 0, int maxHeight = 0, C2D_Font fnt = nullptr);
 	float GetTextWidth(float size, std::string Text, C2D_Font fnt = nullptr);
 	void GetTextSize(float size, float *width, float *height, std::string Text, C2D_Font fnt = nullptr);
 	float GetTextHeight(float size, std::string Text, C2D_Font fnt = nullptr);
