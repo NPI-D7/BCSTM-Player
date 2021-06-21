@@ -7,7 +7,25 @@
 
 using CTRU_Thread = Thread;
 
+#define THREAD_STACK_SIZE 0x1000
+
 namespace RenderD7 {
+    namespace Thread
+    {
+        inline bool threadrunning = false;
+
+        struct Thread
+        {
+            Handle handle;
+            void (*ep)(void);
+            bool finished;
+            void* stacktop;
+        };
+
+        bool Create();
+        bool Join();
+        void Exit();
+    }
     class Thread {
     public:
         /**
