@@ -7,7 +7,7 @@
                 "${workspaceFolder}/BCSTM/**",
                 "/opt/devkitpro/libctru/include/**",
                 "/opt/devkitpro/portlibs/3ds/include/**",
-                "${workspaceFolder}/RenderD7-alpha0-3-0/**"
+                "${workspaceFolder}/RenderD7-alpha0-6-0/**"
             ],
             "intelliSenseMode": "gcc-arm",
             
