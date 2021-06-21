@@ -237,7 +237,7 @@ bool RenderD7::MainLoop()
     C3D_FrameBegin(C3D_FRAME_SYNCDRAW);
 	C2D_TargetClear(Top, C2D_Color32(0, 0, 0, 0));
 	C2D_TargetClear(Bottom, C2D_Color32(0, 0, 0, 0));
-    
+
     return running;
 }
 
@@ -522,6 +522,7 @@ Result RenderD7::Init::Main()
 }
 void RenderD7::Exit::Main()
 {
+	if (threadrunning) RenderD7::Thread::Exit();s
     C2D_TextBufDelete(TextBuf);
 	C2D_Fini();
 	C3D_Fini();
