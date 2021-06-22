@@ -20,7 +20,7 @@
 #include "parameter.hpp"
 #include "thread.hpp"
 
-#define RENDERD7VSTRING "0.6.2"
+#define RENDERD7VSTRING "6.１.0"
 #define CHANGELOG "6.1.0: rewrite Thread system/n6.0.2: Fix Code in lang.hpp\nadd Draw Text Left Function.\nadd changelog\n6.0.1: add Threading system."
 #define DEFAULT_CENTER 0.5f
 
