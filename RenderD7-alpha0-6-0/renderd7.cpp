@@ -521,7 +521,7 @@ Result RenderD7::Init::Main()
 }
 void RenderD7::Exit::Main()
 {
-    if (RenderD7::Thread::threadrunning) RenderD7::Thread::Exit();
+    if (RenderD7::Threads::threadrunning) RenderD7::Threads::Exit();
     C2D_TextBufDelete(TextBuf);
 	C2D_Fini();
 	C3D_Fini();
