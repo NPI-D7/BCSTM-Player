@@ -1,5 +1,9 @@
 #include "thread.hpp"
 namespace RenderD7 {
+    Threads::Exit()
+    {
+
+    }
     Thread::Thread() :
                 m_started(false),
                 m_running(false) { /* do nothing */ }
