@@ -224,6 +224,22 @@ void RenderD7::OnScreen(C3D_RenderTarget *target)
     C2D_SceneBegin(target);
 }
 
+void frameloop()
+{
+	frames++;
+	u64 delta_time = osGetTime() - last_time;
+	if (delta_time >= 1000) {
+		current_fps = frames/(delta_time/1000.0f)+1;
+		frames = 0;
+		last_time = osGetTime();
+	}
+	d11framerate = current_fps;
+}
+float getframerate()
+{
+	return d11framerate;
+}
+
 bool RenderD7::MainLoop()
 {
     if (!aptMainLoop()) return false;
@@ -237,7 +253,7 @@ bool RenderD7::MainLoop()
     C3D_FrameBegin(C3D_FRAME_SYNCDRAW);
 	C2D_TargetClear(Top, C2D_Color32(0, 0, 0, 0));
 	C2D_TargetClear(Bottom, C2D_Color32(0, 0, 0, 0));
-
+    frameloop();
     return running;
 }
 
@@ -324,23 +340,6 @@ void RenderD7::Sprite::SetScale(float x, float y)
 void RenderD7::ClearTextBufs(void)
 {
 	C2D_TextBufClear(TextBuf);
-}
-
-void frameloop()
-{
-	frames++;
-	u64 delta_time = osGetTime() - last_time;
-	if (delta_time >= 1000) {
-		current_fps = frames/(delta_time/1000.0f)+1;
-		frames = 0;
-		last_time = osGetTime();
-	}
-	d11framerate = current_fps;
-}
-float getframerate()
-{
-    frameloop();
-	return d11framerate;
 }
 
 bool RenderD7::DrawRect(float x, float y, float w, float h, u32 color)
