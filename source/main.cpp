@@ -12,8 +12,6 @@ void CardScan(RenderD7::Parameter param) {
     int id = param.get<int>();
 
     while (true) {
-        RenderD7::OnScreen(Bottom);
-        RenderD7::DrawTextLeft(395, 2, 0.6f, RenderD7::Color::Hex("#ffffff"), "Fps: " + RenderD7::GetFramerate());
         D7TM::CardLoop();
         RenderD7::Thread::sleep(1000 * id); // wait; also, this is needed to allow for concurrency (refer to the documentation for m3d::Thread::sleep())
     }
@@ -38,6 +36,8 @@ int main()
         RenderD7::Scene::doDraw();
         RenderD7::Scene::doLogic(d7_hDown, d7_hHeld, d7_hUp, d7_touch);
         player.tick();
+        RenderD7::OnScreen(Bottom);
+        RenderD7::DrawTextLeft(395, 2, 0.6f, RenderD7::Color::Hex("#ffffff"), "Fps: " + RenderD7::GetFramerate());
         C3D_FrameEnd(0);
     }
     t1.detach();
