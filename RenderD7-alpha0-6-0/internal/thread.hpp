@@ -10,7 +10,7 @@ using CTRU_Thread = Thread;
 #define THREAD_STACK_SIZE 0x1000
 
 namespace RenderD7 {
-   /* namespace Thread
+    namespace Threads
     {
         inline bool threadrunning = false;
 
@@ -25,7 +25,7 @@ namespace RenderD7 {
         bool Create();
         bool Join();
         void Exit();
-    }*/
+    }
     class Thread {
     public:
         /**
@@ -33,8 +33,7 @@ namespace RenderD7 {
          * @note This should only be called when calling m3d::Thread::initialize() before calling m3d::Thread::start()
          */
         Thread();
-        inline bool threadrunning = false;
-        void Exit();
+        
         /**
          * @brief Constructs the thread
          * @param t_function  The thread function
