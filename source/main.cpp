@@ -13,7 +13,7 @@ void CardScan(RenderD7::Parameter param) {
 
     while (true) {
         RenderD7::OnScreen(Bottom);
-        RenderD7::DrawTextLeft(395, 2, 0.6f, RenderD7::Color::Hex("#ffffff), "Fps: " + RenderD7::GetFramerate());
+        RenderD7::DrawTextLeft(395, 2, 0.6f, RenderD7::Color::Hex("#ffffff"), "Fps: " + RenderD7::GetFramerate());
         D7TM::CardLoop();
         RenderD7::Thread::sleep(1000 * id); // wait; also, this is needed to allow for concurrency (refer to the documentation for m3d::Thread::sleep())
     }
