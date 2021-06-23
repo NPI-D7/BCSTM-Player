@@ -1,6 +1,6 @@
 #include "thread.hpp"
 namespace RenderD7 {
-    Threads::Exit()
+    void Threads::Exit()
     {
 
     }
