@@ -33,7 +33,8 @@ namespace RenderD7 {
          * @note This should only be called when calling m3d::Thread::initialize() before calling m3d::Thread::start()
          */
         Thread();
-
+        inline bool threadrunning = false;
+        void Exit();
         /**
          * @brief Constructs the thread
          * @param t_function  The thread function
