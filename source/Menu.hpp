@@ -16,7 +16,7 @@ class MMM : public RenderD7::Scene
         {20, 85, 100, 35, "Titles", 0, 9},
         {20, 135, 100, 35, "Credits", -8, 10},
         {20, 185, 100, 35, "Exit", 8, 10},
-        {200, 35, 100, 35, "Settings", -30, 10}
+        {200, 35, 100, 35, "Settings", -15, 10}
     };
     int Selection = 0;
 };
