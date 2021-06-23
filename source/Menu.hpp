@@ -12,10 +12,11 @@ class MMM : public RenderD7::Scene
     private:
     std::vector<RenderD7::TObject> buttons = 
     {
-        {90, 20, 140, 35, "Browse", -8, 10},
-        {90, 70, 140, 35, "Titles", 0, 9},
-        {90, 120, 140, 35, "Credits", -4, 10},
-        {90, 170, 140, 35, "Exit", 4, 10}
+        {20, 20, 100, 35, "Browse", -8, 10},
+        {20, 70, 100, 35, "Titles", 0, 9},
+        {20, 120, 100, 35, "Credits", -4, 10},
+        {200, 170, 100, 35, "Exit", 4, 10},
+        {200, 20, 100, 35, "Settings", 4, 10}
     };
     int Selection = 0;
 };
