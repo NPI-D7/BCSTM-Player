@@ -240,6 +240,11 @@ float getframerate()
 	return d11framerate;
 }
 
+std::string RenderD7::GetFramerate()
+{
+	return (std::to_string(d11framerate).substr(0, 2));
+}
+
 bool RenderD7::MainLoop()
 {
     if (!aptMainLoop()) return false;
@@ -528,12 +533,6 @@ void RenderD7::Exit::Main()
     aptExit();
     romfsExit();
     cfguExit();
-}
-
-std::string RenderD7::GetFramerate()
-{
-	frameloop();
-	return (std::to_string(d11framerate).substr(0, 2));
 }
 
 void RenderD7::DrawTObjects(std::vector<RenderD7::TObject> tobjects, u32 color, u32 txtcolor, int selection, u32 selbgcolor, u32 selcolor)
