@@ -12,7 +12,7 @@ bool playing = false;
 std::string currentlypl;
 
 void FS_Thread(RenderD7::Parameter param) {
-    int id = param.get<int>();
+   
 
     while (true) {
         chdir("sdmc:/");
