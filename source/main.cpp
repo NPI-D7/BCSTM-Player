@@ -36,8 +36,6 @@ int main()
         RenderD7::Scene::doDraw();
         RenderD7::Scene::doLogic(d7_hDown, d7_hHeld, d7_hUp, d7_touch);
         player.tick();
-        RenderD7::OnScreen(Bottom);
-        RenderD7::DrawTextLeft(395, 2, 0.6f, RenderD7::Color::Hex("#ffffff"), "Fps: " + RenderD7::GetFramerate());
         C3D_FrameEnd(0);
     }
     t1.detach();

@@ -19,6 +19,7 @@
 #include "lang.hpp"
 #include "parameter.hpp"
 #include "thread.hpp"
+#include "ini.hpp"
 
 #define RENDERD7VSTRING "6.１.0"
 #define CHANGELOG "6.1.0: rewrite Threadsystem, Improve framerate/n6.0.2: Fix Code in lang.hpp\nadd Draw Text Left Function.\nadd changelog\n6.0.1: add Threading system."
@@ -163,16 +164,35 @@ namespace RenderD7
     };
     struct TObject
     {
-        int x;
-        int y;
-        int w;
-        int h;
-        std::string text = "";
-        float correctx = 0; 
-        float correcty = 0;
-        float txtsize = 0.7f;
-        
+        int x; //Position X
+        int y; //Position Y
+        int w; //Button Width
+        int h; //Button Height
+        std::string text = ""; //Text
+        float correctx = 0; //Correct X Position
+        float correcty = 0; //Correct Y Position
+        float txtsize = 0.7f;  //Set Text Size
     };
+
+    struct ScrollList1 
+    {
+        std::string Text = "";
+    };
+
+    struct ScrollList2 
+    {
+        float x;
+        float y;
+        float w;
+        float h;
+        std::string Text = "";
+    };
+    /*enum ListType
+    {
+        ONE,
+        TWO
+    };*/
+    void DrawList1(RenderD7::ScrollList1 &l, float txtsize, C3D_RenderTarget *t);
     void DrawTObjects(std::vector<RenderD7::TObject> tobjects, u32 color, u32 txtcolor,  int selection = -1, u32 selbgcolor = RenderD7::Color::Hex("#2D98AF"), u32 selcolor = RenderD7::Color::Hex("#000000"));
     void DrawSTObject(std::vector<RenderD7::TObject> tobject, int tobjectindex, u32 color, u32 txtcolor);
     bool touchTObj(touchPosition touch, RenderD7::TObject button);
@@ -187,6 +207,4 @@ namespace RenderD7
     bool NameIsEndingWith(const std::string &name, const std::vector<std::string> &extensions);
     void GetDirContentsExt(std::vector<RenderD7::DirContent> &dircontent, const std::vector<std::string> &extensions);
     void GetDirContents(std::vector<RenderD7::DirContent> &dircontent);
-
-    
 }

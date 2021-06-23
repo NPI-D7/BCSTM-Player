@@ -4,6 +4,7 @@
 
 #define RGBA8(r, g, b, a) ((((r) & 0xFF) << 0) | (((g) & 0xFF) << 8) | (((b) & 0xFF) << 16) | (((a) & 0xFF) << 24))
 #define D7_NOTHING C2D_Color32(0, 0, 0, 0)
+#define CFGVER "0"
 Log renderd7log;
 float animtime;
 bool isndspinit = false;
@@ -11,6 +12,10 @@ bool running = true;
 std::stack<std::unique_ptr<RenderD7::Scene>> RenderD7::Scene::scenes;
 bool usedbgmsg = false;
 std::string dspststus = "Not Initialisized!";
+
+//INI::INIFile cfgfile;
+std::unique_ptr<INI::INIFile> cfgfile = nullptr;
+INI::INIStructure cfgstruct;
 
 u32 d7_hDown;
 u32 d7_hHeld;
@@ -512,6 +517,14 @@ Result RenderD7::Init::Main()
     aptInit();
     romfsInit();
     cfguInit();
+	mkdir("sdmc:/RenderD7/", 0777);
+	cfgfile = std::make_unique<INI::INIFile>("sdmc:/RenderD7/config.ini");
+	cfgfile->read(cfgstruct);
+	cfgstruct["info"]["version"] = CFGVER;
+	cfgstruct["info"]["renderd7ver"] = RENDERD7VSTRING;
+	cfgstruct["settings"]["doscreentimeout"] = "0";
+	cfgstruct["settings"]["forcetimeoutLB"] = "1";
+	cfgstruct["settings"]["forceFrameRate"] = "60";
     osSetSpeedupEnable(true);
     C3D_Init(C3D_DEFAULT_CMDBUF_SIZE);
 	C2D_Init(C2D_DEFAULT_MAX_OBJECTS);
@@ -526,6 +539,7 @@ Result RenderD7::Init::Main()
 }
 void RenderD7::Exit::Main()
 {
+	cfgfile->write(cfgstruct);
     if (RenderD7::Threads::threadrunning) RenderD7::Threads::Exit();
     C2D_TextBufDelete(TextBuf);
 	C2D_Fini();
@@ -731,4 +745,11 @@ bool RenderD7::IsNdspInit()
 	{
 		return false;
 	}
+}
+
+void RenderD7::DrawList1(RenderD7::ScrollList1 &l, float txtsize, C3D_RenderTarget *t)
+{
+	RenderD7::OnScreen(t);
+	RenderD7::DrawRect(0, 0, 400, 240, RenderD7::Color::Hex("#dddddd"));
+	RenderD7::DrawText(0, 0, 0.8f, RenderD7::Color::Hex("#ffffff"), l.Text);
 }
