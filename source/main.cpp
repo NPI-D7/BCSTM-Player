@@ -9,8 +9,6 @@ RenderD7::Sheet sheet;
 extern Log cachelog;
 
 void CardScan(RenderD7::Parameter param) {
-    int id = param.get<int>();
-
     while (true) {
         D7TM::CardLoop();
         player.tick();
