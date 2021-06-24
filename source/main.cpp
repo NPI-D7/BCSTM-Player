@@ -12,7 +12,7 @@ void CardScan(RenderD7::Parameter param) {
     while (true) {
         D7TM::CardLoop();
         player.tick();
-        RenderD7::Thread::sleep(1000 * id); // wait; also, this is needed to allow for concurrency (refer to the documentation for m3d::Thread::sleep())
+        RenderD7::Thread::sleep(1000 * 1); // wait; also, this is needed to allow for concurrency (refer to the documentation for m3d::Thread::sleep())
     }
 }
 
