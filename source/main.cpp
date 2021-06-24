@@ -13,6 +13,7 @@ void CardScan(RenderD7::Parameter param) {
 
     while (true) {
         D7TM::CardLoop();
+        player.tick();
         RenderD7::Thread::sleep(1000 * id); // wait; also, this is needed to allow for concurrency (refer to the documentation for m3d::Thread::sleep())
     }
 }
@@ -35,7 +36,7 @@ int main()
     {
         RenderD7::Scene::doDraw();
         RenderD7::Scene::doLogic(d7_hDown, d7_hHeld, d7_hUp, d7_touch);
-        player.tick();
+        //player.tick();
         C3D_FrameEnd(0);
     }
     t1.detach();
