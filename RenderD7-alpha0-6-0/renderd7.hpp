@@ -12,6 +12,8 @@
 #include <stdio.h>
 #include <cstring>
 #include <sys/stat.h>
+#include <algorithm>
+#include <iostream>
 #include "external/lodepng.h"
 #include "utils.hpp"
 #include "external/fs.h"
@@ -21,7 +23,7 @@
 #include "thread.hpp"
 #include "ini.hpp"
 
-#define RENDERD7VSTRING "6.１.0"
+#define RENDERD7VSTRING "6.1.0"
 #define CHANGELOG "6.1.0: rewrite Threadsystem, Improve framerate/n6.0.2: Fix Code in lang.hpp\nadd Draw Text Left Function.\nadd changelog\n6.0.1: add Threading system."
 #define DEFAULT_CENTER 0.5f
 
@@ -121,6 +123,10 @@ namespace RenderD7
         void DisplayWithProgress(std::string titletext, std::string subtext, float current, float total, u32 prgbarcolor);
     }
     
+    namespace Convert
+    {
+        inline float StringtoFloat(std::string inp){return std::atof(inp.c_str());}
+    }
     namespace FS
     {
         bool FileExist(const std::string& path);

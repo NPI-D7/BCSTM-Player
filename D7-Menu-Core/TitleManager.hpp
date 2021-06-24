@@ -1,4 +1,4 @@
-
+#pragma once
 #include "title.hpp"
 #include <3ds.h>
 #include <memory>

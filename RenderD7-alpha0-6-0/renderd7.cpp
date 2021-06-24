@@ -518,13 +518,21 @@ Result RenderD7::Init::Main()
     romfsInit();
     cfguInit();
 	mkdir("sdmc:/RenderD7/", 0777);
+	if (!FS::FileExist("sdmc:/RenderD7/config.ini"))
+	{
+		cfgfile = std::make_unique<INI::INIFile>("sdmc:/RenderD7/config.ini");
+		cfgfile->read(cfgstruct);
+		cfgstruct["info"]["version"] = CFGVER;
+		cfgstruct["info"]["renderd7ver"] = RENDERD7VSTRING;
+		cfgstruct["settings"]["doscreentimeout"] = "0";
+		cfgstruct["settings"]["forcetimeoutLB"] = "1";
+		cfgstruct["settings"]["forceFrameRate"] = "60";
+		cfgfile->write(cfgstruct);
+	}
 	cfgfile = std::make_unique<INI::INIFile>("sdmc:/RenderD7/config.ini");
 	cfgfile->read(cfgstruct);
-	cfgstruct["info"]["version"] = CFGVER;
-	cfgstruct["info"]["renderd7ver"] = RENDERD7VSTRING;
-	cfgstruct["settings"]["doscreentimeout"] = "0";
-	cfgstruct["settings"]["forcetimeoutLB"] = "1";
-	cfgstruct["settings"]["forceFrameRate"] = "60";
+	std::string Fps = cfgstruct["settings"]["forceFrameRate"];
+	C3D_FrameRate(RenderD7::Convert::StringtoFloat(Fps));
     osSetSpeedupEnable(true);
     C3D_Init(C3D_DEFAULT_CMDBUF_SIZE);
 	C2D_Init(C2D_DEFAULT_MAX_OBJECTS);
