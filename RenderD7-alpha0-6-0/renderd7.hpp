@@ -15,7 +15,6 @@
 #include <algorithm>
 #include <iostream>
 #include "external/lodepng.h"
-#include "utils.hpp"
 #include "external/fs.h"
 #include <codecvt>
 #include "lang.hpp"
