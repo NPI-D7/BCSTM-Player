@@ -663,16 +663,16 @@ void RenderD7::Image::LoadPng(const std::string path)
 	lodepng::decode(ImageBuffer, width, height, path);
 
 	this->img.tex = new C3D_Tex;
-	this->img.subtex = new Tex3DS_SubTexture({(u16)width, (u16)height, 0.0f, 1.0f, width / 512.0f, 1.0f - (height / 512.0f)});
+	this->img.subtex = new Tex3DS_SubTexture({(u16)width, (u16)height, 0.0f, 1.0f, width / 1024.0f, 1.0f - (height / 1024.0f)});
 
-	C3D_TexInit(this->img.tex, 512, 512, GPU_RGBA8);
+	C3D_TexInit(this->img.tex, 1024, 1024, GPU_RGBA8);
 	C3D_TexSetFilter(this->img.tex, GPU_LINEAR, GPU_LINEAR);
 	this->img.tex->border = 0xFFFFFFFF;
 	C3D_TexSetWrap(this->img.tex, GPU_CLAMP_TO_BORDER, GPU_CLAMP_TO_BORDER);
 
-	for (u32 x = 0; x < width && x < 512; x++) {
-		for (u32 y = 0; y < height && y < 512; y++) {
-			const u32 dstPos = ((((y >> 3) * (512 >> 3) + (x >> 3)) << 6) +
+	for (u32 x = 0; x < width && x < 1024; x++) {
+		for (u32 y = 0; y < height && y < 1024; y++) {
+			const u32 dstPos = ((((y >> 3) * (1024 >> 3) + (x >> 3)) << 6) +
 								((x & 1) | ((y & 1) << 1) | ((x & 2) << 1) | ((y & 2) << 2) |
 								((x & 4) << 2) | ((y & 4) << 3))) * 4;
 
