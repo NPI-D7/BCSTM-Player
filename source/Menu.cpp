@@ -11,23 +11,6 @@ extern RenderD7::Sheet sheet;
 bool playing = false;
 std::string currentlypl;
 
-void FS_Thread(RenderD7::Parameter param) {
-   
-
-    while (true) {
-        chdir("sdmc:/");
-        std::vector<RenderD7::DirContent> temp;
-        RenderD7::GetDirContentsExt(temp, {"bcstm"});
-        for (uint i = 0; i < temp.size(); i++)
-        {
-           dircontentz.push_back(temp[i]);
-        } 
-        changeddirz = false;
-        break;
-        //RenderD7::Thread::sleep(1000 * id); // wait; also, this is needed to allow for concurrency (refer to the documentation for m3d::Thread::sleep())
-    }
-}
-
 void clearCache()
 {
     remove("sdmc:/BCSTM-Player/cache/sd");
@@ -145,8 +128,14 @@ void MMM::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
 Browse::Browse()
 {
     //RenderD7::Msg::Display("BCSTM-Player", "Loading Directory: sd:/", Top);
-    RenderD7::Thread f1(FS_Thread, 1);
-    f1.start();
+    chdir("sdmc:/");
+    std::vector<RenderD7::DirContent> temp;
+    RenderD7::GetDirContentsExt(temp, {"bcstm"});
+    for (uint i = 0; i < temp.size(); i++)
+    {
+        this->dircontent.push_back(temp[i]);
+    } 
+    this->changeddir = false;
 }
 
 void Browse::Draw(void) const
@@ -162,18 +151,18 @@ void Browse::Draw(void) const
     std::string dirs;
     int contentsss;
     contentsss = (int)dircontent.size();
-    for (int i = this->dirsel < 9 ? 0 : this->dirsel - 9; (int)dircontentz.size() && i < ((this->dirsel < 9) ? 10 : this->dirsel + 1); i++)
+    for (int i = this->dirsel < 9 ? 0 : this->dirsel - 9; (int)dircontent.size() && i < ((this->dirsel < 9) ? 10 : this->dirsel + 1); i++)
     {
         if (i == dirsel)
         {
-            dirs += "> " + dircontentz[i].name + "\n";
+            dirs += "> " + dircontent[i].name + "\n";
         }
         else
         {
-            dirs += dircontentz[i].name + "\n";
+            dirs += dircontent[i].name + "\n";
         } 
     }
-    for (uint i = 0; i < ((dircontentz.size() < 10) ? 10 - dircontentz.size() : 0); i++) {
+    for (uint i = 0; i < ((dircontent.size() < 10) ? 10 - dircontent.size() : 0); i++) {
 		dirs += "\n\n";
 	}
 
