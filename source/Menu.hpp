@@ -1,8 +1,5 @@
 #include "renderd7.hpp"
 
-inline std::vector<RenderD7::DirContent> dircontentz;
-inline int dirselz = 0;
-inline bool changeddirz = false;
 class MMM : public RenderD7::Scene
 {
     public:
