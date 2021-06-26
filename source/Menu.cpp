@@ -67,11 +67,11 @@ void MMM::Draw(void) const
 }
 void MMM::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
 {
-    if((hDown & KEY_DOWN && Selection < 7))
+    if(((hDown & KEY_DOWN && Selection < 7 && Selection !=3)))
     {
         Selection ++;
     }
-    if ((hDown & KEY_UP && Selection > 0))
+    if (((hDown & KEY_UP && Selection > 0 && Selection != 4)))
     {
         Selection--;
     }
