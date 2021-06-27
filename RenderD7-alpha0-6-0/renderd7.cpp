@@ -32,8 +32,11 @@ static u64 last_time = 0;
 float d11framerate = 0;
 //-----------------
 
+//Metrik-------------------------------------
+u32 mt_color;
+//-------------------------------------------
 bool currentScreen = false;
-
+bool metrikd = false;
 C3D_RenderTarget* Top;
 C3D_RenderTarget* TopRight;
 C3D_RenderTarget* Bottom;
@@ -247,7 +250,7 @@ float getframerate()
 
 std::string RenderD7::GetFramerate()
 {
-	return (std::to_string(d11framerate).substr(0, 2));
+	return (std::to_string((int)d11framerate).substr(0, 2));
 }
 
 bool RenderD7::MainLoop()
@@ -261,9 +264,11 @@ bool RenderD7::MainLoop()
 
     RenderD7::ClearTextBufs();
     C3D_FrameBegin(C3D_FRAME_SYNCDRAW);
+	
 	C2D_TargetClear(Top, C2D_Color32(0, 0, 0, 0));
 	C2D_TargetClear(Bottom, C2D_Color32(0, 0, 0, 0));
     frameloop();
+	if (metrikd)RenderD7::DrawMetrikOvl();
     return running;
 }
 
@@ -511,6 +516,12 @@ bool RenderD7::DrawCircle(float x, float y, float radius, u32 color)
 	return C2D_DrawCircleSolid(x, y, 0.5f, radius, color);
 }
 
+void MetrikThread(RenderD7::Parameter param) {
+    while (true) {
+        RenderD7::DrawMetrikOvl();
+        RenderD7::Thread::sleep(1000 * 1); // wait; also, this is needed to allow for concurrency (refer to the documentation for m3d::Thread::sleep())
+    }
+}
 Result RenderD7::Init::Main()
 {
     gfxInitDefault();
@@ -527,13 +538,25 @@ Result RenderD7::Init::Main()
 		cfgstruct["settings"]["doscreentimeout"] = "0";
 		cfgstruct["settings"]["forcetimeoutLB"] = "1";
 		cfgstruct["settings"]["forceFrameRate"] = "60";
+		cfgstruct["settings"]["super-reselution"] = "0";
+		cfgstruct["metrik-settings"]["enableoverlay"] = "0";
+		cfgstruct["metrik-settings"]["Screen"] = "0";
+		cfgstruct["metrik-settings"]["Color"] = "#ffffff";
+		cfgstruct["metrik-settings"]["ColorA"] = "255";
 		cfgfile->write(cfgstruct);
 	}
 	cfgfile = std::make_unique<INI::INIFile>("sdmc:/RenderD7/config.ini");
 	cfgfile->read(cfgstruct);
 	std::string Fps = cfgstruct["settings"]["forceFrameRate"];
 	C3D_FrameRate(RenderD7::Convert::StringtoFloat(Fps));
+	metrikd = RenderD7::Convert::FloatToBool(RenderD7::Convert::StringtoFloat(cfgstruct["metrik-settings"]["enableoverlay"]));
+	mt_color = RenderD7::Color::Hex(cfgstruct["metrik-settings"]["Color"], (u8)RenderD7::Convert::StringtoFloat(cfgstruct["metrik-settings"]["ColorA"]));
     osSetSpeedupEnable(true);
+	/*if(metrikd)
+	{
+		RenderD7::Thread tr(MetrikThread);
+		tr.start();
+	}*/
     C3D_Init(C3D_DEFAULT_CMDBUF_SIZE);
 	C2D_Init(C2D_DEFAULT_MAX_OBJECTS);
 	C2D_Prepare();
@@ -760,4 +783,10 @@ void RenderD7::DrawList1(RenderD7::ScrollList1 &l, float txtsize, C3D_RenderTarg
 	RenderD7::OnScreen(t);
 	RenderD7::DrawRect(0, 0, 400, 240, RenderD7::Color::Hex("#dddddd"));
 	RenderD7::DrawText(0, 0, 0.8f, RenderD7::Color::Hex("#ffffff"), l.Text);
+}
+
+void RenderD7::DrawMetrikOvl()
+{
+	RenderD7::OnScreen(Top);
+	RenderD7::DrawText(0, 0, 0.6f, mt_color, "HI");
 }

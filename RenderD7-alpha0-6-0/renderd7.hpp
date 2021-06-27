@@ -100,6 +100,7 @@ namespace RenderD7
     {
         u32 Hex(const std::string color, u8 a = 255);
     }
+    void DrawMetrikOvl();
     bool DrawImageFromSheet(RenderD7::Sheet* sheet, size_t index, float x, float y, float scaleX = 1.0, float scaleY = 1.0);
     namespace Error
     {
@@ -125,6 +126,7 @@ namespace RenderD7
     namespace Convert
     {
         inline float StringtoFloat(std::string inp){return std::atof(inp.c_str());}
+        inline bool FloatToBool(float inp){if(inp == 1)return true; else return false;}
     }
     namespace FS
     {
@@ -212,4 +214,6 @@ namespace RenderD7
     bool NameIsEndingWith(const std::string &name, const std::vector<std::string> &extensions);
     void GetDirContentsExt(std::vector<RenderD7::DirContent> &dircontent, const std::vector<std::string> &extensions);
     void GetDirContents(std::vector<RenderD7::DirContent> &dircontent);
+
+    
 }
