@@ -14,8 +14,8 @@ enum DownloadError {
 	DL_CANCEL, // No clue if that's needed tho.
 };
 
-inline const std::string &lurl;
-inline const std::string &lpath;
+const std::string &lurl;
+const std::string &lpath;
 
 void Download()
 {
