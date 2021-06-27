@@ -7,7 +7,7 @@
 #include <unistd.h>
 #include <vector>
 
-#include "download.hpp"
+#include "network.hpp"
 #define USER_AGENT APP_TITLE "-" VERSION_STRING
 
 static char *result_buf = nullptr;
