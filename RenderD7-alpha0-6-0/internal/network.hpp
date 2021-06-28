@@ -17,8 +17,8 @@ enum DownloadError {
 Result downloadToFile(const std::string &url, const std::string &path);
 Result downloadFromRelease(const std::string &url, const std::string &asset, const std::string &path, bool includePrereleases);
 
-const std::string &lurl = "";
-const std::string &lpath = "";
+inline std::string lurl = "";
+inline std::string lpath = "";
 
 void Download()
 {
@@ -30,7 +30,7 @@ void Download()
     }
 }
 
-void StartDownload(const std::string &url, const std::string &path)
+void StartDownload(std::string url, std::string path)
 {
     lurl = url;
     lpath = path;
