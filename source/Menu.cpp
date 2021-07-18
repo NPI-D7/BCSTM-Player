@@ -94,10 +94,10 @@ void MMM::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
     {
         RenderD7::Scene::Load(std::make_unique<Browse>());
     }
-    if (RenderD7::touchTObj(touch, buttons[1]))
+   /* if (RenderD7::touchTObj(touch, buttons[1]))
     {
         RenderD7::Scene::Load(std::make_unique<Titles>());
-    }
+    }*/
     if (RenderD7::touchTObj(touch, buttons[3]))
     {
         RenderD7::ExitApp();
@@ -111,10 +111,10 @@ void MMM::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
             playing = false;
         }
     }
-    if(hDown & KEY_L)
+ /*   if(hDown & KEY_L)
     {
         RenderD7::Scene::Load(std::make_unique<RomfsBrowse>());
-    }
+    }*/
     if (hDown & KEY_R)
     {
         RenderD7::Error::DisplayError("BCSTM-Player", "Just for fun");
