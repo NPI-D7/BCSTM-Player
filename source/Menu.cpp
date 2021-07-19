@@ -127,6 +127,7 @@ void MMM::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
 Browse::Browse()
 {
     //RenderD7::Msg::Display("BCSTM-Player", "Loading Directory: sd:/", Top);
+    this->dircontent.clear();
     chdir("sdmc:/");
     std::vector<RenderD7::DirContent> temp;
     RenderD7::GetDirContentsExt(temp, {"bcstm"});
