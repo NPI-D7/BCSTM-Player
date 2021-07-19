@@ -29,7 +29,6 @@ class Browse : public RenderD7::Scene
     Browse();
    // static void FS_Thread(RenderD7::Parameter param);
     private:
-    
     std::vector<RenderD7::DirContent> dircontent;
     int dirsel = 0;
     bool changeddir = false;
@@ -42,8 +41,7 @@ class Credits : public RenderD7::Scene
     void Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch) override;
     Credits();
     private:
-    
-    
+    int n = 0;
 };
 
 class Titles : public RenderD7::Scene
