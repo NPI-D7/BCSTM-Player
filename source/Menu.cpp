@@ -31,7 +31,6 @@ MMM::MMM()
 }
 void MMM::Draw(void) const
 {
-    
     RenderD7::OnScreen(Top);
     RenderD7::DrawRect(0, 0, 400, 240, RenderD7::Color::Hex("#EEEEEE"));
     //img.Draw(0, 0);
@@ -199,15 +198,12 @@ void Browse::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
         {
 			if (this->dircontent[dirsel].isDir) 
             {
-                
 				chdir(this->dircontent[this->dirsel].name.c_str());
 				this->dirsel = 0;
 				this->changeddir = true;
-
 			} 
             else 
             {
-				
                 if (RenderD7::NameIsEndingWith(this->dircontent[this->dirsel].name, {"bcstm"}) && RenderD7::IsNdspInit())
                 {
                     playing = false;
@@ -268,7 +264,6 @@ void Browse::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
     {
         RenderD7::Error::DisplayError("BCSTM-Player", "Just for fun");
     }
-    
 }
 
 Credits::Credits()
@@ -293,7 +288,6 @@ void Credits::Draw(void) const
     RenderD7::DrawImageFromSheet(&sheet, 0, 15, 70);
     RenderD7::DrawTextCentered(5, 218, 0.7f, RenderD7::Color::Hex("#FFFFFF"), "RenderD7: Version: " RENDERD7VSTRING, 390);
     RenderD7::DrawText(5, 2, 0.6f, RenderD7::Color::Hex("#FFFFFF"), "Framerate: " + RenderD7::GetFramerate());
-
 }
 
 void Credits::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
@@ -310,7 +304,6 @@ Titles::Titles()
     maxtitles = (int)TitleManager::sdtitles.size();
     TitleManager::ScanNand("sdmc:/BCSTM-Player/");
     abc = (int)TitleManager::nandtitles.size();
-
 }
 
 void Titles::Draw(void) const
@@ -338,8 +331,6 @@ void Titles::Draw(void) const
     RenderD7::OnScreen(Bottom);
     RenderD7::DrawText(5, 2, 0.7f, RenderD7::Color::Hex("#111111"), "Titles:\nNand: " + std::to_string(abc) + "SD: " + std::to_string(maxtitles));
     //C2D_DrawImageAt(TitleManager::sdtitles[selection]->icon(), 30, 30, 0.5f, nullptr);
-
-
 }
 
 void Titles::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
@@ -410,7 +401,6 @@ void RomfsBrowse::Draw(void) const
     {
         RenderD7::DrawText(5, 218, 0.7f, RenderD7::Color::Hex("#111111"), "Playing: " + currentlypl);
     }
-    
 }
 
 void RomfsBrowse::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
@@ -436,15 +426,12 @@ void RomfsBrowse::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
         {
 			if (this->dircontent[dirsel].isDir) 
             {
-                
 				chdir(this->dircontent[this->dirsel].name.c_str());
 				this->dirsel = 0;
 				this->changeddir = true;
-
 			} 
             else 
             {
-				
                 if (RenderD7::NameIsEndingWith(this->dircontent[this->dirsel].name, {"bcstm"}))
                 {
                     playing = false;
@@ -497,5 +484,4 @@ void RomfsBrowse::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
     {
         dirsel += 6;
     }
-    
 }
