@@ -130,7 +130,6 @@ void RenderD7::SetupLog()
 }
 void RenderD7::SpriteSheetAnimation::Setup(RenderD7::Sheet *sheet, size_t imagecount, size_t startimage, float frame_begin, float frame_finish)
 {
-    
     D_totaltime = frame_begin;
     renderd7log.Write("frame_begin success");
     this->images = imagecount;
@@ -155,8 +154,6 @@ void RenderD7::SpriteSheetAnimation::Play(float timespeed)
     }
     RenderD7::SpriteSheetAnimation::FromSheet(sheet, imgs);
     //RenderD7::SpriteSheetAnimation::Draw();
-    
-
 }
 
 void RenderD7::Error::DisplayError(std::string toptext, std::string errortext)
@@ -193,8 +190,7 @@ void RenderD7::Error::DisplayFatalError(std::string toptext, std::string errorte
 		{
 			RenderD7::ExitApp();
 		}
-	}
-	
+        {
 }
 u32 RenderD7::Color::Hex(const std::string color, u8 a)
 {
@@ -275,11 +271,11 @@ bool RenderD7::MainLoop()
 
 RenderD7::Sheet::Sheet()
 {
-
+    //
 }
 RenderD7::Sheet::~Sheet()
 {
-
+    //
 }
 
 Result RenderD7::Sheet::Load(const char *path)
@@ -295,11 +291,11 @@ void RenderD7::Sheet::Free()
 
 RenderD7::Sprite::Sprite()
 {
-
+//
 }
 RenderD7::Sprite::~Sprite()
 {
-	
+	//
 }
 void RenderD7::Sprite::FromSheet(RenderD7::Sheet *sheet, size_t index)
 {
@@ -381,7 +377,6 @@ void RenderD7::DrawTextCentered(float x, float y, float size, u32 color, std::st
 			} else {
 				widthScale = RenderD7::GetTextWidth(size, Text.substr(0, Text.find('\n')));
 			}
-
 		} else {
 			// Do the widthScale 2.
 			if (fnt != nullptr) {
@@ -389,9 +384,7 @@ void RenderD7::DrawTextCentered(float x, float y, float size, u32 color, std::st
 			} else {
 				widthScale = std::min((float)maxWidth, RenderD7::GetTextWidth(size, Text.substr(0, Text.find('\n'))));
 			}
-
 		}
-
 		if (fnt != nullptr) {
 			RenderD7::DrawText((currentScreen ? 200 : 160)+x-(widthScale/2), y+(lineHeight*line), size, color, Text.substr(0, Text.find('\n')), maxWidth, maxHeight, fnt);
 		} else {
@@ -409,7 +402,6 @@ void RenderD7::DrawTextCentered(float x, float y, float size, u32 color, std::st
 		} else {
 			widthScale = RenderD7::GetTextWidth(size, Text.substr(0, Text.find('\n')));
 		}
-
 	} else {
 		// And again.
 		if (fnt != nullptr) {
@@ -417,7 +409,6 @@ void RenderD7::DrawTextCentered(float x, float y, float size, u32 color, std::st
 		} else {
 			widthScale = std::min((float)maxWidth, RenderD7::GetTextWidth(size, Text.substr(0, Text.find('\n'))));
 		}
-
 	}
 	if (fnt != nullptr) {
 		RenderD7::DrawText((currentScreen ? 200 : 160)+x-(widthScale/2), y+(lineHeight*line), size, color, Text.substr(0, Text.find('\n')), maxWidth, maxHeight, fnt);
@@ -442,7 +433,6 @@ void RenderD7::DrawText(float x, float y, float size, u32 color, std::string Tex
 	if (maxHeight == 0) {
 		heightScale = size;
 	} else {
-		
 		if (fnt != nullptr) {
 			heightScale = std::min(size, size*(maxHeight/RenderD7::GetTextHeight(size, Text, fnt)));
 		} else {
@@ -566,7 +556,6 @@ Result RenderD7::Init::Main()
 	TextBuf = C2D_TextBufNew(4096);
 	Font = C2D_FontLoadSystem(CFG_REGION_USA);
 	return 0;
-
 }
 void RenderD7::Exit::Main()
 {
@@ -596,7 +585,6 @@ void RenderD7::DrawTObjects(std::vector<RenderD7::TObject> tobjects, u32 color, 
 			RenderD7::DrawRect(tobjects[i].x, tobjects[i].y - 1, tobjects[i].w, tobjects[i].h, color);
 			RenderD7::DrawText(tobjects[i].x + (tobjects[i].w/2) - RenderD7::GetTextHeight(tobjects[i].txtsize , tobjects[i].text) + tobjects[i].correctx, tobjects[i].y + (tobjects[i].h/2) - RenderD7::GetTextHeight(tobjects[i].txtsize, tobjects[i].text) + tobjects[i].correcty, tobjects[i].txtsize, txtcolor, tobjects[i].text);
 		}
-		
 	}
 }
 void RenderD7::ExitApp()
@@ -663,7 +651,6 @@ void RenderD7::GetDirContentsExt(std::vector<RenderD7::DirContent> &dircontent, 
 
 		closedir(pdir);
 	}
-
 	sort(dircontent.begin(), dircontent.end(), dirEntryPredicate);
 }
 
@@ -740,8 +727,6 @@ void RenderD7::Image::LoadPFromBuffer(const std::vector<u8> &buffer)
 			((uint8_t *)img.tex->data)[dstPos + 3] = ImageBuffer.data()[srcPos + 0];
 		}
 	}
-
-
 }
 
 bool RenderD7::DrawImage(C2D_Image img, float x, float y, float scaleX, float scaleY)
