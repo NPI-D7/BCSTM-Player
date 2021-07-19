@@ -49,7 +49,7 @@ RenderD7::SpriteSheetAnimation::SpriteSheetAnimation()
 }
 RenderD7::SpriteSheetAnimation::~SpriteSheetAnimation()
 {
-    
+    //
 }
 bool RenderD7::DrawImageFromSheet(RenderD7::Sheet* sheet, size_t index, float x, float y, float scaleX, float scaleY)
 {
@@ -190,7 +190,7 @@ void RenderD7::Error::DisplayFatalError(std::string toptext, std::string errorte
 		{
 			RenderD7::ExitApp();
 		}
-        {
+        }
 }
 u32 RenderD7::Color::Hex(const std::string color, u8 a)
 {
