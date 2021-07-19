@@ -48,7 +48,6 @@ namespace RenderD7
         Result Load(const char *path);
         void Free();
         C2D_SpriteSheet spritesheet;
-        
     };
     class Image
     {
@@ -60,8 +59,6 @@ namespace RenderD7
         C2D_Image img;
         bool loadet = false;
     };
-
-    
 
     class Sprite
     {
@@ -84,6 +81,7 @@ namespace RenderD7
         C2D_ImageTint tint;
         C2D_Sprite sprite;
     };
+
     class Scene {
     public:
         static std::stack<std::unique_ptr<Scene>> scenes;
@@ -94,7 +92,6 @@ namespace RenderD7
         static void Back();
         static void doDraw();
         static void doLogic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch);
-
     };
     namespace Color
     {
@@ -155,7 +152,6 @@ namespace RenderD7
 
     class SpriteSheetAnimation : public RenderD7::Sprite
     {
-        
         public:
         SpriteSheetAnimation();
         ~SpriteSheetAnimation();
@@ -167,7 +163,6 @@ namespace RenderD7
         float D_totaltime;
         RenderD7::Sheet *sheet;
         float time;
-
     };
     struct TObject
     {
@@ -214,6 +209,4 @@ namespace RenderD7
     bool NameIsEndingWith(const std::string &name, const std::vector<std::string> &extensions);
     void GetDirContentsExt(std::vector<RenderD7::DirContent> &dircontent, const std::vector<std::string> &extensions);
     void GetDirContents(std::vector<RenderD7::DirContent> &dircontent);
-
-    
 }
