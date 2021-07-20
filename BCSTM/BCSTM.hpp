@@ -16,7 +16,7 @@ public:
 	void play();
 	void pause();
 	void stop();
-        inline std::string GetLoop(){ return this->m_looping? "True" : "False"}
+        inline std::string GetLoop(){ return this->m_looping? "True" : "False";}
 
 protected:
 	void streamData();
