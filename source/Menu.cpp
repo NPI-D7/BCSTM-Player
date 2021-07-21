@@ -32,7 +32,7 @@ MMM::MMM()
 void MMM::Draw(void) const
 {
     RenderD7::OnScreen(Top);
-    RenderD7::DrawRect(0, 0, 400, 240, RenderD7::Color::Hex("#EEEEEE"));
+    RenderD7::DrawRect(0, 0, 400, 240, RenderD7::Color::Hex("#444444"));
     //img.Draw(0, 0);
     RenderD7::DrawRect(0, 0, 400, 26, RenderD7::Color::Hex("#222222", 200));
     RenderD7::DrawText(5, 2, 0.7f, RenderD7::Color::Hex("#FFFFFF"), "BCSTM-Player->" + RenderD7::Lang::get("MAINMENU"));
@@ -174,6 +174,9 @@ void Browse::Draw(void) const
         RenderD7::DrawText(5, 218, 0.7f, RenderD7::Color::Hex("#111111"), "Playing: " + currentlypl);
     }
     RenderD7::DrawText(5, 2, 0.7f, RenderD7::Color::Hex("#111111"), "DirContents: " + std::to_string(contentsss));
+    RenderD7::DrawText(5, 2, 0.7f, RenderD7::Color::Hex("#111111"), "\nLoop: " + player.GetLoop());
+    RenderD7::DrawText(5, 2, 0.7f, RenderD7::Color::Hex("#111111"), "\n\nLoopStart: " + player.GetLoopStart());
+    RenderD7::DrawText(5, 2, 0.7f, RenderD7::Color::Hex("#111111"), "\n\nLoopEnd: " + player.GetLoopEnd());
 }
 
 void Browse::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
