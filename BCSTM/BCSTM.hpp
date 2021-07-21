@@ -17,6 +17,8 @@ public:
 	void pause();
 	void stop();
         inline std::string GetLoop(){ return this->m_looping? "True" : "False";}
+        inline std::string GetLoopStart(){ return this->m_blockLoopStart;}
+        inline std::string GetLoopEnd(){ return this->m_blockLoopEnd;}
 
 protected:
 	void streamData();
