@@ -176,7 +176,7 @@ void Browse::Draw(void) const
     RenderD7::DrawText(5, 2, 0.7f, RenderD7::Color::Hex("#111111"), "DirContents: " + std::to_string(contentsss));
     RenderD7::DrawText(5, 2, 0.7f, RenderD7::Color::Hex("#111111"), "\nLoop: " + player.GetLoop());
     RenderD7::DrawText(5, 2, 0.7f, RenderD7::Color::Hex("#111111"), "\n\nLoopStart: " + player.GetLoopStart());
-    RenderD7::DrawText(5, 2, 0.7f, RenderD7::Color::Hex("#111111"), "\n\nLoopEnd: " + player.GetLoopEnd());
+    RenderD7::DrawText(5, 2, 0.7f, RenderD7::Color::Hex("#111111"), "\n\n\nLoopEnd: " + player.GetLoopEnd());
 }
 
 void Browse::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
