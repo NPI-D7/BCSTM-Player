@@ -30,14 +30,15 @@ Log::Log()
 
 void Log::Init(const char *filename)
 {
-	this->filename = filename;
-	if ((access(filename, F_OK) == 0))
+        std::string name = "Log_" + Log::logDate() + filename + ".txt";
+	this->filename = name;
+	if ((access(name, F_OK) == 0))
 	{
 
 	}
 	else 
 	{
-		FILE* logfile = fopen((filename), "w");
+		FILE* logfile = fopen((name), "w");
 		fclose(logfile);
 	}
 }
