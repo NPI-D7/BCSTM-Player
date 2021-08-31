@@ -1,4 +1,4 @@
-name: Build BCSTM-Player
+name: Build BCSTM-Player🎵
 
 on:
   push:
@@ -105,13 +105,12 @@ jobs:
           cd nightlys
           sudo chmod +x nightlytool
           echo running
-          ./nightlytool management/BCSTM-Player-bak1.ini BCSTM-Player NPI-D7 nightlys v$CURRENT_DATE $COMMIT_HASH Bak1_Version\\$COMMIT_SUBJECT\\$COMMIT_MESSAGE nn nn nn
+          ./nightlytool management/BCSTM-Player.ini BCSTM-Player NPI-D7 nightlys v$CURRENT_DATE $COMMIT_HASH "\\$COMMIT_SUBJECT\\$COMMIT_MESSAGE\\\\1.1.0 Update\\\\" 0 "$AUTHOR_NAME"
           echo creating dirs
           ls -R
-          git stage management/BCSTM-Player-bak1.ini
-          mkdir -p builds/BCSTM-Player/bak1
-          cd builds/BCSTM-Player/bak1
-          qrencode -o BCSTM-Player.png https://github.com/NPI-D7/nightlys/raw/v$CURRENT_DATE/builds/BCSTM-Player/bak1/BCSTM-Player.cia
+          mkdir -p builds/BCSTM-Player/
+          cd builds/BCSTM-Player/
+          qrencode -o BCSTM-Player.png https://github.com/NPI-D7/nightlys/raw/v$CURRENT_DATE/builds/BCSTM-Player/BCSTM-Player.cia
           qrencode -o BCSTM-Player-release.png https://github.com/NPI-D7/nightlys/releases/download/$COMMIT_TAG/BCSTM-Player.cia
           cp ${{ github.workspace }}/build/* .
           git stage .
