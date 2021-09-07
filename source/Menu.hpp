@@ -10,7 +10,7 @@ class MMM : public RenderD7::Scene
     {
         {90, 50, 140, 35, "Browse", -8, 10},
         {90, 100, 140, 35, "Credits", -10, 10},
-        {90, 150, 140, 35, "Exit", 4, 10}
+        {90, 150, 140, 35, "Exit", 5, 10}
     };
     int Selection = 0;
 };
