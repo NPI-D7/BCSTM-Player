@@ -27,13 +27,13 @@ void DrawFMBG()
 
 MMM::MMM()
 {
-   // img.LoadPng("romfs:/gfx/bg.png");
+    img.LoadPng("romfs:/gfx/bg.png");
 }
 void MMM::Draw(void) const
 {
     RenderD7::OnScreen(Top);
     RenderD7::DrawRect(0, 0, 400, 240, RenderD7::Color::Hex("#444444"));
-    //img.Draw(0, 0);
+    img.Draw(0, 0);
     RenderD7::DrawRect(0, 0, 400, 26, RenderD7::Color::Hex("#222222", 200));
     RenderD7::DrawText(5, 2, 0.7f, RenderD7::Color::Hex("#FFFFFF"), "BCSTM-Player->" + RenderD7::Lang::get("MAINMENU"));
     RenderD7::DrawText(5, 30, 0.7f, RenderD7::Color::Hex("#FFFFFF"), "\n\n\nNdspFirmStatus: " + dspststus);
