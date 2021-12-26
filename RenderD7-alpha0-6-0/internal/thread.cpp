@@ -45,7 +45,7 @@ namespace RenderD7 {
         }
     }
 
-    void Thread::detach() {
+    void Thread::kill() {
         threadDetach(m_thread);
         m_running = false;
         m_started = false;

@@ -5,6 +5,7 @@
 #include <cstring>
 #include <string>
 
+extern bool isndspinit;
 using std::string;
 
 // Reference: http://yannesposito.com/Scratch/en/blog/2010-10-14-Fun-with-wav/
@@ -25,6 +26,7 @@ typedef struct _WavHeader {
 static_assert(sizeof(WavHeader) == 44, "WavHeader size is not 44 bytes.");
 
 sound::sound(const string& path, int channel, bool toloop) {
+        if (isndspinit){
 	ndspSetOutputMode(NDSP_OUTPUT_STEREO);
 	ndspSetOutputCount(2); // Num of buffers
 
@@ -98,10 +100,11 @@ sound::sound(const string& path, int channel, bool toloop) {
 	waveBuf.nsamples = dataSize / (wavHeader.bits_per_sample >> 3);
 	waveBuf.looping = toloop;
 	waveBuf.status = NDSP_WBUF_FREE;
-	chnl = channel;
+	chnl = channel;}
 }
 
 sound::~sound() {
+        if (isndspinit){
 	waveBuf.data_vaddr = 0;
 	waveBuf.nsamples = 0;
 	waveBuf.looping = false;
@@ -110,16 +113,18 @@ sound::~sound() {
 
 	if (data) {
 		linearFree(data);
-	}
+	}}
 }
 
 void sound::play() {
+        if (isndspinit){
 	if (!data)	return;
 	DSP_FlushDataCache(data, dataSize);
-	ndspChnWaveBufAdd(chnl, &waveBuf);
+	ndspChnWaveBufAdd(chnl, &waveBuf);}
 }
 
 void sound::stop() {
+        if (isndspinit){
 	if (!data)	return;
-	ndspChnWaveBufClear(chnl);
+	ndspChnWaveBufClear(chnl);}
 }

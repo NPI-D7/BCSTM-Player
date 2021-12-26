@@ -21,9 +21,11 @@
 #include "parameter.hpp"
 #include "thread.hpp"
 #include "ini.hpp"
+#include "stringtool.hpp"
+#include "Clock.hpp"
 
-#define RENDERD7VSTRING "6.1.0"
-#define CHANGELOG "6.1.0: rewrite Threadsystem, Improve framerate/n6.0.2: Fix Code in lang.hpp\nadd Draw Text Left Function.\nadd changelog\n6.0.1: add Threading system."
+#define RENDERD7VSTRING "0.6.10"
+#define CHANGELOG "0.6.10: rewrite Threadsystem, Improve framerate/n0.6.02: Fix Code in lang.hpp\nadd Draw Text Left Function.\nadd changelog\n0.6.01: add Threading system."
 #define DEFAULT_CENTER 0.5f
 
 extern C3D_RenderTarget* Top;
@@ -37,32 +39,66 @@ extern touchPosition d7_touch;
 
 extern std::string dspststus;
 
+/// RenderD7
 namespace RenderD7
 {
+    enum kbd{
+         SWKBD,
+         BKBD
+    };
+    enum kbd_type
+    {
+         NUMPAD,
+         STANDARD
+    };
+    /// Set current RenderScreen
+    /// \param target The RenderTarget Top, Bottom
     void OnScreen(C3D_RenderTarget *target);
+    /** The Spritesheet Class */
     class Sheet
     {
         public:
+        /// Construct sheet
         Sheet();
+        // Deconstruct sheet
         ~Sheet();
+        /// Load a Sritesheet
+        /// path: Path to the Spritesheet (.t3x)
         Result Load(const char *path);
+        /// Unload the Spritesheet
         void Free();
+        // The Spritesheet
         C2D_SpriteSheet spritesheet;
     };
+    /// Image Class
     class Image
     {
         public:
+        /// Load Image from Png
+        /// path: path to png file
         void LoadPng(const std::string path);
+        /// Load the Image from buffer
+        /// buffer: the frame buffer
         void LoadPFromBuffer(const std::vector<u8> &buffer);
+        /// Draw the Image directly
+        /// \param x The x position
+        /// \param y the y position
+        /// \param scaleX x scale from 0.0 to 1.0
+        /// \param scaleY y scale from 0.0 to 1.0
         bool Draw(float x, float y, float scaleX = 1.0f, float scaleY = 1.0f);
+        /// \brief Get The Image
+        /// \return C2D_Image
         C2D_Image Get(){return this->img;}
+        /// \img this is the C2D_Image
         C2D_Image img;
+        /// \loadet whether the image is loadet or not
         bool loadet = false;
     };
-
+    /// Sprite Class
     class Sprite
     {
         public:
+        /// \brief Construct Sprite
         Sprite();
         ~Sprite();
         void FromSheet(RenderD7::Sheet *sheet, size_t index);
@@ -88,13 +124,27 @@ namespace RenderD7
     	virtual ~Scene() {}
     	virtual void Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch) = 0;
     	virtual void Draw() const = 0;
+        //virtual void Ovl() const = 0;
         static void Load(std::unique_ptr<Scene> scene);
         static void Back();
         static void doDraw();
         static void doLogic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch);
+        //static void HandleOvl();
     };
+
     namespace Color
     {
+        struct rgba
+        {
+            u8 r, g, b, a;
+        };
+        class RGBA{
+            public:
+            RGBA(u8 r, u8 g, u8 b, u8 a) : m_r(r),m_g(g),m_b(b),m_a(a){}
+            u32 toRGBA() const {return (m_r << 24) | (m_g << 16) | (m_b << 8) | m_a;}
+            
+            u8 m_r, m_g ,m_b, m_a;
+        };
         u32 Hex(const std::string color, u8 a = 255);
     }
     void DrawMetrikOvl();
@@ -106,7 +156,7 @@ namespace RenderD7
     }
     namespace Init
     {
-        Result Main();
+        Result Main(std::string app_name = "RD7Game");
         void NdspFirm(bool useit = false);
     }
     namespace Exit
@@ -123,6 +173,7 @@ namespace RenderD7
     namespace Convert
     {
         inline float StringtoFloat(std::string inp){return std::atof(inp.c_str());}
+        inline int StringtoInt(std::string inp){return std::atoi(inp.c_str());}
         inline bool FloatToBool(float inp){if(inp == 1)return true; else return false;}
     }
     namespace FS
@@ -138,6 +189,8 @@ namespace RenderD7
     void ClearTextBufs(void);
    
     bool DrawRect(float x, float y, float w, float h, u32 color);
+    bool DrawNFRect(float p1x, float p1y, float w, float h, u32 color, float scale = 1);
+    bool DrawPx(float x, float y, u32 color);
     void DrawTextCentered(float x, float y, float size, u32 color, std::string Text, int maxWidth = 0, int maxHeight = 0, C2D_Font fnt = nullptr);
 	void DrawText(float x, float y, float size, u32 color, std::string Text, int maxWidth = 0, int maxHeight = 0, C2D_Font fnt = nullptr);
     void DrawTextLeft(float x, float y, float size, u32 color, std::string Text, int maxWidth = 0, int maxHeight = 0, C2D_Font fnt = nullptr);
@@ -176,6 +229,14 @@ namespace RenderD7
         float txtsize = 0.7f;  //Set Text Size
     };
 
+    struct TLBtn
+    {
+        int x; //Position X
+        int y; //Position Y
+        int w; //Button Width
+        int h; //Button Height
+    };
+
     struct ScrollList1 
     {
         std::string Text = "";
@@ -198,15 +259,44 @@ namespace RenderD7
     void DrawTObjects(std::vector<RenderD7::TObject> tobjects, u32 color, u32 txtcolor,  int selection = -1, u32 selbgcolor = RenderD7::Color::Hex("#2D98AF"), u32 selcolor = RenderD7::Color::Hex("#000000"));
     void DrawSTObject(std::vector<RenderD7::TObject> tobject, int tobjectindex, u32 color, u32 txtcolor);
     bool touchTObj(touchPosition touch, RenderD7::TObject button);
-    
+    void DrawTLBtns(std::vector<RenderD7::TLBtn> btns, u32 color,  int selection = -1, u32 selbgcolor = RenderD7::Color::Hex("#2D98AF"), u32 selcolor = RenderD7::Color::Hex("#000000"));
     struct DirContent
     {
         std::string name;
         std::string path;
         bool isDir;
     };
+    struct Checkbox
+    {
+        float x, y, s;
+        bool is_chexked = false;
+        u32 outcol, incol, chcol;
+    };
+    void DrawCheckbox(Checkbox box);
+    /*class Console
+    {
+         public:
+           Console();
+           Console(int x, int y, int w, int h, int a = 255);
+           Console(int x, int y, int w, int h, RenderD7::rgba col);
+           Console(int x, int y, int w, int h, std::string name, RenderD7::rgba col = {255, 255, 255, 255}, RenderD7::rgba barcol = {0, 0, 0, 255}, RenderD7::rgba outlinecol = {222, 222, 222, 255});
+           void On(C3D_RenderTarget *t_cscreen);
+           bool Update();
+           ~Console();
+         private:
+           std::vector<std::string> m_lines;
+           int x, y, w, h;
+           std::string m_name = "";
+           C3D_RenderTarget *cscreen;
+           bool m_nconsole = false;
+           bool m_mconsole = false;
+           RenderD7::rgba color = {255, 255, 255, 255};
+           RenderD7::rgba outlinecol = {222, 222, 222, 255};
+           RenderD7::rgba barcolor = {0, 0, 0, 255};
+    };*/
 
     bool NameIsEndingWith(const std::string &name, const std::vector<std::string> &extensions);
     void GetDirContentsExt(std::vector<RenderD7::DirContent> &dircontent, const std::vector<std::string> &extensions);
     void GetDirContents(std::vector<RenderD7::DirContent> &dircontent);
-}
+
+} /// RenderD7

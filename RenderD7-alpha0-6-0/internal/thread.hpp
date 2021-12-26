@@ -78,7 +78,7 @@ namespace RenderD7 {
         /**
          * @brief Detaches the thread
          */
-        void detach();
+        void kill();
 
         /**
          * @brief Waits for the thread to finish
