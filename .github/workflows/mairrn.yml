@@ -34,7 +34,7 @@ jobs:
           #RenderD7
           cd ..
           git clone https://github.com/NPI-D7/RenderD7.git
-          cd Simple-Cam
+          cd BCSTM-Player
           mkdir -p extlibs/
           #rm -r extlibs/RenderD7
           mkdir -p RenderD7-alphap0-6-0/
