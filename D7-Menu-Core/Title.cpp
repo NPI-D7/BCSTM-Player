@@ -47,7 +47,7 @@ void D7TM::CardLoop()
 	if (checked)
 	{
 		checked = false;
-	}
+	}//__
 
 }
 /*static C2D_Image loadIconTex(smdh_s* smdh){
