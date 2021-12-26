@@ -39,7 +39,7 @@ int main()
         C3D_FrameEnd(0);
     }
     player.stop();
-    t1.detach();
+    t1.kill();
     sheet.Free();
     RenderD7::Exit::NdspFirm();
     RenderD7::Exit::Main();
