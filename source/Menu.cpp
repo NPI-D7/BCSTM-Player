@@ -10,6 +10,7 @@ BCSTM player;
 extern RenderD7::Sheet sheet;
 bool playing = false;
 std::string currentlypl;
+RenderD7::Checkbox box{40, 60, 20};
 
 void clearCache()
 {
@@ -292,6 +293,7 @@ void Credits::Draw(void) const
     RenderD7::DrawImageFromSheet(&sheet, 0, 15, 70);
     RenderD7::DrawTextCentered(5, 218, 0.7f, RenderD7::Color::Hex("#FFFFFF"), "RenderD7: Version: " RENDERD7VSTRING, 390);
     RenderD7::DrawText(5, 2, 0.6f, RenderD7::Color::Hex("#FFFFFF"), "Framerate: " + RenderD7::GetFramerate());
+    RenderD7::DrawCheckbox(box);
 }
 
 void Credits::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
