@@ -294,7 +294,7 @@ void Credits::Draw(void) const
     RenderD7::DrawTextCentered(5, 218, 0.7f, RenderD7::Color::Hex("#FFFFFF"), "RenderD7: Version: " RENDERD7VSTRING, 390);
     RenderD7::DrawText(5, 2, 0.6f, RenderD7::Color::Hex("#FFFFFF"), "Framerate: " + RenderD7::GetFramerate());
    // RenderD7::DrawCheckbox(box);
-   // RenderD7::DrawNFRect(20, 20, 50, 50, C2D_Color32(255, 255, 255, 255), 3);
+    RenderD7::DrawNFRect(20, 20, 50, 50, C2D_Color32(255, 255, 255, 255), 3);
 }
 
 void Credits::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
