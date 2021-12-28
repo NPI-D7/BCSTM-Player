@@ -583,7 +583,7 @@ Result RenderD7::Init::Main(std::string app_name)
 		tr.start();
 	}*/
     C3D_Init(C3D_DEFAULT_CMDBUF_SIZE);
-	C2D_Init(size_t(maxobj__));
+	C2D_Init(size_t(C2D_DEFAULT_MAX_OBJECTS));
 	C2D_Prepare();
 	Top = C2D_CreateScreenTarget(GFX_TOP, GFX_LEFT);
 	TopRight = C2D_CreateScreenTarget(GFX_TOP, GFX_RIGHT);
