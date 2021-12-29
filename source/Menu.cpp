@@ -70,10 +70,10 @@ void MMM::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
     {
         RenderD7::Scene::Load(std::make_unique<Browse>());
     }
-  /*  if (hDown & KEY_A && Selection == 1)
+    if (hDown & KEY_A && Selection == 1)
     {
         RenderD7::Scene::Load(std::make_unique<Titles>());
-    }*/
+    }
     if ((hDown & KEY_A && Selection == 2))
     {
         RenderD7::Scene::Load(std::make_unique<Credits>());
@@ -94,10 +94,10 @@ void MMM::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
     {
         RenderD7::Scene::Load(std::make_unique<Browse>());
     }
-   /* if (RenderD7::touchTObj(touch, buttons[1]))
+    if (RenderD7::touchTObj(touch, buttons[1]))
     {
         RenderD7::Scene::Load(std::make_unique<Titles>());
-    }*/
+    }
     if (RenderD7::touchTObj(touch, buttons[3]))
     {
         RenderD7::ExitApp();
