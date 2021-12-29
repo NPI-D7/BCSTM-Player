@@ -250,7 +250,7 @@ void frameloop()
 		last_time = osGetTime();
 	}
 	d11framerate = current_fps;
-        mt_fpsgraph[320] = current_fps;
+       // mt_fpsgraph[320] = current_fps;
 }
 float getframerate()
 {
@@ -280,7 +280,7 @@ bool RenderD7::MainLoop()
         RenderD7::Scene::doDraw();
         RenderD7::Scene::doLogic(d7_hDown, d7_hHeld, d7_hUp, d7_touch);
         
-	if (metrikd)RenderD7::DrawMetrikOvl();
+	//if (metrikd)RenderD7::DrawMetrikOvl();
     return running;
 }
 
