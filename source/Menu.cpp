@@ -279,7 +279,7 @@ void Credits::Draw(void) const
 {
     RenderD7::OnScreen(Top);
     RenderD7::DrawRect(0, 0, 400, 240, RenderD7::Color::Hex("#EEEEEE"));
-    //img.Draw(0, 0);
+    img.Draw(0, 0);
     RenderD7::DrawRect(0, 0, 400, 26, RenderD7::Color::Hex("#222222"));
     RenderD7::DrawRect(0, 240, 400, -26, RenderD7::Color::Hex("#222222"));
     std::string stdzeitverschwendung = "Version: 1.0.0";
