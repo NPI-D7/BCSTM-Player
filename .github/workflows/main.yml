@@ -22,7 +22,7 @@ jobs:
       commit_message: ${{ steps.build.outputs.commit_message }}
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
         with:
           submodules: recursive
       - name: Install tools
