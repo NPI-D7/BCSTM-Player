@@ -111,10 +111,10 @@ void MMM::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
             playing = false;
         }
     }
- /*   if(hDown & KEY_L)
+    if(hDown & KEY_L)
     {
         RenderD7::Scene::Load(std::make_unique<RomfsBrowse>());
-    }*/
+    }
     if (hDown & KEY_R)
     {
         RenderD7::Error::DisplayError("BCSTM-Player", "Just for fun");
@@ -367,7 +367,7 @@ void Titles::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
 RomfsBrowse::RomfsBrowse()
 {
     RenderD7::Msg::Display("BCSTM-Player", "Loading Directory: h:/", Top);
-    chdir("h:/");
+    chdir("romfs:/");
     std::vector<RenderD7::DirContent> temp;
     RenderD7::GetDirContentsExt(temp, {"bcstm"});
     for (uint i = 0; i < temp.size(); i++)
@@ -462,7 +462,7 @@ void RomfsBrowse::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
         char path[PATH_MAX];
 		getcwd(path, PATH_MAX);
 
-		if (strcmp(path, "h:/") == 0 || strcmp(path, "/") == 0) 
+		if (strcmp(path, "romfs:/") == 0 || strcmp(path, "/") == 0) 
         {
 			RenderD7::Scene::Back();
 		} 
