@@ -19,6 +19,7 @@ public:
 	void stop();
 
 private:
+	/// \param dataSize the Size of the filedata
 	u32 dataSize;
 	ndspWaveBuf waveBuf;
 	u8* data = NULL;

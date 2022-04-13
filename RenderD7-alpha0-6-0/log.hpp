@@ -25,6 +25,6 @@ class Log
                 /// \param fmt_str the formatted style
 		std::string format(const std::string& fmt_str, ...);
 	private:
-                /// param filename the name of the logfile
+                /// \param filename the name of the logfile
 		std::string filename;
 };

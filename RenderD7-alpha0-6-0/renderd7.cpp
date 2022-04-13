@@ -4,12 +4,13 @@
 
 #define RGBA8(r, g, b, a) ((((r) & 0xFF) << 0) | (((g) & 0xFF) << 8) | (((b) & 0xFF) << 16) | (((a) & 0xFF) << 24))
 #define D7_NOTHING C2D_Color32(0, 0, 0, 0)
-#define CFGVER "0"
+#define CFGVER "1"
 Log renderd7log;
 float animtime;
 bool isndspinit = false;
 bool running = true;
 std::stack<std::unique_ptr<RenderD7::Scene>> RenderD7::Scene::scenes;
+//std::vector<RenderD7::Ovl> overlays;
 bool usedbgmsg = false;
 std::string dspststus = "Not Initialisized!";
 
@@ -19,6 +20,12 @@ int maxobj__;
 //INI::INIFile cfgfile;
 std::unique_ptr<INI::INIFile> cfgfile = nullptr;
 INI::INIStructure cfgstruct;
+
+// RD7 SuperReselution
+bool rd7_superreselution;
+u8 consoleModel = 0;
+u8 sysRegion = CFG_REGION_USA;
+//---------------------------------------
 
 std::string D_app_name;
 
@@ -55,6 +62,21 @@ C3D_RenderTarget* Bottom;
 
 #define DSEVENBLACK C2D_Color32(0, 0 ,0, 255)
 #define DSEVENWHITE C2D_Color32(255, 255, 255, 255)
+
+void screenoff()
+{
+    gspLcdInit();\
+    GSPLCD_PowerOffBacklight(GSPLCD_SCREEN_BOTH);\
+    gspLcdExit();
+}
+
+void screenon()
+{
+    gspLcdInit();\
+    GSPLCD_PowerOnBacklight(GSPLCD_SCREEN_BOTH);\
+    gspLcdExit();
+}
+
 RenderD7::SpriteSheetAnimation::SpriteSheetAnimation()
 {
     renderd7log.Write("SpriteSheetAnimation createt!");
@@ -138,7 +160,7 @@ void RenderD7::Msg::DisplayWithProgress(std::string titletext, std::string subte
 }
 void RenderD7::SetupLog()
 {
-    renderd7log.Init("sdmc:/Flappy-Bird-RenderD7.log");
+    renderd7log.Init("sdmc:/RenderD7.log");
 }
 void RenderD7::SpriteSheetAnimation::Setup(RenderD7::Sheet *sheet, size_t imagecount, size_t startimage, float frame_begin, float frame_finish)
 {
@@ -168,19 +190,18 @@ void RenderD7::SpriteSheetAnimation::Play(float timespeed)
     //RenderD7::SpriteSheetAnimation::Draw();
 }
 
-void RenderD7::Error::DisplayError(std::string toptext, std::string errortext)
+void RenderD7::Error::DisplayError(std::string toptext, std::string errortext, int timesec)
 {
     RenderD7::ClearTextBufs();
 	C3D_FrameBegin(C3D_FRAME_SYNCDRAW);
 	C2D_TargetClear(Top, DSEVENBLACK);
 	C2D_TargetClear(Bottom, DSEVENBLACK);
 	RenderD7::OnScreen(Top);
-    RenderD7::DrawTextCentered(0, 0, 0.7f, DSEVENWHITE, toptext, 400);
-	RenderD7::DrawTextCentered(0, 100, 0.6f, DSEVENWHITE, errortext, 400);
+    RenderD7::DrawText(0, 0, 0.7f, DSEVENWHITE, toptext);
+	RenderD7::DrawText(0, 30, 0.6f, DSEVENWHITE, errortext);
 	C3D_FrameEnd(0);
-	int time = 60*5;
-    for (int i = 0; i < 60*5; i++) {
-		RenderD7::Msg::DisplayWithProgress("", "\n\n\n" + std::to_string(i) + " / " + std::to_string(time), i, 60*5, RenderD7::Color::Hex("#00EE11"));
+    for (int i = 0; i < 60*timesec; i++) {
+		RenderD7::DrawRect(0, 236, (int)(((float)i / (float)60*timesec) * 400.0f), 4, RenderD7::Color::Hex("#00ff00"));
 		gspWaitForVBlank();
 	}
 }
@@ -250,7 +271,7 @@ void frameloop()
 		last_time = osGetTime();
 	}
 	d11framerate = current_fps;
-       // mt_fpsgraph[320] = current_fps;
+	mt_fpsgraph[320] = current_fps;
 }
 float getframerate()
 {
@@ -536,6 +557,17 @@ void MetrikThread(RenderD7::Parameter param) {
 Result RenderD7::Init::Main(std::string app_name)
 {
     gfxInitDefault();
+	Result res = cfguInit();
+	if (R_SUCCEEDED(res)) {
+		CFGU_SecureInfoGetRegion(&sysRegion);
+		CFGU_GetSystemModel(&consoleModel);
+		cfguExit();
+	}
+	if (rd7_superreselution)
+	{
+		gfxSetWide(consoleModel != 3);
+	}
+	
     aptInit();
     romfsInit();
     cfguInit();
@@ -545,9 +577,17 @@ Result RenderD7::Init::Main(std::string app_name)
     std::string cfgpath = "sdmc:/RenderD7/Apps/";
     cfgpath += D_app_name;
 	mkdir("sdmc:/RenderD7/", 0777);
-        mkdir("sdmc:/RenderD7/Apps", 0777);
-        mkdir(cfgpath.c_str(), 0777);
-	if (!FS::FileExist(cfgpath + "/config.ini"))
+    mkdir("sdmc:/RenderD7/Apps", 0777);
+    mkdir(cfgpath.c_str(), 0777);
+	bool renew = false;
+	if (FS::FileExist(cfgpath + "/config.ini"))
+	{
+		cfgfile = std::make_unique<INI::INIFile>(cfgpath + "/config.ini");
+		cfgfile->read(cfgstruct);
+		std::string version = cfgstruct["info"]["version"];
+		if (version != CFGVER) renew = true;
+	}
+	if (!FS::FileExist(cfgpath + "/config.ini") || renew)
 	{
 		cfgfile = std::make_unique<INI::INIFile>(cfgpath+ "/config.ini");
 		cfgfile->read(cfgstruct);
@@ -561,9 +601,9 @@ Result RenderD7::Init::Main(std::string app_name)
 		cfgstruct["metrik-settings"]["Screen"] = "0";
 		cfgstruct["metrik-settings"]["txtColor"] = "#ffffff";
 		cfgstruct["metrik-settings"]["txtColorA"] = "255";
-                cfgstruct["metrik-settings"]["ColorA"] = "255";
-                cfgstruct["metrik-settings"]["Color"] = "#000000";
-                cfgstruct["metrik-settings"]["txtSize"] = "0.7f";
+        cfgstruct["metrik-settings"]["ColorA"] = "255";
+        cfgstruct["metrik-settings"]["Color"] = "#000000";
+        cfgstruct["metrik-settings"]["txtSize"] = "0.7f";
 		cfgfile->write(cfgstruct);
 	}
 	cfgfile = std::make_unique<INI::INIFile>(cfgpath+ "/config.ini");
@@ -572,16 +612,17 @@ Result RenderD7::Init::Main(std::string app_name)
 	C3D_FrameRate(RenderD7::Convert::StringtoFloat(Fps));
 	metrikd = RenderD7::Convert::FloatToBool(RenderD7::Convert::StringtoFloat(cfgstruct["metrik-settings"]["enableoverlay"]));
 	mt_txtcolor = RenderD7::Color::Hex(cfgstruct["metrik-settings"]["txtColor"], (u8)RenderD7::Convert::StringtoFloat(cfgstruct["metrik-settings"]["txtColorA"]));
-        mt_color = RenderD7::Color::Hex(cfgstruct["metrik-settings"]["Color"], (u8)RenderD7::Convert::StringtoFloat(cfgstruct["metrik-settings"]["ColorA"]));
-        mt_txtSize = RenderD7::Convert::StringtoFloat(cfgstruct["metrik-settings"]["txtSize"]);
-        mt_screen = RenderD7::Convert::StringtoInt(cfgstruct["metrik-settings"]["Screen"]);
-        
-        osSetSpeedupEnable(true);
-	/*if(metrikd)
+    mt_color = RenderD7::Color::Hex(cfgstruct["metrik-settings"]["Color"], (u8)RenderD7::Convert::StringtoFloat(cfgstruct["metrik-settings"]["ColorA"]));
+    mt_txtSize = RenderD7::Convert::StringtoFloat(cfgstruct["metrik-settings"]["txtSize"]);
+    mt_screen = RenderD7::Convert::StringtoInt(cfgstruct["metrik-settings"]["Screen"]);
+	rd7_superreselution = RenderD7::Convert::FloatToBool(RenderD7::Convert::StringtoFloat(cfgstruct["settings"]["super-reselution"]));
+
+    osSetSpeedupEnable(true);
+	if (rd7_superreselution)
 	{
-		RenderD7::Thread tr(MetrikThread);
-		tr.start();
-	}*/
+		if (consoleModel != 3) gfxSetWide(true);
+	}
+	
     C3D_Init(C3D_DEFAULT_CMDBUF_SIZE);
 	C2D_Init(size_t(maxobj__));
 	C2D_Prepare();
@@ -590,9 +631,45 @@ Result RenderD7::Init::Main(std::string app_name)
 	Bottom = C2D_CreateScreenTarget(GFX_BOTTOM, GFX_LEFT);
 	TextBuf = C2D_TextBufNew(4096);
 	Font = C2D_FontLoadSystem(CFG_REGION_USA);
+	
         //RenderD7::Msg::Display("RenderD7", "RenderD7 init success!\nWaiting for MainLoop!", Top);
 	return 0;
 }
+
+Result RenderD7::Init::Reload()
+{
+	C2D_TextBufDelete(TextBuf);
+	C2D_Fini();
+	C3D_Fini();
+	C3D_Init(C3D_DEFAULT_CMDBUF_SIZE);
+	C2D_Init(size_t(maxobj__));
+	C2D_Prepare();
+	Top = C2D_CreateScreenTarget(GFX_TOP, GFX_LEFT);
+	TopRight = C2D_CreateScreenTarget(GFX_TOP, GFX_RIGHT);
+	Bottom = C2D_CreateScreenTarget(GFX_BOTTOM, GFX_LEFT);
+	TextBuf = C2D_TextBufNew(4096);
+	Font = C2D_FontLoadSystem(CFG_REGION_USA);
+
+	return 0;
+}
+
+void RenderD7::ToggleRD7SR()
+{
+	// Display black screen
+	C3D_FrameBegin(C3D_FRAME_SYNCDRAW);
+	C2D_TargetClear(Top, RenderD7::Color::Hex("#000000"));
+	RenderD7::OnScreen(Top);
+	C3D_FrameEnd(0);
+	// Toggle 400px/800px mode
+	gfxSetWide(!gfxIsWide());
+	RenderD7::Init::Reload();
+}
+
+bool RenderD7::IsRD7SR()
+{
+	return gfxIsWide();
+}
+
 void RenderD7::Exit::Main()
 {
 	cfgfile->write(cfgstruct);
@@ -601,8 +678,10 @@ void RenderD7::Exit::Main()
 	C2D_Fini();
 	C3D_Fini();
     aptExit();
+	gfxExit();
     romfsExit();
     cfguExit();
+	romfsExit();
 }
 
 void RenderD7::DrawTObjects(std::vector<RenderD7::TObject> tobjects, u32 color, u32 txtcolor, int selection, u32 selbgcolor, u32 selcolor)
@@ -650,6 +729,14 @@ bool RenderD7::touchTObj(touchPosition touch, RenderD7::TObject button)
 {
    if (touch.px >= button.x && touch.px <= (button.x + button.w) && touch.py >= button.y && touch.py <= (button.y + button.h))	return true;
     else	return false;
+}
+
+int RenderD7::GetRandomInt(int b, int e)
+{
+	std::default_random_engine generator;
+	std::uniform_int_distribution<int> distribution(b, e);
+	int r = distribution(generator); 
+	return r;
 }
 
 void RenderD7::DrawSTObject(std::vector<RenderD7::TObject> tobject, int tobjectindex, u32 color, u32 txtcolor)
@@ -826,22 +913,26 @@ void RenderD7::DrawList1(RenderD7::ScrollList1 &l, float txtsize, C3D_RenderTarg
 
 void RenderD7::DrawMetrikOvl()
 {
-        switch (mt_screen)
-        {
-            case 0:
-                RenderD7::OnScreen(Top);
-            case 1:
-                RenderD7::OnScreen(Bottom);
-            default:
-                RenderD7::OnScreen(Bottom);
-        }
+    switch (mt_screen)
+    {
+        case 0:
+        RenderD7::OnScreen(Top);
+		break;
+        case 1:
+        RenderD7::OnScreen(Bottom);
+		break;
+        default:
+        RenderD7::OnScreen(Bottom);
+		break;
+    }
 	RenderD7::DrawText(0, 0, mt_txtSize, mt_txtcolor, "FPS: " + RenderD7::GetFramerate());
-        //RenderD7::DrawText(0, 50, mt_txtSize, mt_txtcolor, "CPU: " + std::to_string(C3D_GetProcessingTime()*6.0f) + "/" + std::to_string(C3D_GetProcessingTime()));
-        //RenderD7::DrawText(0, 70, mt_txtSize, mt_txtcolor, "GPU: " + std::to_string(C3D_GetDrawingTime()*6.0f) + "/" + std::to_string(C3D_GetDrawingTime()));
-        for (int z = 0; z < 320; z++)
-        {
-             C2D_DrawLine(z, 239 - mt_fpsgraph[z], mt_txtcolor, z + 1, 239 - mt_fpsgraph[z + 1], mt_txtcolor, 1, 1);
-        }
+    RenderD7::DrawText(0, 50, mt_txtSize, mt_txtcolor, "CPU: " + std::to_string(C3D_GetProcessingTime()*6.0f) + "%/" + std::to_string(C3D_GetProcessingTime()));
+    RenderD7::DrawText(0, 70, mt_txtSize, mt_txtcolor, "GPU: " + std::to_string(C3D_GetDrawingTime()*6.0f) + "%/" + std::to_string(C3D_GetDrawingTime()));
+	RenderD7::DrawText(0, 90, mt_txtSize, mt_txtcolor, "CMD: " + std::to_string(C3D_GetCmdBufUsage()*100.0f) + "%/" + std::to_string(C3D_GetCmdBufUsage()));
+    for (int z = 0; z < 320; z++)
+    {
+        C2D_DrawLine(z, 239 - mt_fpsgraph[z], mt_txtcolor, z + 1, 239 - mt_fpsgraph[z + 1], mt_txtcolor, 1, 1);
+    }
 }
 
 bool RenderD7::DrawNFRect(float p1x, float p1y, float w, float h, u32 color, float scale)
@@ -852,6 +943,62 @@ bool RenderD7::DrawNFRect(float p1x, float p1y, float w, float h, u32 color, flo
     C2D_DrawLine(p1x, h, color,p1x, p1y, color, scale, 1);
     return true;
 }
+
+void RenderD7::FrameEnd()
+{
+	if (metrikd)RenderD7::DrawMetrikOvl();
+	/*for (int i = 0; i < (int)overlays.size(); i++)
+	{
+		overlays[i].Draw();
+	}*/
+	if (d7_hHeld & KEY_R && d7_hDown & KEY_SELECT)
+	{
+		RenderD7::LoadSettings();
+	}
+	
+	C3D_FrameEnd(0);
+}
+
+RenderD7::RSettings::RSettings()
+{
+
+}
+
+RenderD7::RSettings::~RSettings()
+{
+
+}
+
+void RenderD7::RSettings::Draw(void) const
+{
+	RenderD7::OnScreen(Top);
+	RenderD7::DrawRect(0, 0, 400, 21, RenderD7::Color::Hex("#111111"));
+	RenderD7::DrawRect(0, 21, 400, 220, RenderD7::Color::Hex("#eeeeee"));
+	RenderD7::DrawText(0, 0, 0.7f, DSEVENWHITE, "RenderD7->Settings");
+	RenderD7::DrawText(0, 26, 0.7f, DSEVENBLACK, "X");
+	RenderD7::OnScreen(Bottom);
+	RenderD7::DrawRect(0, 0, 320, 240, RenderD7::Color::Hex("#eeeeee"));
+	RenderD7::DrawTObjects(buttons, RenderD7::Color::Hex("#111111"), RenderD7::Color::Hex("#eeeeee"));
+}
+
+void RenderD7::RSettings::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
+{
+
+	if (d7_hDown & KEY_B)
+	{
+		RenderD7::Scene::Back();
+	}
+	
+}
+
+void RenderD7::LoadSettings(){
+	RenderD7::Scene::Load(std::make_unique<RenderD7::RSettings>());
+}
+
+/*void RenderD7::AddOvl(RenderD7::Ovl overlay)
+{
+	overlays.push_back(overlay);
+}*/
 
 /*RenderD7::Console::Console()
 {
@@ -870,7 +1017,7 @@ RenderD7::Console::Console(int x, int y, int w, int h, u8 a)
     this->color = {0, 0, 0, a};
     
 }
-RenderD7::Console::Console(int x, int y, int w, int h, RenderD7::rgba col)
+RenderD7::Console::Console(int x, int y, int w, int h, RenderD7::Color::rgba col)
 {
     this->x = x;
     this->y = y;
@@ -878,7 +1025,7 @@ RenderD7::Console::Console(int x, int y, int w, int h, RenderD7::rgba col)
     this->h = h;
     this->color = col;
 }
-RenderD7::Console::Console(int x, int y, int w, int h, std::string name, RenderD7::rgba col, RenderD7::rgba barcol, RenderD7::rgba outlinecol)
+RenderD7::Console::Console(int x, int y, int w, int h, std::string name, RenderD7::Color::rgba col, RenderD7::Color::rgba barcol, RenderD7::Color::rgba outlinecol)
 {
     this->x = x;
     this->y = y;
@@ -897,10 +1044,9 @@ void RenderD7::Console::On(C3D_RenderTarget *t_cscreen)
 {
      this->cscreen = t_cscreen;
 }
-bool RenderD7:: Console::Update()
+bool RenderD7::Console::Update()
 {
      bool dr_sc = true;
      return dr_sc;
 }
-
 */

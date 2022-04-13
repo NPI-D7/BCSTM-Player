@@ -6,11 +6,13 @@
 #include <stack>
 #include <string>
 #include <functional>
+#include <map>
 #include <vector>
 #include <dirent.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <cstring>
+#include <random>
 #include <sys/stat.h>
 #include <algorithm>
 #include <iostream>
@@ -24,8 +26,8 @@
 #include "stringtool.hpp"
 #include "Clock.hpp"
 
-#define RENDERD7VSTRING "0.6.10"
-#define CHANGELOG "0.6.10: rewrite Threadsystem, Improve framerate/n0.6.02: Fix Code in lang.hpp\nadd Draw Text Left Function.\nadd changelog\n0.6.01: add Threading system."
+#define RENDERD7VSTRING "0.7.0"
+#define CHANGELOG "0.6.2:  \n0.6.10: rewrite Threadsystem, Improve framerate\n0.6.02: Fix Code in lang.hpp\nadd Draw Text Left Function.\nadd changelog\n0.6.01: add Threading system."
 #define DEFAULT_CENTER 0.5f
 
 extern C3D_RenderTarget* Top;
@@ -51,6 +53,17 @@ namespace RenderD7
          NUMPAD,
          STANDARD
     };
+    struct TObject
+    {
+        int x; //Position X
+        int y; //Position Y
+        int w; //Button Width
+        int h; //Button Height
+        std::string text = ""; //Text
+        float correctx = 0; //Correct X Position
+        float correcty = 0; //Correct Y Position
+        float txtsize = 0.7f;  //Set Text Size
+    };
     /// Set current RenderScreen
     /// \param target The RenderTarget Top, Bottom
     void OnScreen(C3D_RenderTarget *target);
@@ -63,11 +76,11 @@ namespace RenderD7
         // Deconstruct sheet
         ~Sheet();
         /// Load a Sritesheet
-        /// path: Path to the Spritesheet (.t3x)
+        /// \param path Path to the Spritesheet (.t3x)
         Result Load(const char *path);
         /// Unload the Spritesheet
         void Free();
-        // The Spritesheet
+        /// The Spritesheet
         C2D_SpriteSheet spritesheet;
     };
     /// Image Class
@@ -75,10 +88,10 @@ namespace RenderD7
     {
         public:
         /// Load Image from Png
-        /// path: path to png file
+        /// \param path path to png file
         void LoadPng(const std::string path);
         /// Load the Image from buffer
-        /// buffer: the frame buffer
+        /// \param buffer the frame buffer
         void LoadPFromBuffer(const std::vector<u8> &buffer);
         /// Draw the Image directly
         /// \param x The x position
@@ -89,9 +102,9 @@ namespace RenderD7
         /// \brief Get The Image
         /// \return C2D_Image
         C2D_Image Get(){return this->img;}
-        /// \img this is the C2D_Image
+        /// \param img this is the C2D_Image
         C2D_Image img;
-        /// \loadet whether the image is loadet or not
+        /// \param loadet whether the image is loadet or not
         bool loadet = false;
     };
     /// Sprite Class
@@ -100,8 +113,14 @@ namespace RenderD7
         public:
         /// \brief Construct Sprite
         Sprite();
+        /// \brief Deconstruct Sprite
         ~Sprite();
+        /// \brief Load a Sprite From SpriteSheet
+        /// \param sheet the Sheet to load from.(RenderD7::Sheet)
+        /// \param index the number of the Sprite in the Sheet
         void FromSheet(RenderD7::Sheet *sheet, size_t index);
+        /// \brief Load a Sprite From SpriteSheet
+        /// \param img the Image to load from.(RenderD7::Image)
         void FromImage(RenderD7::Image *img);
         bool Draw();
         void SetCenter(float x, float y);
@@ -132,6 +151,36 @@ namespace RenderD7
         //static void HandleOvl();
     };
 
+    class RSettings : public RenderD7::Scene
+    {
+    private:
+        std::string rd7srstate = "false";
+        std::vector<RenderD7::TObject> buttons = 
+        {
+            {20, 35, 120, 35, "RD7SR", -11, 10},
+            {20, 85, 120, 35, "", 0, 9},
+            {20, 135, 120, 35, "", -8, 10},
+            {20, 185, 120, 35, "", 8, 10},
+            {180, 35, 120, 35, "", -15, 10},
+            {180, 85, 120, 35, "", -15, 10},
+            {180, 135, 120, 35, "", -15, 10},
+            {180, 185, 120, 35, "", -15, 10}
+        };
+    public:
+        RSettings();
+        void Draw(void) const override;
+        ~RSettings();
+        void Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch) override;
+    };
+
+    void LoadSettings();
+
+    /*class Ovl {
+        public:
+        virtual ~Ovl(){}
+        virtual void Draw() const = 0;
+    };
+    void AddOvl(RenderD7::Ovl overlay);*/
     namespace Color
     {
         struct rgba
@@ -147,16 +196,18 @@ namespace RenderD7
         };
         u32 Hex(const std::string color, u8 a = 255);
     }
+    int GetRandomInt(int b, int e);
     void DrawMetrikOvl();
     bool DrawImageFromSheet(RenderD7::Sheet* sheet, size_t index, float x, float y, float scaleX = 1.0, float scaleY = 1.0);
     namespace Error
     {
-        void DisplayError(std::string toptext, std::string errortext);
+        void DisplayError(std::string toptext, std::string errortext, int timesec);
         void DisplayFatalError(std::string toptext, std::string errortext);
     }
     namespace Init
     {
         Result Main(std::string app_name = "RD7Game");
+        Result Reload();
         void NdspFirm(bool useit = false);
     }
     namespace Exit
@@ -201,7 +252,9 @@ namespace RenderD7
 	Result unloadFont(C2D_Font &fnt);
     bool DrawCircle(float x, float y, float radius, u32 color);
     bool DrawImage(C2D_Image img, float x, float y, float scaleX = 1.0f, float scaleY = 1.0f);
-    
+    void FrameEnd();
+    void ToggleRD7SR();
+    bool IsRD7SR();
 
     class SpriteSheetAnimation : public RenderD7::Sprite
     {
@@ -217,17 +270,7 @@ namespace RenderD7
         RenderD7::Sheet *sheet;
         float time;
     };
-    struct TObject
-    {
-        int x; //Position X
-        int y; //Position Y
-        int w; //Button Width
-        int h; //Button Height
-        std::string text = ""; //Text
-        float correctx = 0; //Correct X Position
-        float correcty = 0; //Correct Y Position
-        float txtsize = 0.7f;  //Set Text Size
-    };
+    
 
     struct TLBtn
     {
@@ -278,8 +321,8 @@ namespace RenderD7
          public:
            Console();
            Console(int x, int y, int w, int h, int a = 255);
-           Console(int x, int y, int w, int h, RenderD7::rgba col);
-           Console(int x, int y, int w, int h, std::string name, RenderD7::rgba col = {255, 255, 255, 255}, RenderD7::rgba barcol = {0, 0, 0, 255}, RenderD7::rgba outlinecol = {222, 222, 222, 255});
+           Console(int x, int y, int w, int h, RenderD7::Color::rgba col);
+           Console(int x, int y, int w, int h, std::string name, RenderD7::Color::rgba col = {255, 255, 255, 255}, RenderD7::Color::rgba barcol = {0, 0, 0, 255}, RenderD7::Color::rgba outlinecol = {222, 222, 222, 255});
            void On(C3D_RenderTarget *t_cscreen);
            bool Update();
            ~Console();
@@ -290,9 +333,9 @@ namespace RenderD7
            C3D_RenderTarget *cscreen;
            bool m_nconsole = false;
            bool m_mconsole = false;
-           RenderD7::rgba color = {255, 255, 255, 255};
-           RenderD7::rgba outlinecol = {222, 222, 222, 255};
-           RenderD7::rgba barcolor = {0, 0, 0, 255};
+           RenderD7::Color::rgba color = {255, 255, 255, 255};
+           RenderD7::Color::rgba outlinecol = {222, 222, 222, 255};
+           RenderD7::Color::rgba barcolor = {0, 0, 0, 255};
     };*/
 
     bool NameIsEndingWith(const std::string &name, const std::vector<std::string> &extensions);
