@@ -37,31 +37,22 @@ bool Cache::Read(std::vector<std::shared_ptr<Title>> t, const std::string& path,
 
     for(unsigned i = 0; i < count; i++)
     {
-        auto newData = std::make_shared<Title>();
+        //auto newData = std::make_shared<Title>();
         
-        char title[64];
-        fread(title, sizeof(uint16_t), 0x40, cache);
-        fgetc(cache);
-
+        //char title[64];
+        
         /*char author[64];
         fread(author, sizeof(uint16_t), 0x20, cache);
         fgetc(cache);*/
 
-        char prodCode[16];
-        fread(prodCode, 1, 16, cache);
-        fgetc(cache);
+        //char prodCode[16];
+        
 
-        uint64_t newID = 0;
-        fread(&newID, sizeof(uint64_t), 1, cache);
-        fgetc(cache);
+        //uint64_t newID = 0;
         RenderD7::Msg::DisplayWithProgress("D7-Menu-Core",  "Loading Titles from cache: ", i, count, RenderD7::Color::Hex("#00DD11"));
-        newData->LoadFromCache(newID, title, prodCode, nand ? MEDIATYPE_NAND : MEDIATYPE_SD);
-        t.push_back(newData);
+        //newData->LoadFromCache(newID, title, prodCode, nand ? MEDIATYPE_NAND : MEDIATYPE_SD);
+        //t.push_back(newData);
     }
-    cachelog.Write("Read Data...");
-    fclose(cache);
-    cachelog.Write("Close File...");
-
     return true;
     cachelog.Write("return");
 }
