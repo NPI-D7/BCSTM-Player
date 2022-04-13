@@ -61,14 +61,14 @@ Title::~Title(void){
     }
 }
 
-bool Title::LoadFromCache(const uint64_t& _id, const std::string _title, const std::string& code, const uint8_t& mt)
+bool Title::LoadFromCache(const uint64_t& _id, std::string _title, std::string code, const uint8_t& mt)
     {
 		cachelog.Write("Loading Title: " + _id);
         m_id = _id;
         m_Media = (FS_MediaType)mt;
-        m_Name.assign(_title);
+        m_Name = _title;
 		//m_Author.assign(_author);
-        m_prodCode.assign(code);
+        m_prodCode = code;
 		cachelog.Write(std::to_string(m_id));
 		cachelog.Write(m_Name + std::to_string((u32)(m_id)) + std::to_string((u32)(m_id >> 32)));
 		//smdh_s* smdh = loadSMDH(lowid(), highid(), m_Media);

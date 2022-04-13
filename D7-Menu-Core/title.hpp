@@ -17,7 +17,7 @@ class Title {
     Title(void) = default;
     ~Title(void);
    
-    bool LoadFromCache(const uint64_t& _id, const std::string _title, const std::string& code, const uint8_t& mt);
+    bool LoadFromCache(const uint64_t& _id, std::string _title, std::string code, const uint8_t& mt);
     bool load(u64 id, FS_MediaType mediatype);
     u32 highid(void);
     u32 lowid(void);

@@ -330,7 +330,7 @@ void Titles::Draw(void) const
         else
         {
             titles += TitleManager::sdtitles[i]->name() + "\n";
-        } 
+        }
     }
     for (uint i = 0; i < ((TitleManager::sdtitles.size() < 10) ? 10 - TitleManager::sdtitles.size() : 0); i++) {
 		titles += "\n\n";
@@ -338,7 +338,7 @@ void Titles::Draw(void) const
 
     RenderD7::DrawText(10, 30, 0.6f, RenderD7::Color::Hex("#111111"), titles.c_str());
     RenderD7::OnScreen(Bottom);
-    RenderD7::DrawText(5, 2, 0.7f, RenderD7::Color::Hex("#111111"), "Titles:\nNand: " + std::to_string(abc) + "SD: " + std::to_string(maxtitles));
+    RenderD7::DrawText(5, 2, 0.7f, RenderD7::Color::Hex("#111111"), "Titles:\nNand: " + std::to_string(abc) + " SD: " + std::to_string(maxtitles));
     //C2D_DrawImageAt(TitleManager::sdtitles[selection]->icon(), 30, 30, 0.5f, nullptr);
 }
 

@@ -26,6 +26,7 @@ void Cache::Create(std::vector<std::shared_ptr<Title>> t, const std::string& pat
 
 bool Cache::Read(std::vector<std::shared_ptr<Title>> t, const std::string& path, bool nand)
 {
+    int zz = 0;
     RenderD7::Msg::Display("D7-Menu-Core", "Look for exisring cache...", Top);
     if (!RenderD7::FS::FileExist(path))
     {
@@ -37,11 +38,12 @@ bool Cache::Read(std::vector<std::shared_ptr<Title>> t, const std::string& path,
     INI::INIStructure cachedata;
     cache.read(cachedata);
     for (auto const& it : cachedata)
-     {
+    {
 	    auto const& section = it.first;
         secs.push_back(section);
-        RenderD7::Msg::DisplayWithProgress("D7-Menu-Core",  "Loading Data: " + section, 0, 1, RenderD7::Color::Hex("#00DD11"));
-     }
+        RenderD7::Msg::DisplayWithProgress("D7-Menu-Core",  "Loading Data: " + section, zz, cachedata.size(), RenderD7::Color::Hex("#00DD11"));
+        zz++;
+    }
     for(unsigned i = 1; i < secs.size(); i++)
     {
         auto newData = std::make_shared<Title>();
