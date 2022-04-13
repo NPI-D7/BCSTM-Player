@@ -66,8 +66,8 @@ VERSION_MICRO := 0
 #---------------------------------------------------------------------------------
 TARGET		:=	BCSTM-Player
 BUILD		:=	build
-LIBTWEEN	:=  $(CURDIR)RenderD7-alpha0-6-0/external/tween-engine/
-UNIVCORE	:=	RenderD7-alpha0-6-0 RenderD7-alpha0-6-0/internal BCSTM RenderD7-alpha0-6-0/external RenderD7-alpha0-6-0/external/tween-engine/include/ RenderD7-alpha0-6-0/external/tween-engine/include/TweenEngine RenderD7-alpha0-6-0/external/tween-engine/source D7-Menu-Core
+LIBTWEEN	:=  $(CURDIR)RenderD7/external/tween-engine/
+UNIVCORE	:=	RenderD7 RenderD7/internal BCSTM RenderD7/external RenderD7/external/tween-engine/include/ RenderD7/external/tween-engine/include/TweenEngine RenderD7/external/tween-engine/source D7-Menu-Core
 SOURCES		:=	$(UNIVCORE) source
 DATA		:=	data
 INCLUDES	:=	$(UNIVCORE) source 
