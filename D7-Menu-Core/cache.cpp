@@ -2,6 +2,9 @@
 #include "renderd7.hpp"
 #include "log.hpp"
 #include "ini.hpp"
+#include <iostream>
+#include <sstream>
+#include <cstdint>
 
 Log cachelog;
 
@@ -29,29 +32,35 @@ bool Cache::Read(std::vector<std::shared_ptr<Title>> t, const std::string& path,
     {
         return false;
     }
-
+    std::vector<std::string> secs;
     RenderD7::Msg::Display("D7-Menu-Core",  "Loading Titles from cache...", Top);
     INI::INIFile cache(path);
     INI::INIStructure cachedata;
     unsigned count = RenderD7::Convert::StringtoInt(cachedata["base"]["count"]);
-
-    for(unsigned i = 0; i < count; i++)
+    for (auto const& it : cachedata)
+     {
+	    auto const& section = it.first;
+        secs.push_back(section);
+     }
+    for(unsigned i = 1; i < count + 1; i++)
     {
-        //auto newData = std::make_shared<Title>();
+        auto newData = std::make_shared<Title>();
         
-        //char title[64];
+        std::string title = cachedata[secs[i]]["name"];
         
         /*char author[64];
         fread(author, sizeof(uint16_t), 0x20, cache);
         fgetc(cache);*/
 
-        //char prodCode[16];
+        std::string prodCode = cachedata[secs[i]]["prod"];
         
 
-        //uint64_t newID = 0;
+        uint64_t newID = 0;
+        std::istringstream iss(cachedata[secs[i]]["id"]);
+        iss >> newID;
         RenderD7::Msg::DisplayWithProgress("D7-Menu-Core",  "Loading Titles from cache: ", i, count, RenderD7::Color::Hex("#00DD11"));
-        //newData->LoadFromCache(newID, title, prodCode, nand ? MEDIATYPE_NAND : MEDIATYPE_SD);
-        //t.push_back(newData);
+        newData->LoadFromCache(newID, title, prodCode, nand ? MEDIATYPE_NAND : MEDIATYPE_SD);
+        t.push_back(newData);
     }
     return true;
     cachelog.Write("return");
