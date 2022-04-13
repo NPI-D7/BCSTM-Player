@@ -56,7 +56,7 @@ bool Cache::Read(std::vector<std::shared_ptr<Title>> t, const std::string& path,
         uint64_t newID = 0;
         std::istringstream iss(cachedata[secs[i]]["id"]);
         iss >> newID;
-        RenderD7::Msg::DisplayWithProgress("D7-Menu-Core",  "Loading Titles from cache: ", i, count, RenderD7::Color::Hex("#00DD11"));
+        RenderD7::Msg::DisplayWithProgress("D7-Menu-Core",  "Loading Titles from cache: ", i, secs.size(), RenderD7::Color::Hex("#00DD11"));
         newData->LoadFromCache(newID, title, prodCode, nand ? MEDIATYPE_NAND : MEDIATYPE_SD);
         t.push_back(newData);
     }
