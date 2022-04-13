@@ -201,7 +201,7 @@ namespace RenderD7
     bool DrawImageFromSheet(RenderD7::Sheet* sheet, size_t index, float x, float y, float scaleX = 1.0, float scaleY = 1.0);
     namespace Error
     {
-        void DisplayError(std::string toptext, std::string errortext, int timesec);
+        void DisplayError(std::string toptext, std::string errortext, int timesec = 3);
         void DisplayFatalError(std::string toptext, std::string errortext);
     }
     namespace Init
