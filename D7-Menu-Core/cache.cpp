@@ -17,7 +17,7 @@ void Cache::Create(std::vector<std::shared_ptr<Title>> t, const std::string& pat
     {
         RenderD7::Msg::DisplayWithProgress("D7-Menu-Core", "Writing Cache: " + t[i]->name(), i, (int)t.size(), RenderD7::Color::Hex("#00DD11"));
         cachedata[t[i]->name()]["name"] = t[i]->name();
-        cachedata[t[i]->name()]["author"] = t[i]->author();
+        //cachedata[t[i]->name()]["author"] = t[i]->author();
         cachedata[t[i]->name()]["prod"] = t[i]->prodcode();
         cachedata[t[i]->name()]["id"] = std::to_string(t[i]->ID());
     }
@@ -45,10 +45,6 @@ bool Cache::Read(std::vector<std::shared_ptr<Title>> t, const std::string& path,
         auto newData = std::make_shared<Title>();
         
         std::string title = cachedata[secs[i]]["name"];
-        
-        /*char author[64];
-        fread(author, sizeof(uint16_t), 0x20, cache);
-        fgetc(cache);*/
 
         std::string prodCode = cachedata[secs[i]]["prod"];
         
