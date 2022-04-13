@@ -178,6 +178,8 @@ void Browse::Draw(void) const
     RenderD7::DrawText(5, 2, 0.7f, RenderD7::Color::Hex("#111111"), "\nLoop: " + player.GetLoop());
     RenderD7::DrawText(5, 2, 0.7f, RenderD7::Color::Hex("#111111"), "\n\nLoopStart: " + player.GetLoopStart());
     RenderD7::DrawText(5, 2, 0.7f, RenderD7::Color::Hex("#111111"), "\n\n\nLoopEnd: " + player.GetLoopEnd());
+    RenderD7::DrawText(5, 2, 0.7f, RenderD7::Color::Hex("#111111"), "\n\n\n\nPosition: " + std::to_string(player.GetCurrent()));
+    RenderD7::DrawText(5, 2, 0.7f, RenderD7::Color::Hex("#111111"), "\n\n\n\n\nLengh: " + std::to_string(player.GetTotal()));
 }
 
 void Browse::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
