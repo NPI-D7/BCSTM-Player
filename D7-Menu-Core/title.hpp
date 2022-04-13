@@ -34,6 +34,6 @@ class Title {
     FS_CardType m_Card;
     C2D_Image m_Icon;
     std::string m_Name;
-    //std::string m_Author;
+    std::string m_Author;
     std::string m_prodCode;
 };
