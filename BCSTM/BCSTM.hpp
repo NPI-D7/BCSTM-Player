@@ -19,6 +19,9 @@ public:
         inline std::string GetLoop(){ return this->m_looping? "True" : "False";}
         inline std::string GetLoopStart(){ return std::to_string(this->m_blockLoopStart);}
         inline std::string GetLoopEnd(){ return std::to_string(this->m_blockLoopEnd);}
+        inline float GetTotal(){ return (float)this->lastTime;}
+        inline float GetCurrent(){ return (float)(this->currTime;}
+
 
 protected:
 	void streamData();
