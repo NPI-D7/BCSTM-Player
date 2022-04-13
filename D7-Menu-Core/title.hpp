@@ -24,7 +24,7 @@ class Title {
     u64 ID(void);
     FS_MediaType mediatype(void);
     std::string name(void);
-    //std::string author(void);
+    std::string author(void);
     std::string prodcode(void) { return m_prodCode; }
     C2D_Image icon(void);
 

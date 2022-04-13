@@ -25,18 +25,6 @@ void D7TM::CardLoop()
 		CardStatus = "Inserted";
 		FSUSER_GetCardType(&type);
                 CardTypeStatus = type? "TWL" : "CTR";
-		/*if (type == CARD_CTR)
-		{
-			CardTypeStatus = "CTR";
-		}
-		else if (type == CARD_TWL)
-		{
-			CardTypeStatus == "TWL(Not Supportet)";
-		}
-		else
-		{
-			CardTypeStatus == "Not Found";
-		}*/
 	}
 	else 
 	{
@@ -147,7 +135,7 @@ std::string Title::name(void)
 	return m_Name;
 }
 
-/*std::string Title::author(void)
+std::string Title::author(void)
 {
 	return m_Author;
-}*/
+}
