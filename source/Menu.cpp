@@ -33,12 +33,12 @@ MMM::MMM()
 void MMM::Draw(void) const
 {
     RenderD7::OnScreen(Top);
-    RenderD7::DrawRect(0, 0, 400, 240, RenderD7::Color::Hex("#444444"));
-    img.Draw(0, 0);
-    RenderD7::DrawRect(0, 0, 400, 26, RenderD7::Color::Hex("#222222", 200));
+    RenderD7::DrawRect(0, 0, 400, 240, RenderD7::Color::Hex("#eeeeee"));
+    //img.Draw(0, 0);
+    RenderD7::DrawRect(0, 0, 400, 26, RenderD7::Color::Hex("#111111", 255));
     RenderD7::DrawText(5, 2, 0.7f, RenderD7::Color::Hex("#FFFFFF"), "BCSTM-Player->" + RenderD7::Lang::get("MAINMENU"));
-    RenderD7::DrawText(5, 30, 0.7f, RenderD7::Color::Hex("#FFFFFF"), "\n\n\nNdspFirmStatus: " + dspststus);
-    RenderD7::DrawText(5, 50, 0.7f, RenderD7::Color::Hex("#FFFFFF"), "\n\n\n\uE003: Stop Player!\n\uE002 or \uE001: Back to MainMenu\nCard: " + CardStatus + "\nType: " + CardTypeStatus);
+    RenderD7::DrawText(5, 30, 0.7f, RenderD7::Color::Hex("#111111"), "\n\n\nNdspFirmStatus: " + dspststus);
+    RenderD7::DrawText(5, 50, 0.7f, RenderD7::Color::Hex("#111111"), "\n\n\n\uE003: Stop Player!\n\uE002 or \uE001: Back to MainMenu\nCard: " + CardStatus + "\nType: " + CardTypeStatus);
     if (playing)
     {
         RenderD7::DrawText(5, 218, 0.7f, RenderD7::Color::Hex("#111111"), "Playing: " + currentlypl);
@@ -281,7 +281,7 @@ void Credits::Draw(void) const
 {
     RenderD7::OnScreen(Top);
     RenderD7::DrawRect(0, 0, 400, 240, RenderD7::Color::Hex("#EEEEEE"));
-    img.Draw(0, 0);
+    //img.Draw(0, 0);
     RenderD7::DrawRect(0, 0, 400, 26, RenderD7::Color::Hex("#222222"));
     RenderD7::DrawRect(0, 240, 400, -26, RenderD7::Color::Hex("#222222"));
     std::string stdzeitverschwendung = "Version: 1.0.0";
@@ -296,7 +296,7 @@ void Credits::Draw(void) const
     RenderD7::DrawTextCentered(5, 218, 0.7f, RenderD7::Color::Hex("#FFFFFF"), "RenderD7: Version: " RENDERD7VSTRING, 390);
     RenderD7::DrawText(5, 2, 0.6f, RenderD7::Color::Hex("#FFFFFF"), "Framerate: " + RenderD7::GetFramerate());
    // RenderD7::DrawCheckbox(box);
-    RenderD7::DrawNFRect(20, 20, 50, 50, C2D_Color32(255, 255, 255, 255), 3);
+    //RenderD7::DrawNFRect(20, 20, 50, 50, C2D_Color32(255, 255, 255, 255), 3);
 }
 
 void Credits::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
