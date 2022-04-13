@@ -13,7 +13,6 @@ void Cache::Create(std::vector<std::shared_ptr<Title>> t, const std::string& pat
     remove(path.c_str());
     INI::INIFile cache(path);
     INI::INIStructure cachedata;
-    cachedata["base"]["count"] = std::to_string(t.size());
     for(unsigned i = 0; i < t.size(); i++)
     {
         RenderD7::Msg::DisplayWithProgress("D7-Menu-Core", "Writing Cache: " + t[i]->name(), i, (int)t.size(), RenderD7::Color::Hex("#00DD11"));
@@ -36,13 +35,12 @@ bool Cache::Read(std::vector<std::shared_ptr<Title>> t, const std::string& path,
     RenderD7::Msg::Display("D7-Menu-Core",  "Loading Titles from cache...", Top);
     INI::INIFile cache(path);
     INI::INIStructure cachedata;
-    unsigned count = RenderD7::Convert::StringtoInt(cachedata["base"]["count"]);
     for (auto const& it : cachedata)
      {
 	    auto const& section = it.first;
         secs.push_back(section);
      }
-    for(unsigned i = 1; i < count + 1; i++)
+    for(unsigned i = 1; i < secs.size(); i++)
     {
         auto newData = std::make_shared<Title>();
         
