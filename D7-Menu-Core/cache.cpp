@@ -35,6 +35,7 @@ bool Cache::Read(std::vector<std::shared_ptr<Title>> t, const std::string& path,
     RenderD7::Msg::Display("D7-Menu-Core",  "Loading Titles from cache...", Top);
     INI::INIFile cache(path);
     INI::INIStructure cachedata;
+    cache.read(cachedata);
     for (auto const& it : cachedata)
      {
 	    auto const& section = it.first;
