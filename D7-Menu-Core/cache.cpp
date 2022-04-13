@@ -39,6 +39,7 @@ bool Cache::Read(std::vector<std::shared_ptr<Title>> t, const std::string& path,
      {
 	    auto const& section = it.first;
         secs.push_back(section);
+        RenderD7::Msg::DisplayWithProgress("D7-Menu-Core",  "Loading Data: " + section, 0, 1, RenderD7::Color::Hex("#00DD11"));
      }
     for(unsigned i = 1; i < secs.size(); i++)
     {
