@@ -23,7 +23,7 @@ int main()
     mkdir("sdmc:/BCSTM-Player/cache/", 0777);
     RenderD7::Lang::load(RenderD7::Lang::getSys());
     //img.LoadPng("romfs:/gfx/bg.png");
-    cachelog.Init("/BCSTM-Player/cache.log");
+    cachelog.Init("sdmc:/BCSTM-Player/cache.log");
     RenderD7::Init::NdspFirm(true);
     aptSetSleepAllowed(false);
     sheet.Load("romfs:/gfx/sprites.t3x");
