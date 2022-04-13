@@ -9,7 +9,7 @@ void Cache::Create(std::vector<std::shared_ptr<Title>> t, const std::string& pat
 {
     remove(path.c_str());
     INI::INIFile cache(path);
-    INI::INIStructure cahedata;
+    INI::INIStructure cachedata;
     for(unsigned i = 0; i < t.size(); i++)
     {
         RenderD7::Msg::DisplayWithProgress("D7-Menu-Core", "Writing Cache: " + t[i]->name(), i, (int)t.size(), RenderD7::Color::Hex("#00DD11"));
