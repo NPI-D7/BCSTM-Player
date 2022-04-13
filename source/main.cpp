@@ -18,7 +18,7 @@ void CardScan(RenderD7::Parameter param) {
 
 int main()
 {
-    RenderD7::Init::Main();
+    RenderD7::Init::Main("BCSTM-Player");
     mkdir("sdmc:/BCSTM-Player/", 0777);
     mkdir("sdmc:/BCSTM-Player/cache/", 0777);
     RenderD7::Lang::load(RenderD7::Lang::getSys());
