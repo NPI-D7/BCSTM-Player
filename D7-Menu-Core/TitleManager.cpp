@@ -79,7 +79,7 @@ void TitleManager::ScanSD(const std::string &appmaindir)
 				auto title = std::make_shared<Title>();
 				if (title->load(ids[i], MEDIATYPE_SD))
 				{
-					sheet.AddInage(48, 48, &title.icon());
+					sheet.AddInage(48, 48, &title->icon());
 					sdtitles.push_back(title);
 				}
 			}
