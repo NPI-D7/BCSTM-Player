@@ -1,5 +1,4 @@
 #include "renderd7.hpp"
-#include "bmp.hpp"
 class SheetMaker
 {
     public:
@@ -11,6 +10,5 @@ class SheetMaker
     int count;
     int count2;
     std::vector<u8> ImageBuffer;
-    BMP bmp;
     unsigned width, height;
 };
