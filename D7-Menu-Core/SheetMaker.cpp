@@ -21,6 +21,7 @@ void SheetMaker::AddInage(int zwidth, int zheight, C2D_Image *image)
     ImageBuffer[4 * width * y + 4 * x + 2] = ((uint8_t *)this->img.tex->data)[dstPos + 1];
     ImageBuffer[4 * width * y + 4 * x + 3] = ((uint8_t *)this->img.tex->data)[dstPos + 0];
     }}
+    count++;
 }
 
 void SheetMaker::Write(std::string path)
