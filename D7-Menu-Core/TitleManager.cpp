@@ -3,6 +3,7 @@
 #include "cache.hpp"
 #include "renderd7.hpp"
 #include "log.hpp"
+#include "SheetMaker.hpp"
 
 extern Log cachelog;
 
@@ -53,7 +54,7 @@ void TitleManager::ScanSD(const std::string &appmaindir)
     Result res = 0;
     u32 count = 0;
 	sdtitles.clear();
-
+	SheetMaker sheet;
 	if (!Cache::Read(TitleManager::sdtitles, appmaindir + "cache/sd", false))
 	{
 		res = AM_GetTitleCount(MEDIATYPE_SD, &count);
@@ -78,12 +79,13 @@ void TitleManager::ScanSD(const std::string &appmaindir)
 				auto title = std::make_shared<Title>();
 				if (title->load(ids[i], MEDIATYPE_SD))
 				{
-					
+					sheet.AddInage(48, 48, title.icon());
 					sdtitles.push_back(title);
 				}
 			}
 			RenderD7::Msg::DisplayWithProgress("D7-Menu-Core", "Scanning SDCard...", (int)TitleManager::currenttitle, (int)TitleManager::titlecount, RenderD7::Color::Hex("#00DD11"));
 		}
+		sheet.Write("sdmc:/sheetnext.png");
 		std::sort(sdtitles.begin(), sdtitles.end(), [](std::shared_ptr<Title>& l, std::shared_ptr<Title>& r) { return l->name() < r->name(); });
 		RenderD7::Msg::Display("D7-Menu-Core", "Creating cache", Top);
 		Cache::Create(sdtitles, appmaindir + "cache/sd");
