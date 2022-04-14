@@ -24,7 +24,7 @@ void Cache::Create(std::vector<std::shared_ptr<Title>> t, const std::string& pat
         cachedata[t[i]->name()]["id"] = std::to_string(t[i]->ID());
         sheet.AddInage(48, 48, t[i]->icon());
     }
-    sheet.Write("sdmc:/sheetnext.png");
+    sheet.Write(path + ".png");
     cache.write(cachedata);
 }
 
