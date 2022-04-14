@@ -14,10 +14,10 @@ SheetMaker::~SheetMaker()
 
 void SheetMaker::AddInage(int zwidth, int zheight, C2D_Image image)
 {
-    
+    if ((count2 * zwidth) > width) count++;
 
     for(unsigned y = count*zheight; y < height; y++){
-    for(unsigned x = count*zwidth; x < width; x++) {
+    for(unsigned x = count2*zwidth; x < width; x++) {
     const u32 dstPos = ((((y >> 3) * (1024 >> 3) + (x >> 3)) << 6) +
 	((x & 1) | ((y & 1) << 1) | ((x & 2) << 1) | ((y & 2) << 2) |
 	((x & 4) << 2) | ((y & 4) << 3))) * 4;
@@ -26,7 +26,7 @@ void SheetMaker::AddInage(int zwidth, int zheight, C2D_Image image)
     ImageBuffer[4 * width * y + 4 * x + 2] = ((uint8_t *)image.tex->data)[dstPos + 1];
     ImageBuffer[4 * width * y + 4 * x + 3] = ((uint8_t *)image.tex->data)[dstPos + 0];
     }}
-    count++;
+    count2++;
 }
 
 void SheetMaker::Write(std::string path)

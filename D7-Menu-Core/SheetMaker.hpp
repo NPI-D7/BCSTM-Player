@@ -9,6 +9,7 @@ class SheetMaker
     void Write(std::string path);
     private:
     int count;
+    int count2;
     std::vector<u8> ImageBuffer;
     unsigned width, height;
 };
