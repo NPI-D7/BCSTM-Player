@@ -14,12 +14,17 @@ SheetMaker::~SheetMaker()
 
 void SheetMaker::AddInage(int zwidth, int zheight, C2D_Image *image)
 {
+    
+
     for(unsigned y = count*zheight; y < height; y++){
     for(unsigned x = count*zwidth; x < width; x++) {
-    ImageBuffer[4 * width * y + 4 * x + 0] = ((uint8_t *)img->tex->data)[dstPos + 3];
-    ImageBuffer[4 * width * y + 4 * x + 1] = ((uint8_t *)img->tex->data)[dstPos + 2];
-    ImageBuffer[4 * width * y + 4 * x + 2] = ((uint8_t *)img->tex->data)[dstPos + 1];
-    ImageBuffer[4 * width * y + 4 * x + 3] = ((uint8_t *)img->tex->data)[dstPos + 0];
+    const u32 dstPos = ((((y >> 3) * (1024 >> 3) + (x >> 3)) << 6) +
+	((x & 1) | ((y & 1) << 1) | ((x & 2) << 1) | ((y & 2) << 2) |
+	((x & 4) << 2) | ((y & 4) << 3))) * 4;
+    ImageBuffer[4 * width * y + 4 * x + 0] = ((uint8_t *)image->tex->data)[dstPos + 3];
+    ImageBuffer[4 * width * y + 4 * x + 1] = ((uint8_t *)image->tex->data)[dstPos + 2];
+    ImageBuffer[4 * width * y + 4 * x + 2] = ((uint8_t *)image->tex->data)[dstPos + 1];
+    ImageBuffer[4 * width * y + 4 * x + 3] = ((uint8_t *)image->tex->data)[dstPos + 0];
     }}
     count++;
 }
