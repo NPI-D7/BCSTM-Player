@@ -5,7 +5,7 @@ class SheetMaker
     public:
     SheetMaker();
     ~SheetMaker();
-    void AddInage(int zwidth, int zheight, C2D_Image *image);
+    void AddInage(int zwidth, int zheight, C2D_Image image);
     void Write(std::string path);
     private:
     int count;

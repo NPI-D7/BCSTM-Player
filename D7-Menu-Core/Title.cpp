@@ -71,13 +71,13 @@ bool Title::LoadFromCache(const uint64_t& _id, std::string _title, std::string c
         m_prodCode = code;
 		cachelog.Write(std::to_string(m_id));
 		cachelog.Write(m_Name + std::to_string((u32)(m_id)) + std::to_string((u32)(m_id >> 32)));
-		//smdh_s* smdh = loadSMDH(lowid(), highid(), m_Media);
-    	//if (smdh == NULL){
-        //	return false;
-    	//}
+		smdh_s* smdh = loadSMDH(lowid(), highid(), m_Media);
+    	if (smdh == NULL){
+        	return false;
+    	}
 
-		//m_Icon     = loadIconTex(smdh);
-		//delete smdh;
+		m_Icon     = loadIconTex(smdh);
+		delete smdh;
         return true;
     }
 
