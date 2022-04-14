@@ -5,6 +5,7 @@ SheetMaker::SheetMaker()
     height = 1024;
     width = 1024;
     ImageBuffer.resize(width * height * 4);
+    bmp = BMP::BMP(1024, 1024);
 }
 
 SheetMaker::~SheetMaker()
@@ -27,9 +28,11 @@ void SheetMaker::AddInage(int zwidth, int zheight, C2D_Image image)
     ImageBuffer[4 * width * y + 4 * x + 3] = ((uint8_t *)image.tex->data)[dstPos + 0];
     }}
     count2++;
+
 }
 
 void SheetMaker::Write(std::string path)
 {
     lodepng::encode(path.c_str(), ImageBuffer, width, height);
+    bmp.write(path.c_str());
 }
