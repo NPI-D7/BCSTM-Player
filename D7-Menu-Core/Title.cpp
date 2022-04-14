@@ -38,7 +38,7 @@ void D7TM::CardLoop()
 	}//__
 
 }
-/*static C2D_Image loadIconTex(smdh_s* smdh){
+static C2D_Image loadIconTex(smdh_s* smdh){
     C3D_Tex* tex                          = new C3D_Tex;
 	static const Tex3DS_SubTexture subt3x = {48, 48, 0.0f, 48 / 64.0f, 48 / 64.0f, 0.0f};
 	C3D_TexInit(tex, 64, 64, GPU_RGB565);
@@ -54,7 +54,7 @@ void D7TM::CardLoop()
 	
 	return C2D_Image{tex, &subt3x};
 }
-*/
+
 Title::~Title(void){
     if (m_Card != CARD_TWL && m_Icon.tex) {
         C3D_TexDelete(m_Icon.tex);
