@@ -22,7 +22,7 @@ void Cache::Create(std::vector<std::shared_ptr<Title>> t, const std::string& pat
         //cachedata[t[i]->name()]["author"] = t[i]->author();
         cachedata[t[i]->name()]["prod"] = t[i]->prodcode();
         cachedata[t[i]->name()]["id"] = std::to_string(t[i]->ID());
-        sheet.AddInage(48, 48, t[i]->icon());
+        sheet.AddInage(48, 48, t[i]->IconBuffer);
     }
     sheet.Write(path + ".png");
     cache.write(cachedata);

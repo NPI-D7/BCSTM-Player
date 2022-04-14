@@ -42,7 +42,7 @@ static C2D_Image loadIconTex(smdh_s* smdh){
     C3D_Tex* tex                          = new C3D_Tex;
 	static const Tex3DS_SubTexture subt3x = {48, 48, 0.0f, 48 / 64.0f, 48 / 64.0f, 0.0f};
 	C3D_TexInit(tex, 64, 64, GPU_RGB565);
-
+	
 	u16* dest = (u16*)tex->data + (64 - 48) * 64;
 	u16* src  = (u16*)smdh->bigIconData;
 	for (int j = 0; j < 48; j += 8)
@@ -98,6 +98,7 @@ bool Title::load(u64 id, FS_MediaType media) {
 	m_Author = UTF16toUTF8((char16_t*)smdh->applicationTitles[1].publisher);
 	titleload = true;
 	m_Icon     = loadIconTex(smdh);
+	IconBuffer = smdh->bigIconData;
 	delete smdh;
 	return titleload;
 }
