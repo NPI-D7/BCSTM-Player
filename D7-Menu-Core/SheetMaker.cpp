@@ -39,7 +39,7 @@ void SheetMaker::AddInage(int zwidth, int zheight, u16 *buf)
 	int tile_number = 1;
 	int extra_x = 0;
 	int extra_y = 0;
-	i=0;
+	int i=0;
 	int tile_x[16] = {0,1,0,1,2,3,2,3,0,1,0,1,2,3,2,3};
 	int tile_y[16] = {0,0,1,1,0,0,1,1,2,2,3,3,2,2,3,3};
 	while (tile_number < 37){
