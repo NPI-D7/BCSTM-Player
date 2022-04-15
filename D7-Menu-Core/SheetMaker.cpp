@@ -26,10 +26,10 @@ void SheetMaker::AddInage(int zwidth, int zheight, C3D_Tex tex)
     ImageBuffer[dstPos + 1] = tex.data[srcPos + 2];
     ImageBuffer[dstPos + 2] = tex.data[srcPos + 1];
     ImageBuffer[dstPos + 3] = tex.data[srcPos + 0];
-    bmp.data[dstPos + 0] = tex.data[srcPos + 3];
-    bmp.data[dstPos + 1] = tex.data[srcPos + 2];
-    bmp.data[dstPos + 2] = tex.data[srcPos + 1];
-    bmp.data[dstPos + 3] = tex.data[srcPos + 0];
+    //bmp.data[dstPos + 0] = tex.data[srcPos + 3];
+    //bmp.data[dstPos + 1] = tex.data[srcPos + 2];
+    //bmp.data[dstPos + 2] = tex.data[srcPos + 1];
+    //bmp.data[dstPos + 3] = tex.data[srcPos + 0];
     }}
     count2++;
 
@@ -39,5 +39,5 @@ void SheetMaker::Write(std::string path)
 {
     lodepng::encode(path.c_str(), ImageBuffer, width, height);
     std::string path2 = path + ".bmp";
-    bmp.write(path2.c_str())
+    //bmp.write(path2.c_str())
 }

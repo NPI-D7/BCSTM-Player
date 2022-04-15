@@ -12,5 +12,5 @@ class SheetMaker
     int count2;
     std::vector<u8> ImageBuffer;
     unsigned width, height;
-    BMP bmp(1024, 1024);
+    //BMP bmp(1024, 1024);
 };
