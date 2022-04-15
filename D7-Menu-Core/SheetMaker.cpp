@@ -44,10 +44,10 @@ void SheetMaker::AddInage(int zwidth, int zheight, u16 *buf)
 	int tile_y[16] = {0,0,1,1,0,0,1,1,2,2,3,3,2,2,3,3};
 	while (tile_number < 37){
 		while (i < (tile_size)){
-			putPixel565(bitmap->pixels, tile_x[i-((tile_number-1)<<6)] + extra_x, tile_y[i-((tile_number-1)<<6)] + extra_y, buf[i]);
-			putPixel565(bitmap->pixels, 4+tile_x[i-((tile_number-1)<<6)] + extra_x, tile_y[i-((tile_number-1)<<6)] + extra_y, buf[i+16]);
-			putPixel565(bitmap->pixels, tile_x[i-((tile_number-1)<<6)] + extra_x, 4+tile_y[i-((tile_number-1)<<6)] + extra_y, buf[i+32]);
-			putPixel565(bitmap->pixels, 4+tile_x[i-((tile_number-1)<<6)] + extra_x, 4+tile_y[i-((tile_number-1)<<6)] + extra_y, buf[i+48]);
+			BMP::PutPixel565(bitmap->pixels, tile_x[i-((tile_number-1)<<6)] + extra_x, tile_y[i-((tile_number-1)<<6)] + extra_y, buf[i]);
+			BMP::PutPixel565(bitmap->pixels, 4+tile_x[i-((tile_number-1)<<6)] + extra_x, tile_y[i-((tile_number-1)<<6)] + extra_y, buf[i+16]);
+			BMP::PutPixel565(bitmap->pixels, tile_x[i-((tile_number-1)<<6)] + extra_x, 4+tile_y[i-((tile_number-1)<<6)] + extra_y, buf[i+32]);
+			BMP::PutPixel565(bitmap->pixels, 4+tile_x[i-((tile_number-1)<<6)] + extra_x, 4+tile_y[i-((tile_number-1)<<6)] + extra_y, buf[i+48]);
 			i++;
 		}
 		if (tile_number % 6 == 0){
