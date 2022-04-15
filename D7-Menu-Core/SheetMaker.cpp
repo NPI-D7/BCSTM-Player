@@ -12,7 +12,7 @@ SheetMaker::~SheetMaker()
 
 }
 
-void SheetMaker::AddInage(int zwidth, int zheight, u16 buf)
+void SheetMaker::AddInage(int zwidth, int zheight, u16 *buf)
 {
     if ((count2 * zwidth) > width) count++;
 
