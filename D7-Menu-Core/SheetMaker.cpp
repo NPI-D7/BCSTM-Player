@@ -66,5 +66,5 @@ void SheetMaker::Write(std::string path)
 {
     lodepng::encode(path.c_str(), ImageBuffer, width, height);
     std::string path2 = path + ".bmp";
-    BMP::Save(bitmap, path2);
+    BMP::Save(path2, bitmap);
 }
