@@ -32,6 +32,34 @@ void SheetMaker::AddInage(int zwidth, int zheight, u16 *buf)
     }}
     count2++;*/
 
+    // Convert RGB565 icon to a RGB24 one
+	int x=(count2*zwidth);
+	int y=(count*zheight);
+	int tile_size = 16;
+	int tile_number = 1;
+	int extra_x = 0;
+	int extra_y = 0;
+	i=0;
+	int tile_x[16] = {0,1,0,1,2,3,2,3,0,1,0,1,2,3,2,3};
+	int tile_y[16] = {0,0,1,1,0,0,1,1,2,2,3,3,2,2,3,3};
+	while (tile_number < 37){
+		while (i < (tile_size)){
+			putPixel565(bitmap->pixels, tile_x[i-((tile_number-1)<<6)] + extra_x, tile_y[i-((tile_number-1)<<6)] + extra_y, buf[i]);
+			putPixel565(bitmap->pixels, 4+tile_x[i-((tile_number-1)<<6)] + extra_x, tile_y[i-((tile_number-1)<<6)] + extra_y, buf[i+16]);
+			putPixel565(bitmap->pixels, tile_x[i-((tile_number-1)<<6)] + extra_x, 4+tile_y[i-((tile_number-1)<<6)] + extra_y, buf[i+32]);
+			putPixel565(bitmap->pixels, 4+tile_x[i-((tile_number-1)<<6)] + extra_x, 4+tile_y[i-((tile_number-1)<<6)] + extra_y, buf[i+48]);
+			i++;
+		}
+		if (tile_number % 6 == 0){
+			extra_x = 0;
+			extra_y = extra_y + 8;
+		}else extra_x = extra_x + 8;
+		tile_number++;
+		tile_size = tile_size + 64;
+		i = i + 48;
+	}
+	bitmap->magic = 0x4C494D47;
+    count2++;
 }
 
 void SheetMaker::Write(std::string path)
