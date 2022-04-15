@@ -17,7 +17,7 @@ uint32_t* SheetMaker::ToRGBA888(uint16_t* bufdata, int ywidth, int yheight)
     uint8_t r = (((((int)bufdata >> 11) & 0x1F) * 527) + 23) >> 6;
     uint8_t g = (((((int)bufdata >> 5) & 0x1F) * 259) + 33) >> 6;
     uint8_t b = ((((int)bufdata & 0x1F) & 0x1F) + 23) >> 6;
-    uint32_t RGB = 255 << 24 | r << 16 | g << 8 | b;
+    uint32_t* RGB = 255 << 24 | r << 16 | g << 8 | b;
     return RGB;    
 }
 
@@ -35,10 +35,10 @@ void SheetMaker::AddInage(int zwidth, int zheight, u16* buf)
 	((x & 1) | ((y & 1) << 1) | ((x & 2) << 1) | ((y & 2) << 2) |
 	((x & 4) << 2) | ((y & 4) << 3))) * 4;
     const u32 dstPos = (y * zwidth + x) * 4;
-    ImageBuffer[dstPos + 0] = ((uint8_t *)imagesrc)[srcPos + 3];
-    ImageBuffer[dstPos + 1] = ((uint8_t *)imagesrc)[srcPos + 2];
-    ImageBuffer[dstPos + 2] = ((uint8_t *)imagesrc)[srcPos + 1];
-    ImageBuffer[dstPos + 3] = ((uint8_t *)imagesrc)[srcPos + 0];
+    ImageBuffer[dstPos + 0] = ((uint8_t *)imagesrc)[srcPos + 0];
+    ImageBuffer[dstPos + 1] = ((uint8_t *)imagesrc)[srcPos + 1];
+    ImageBuffer[dstPos + 2] = ((uint8_t *)imagesrc)[srcPos + 2];
+    ImageBuffer[dstPos + 3] = ((uint8_t *)imagesrc)[srcPos + 3];
     }}
     count2++;
 }
