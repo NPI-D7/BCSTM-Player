@@ -27,7 +27,7 @@ class Title {
     std::string author(void);
     std::string prodcode(void) { return m_prodCode; }
     C2D_Image icon(void);
-    u16 *IconBuffer;
+    C3D_Tex m_3Icon;
 
     private:
     u64 m_id;

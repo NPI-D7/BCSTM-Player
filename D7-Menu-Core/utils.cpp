@@ -50,6 +50,13 @@ std::string UTF16toUTF8(const std::u16string& src)
 	return utf16DataToUtf8(src.data(), src.size());
 }
 
+void utf8_convert(char* buf, const u16* input, size_t bufsize)
+{
+	ssize_t units = utf16_to_utf8((uint8_t*)buf, input, bufsize);
+	if (units < 0) units = 0;
+	buf[units] = 0;
+}
+
 //std::string format(std::string fmt_str, ...)
 //{
 //	va_list ap;

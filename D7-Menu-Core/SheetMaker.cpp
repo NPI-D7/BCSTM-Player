@@ -12,7 +12,7 @@ SheetMaker::~SheetMaker()
 
 }
 
-void SheetMaker::AddInage(int zwidth, int zheight, u8 datas)
+void SheetMaker::AddInage(int zwidth, int zheight, C3D_Tex tex)
 {
     if ((count2 * zwidth) > width) count++;
 
@@ -22,10 +22,14 @@ void SheetMaker::AddInage(int zwidth, int zheight, u8 datas)
 	((x & 1) | ((y & 1) << 1) | ((x & 2) << 1) | ((y & 2) << 2) |
 	((x & 4) << 2) | ((y & 4) << 3))) * 4;
     const u32 dstPos = (y * zwidth + x) * 4;
-    ImageBuffer[dstPos + 0] = datas[dstPos + 0];
-    ImageBuffer[dstPos + 1] = datas[dstPos + 1];
-    ImageBuffer[dstPos + 2] = datas[dstPos + 2];
-    ImageBuffer[dstPos + 3] = datas[dstPos + 3];
+    ImageBuffer[dstPos + 0] = tex.data[srcPos + 3];
+    ImageBuffer[dstPos + 1] = tex.data[srcPos + 2];
+    ImageBuffer[dstPos + 2] = tex.data[srcPos + 1];
+    ImageBuffer[dstPos + 3] = tex.data[srcPos + 0];
+    bmp.data[dstPos + 0] = tex.data[srcPos + 3];
+    bmp.data[dstPos + 1] = tex.data[srcPos + 2];
+    bmp.data[dstPos + 2] = tex.data[srcPos + 1];
+    bmp.data[dstPos + 3] = tex.data[srcPos + 0];
     }}
     count2++;
 
@@ -34,4 +38,6 @@ void SheetMaker::AddInage(int zwidth, int zheight, u8 datas)
 void SheetMaker::Write(std::string path)
 {
     lodepng::encode(path.c_str(), ImageBuffer, width, height);
+    std::string path2 = path + ".bmp";
+    bmp.write(path2.c_str())
 }

@@ -55,6 +55,21 @@ static C2D_Image loadIconTex(smdh_s* smdh){
 	return C2D_Image{tex, &subt3x};
 }
 
+static C3D_Tex GetIcon(smdh_s* smdh)
+{
+	C3D_Tex icon;
+	C3D_TexInit(&icon, 64, 64, GPU_RGB565);
+	u16* dest = (u16*)icon.data + (64-48)*64;
+	u16* src = (u16*)smdhstruct->bigIconData;
+	for (int j = 0; j < 48; j += 8)
+	{
+		memcpy(dest, src, 48*8*sizeof(u16));
+		src += 48*8;
+		dest += 64*8;
+	}
+	return icon;
+}
+
 Title::~Title(void){
     if (m_Card != CARD_TWL && m_Icon.tex) {
         C3D_TexDelete(m_Icon.tex);
@@ -98,6 +113,7 @@ bool Title::load(u64 id, FS_MediaType media) {
 	m_Author = UTF16toUTF8((char16_t*)smdh->applicationTitles[1].publisher);
 	titleload = true;
 	m_Icon     = loadIconTex(smdh);
+	m_3Icon = GetIcon(smdh);
 	IconBuffer = smdh->bigIconData;
 	delete smdh;
 	return titleload;
