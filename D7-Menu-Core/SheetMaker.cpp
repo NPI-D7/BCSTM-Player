@@ -5,8 +5,6 @@ SheetMaker::SheetMaker()
     height = 1024;
     width = 1024;
     ImageBuffer.resize(width * height * 4);
-    bitmap->height = height;
-    bitmap->width = width;
 }
 
 SheetMaker::~SheetMaker()
@@ -14,7 +12,12 @@ SheetMaker::~SheetMaker()
 
 }
 
-void SheetMaker::AddInage(int zwidth, int zheight, u16* buf)
+u8* SheetMaker::ToRGB888(u8* bufdata)
+{
+    
+}
+
+void SheetMaker::AddInage(int zwidth, int zheight, C3D_Tex tex)
 {
     if (((count2 * zwidth) + zwidth) > (int)width)
     {
