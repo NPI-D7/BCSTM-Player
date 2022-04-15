@@ -60,7 +60,7 @@ static C3D_Tex GetIcon(smdh_s* smdh)
 	C3D_Tex icon;
 	C3D_TexInit(&icon, 64, 64, GPU_RGB565);
 	u16* dest = (u16*)icon.data + (64-48)*64;
-	u16* src = (u16*)smdhstruct->bigIconData;
+	u16* src = (u16*)smdh->bigIconData;
 	for (int j = 0; j < 48; j += 8)
 	{
 		memcpy(dest, src, 48*8*sizeof(u16));
@@ -114,7 +114,6 @@ bool Title::load(u64 id, FS_MediaType media) {
 	titleload = true;
 	m_Icon     = loadIconTex(smdh);
 	m_3Icon = GetIcon(smdh);
-	IconBuffer = smdh->bigIconData;
 	delete smdh;
 	return titleload;
 }
