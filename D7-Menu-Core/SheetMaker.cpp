@@ -24,10 +24,10 @@ void SheetMaker::AddInage(int zwidth, int zheight, C3D_Tex tex)
 	((x & 1) | ((y & 1) << 1) | ((x & 2) << 1) | ((y & 2) << 2) |
 	((x & 4) << 2) | ((y & 4) << 3))) * 4;
     const u32 dstPos = (y * zwidth + x) * 4;
-    ImageBuffer[dstPos + 0] = ((uint8_t *)tex.data[srcPos + 3]);
-    ImageBuffer[dstPos + 1] = ((uint8_t *)tex.data[srcPos + 2]);
-    ImageBuffer[dstPos + 2] = ((uint8_t *)tex.data[srcPos + 1]);
-    ImageBuffer[dstPos + 3] = ((uint8_t *)tex.data[srcPos + 0]);
+    ImageBuffer[dstPos + 0] = ((uint8_t *)tex.data)[srcPos + 3];
+    ImageBuffer[dstPos + 1] = ((uint8_t *)tex.data)[srcPos + 2];
+    ImageBuffer[dstPos + 2] = ((uint8_t *)tex.data)[srcPos + 1];
+    ImageBuffer[dstPos + 3] = ((uint8_t *)tex.data)[srcPos + 0];
     }}
     count2++;
 }
