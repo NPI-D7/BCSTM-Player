@@ -114,6 +114,7 @@ bool Title::load(u64 id, FS_MediaType media) {
 	titleload = true;
 	m_Icon     = loadIconTex(smdh);
 	m_3Icon = GetIcon(smdh);
+	ibuf = smdh->bigIconData;
 	delete smdh;
 	return titleload;
 }

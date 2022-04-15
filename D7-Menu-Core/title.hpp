@@ -28,7 +28,7 @@ class Title {
     std::string prodcode(void) { return m_prodCode; }
     C2D_Image icon(void);
     C3D_Tex m_3Icon;
-
+    u16 ibuf;
     private:
     u64 m_id;
     FS_MediaType m_Media;
