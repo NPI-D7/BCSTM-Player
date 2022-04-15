@@ -6,7 +6,7 @@ class SheetMaker
     SheetMaker();
     ~SheetMaker();
     void AddInage(int zwidth, int zheight, C3D_Tex tex);
-    u8* ToRGB888(u8* bufdata);
+    u8* ToRGB888(u8* bufdata int ywidth, int yheight);
     void Write(std::string path);
     private:
     int count;

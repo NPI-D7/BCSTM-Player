@@ -1,5 +1,12 @@
 #include "SheetMaker.hpp"
 
+struct px
+{
+    u8 r;
+    u8 g;
+    u8 b;
+};
+
 SheetMaker::SheetMaker()
 {
     height = 1024;
@@ -12,9 +19,13 @@ SheetMaker::~SheetMaker()
 
 }
 
-u8* SheetMaker::ToRGB888(u8* bufdata)
+u8* SheetMaker::ToRGB888(u8* bufdata, int ywidth, int yheight)
 {
-    
+    px pxmap[12][12];
+    for(unsigned y = 0; y < yheight; y++){
+    for(unsigned x = 0; x < ywidth; x++) {
+        
+    }}
 }
 
 void SheetMaker::AddInage(int zwidth, int zheight, C3D_Tex tex)
