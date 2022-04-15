@@ -19,7 +19,7 @@ uint32_t* SheetMaker::ToRGBA888(uint16_t* bufdata, int ywidth, int yheight)
     uint8_t r = (((((int)bufdata >> 11) & 0x1F) * 527) + 23) >> 6;
     uint8_t g = (((((int)bufdata >> 5) & 0x1F) * 259) + 33) >> 6;
     uint8_t b = ((((int)bufdata & 0x1F) & 0x1F) + 23) >> 6;
-    return RGBA8(r,g,b,255);    
+    return RGBA8((int)r,(int)g,(int))b,255);    
 }
 
 void SheetMaker::AddInage(int zwidth, int zheight, u16* buf)
