@@ -5,6 +5,8 @@ SheetMaker::SheetMaker()
     height = 1024;
     width = 1024;
     ImageBuffer.resize(width * height * 4);
+    bitmap->height = height;
+    bitmap->width = width;
 }
 
 SheetMaker::~SheetMaker()
@@ -36,5 +38,5 @@ void SheetMaker::Write(std::string path)
 {
     lodepng::encode(path.c_str(), ImageBuffer, width, height);
     std::string path2 = path + ".bmp";
-    //bmp.write(path2.c_str())
+    BMP::Save(bitmap, path2);
 }
