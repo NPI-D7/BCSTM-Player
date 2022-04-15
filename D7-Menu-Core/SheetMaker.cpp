@@ -12,7 +12,7 @@ SheetMaker::~SheetMaker()
 
 }
 
-uint32_t* SheetMaker::ToRGB888(uint16_t* bufdata, int ywidth, int yheight)
+uint32_t* SheetMaker::ToRGBA888(uint16_t* bufdata, int ywidth, int yheight)
 {
     uint8_t r = ((((bufdata >> 11) & 0x1F) * 527) + 23) >> 6;
     uint8_t r = ((((bufdata >> 5) & 0x1F) * 259) + 33) >> 6;
@@ -28,7 +28,7 @@ void SheetMaker::AddInage(int zwidth, int zheight, u16* buf)
         count++;
         count2 = 0;
     }
-    u32 imagesrc = this->ToRGB888(buf, zwidth, zheight);
+    u32* imagesrc = this->ToRGBA888(buf, zwidth, zheight);
     for(unsigned y = count*zheight; y < height; y++){
     for(unsigned x = count2*zwidth; x < width; x++) {
     const u32 srcPos = ((((y >> 3) * (width >> 3) + (x >> 3)) << 6) +
