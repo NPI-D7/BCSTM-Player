@@ -1,5 +1,7 @@
 #include "SheetMaker.hpp"
 
+#define RGBA8(r, g, b, a) ((((r) & 0xFF) << 0) | (((g) & 0xFF) << 8) | (((b) & 0xFF) << 16) | (((a) & 0xFF) << 24))
+
 SheetMaker::SheetMaker()
 {
     height = 1024;
@@ -17,8 +19,7 @@ uint32_t* SheetMaker::ToRGBA888(uint16_t* bufdata, int ywidth, int yheight)
     uint8_t r = (((((int)bufdata >> 11) & 0x1F) * 527) + 23) >> 6;
     uint8_t g = (((((int)bufdata >> 5) & 0x1F) * 259) + 33) >> 6;
     uint8_t b = ((((int)bufdata & 0x1F) & 0x1F) + 23) >> 6;
-    uint32_t* RGB = ((((255) & 0xFF) << 24) | (((r) & 0xff) << 16) | (((g) & 0xff) << 8) | ((b) & 0xff));
-    return RGB;    
+    return RGBA8(r,g,b,255);    
 }
 
 void SheetMaker::AddInage(int zwidth, int zheight, u16* buf)
