@@ -65,6 +65,6 @@ void SheetMaker::AddInage(int zwidth, int zheight, u16 *buf)
 void SheetMaker::Write(std::string path)
 {
     lodepng::encode(path.c_str(), ImageBuffer, width, height);
-    std::string path2 = path + ".bmp";
-    BMP::Save(path2, bitmap);
+    //std::string path2 = path + ".bmp";
+    BMP::Save("/BCSTM-Player/cache/bmp.bmp", bitmap);
 }
