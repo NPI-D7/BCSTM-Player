@@ -1,5 +1,4 @@
 #include "renderd7.hpp"
-#include "bmp.hpp"
 class SheetMaker
 {
     public:
