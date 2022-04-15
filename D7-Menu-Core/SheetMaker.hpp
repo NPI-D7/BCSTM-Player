@@ -5,7 +5,7 @@ class SheetMaker
     public:
     SheetMaker();
     ~SheetMaker();
-    void AddInage(int zwidth, int zheight, u16 *buf);
+    void AddInage(int zwidth, int zheight, C3D_Tex tex);
     void Write(std::string path);
     private:
     int count;
