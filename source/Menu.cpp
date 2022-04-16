@@ -202,12 +202,10 @@ void Browse::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
     {
         char path[PATH_MAX];
 		getcwd(path, PATH_MAX);
-        this->dircontent.clear();
         if (this->dircontent.size() > 0) 
         {
 			if (this->dircontent[dirsel].isDir) 
             {
-                this->dircontent.clear();
 				chdir(this->dircontent[this->dirsel].name.c_str());
 				this->dirsel = 0;
 				this->changeddir = true;
