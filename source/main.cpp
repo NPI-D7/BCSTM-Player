@@ -36,7 +36,7 @@ int main()
         //RenderD7::Scene::doLogic(d7_hDown, d7_hHeld, d7_hUp, d7_touch);
         //player.tick();
         
-        C3D_FrameEnd(0);
+        RenderD7::FrameEnd();
     }
     player.stop();
     t1.kill();

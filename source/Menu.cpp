@@ -127,7 +127,7 @@ void MMM::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
 
 Browse::Browse()
 {
-    //RenderD7::Msg::Display("BCSTM-Player", "Loading Directory: sd:/", Top);
+    RenderD7::Msg::Display("BCSTM-Player", "Loading Directory: sd:/", Top);
     this->dircontent.clear();
     chdir("sdmc:/");
     std::vector<RenderD7::DirContent> temp;
@@ -148,7 +148,7 @@ void Browse::Draw(void) const
     RenderD7::DrawRect(0, 0, 400, 26, RenderD7::Color::Hex("#222222"));
     RenderD7::DrawText(5, 2, 0.7f, RenderD7::Color::Hex("#FFFFFF"), "BCSTM-Player->FileManager");
     DrawFMBG();
-    RenderD7::DrawTextCentered(30, 216, 0.7f, RenderD7::Color::Hex("#111111"), path, 390);
+    RenderD7::DrawTextCentered(0, 216, 0.7f, RenderD7::Color::Hex("#111111"), path, 400);
     std::string dirs;
     dirs.clear();
     int contentsss;
@@ -207,6 +207,7 @@ void Browse::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
 			if (this->dircontent[dirsel].isDir) 
             {
 				chdir(this->dircontent[this->dirsel].name.c_str());
+                this->dircontent.clear();
 				this->dirsel = 0;
 				this->changeddir = true;
 			} 
