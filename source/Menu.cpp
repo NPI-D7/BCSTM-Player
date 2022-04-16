@@ -104,7 +104,7 @@ void Browse::Draw(void) const
     RenderD7::DrawRect(0, 0, 400, 26, RenderD7::Color::Hex("#222222"));
     RenderD7::DrawText(5, 2, 0.7f, RenderD7::Color::Hex("#FFFFFF"), "BCSTM-Player->FileManager");
     DrawFMBG();
-    RenderD7::DrawTextCentered(30, 216, 0.7f, RenderD7::Color::Hex("#111111"), path, 390);
+    RenderD7::DrawTextCentered(0, 216, 0.7f, RenderD7::Color::Hex("#111111"), path, 400);
     std::string dirs;
     for (int i = this->dirsel < 9 ? 0 : this->dirsel - 9; (int)dircontent.size() && i < ((this->dirsel < 9) ? 10 : this->dirsel + 1); i++)
     {

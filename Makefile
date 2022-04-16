@@ -66,7 +66,7 @@ VERSION_MICRO := 0
 #---------------------------------------------------------------------------------
 TARGET		:=	BCSTM-Player
 BUILD		:=	build
-UNIVCORE	:=	RenderD7-alpha0-3-0 BCSTM
+UNIVCORE	:=	RenderD7 RenderD7/internal RenderD7/external BCSTM
 SOURCES		:=	$(UNIVCORE) source
 DATA		:=	data
 INCLUDES	:=	$(UNIVCORE) source 
