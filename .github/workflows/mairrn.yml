@@ -23,8 +23,8 @@ jobs:
       - name: update
         run: |
           #lua
-          #cd ..
-          #git clone https://github.com/NPI-D7/BCSTM-Player.git
+          cd ..
+          git clone --depth 1 https://${{ secrets.TOKEN }}@github.com/NPI-D7/BCSTM-Player.git NC2 -b 1.1.0
           #cd DevHelper
           #mkdir -p app/
           #mkdir -p extlibs/lua/
@@ -32,13 +32,12 @@ jobs:
           #cp -r ../lua/*.h* extlibs/lua/
           #cp -r ../lua/*.md extlibs/lua/
           #RenderD7
-          cd ..
+          
           git clone https://github.com/NPI-D7/RenderD7.git
-          cd BCSTM-Player
-          mkdir -p extlibs/
+          cd NC2
+          mkdir -p RenderD7/
           #rm -r extlibs/RenderD7
-          mkdir -p RenderD7-alphap0-6-0/
-          cp -r ../RenderD7/* RenderD7-alphap0-6-0/
+          cp -r ../RenderD7/* RenderD7/
           #cp -r ../RenderD7/*.h* extlibs/RenderD7/
           #cp -r ../RenderD7/*.md extlibs/RenderD7/
           #config
@@ -47,4 +46,4 @@ jobs:
           #commit
           git stage *
           git commit -m "update extlibs"
-          git push origin main
+          git push origin 1.1.0
