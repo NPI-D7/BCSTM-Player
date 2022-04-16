@@ -150,6 +150,7 @@ void Browse::Draw(void) const
     DrawFMBG();
     RenderD7::DrawTextCentered(30, 216, 0.7f, RenderD7::Color::Hex("#111111"), path, 390);
     std::string dirs;
+    dirs.clear();
     int contentsss;
     contentsss = (int)dircontent.size();
     for (int i = this->dirsel < 9 ? 0 : this->dirsel - 9; (int)dircontent.size() && i < ((this->dirsel < 9) ? 10 : this->dirsel + 1); i++)
@@ -201,10 +202,12 @@ void Browse::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
     {
         char path[PATH_MAX];
 		getcwd(path, PATH_MAX);
+        this->dircontent.clear();
         if (this->dircontent.size() > 0) 
         {
 			if (this->dircontent[dirsel].isDir) 
             {
+                this->dircontent.clear();
 				chdir(this->dircontent[this->dirsel].name.c_str());
 				this->dirsel = 0;
 				this->changeddir = true;
