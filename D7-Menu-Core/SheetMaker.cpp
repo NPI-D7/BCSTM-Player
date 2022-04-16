@@ -34,8 +34,7 @@ void SheetMaker::AddInage(int zwidth, int zheight, u16* buf)
         count++;
         count2 = 0;
     }
-    unsigned char* convi = stbi__convert_16_to_8(buf, zwidth, zheight, 8);
-    stbi_write_jpg("sdmc:/test.jpg", 48, 48, 1, convi, 20);
+
     //u32* imagesrc = (u32*)this->ToRGBA888(buf, zwidth, zheight);
     /*for(unsigned y = count*zheight; y < height; y++){
     for(unsigned x = count2*zwidth; x < width; x++) {
