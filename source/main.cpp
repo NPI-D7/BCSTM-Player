@@ -8,6 +8,8 @@ extern BCSTM player;
 RenderD7::Sheet sheet;
 extern Log cachelog;
 
+extern int cobj___;
+
 void CardScan(RenderD7::Parameter param) {
     while (true) {
         D7TM::CardLoop();
@@ -18,6 +20,7 @@ void CardScan(RenderD7::Parameter param) {
 
 int main()
 {
+    cobj___ = 6000;
     RenderD7::Init::Main("BCSTM-Player");
     mkdir("sdmc:/BCSTM-Player/", 0777);
     mkdir("sdmc:/BCSTM-Player/cache/", 0777);
