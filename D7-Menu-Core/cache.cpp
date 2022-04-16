@@ -6,13 +6,11 @@
 #include <sstream>
 #include <cstdint>
 #include "utils.hpp"
-#include "SheetMaker.hpp"
 
 Log cachelog;
 
 void Cache::Create(std::vector<std::shared_ptr<Title>> t, const std::string& path)
 {
-	SheetMaker sheet;
     remove(path.c_str());
     INI::INIFile cache(path);
     INI::INIStructure cachedata;
@@ -23,9 +21,7 @@ void Cache::Create(std::vector<std::shared_ptr<Title>> t, const std::string& pat
         //cachedata[t[i]->name()]["author"] = t[i]->author();
         cachedata[t[i]->name()]["prod"] = t[i]->prodcode();
         cachedata[t[i]->name()]["id"] = std::to_string(t[i]->ID());
-        sheet.AddInage(64, 64, t[i]->ibuf);
     }
-    sheet.Write(path + ".png");
     cache.write(cachedata);
 }
 
