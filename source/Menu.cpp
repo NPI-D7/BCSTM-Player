@@ -46,7 +46,7 @@ void MMM::Draw(void) const
     RenderD7::OnScreen(Bottom);
     RenderD7::DrawRect(0, 0, 320, 240, RenderD7::Color::Hex("#222222"));
     RenderD7::DrawTObjects(this->buttons, RenderD7::Color::Hex("#333333"), RenderD7::Color::Hex("#FFFFFF"), this->Selection, RenderD7::Color::Hex("#444444"), RenderD7::Color::Hex("#333333", 100));
-    RenderD7::DrawText(5, 2, 0.6f, RenderD7::Color::Hex("#FFFFFF"), "Framerate: " + RenderD7::GetFramerate());
+    //RenderD7::DrawText(5, 2, 0.6f, RenderD7::Color::Hex("#FFFFFF"), "Framerate: " + RenderD7::GetFramerate());
 }
 void MMM::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
 {
@@ -296,7 +296,7 @@ void Credits::Draw(void) const
     RenderD7::DrawRect(0, 0, 320, 240, RenderD7::Color::Hex("#222222"));
     RenderD7::DrawImageFromSheet(&sheet, 0, 0, 10);
     RenderD7::DrawTextCentered(0, 218, 0.7f, RenderD7::Color::Hex("#FFFFFF"), "RenderD7: Version: " RENDERD7VSTRING, 320);
-    RenderD7::DrawText(5, 2, 0.6f, RenderD7::Color::Hex("#FFFFFF"), "Framerate: " + RenderD7::GetFramerate());
+    //RenderD7::DrawText(5, 2, 0.6f, RenderD7::Color::Hex("#FFFFFF"), "Framerate: " + RenderD7::GetFramerate());
    // RenderD7::DrawCheckbox(box);
     //RenderD7::DrawNFRect(20, 20, 50, 50, C2D_Color32(255, 255, 255, 255), 3);
 }
