@@ -121,6 +121,7 @@ void MMM::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
     }
     if (hDown & KEY_SELECT)
     {
+        void ToggleRD7SR();
         clearCache();
     }
 }
