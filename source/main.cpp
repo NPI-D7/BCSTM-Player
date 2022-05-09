@@ -30,6 +30,7 @@ int main()
     RenderD7::Init::NdspFirm(true);
     aptSetSleepAllowed(false);
     sheet.Load("romfs:/gfx/sprites.t3x");
+    D7TM::IconLoading(false);
     RenderD7::Scene::Load(std::make_unique<MMM>());
     RenderD7::Thread t1(CardScan, 1);
     t1.start();

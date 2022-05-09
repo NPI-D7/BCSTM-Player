@@ -1,0 +1,11 @@
+make.exe --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/Tobi/BCSTM-Player'
+ 
+[ -d build ] || mkdir -p build
+ 
+make: *** No rule to make target '/home/Tobi/BCSTM-Player/build', needed by 'all'.
+
+echo sprites.t3s
+/opt/devkitpro/tools/bin/tex3ds -i /home/Tobi/BCSTM-Player/gfx/sprites.t3s -H build/sprites.h -d /home/Tobi/BCSTM-Player/build/sprites.d -o romfs/gfx/sprites.t3x
+make: Leaving directory '/home/Tobi/BCSTM-Player'
+ 

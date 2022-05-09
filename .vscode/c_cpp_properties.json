@@ -5,8 +5,9 @@
             "includePath": [
                 "${workspaceFolder}",
                 "${workspaceFolder}/BCSTM/**",
-                "/opt/devkitpro/libctru/include/**",
-                "/opt/devkitpro/portlibs/3ds/include/**",
+                "${workspaceFolder}/D7-Menu-Core/**",
+                "/devkitpro/libctru/include/**",
+                "/devkitpro/portlibs/3ds/include/**",
                 "${workspaceFolder}/RenderD7/**"
             ],
             "intelliSenseMode": "gcc-arm",

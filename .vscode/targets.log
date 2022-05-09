@@ -1,0 +1,684 @@
+make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 4.3
+# Built for x86_64-pc-msys
+ 
+# Copyright (C) 1988-2020 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+ 
+
+# Make data base, printed on Mon May  9 21:56:44 2022
+
+# Variables
+
+# makefile (from 'Makefile', line 39)
+MAKEROM = C:/devkitpro/tools/bin/makerom.exe
+# environment
+SYSTEMDRIVE = C:
+# makefile (from '/opt/devkitpro/devkitARM/base_rules', line 6)
+PORTLIBS_PATH := /opt/devkitpro/portlibs
+# makefile (from '/opt/devkitpro/devkitARM/base_tools', line 23)
+AS := arm-none-eabi-as
+# makefile (from 'Makefile', line 120)
+ 
+OUTPUT := /home/Tobi/BCSTM-Player/BCSTM-Player
+# environment
+LC_ALL = C
+# makefile (from '/opt/devkitpro/devkitARM/base_tools', line 24)
+AR := arm-none-eabi-gcc-ar
+# makefile (from 'Makefile', line 158)
+ROMFS_T3XFILES :=  romfs/gfx/sprites.t3x
+# environment
+USERPROFILE = C:\Users\Tobi
+# makefile (from 'Makefile', line 169)
+OFILES :=    BCSTM.o Title.o TitleManager.o cache.o smdh.o utils.o Menu.o main.o  
+# environment
+LOCALAPPDATA = C:\Users\Tobi\AppData\Local
+# environment
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-3a0ff899-0bdb-408f-bb8b-2550d81a3a9b-sock
+# makefile (from 'Makefile', line 123)
+VPATH := /home/Tobi/BCSTM-Player/RenderD7 /home/Tobi/BCSTM-Player/RenderD7/internal /home/Tobi/BCSTM-Player/BCSTM /home/Tobi/BCSTM-Player/RenderD7/external /home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/include/ /home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/include/TweenEngine /home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/source /home/Tobi/BCSTM-Player/D7-Menu-Core /home/Tobi/BCSTM-Player/source /home/Tobi/BCSTM-Player/gfx /home/Tobi/BCSTM-Player/data
+# makefile (from 'Makefile', line 129)
+CFILES := $(subst ,,        )
+# environment
+VSCODE_CWD = C:\Users\Tobi\AppData\Local\Programs\Microsoft VS Code
+# makefile (from 'Makefile', line 40)
+BANNERTOOL = C:/devkitpro/tools/bin/bannertool.exe
+# environment
+SYSTEMROOT = C:\Windows
+# makefile (from 'Makefile', line 104)
+LIBS := -lcurl -lstdc++ -lm -lcitro2d -lcitro3d -lctru -ljpeg
+# makefile (from '/opt/devkitpro/devkitARM/base_tools', line 43)
+SILENTMSG := @echo
+# environment
+PROCESSOR_LEVEL = 25
+# environment
+PSMODULEPATH = C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules
+# default
+MAKE_COMMAND := make
+# makefile (from 'Makefile', line 166)
+OFILES_BIN := $(subst ,,  )
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# environment
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_6868_QPKSDSLDFNHTWWUL
+# makefile (from 'Makefile', line 130)
+CPPFILES :=   BCSTM.cpp     Title.cpp TitleManager.cpp cache.cpp smdh.cpp utils.cpp Menu.cpp main.cpp
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# default
+.VARIABLES := 
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+VSCODE_LOG_STACK = false
+# automatic
+%F = $(notdir $%)
+# environment
+VSCODE_CODE_CACHE_PATH = C:\Users\Tobi\AppData\Roaming\Code\CachedData\57fd6d0195bb9b9d1b49f6da5db789060795de47
+# environment
+LANG = C
+# default
+.LOADED := 
+# environment
+TMP = /home/Tobi/AppData/Local/Temp
+# default
+.INCLUDE_DIRS = /usr/include /usr/include
+# makefile
+MAKEFLAGS = pqrR
+# makefile (from 'Makefile', line 131)
+SFILES := $(subst ,,        )
+# makefile (from 'Makefile', line 80)
+ICON := app/icon.png
+# environment
+ONEDRIVE = C:\Users\Tobi\OneDrive
+# environment
+DEVKITARM = /opt/devkitpro/devkitARM
+# makefile
+CURDIR := /home/Tobi/BCSTM-Player
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# makefile (from 'Makefile', line 127)
+DEPSDIR := /home/Tobi/BCSTM-Player/build
+# environment
+PROGRAMFILES = C:\Program Files
+# environment
+MFLAGS = -pqrR
+# default
+.SHELLFLAGS := -c
+# environment
+!C: = c:\Users\Tobi\BCSTM-Player
+# environment
+COMMONPROGRAMW6432 = C:\Program Files\Common Files
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# makefile (from 'Makefile', line 200)
+_3DSXFLAGS = --smdh=$(CURDIR)/$(TARGET).smdh --romfs=$(CURDIR)/$(ROMFS)
+# makefile (from '/opt/devkitpro/devkitARM/base_tools', line 1)
+MAKEFILE_LIST := Makefile /opt/devkitpro/devkitARM/3ds_rules /opt/devkitpro/devkitARM/base_rules /opt/devkitpro/devkitARM/base_tools
+# makefile (from 'Makefile', line 101)
+ASFLAGS := -g -march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft
+# automatic
+@F = $(notdir $@)
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# environment
+VSCODE_PID = 6868
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# makefile (from '/opt/devkitpro/devkitARM/base_tools', line 28)
+RANLIB := arm-none-eabi-gcc-ranlib
+# environment
+DEVKITPPC = /opt/devkitpro/devkitPPC
+# makefile (from 'Makefile', line 171)
+HFILES := $(subst ,,  )
+# makefile (from 'Makefile', line 78)
+APP_AUTHOR := Tobi-D7
+# makefile (from 'Makefile', line 73)
+INCLUDES := RenderD7 RenderD7/internal BCSTM RenderD7/external RenderD7/external/tween-engine/include/ RenderD7/external/tween-engine/include/TweenEngine RenderD7/external/tween-engine/source D7-Menu-Core source 
+# automatic
+*F = $(notdir $*)
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# makefile (from 'Makefile', line 59)
+VERSION_MAJOR := 1
+# environment
+VSCODE_NLS_CONFIG = {"locale":"de","availableLanguages":{"*":"de"},"_languagePackId":"621308d8e770442313278f2d5d161af1.de","_translationsConfigFile":"C:\\Users\\Tobi\\AppData\\Roaming\\Code\\clp\\621308d8e770442313278f2d5d161af1.de\\tcf.json","_cacheRoot":"C:\\Users\\Tobi\\AppData\\Roaming\\Code\\clp\\621308d8e770442313278f2d5d161af1.de","_resolvedLanguagePackCoreLocation":"C:\\Users\\Tobi\\AppData\\Roaming\\Code\\clp\\621308d8e770442313278f2d5d161af1.de\\57fd6d0195bb9b9d1b49f6da5db789060795de47","_corruptedFile":"C:\\Users\\Tobi\\AppData\\Roaming\\Code\\clp\\621308d8e770442313278f2d5d161af1.de\\corrupted.info","_languagePackSupport":true}
+# makefile (from 'Makefile', line 192)
+APP_ICON := /home/Tobi/BCSTM-Player/app/icon.png
+# makefile (from '/opt/devkitpro/devkitARM/3ds_rules', line 11)
+CTRULIB = $(DEVKITPRO)/libctru
+# makefile (from 'Makefile', line 174)
+INCLUDE := -I/home/Tobi/BCSTM-Player/RenderD7 -I/home/Tobi/BCSTM-Player/RenderD7/internal -I/home/Tobi/BCSTM-Player/BCSTM -I/home/Tobi/BCSTM-Player/RenderD7/external -I/home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/include/ -I/home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/include/TweenEngine -I/home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/source -I/home/Tobi/BCSTM-Player/D7-Menu-Core -I/home/Tobi/BCSTM-Player/source -I/opt/devkitpro/portlibs/3ds/include -I/opt/devkitpro/libctru/include -I/home/Tobi/BCSTM-PlayerRenderD7/external/tween-engine//include -I/home/Tobi/BCSTM-Player/build
+# default
+MAKE_HOST := x86_64-pc-msys
+# environment
+PROGRAMDATA = C:\ProgramData
+# default
+SHELL := /bin/sh
+# environment
+HOMEPATH = \Users\Tobi
+# default
+MAKECMDGOALS := all
+# makefile (from 'Makefile', line 164)
+OFILES_SOURCES := BCSTM.o Title.o TitleManager.o cache.o smdh.o utils.o Menu.o main.o  
+# environment
+DRIVERDATA = C:\Windows\System32\Drivers\DriverData
+# environment
+COMSPEC = C:\Windows\system32\cmd.exe
+# environment
+WINDIR = C:\Windows
+# makefile (from 'Makefile', line 135)
+BINFILES := 
+# environment
+MAKELEVEL := 0
+# makefile (from 'Makefile', line 178)
+LIBPATHS := -L/opt/devkitpro/portlibs/3ds/lib -L/opt/devkitpro/libctru/lib -L/home/Tobi/BCSTM-PlayerRenderD7/external/tween-engine//lib
+# default
+MAKE = $(MAKE_COMMAND)
+# makefile (from 'Makefile', line 133)
+SHLISTFILES := $(subst ,,        )
+# makefile (from '/opt/devkitpro/devkitARM/3ds_rules', line 9)
+PATH := /opt/devkitpro/portlibs/3ds/bin:/opt/devkitpro/tools/bin:/opt/devkitpro/devkitARM/bin:/opt/devkitpro/msys2/usr/bin:/c/Windows/system32:/c/Windows:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0:/c/Windows/System32/OpenSSH:/c/Program Files/Git/cmd:/opt/devkitpro/tools/bin:/home/Tobi/AppData/Local/Microsoft/WindowsApps:/home/Tobi/AppData/Local/Programs/Microsoft VS Code/bin
+# environment
+COMPUTERNAME = PC
+# default
+MAKEFILES := 
+# makefile (from 'Makefile', line 81)
+BNR_IMAGE := app/banner.png
+# automatic
+^F = $(notdir $^)
+# makefile (from '/opt/devkitpro/devkitARM/base_tools', line 5)
+UNAME_R := 3.3.4-341.x86_64
+# environment
+PROMPT = $P$G
+# makefile (from 'Makefile', line 61)
+VERSION_MINOR := 0
+# makefile (from '/opt/devkitpro/devkitARM/base_tools', line 19)
+PREFIX := arm-none-eabi-
+# makefile (from 'Makefile', line 110)
+LIBDIRS := /opt/devkitpro/portlibs/3ds /opt/devkitpro/libctru /home/Tobi/BCSTM-PlayerRenderD7/external/tween-engine/
+# environment
+LOGONSERVER = \\PC
+# environment
+VSCODE_LOG_NATIVE = false
+# environment
+USERNAME = Tobi
+# environment
+COMMONPROGRAMFILES = C:\Program Files\Common Files
+# automatic
+?F = $(notdir $?)
+# makefile (from '/opt/devkitpro/devkitARM/base_tools', line 50)
+bin2o = 	bin2s -a 4 -H `(echo $(<F) | tr . _)`.h $< | $(AS) -o $(<F).o
+# environment
+PROGRAMW6432 = C:\Program Files
+# environment
+DEVKITPRO = /opt/devkitpro
+# makefile (from '/opt/devkitpro/devkitARM/base_tools', line 4)
+UNAME_S := MSYS_NT-10.0-19044
+# environment
+PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+# automatic
++F = $(notdir $+)
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+# environment
+USERDOMAIN = PC
+# 'override' directive
+GNUMAKEFLAGS := 
+# environment
+OS = Windows_NT
+# makefile (from 'Makefile', line 132)
+PICAFILES := $(subst ,,        )
+# makefile
+.DEFAULT_GOAL := all
+# makefile (from 'Makefile', line 90)
+ARCH := -march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft
+# makefile (from 'Makefile', line 79)
+APP_DESCRIPTION := BCSTM MusicPlayer for the 3ds.
+# default
+MAKE_VERSION := 4.3
+# makefile (from 'Makefile', line 69)
+LIBTWEEN := /home/Tobi/BCSTM-PlayerRenderD7/external/tween-engine/
+# 'override' directive
+.SHELLSTATUS := 0
+# makefile (from '/opt/devkitpro/devkitARM/base_tools', line 44)
+SILENTCMD := @
+# environment
+PROGRAMFILES(X86) = C:\Program Files (x86)
+# makefile (from 'Makefile', line 68)
+BUILD := build
+# makefile (from 'Makefile', line 121)
+TOPDIR := /home/Tobi/BCSTM-Player
+# makefile (from 'Makefile', line 77)
+GFXBUILD := romfs/gfx
+# makefile (from 'Makefile', line 102)
+LDFLAGS = -specs=3dsx.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)
+# environment
+USERDOMAIN_ROAMINGPROFILE = PC
+ 
+# environment
+NUMBER_OF_PROCESSORS = 12
+# makefile (from '/opt/devkitpro/devkitARM/base_tools', line 30)
+ISVC = $(or $(VCBUILDHELPER_COMMAND),$(MSBUILDEXTENSIONSPATH32),$(MSBUILDEXTENSIONSPATH))
+# makefile (from 'Makefile', line 86)
+IP := 192.168.2.130
+# environment
+PUBLIC = C:\Users\Public
+# makefile (from 'Makefile', line 82)
+BNR_AUDIO := app/BannerAudio.wav
+# environment
+APPDATA = C:\Users\Tobi\AppData\Roaming
+# makefile (from 'Makefile', line 97)
+CFLAGS := -g -Wall -Wno-psabi -O2 -mword-relocations -DV_STRING=\"1d444c4\" -fomit-frame-pointer -ffunction-sections -march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft  -D__3DS__ -D_GNU_SOURCE=1
+# environment
+HOMEDRIVE = C:
+# makefile (from 'Makefile', line 70)
+UNIVCORE := RenderD7 RenderD7/internal BCSTM RenderD7/external RenderD7/external/tween-engine/include/ RenderD7/external/tween-engine/include/TweenEngine RenderD7/external/tween-engine/source D7-Menu-Core
+# environment
+PROCESSOR_ARCHITECTURE = AMD64
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+HOME = /home/Tobi
+# environment
+COMMONPROGRAMFILES(X86) = C:\Program Files (x86)\Common Files
+# makefile (from '/opt/devkitpro/devkitARM/base_tools', line 13)
+DEVKITPATH = $(shell echo "$(DEVKITPRO)" | sed -e 's/^\([a-zA-Z]\):/\/\1/')
+# makefile (from '/opt/devkitpro/devkitARM/3ds_rules', line 7)
+PORTLIBS := /opt/devkitpro/portlibs/3ds
+# makefile (from 'Makefile', line 63)
+VERSION_MICRO := 0
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# environment
+TEMP = /home/Tobi/AppData/Local/Temp
+# environment
+VSCODE_IPC_HOOK = \\.\pipe\8a33a0d379aadca85b3e7306d64b2615-1.67.0-main-sock
+# environment
+TERM = xterm-256color
+# makefile (from '/opt/devkitpro/devkitARM/base_tools', line 27)
+NM := arm-none-eabi-gcc-nm
+# makefile (from 'Makefile', line 83)
+RSF_FILE := app/build-cia.rsf
+# default
+.RECIPEPREFIX := 
+# automatic
+<F = $(notdir $<)
+# makefile (from 'Makefile', line 134)
+GFXFILES := sprites.t3s
+# makefile (from 'Makefile', line 76)
+ROMFS := romfs
+# default
+SUFFIXES := 
+# environment
+ALLUSERSPROFILE = C:\ProgramData
+# makefile (from 'Makefile', line 67)
+TARGET := BCSTM-Player
+# makefile (from 'Makefile', line 146)
+LD := arm-none-eabi-g++
+# environment
+SESSIONNAME = Console
+# makefile (from 'Makefile', line 52)
+GIT_VER := 1d444c4
+# makefile (from 'Makefile', line 99)
+CXXFLAGS := -g -Wall -Wno-psabi -O2 -mword-relocations -DV_STRING=\"1d444c4\" -fomit-frame-pointer -ffunction-sections -march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft  -D__3DS__ -D_GNU_SOURCE=1 -fno-rtti -fno-exceptions -std=gnu++20 
+# makefile (from '/opt/devkitpro/devkitARM/base_tools', line 26)
+STRIP := arm-none-eabi-strip
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink load
+# environment
+PROCESSOR_REVISION = 2100
+# makefile (from '/opt/devkitpro/devkitARM/base_tools', line 22)
+CXX := arm-none-eabi-g++
+# makefile (from '/opt/devkitpro/devkitARM/base_tools', line 21)
+CC := arm-none-eabi-gcc
+# makefile (from '/opt/devkitpro/devkitARM/base_tools', line 25)
+OBJCOPY := arm-none-eabi-objcopy
+# makefile (from 'Makefile', line 159)
+T3XHFILES :=  build/sprites.h
+# makefile (from 'Makefile', line 71)
+SOURCES := RenderD7 RenderD7/internal BCSTM RenderD7/external RenderD7/external/tween-engine/include/ RenderD7/external/tween-engine/include/TweenEngine RenderD7/external/tween-engine/source D7-Menu-Core source
+# makefile (from '/opt/devkitpro/devkitARM/3ds_rules', line 14)
+APP_TITLE := 
+# makefile (from 'Makefile', line 72)
+DATA := data
+# makefile (from 'Makefile', line 74)
+GRAPHICS := gfx
+# makefile (from 'Makefile', line 180)
+_3DSXDEPS := /home/Tobi/BCSTM-Player/BCSTM-Player.smdh
+# environment
+PROCESSOR_IDENTIFIER = AMD64 Family 25 Model 33 Stepping 0, AuthenticAMD
+# variable set hash-table stats:
+# Load=171/1024=17%, Rehash=0, Collisions=35/378=9%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# RenderD7/external/tween-engine/include/: could not be stat'd.
+# /home/Tobi/BCSTM-Player/RenderD7 (device 1820687712, inode 562949953526354): 2 files, no impossibilities.
+# D7-Menu-Core (device 1820687712, inode 562949953526340): 12 files, no impossibilities.
+# /home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/include: could not be stat'd.
+ 
+# RenderD7/external: could not be stat'd.
+# /home/Tobi/BCSTM-Player/RenderD7/internal: could not be stat'd.
+# RenderD7 (device 1820687712, inode 562949953526354): 2 files, no impossibilities.
+# BCSTM (device 1820687712, inode 562949953526335): 5 files, no impossibilities.
+# /home/Tobi/BCSTM-Player/source (device 1820687712, inode 562949953526391): 5 files, no impossibilities.
+# /home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/source: could not be stat'd.
+# /home/Tobi/BCSTM-Player/D7-Menu-Core (device 1820687712, inode 562949953526340): 12 files, no impossibilities.
+# /home/Tobi/BCSTM-Player/gfx (device 1820687712, inode 562949953526364): 4 files, no impossibilities.
+# . (device 1820687712, inode 1688849860368724): 21 files, no impossibilities.
+# RenderD7/external/tween-engine/include/TweenEngine: could not be stat'd.
+# source (device 1820687712, inode 562949953526391): 5 files, no impossibilities.
+# data: could not be stat'd.
+# gfx (device 1820687712, inode 562949953526364): 4 files, no impossibilities.
+# /home/Tobi/BCSTM-Player/RenderD7/external: could not be stat'd.
+# RenderD7/external/tween-engine/source: could not be stat'd.
+# /home/Tobi/BCSTM-Player/BCSTM (device 1820687712, inode 562949953526335): 5 files, no impossibilities.
+# /home/Tobi/BCSTM-Player/data: could not be stat'd.
+# RenderD7/internal: could not be stat'd.
+# /home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/include/TweenEngine: could not be stat'd.
+
+# 77 files, no impossibilities in 23 directories.
+
+# Implicit Rules
+
+%.a:
+#  recipe to execute (from '/opt/devkitpro/devkitARM/base_rules', line 12):
+	$(SILENTMSG) $(notdir $@)
+	@rm -f $@
+	$(SILENTCMD)$(AR) -rc $@ $^
+
+%.arm.o: %.arm.cpp
+#  recipe to execute (from '/opt/devkitpro/devkitARM/base_rules', line 18):
+	$(SILENTMSG) $(notdir $<)
+	$(SILENTCMD)$(CXX) -MMD -MP -MF $(DEPSDIR)/$*.arm.d $(CXXFLAGS) -marm -c $< -o $@ $(ERROR_FILTER)
+
+%.arm.o: %.arm.c
+#  recipe to execute (from '/opt/devkitpro/devkitARM/base_rules', line 23):
+	$(SILENTMSG) $(notdir $<)
+	$(SILENTCMD)$(CC) -MMD -MP -MF $(DEPSDIR)/$*.arm.d $(CFLAGS) -marm -c $< -o $@ $(ERROR_FILTER)
+
+%.arm.o: %.arm.m
+#  recipe to execute (from '/opt/devkitpro/devkitARM/base_rules', line 28):
+	$(SILENTMSG) $(notdir $<)
+	$(SILENTCMD)$(CC) -MMD -MP -MF $(DEPSDIR)/$*.arm.d $(OBJCFLAGS) -marm -c $< -o $@ $(ERROR_FILTER)
+
+%.thumb.o: %.thumb.cpp
+#  recipe to execute (from '/opt/devkitpro/devkitARM/base_rules', line 33):
+	$(SILENTMSG) $(notdir $<)
+	$(SILENTCMD)$(CXX) -MMD -MP -MF $(DEPSDIR)/$*.thumb.d $(CXXFLAGS) -mthumb -c $< -o $@ $(ERROR_FILTER)
+
+%.thumb.o: %.thumb.c
+#  recipe to execute (from '/opt/devkitpro/devkitARM/base_rules', line 38):
+	$(SILENTMSG) $(notdir $<)
+	$(SILENTCMD)$(CC) -MMD -MP -MF $(DEPSDIR)/$*.thumb.d $(CFLAGS) -mthumb -c $< -o $@ $(ERROR_FILTER)
+
+%.thumb.o: %.thumb.m
+#  recipe to execute (from '/opt/devkitpro/devkitARM/base_rules', line 43):
+	$(SILENTMSG) $(notdir $<)
+	$(SILENTCMD)$(CC) -MMD -MP -MF $(DEPSDIR)/$*.thumb.d $(OBJCFLAGS) -mthumb -c $< -o $@ $(ERROR_FILTER)
+
+%.iwram.o: %.iwram.cpp
+#  recipe to execute (from '/opt/devkitpro/devkitARM/base_rules', line 48):
+	$(SILENTMSG) $(notdir $<)
+	$(SILENTCMD)$(CXX) -MMD -MP -MF $(DEPSDIR)/$*.iwram.d $(CXXFLAGS) -marm -mlong-calls -c $< -o $@ $(ERROR_FILTER)
+
+%.iwram.o: %.iwram.c
+#  recipe to execute (from '/opt/devkitpro/devkitARM/base_rules', line 53):
+	$(SILENTMSG) $(notdir $<)
+	$(SILENTCMD)$(CC) -MMD -MP -MF $(DEPSDIR)/$*.iwram.d $(CFLAGS) -marm -mlong-calls -c $< -o $@ $(ERROR_FILTER)
+
+%.iwram.o: %.iwram.m
+#  recipe to execute (from '/opt/devkitpro/devkitARM/base_rules', line 58):
+	$(SILENTMSG) $(notdir $<)
+	$(SILENTCMD)$(CC) -MMD -MP -MF $(DEPSDIR)/$*.iwram.d $(OBJCFLAGS) -marm -mlong-calls -c $< -o $@ $(ERROR_FILTER)
+
+%.itcm.o: %.itcm.cpp
+#  recipe to execute (from '/opt/devkitpro/devkitARM/base_rules', line 63):
+	$(SILENTMSG) $(notdir $<)
+	$(SILENTCMD)$(CXX) -MMD -MP -MF $(DEPSDIR)/$*.itcm.d $(CXXFLAGS) -marm -mlong-calls -c $< -o $@ $(ERROR_FILTER)
+
+%.itcm.o: %.itcm.c
+#  recipe to execute (from '/opt/devkitpro/devkitARM/base_rules', line 68):
+	$(SILENTMSG) $(notdir $<)
+	$(SILENTCMD)$(CC) -MMD -MP -MF $(DEPSDIR)/$*.itcm.d $(CFLAGS) -marm -mlong-calls -c $< -o $@ $(ERROR_FILTER)
+
+%.itcm.o: %.itcm.m
+#  recipe to execute (from '/opt/devkitpro/devkitARM/base_rules', line 73):
+	$(SILENTMSG) $(notdir $<)
+	$(SILENTCMD)$(CC) -MMD -MP -MF $(DEPSDIR)/$*.itcm.d $(OBJCFLAGS) -marm -mlong-calls -c $< -o $@ $(ERROR_FILTER)
+
+%.o: %.cpp
+#  recipe to execute (from '/opt/devkitpro/devkitARM/base_rules', line 79):
+	$(SILENTMSG) $(notdir $<)
+	$(SILENTCMD)$(CXX) -MMD -MP -MF $(DEPSDIR)/$*.d $(CXXFLAGS) -c $< -o $@ $(ERROR_FILTER)
+
+%.o: %.c
+#  recipe to execute (from '/opt/devkitpro/devkitARM/base_rules', line 84):
+	$(SILENTMSG) $(notdir $<)
+	$(SILENTCMD)$(CC) -MMD -MP -MF $(DEPSDIR)/$*.d $(CFLAGS) -c $< -o $@ $(ERROR_FILTER)
+
+%.o: %.m
+#  recipe to execute (from '/opt/devkitpro/devkitARM/base_rules', line 89):
+	$(SILENTMSG) $(notdir $<)
+	$(SILENTCMD)$(CC) -MMD -MP -MF $(DEPSDIR)/$*.d $(OBJCFLAGS) -c $< -o $@ $(ERROR_FILTER)
+
+%.o: %.s
+#  recipe to execute (from '/opt/devkitpro/devkitARM/base_rules', line 94):
+	$(SILENTMSG) $(notdir $<)
+	$(SILENTCMD)$(CC) -MMD -MP -MF $(DEPSDIR)/$*.d -x assembler-with-cpp $(ASFLAGS) -c $< -o $@ $(ERROR_FILTER)
+
+%.o: %.S
+#  recipe to execute (from '/opt/devkitpro/devkitARM/base_rules', line 99):
+	$(SILENTMSG) $(notdir $<)
+	$(SILENTCMD)$(CC) -MMD -MP -MF $(DEPSDIR)/$*.d -x assembler-with-cpp $(ASFLAGS) -c $< -o $@ $(ERROR_FILTER)
+
+%.smdh: /opt/devkitpro/libctru/default_icon.png Makefile /opt/devkitpro/devkitARM/3ds_rules /opt/devkitpro/devkitARM/base_rules /opt/devkitpro/devkitARM/base_tools
+#  recipe to execute (from '/opt/devkitpro/devkitARM/3ds_rules', line 31):
+	$(SILENTCMD)smdhtool --create "$(APP_TITLE)" "$(APP_DESCRIPTION)" "$(APP_AUTHOR)" $(APP_ICON) $@
+	$(SILENTMSG) built ... $(notdir $@)
+
+%.3dsx: %.elf
+#  recipe to execute (from '/opt/devkitpro/devkitARM/3ds_rules', line 36):
+	$(SILENTCMD)3dsxtool $< $@ $(_3DSXFLAGS)
+	$(SILENTMSG) built ... $(notdir $@)
+
+%.elf:
+#  recipe to execute (from '/opt/devkitpro/devkitARM/3ds_rules', line 41):
+	$(SILENTMSG) linking $(notdir $@)
+	$(SILENTCMD)$(LD) $(LDFLAGS) $(OFILES) $(LIBPATHS) $(LIBS) -o $@
+	$(SILENTCMD)$(NM) -CSn $@ > $(notdir $*.lst)
+
+romfs/gfx/%.t3x build/%.h: %.t3s
+#  recipe to execute (from 'Makefile', line 236):
+	@echo $(notdir $<)
+	$(DEVKITPRO)/tools/bin/tex3ds -i $< -H $(BUILD)/$*.h -d $(DEPSDIR)/$*.d -o $(GFXBUILD)/$*.t3x
+
+# 22 implicit rules, 0 (0.0%) terminal.
+# Files
+
+# Not a target:
+romfs/gfx/sprites.t3x:
+#  Implicit rule search has not been done.
+ 
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+/opt/devkitpro/devkitARM/base_tools:
+#  Implicit rule search has been done.
+#  Last modified 2020-07-28 04:27:14
+#  File has been updated.
+#  Successfully updated.
+
+andsend:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 223):
+	@make all
+	@3dslink -a $(IP) $(TARGET).3dsx
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-09 21:56:40.6976627
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+build/sprites.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+clean:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 211):
+	@echo clean ...
+	@rm -fr $(BUILD) $(TARGET).elf $(TARGET).3dsx $(TARGET).cia $(TARGET).smdh app/*.bin 
+	@rm -fr $(OUTDIR)
+
+# Not a target:
+/opt/devkitpro/devkitARM/base_rules:
+#  Implicit rule search has been done.
+#  Last modified 2020-07-28 04:27:14
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+/opt/devkitpro/devkitARM/3ds_rules:
+#  Implicit rule search has been done.
+#  Last modified 2020-07-28 04:27:14
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+/home/Tobi/BCSTM-Player/build:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+cia: build
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 227):
+	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile cia
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+all: build romfs/gfx /home/Tobi/BCSTM-Player/build romfs/gfx/sprites.t3x build/sprites.h
+#  Phony target (prerequisite of .PHONY).
+#  Command line target.
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/3=0%
+#  recipe to execute (from 'Makefile', line 207):
+	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
+
+run:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 220):
+	@flatpak run org.citra_emu.citra $(TARGET).3dsx
+
+build:
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: ''
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := build
+# automatic
+# * := 
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/13=8%
+#  recipe to execute (from 'Makefile', line 241):
+	@[ -d $@ ] || mkdir -p $@
+
+# Not a target:
+romfs/gfx:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+send:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 217):
+	@3dslink -a $(IP) $(TARGET).3dsx
+
+3dsx: build
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 231):
+	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile 3dsx
+
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+.PHONY: all clean
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# files hash-table stats:
+# Load=19/1024=2%, Rehash=0, Collisions=1/58=2%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+# General ('VPATH' variable) search path:
+# /home/Tobi/BCSTM-Player/RenderD7:/home/Tobi/BCSTM-Player/RenderD7/internal:/home/Tobi/BCSTM-Player/BCSTM:/home/Tobi/BCSTM-Player/RenderD7/external:/home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/include:/home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/include/TweenEngine:/home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/source:/home/Tobi/BCSTM-Player/D7-Menu-Core:/home/Tobi/BCSTM-Player/source:/home/Tobi/BCSTM-Player/gfx:/home/Tobi/BCSTM-Player/data
+ 
+
+# strcache buffers: 1 (0) / strings = 106 / storage = 1576 B / avg = 14 B
+# current buf: size = 8162 B / used = 1576 B / count = 106 / avg = 14 B
+
+# strcache performance: lookups = 174 / hit rate = 39%
+# hash-table stats:
+# Load=106/8192=1%, Rehash=0, Collisions=5/174=3%
+# Finished Make data base on Mon May  9 21:56:44 2022
+
+ 
