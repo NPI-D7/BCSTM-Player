@@ -1,17 +1,17 @@
 make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # GNU Make 4.3
 # Built for x86_64-pc-msys
- 
 # Copyright (C) 1988-2020 Free Software Foundation, Inc.
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
  
 
-# Make data base, printed on Mon May  9 21:56:44 2022
+# Make data base, printed on Thu May 12 21:41:44 2022
 
 # Variables
 
+ 
 # makefile (from 'Makefile', line 39)
 MAKEROM = C:/devkitpro/tools/bin/makerom.exe
 # environment
@@ -21,7 +21,6 @@ PORTLIBS_PATH := /opt/devkitpro/portlibs
 # makefile (from '/opt/devkitpro/devkitARM/base_tools', line 23)
 AS := arm-none-eabi-as
 # makefile (from 'Makefile', line 120)
- 
 OUTPUT := /home/Tobi/BCSTM-Player/BCSTM-Player
 # environment
 LC_ALL = C
@@ -32,15 +31,15 @@ ROMFS_T3XFILES :=  romfs/gfx/sprites.t3x
 # environment
 USERPROFILE = C:\Users\Tobi
 # makefile (from 'Makefile', line 169)
-OFILES :=    BCSTM.o Title.o TitleManager.o cache.o smdh.o utils.o Menu.o main.o  
+OFILES :=    log.o renderd7.o sound.o Clock.o Time.o lang.o thread.o BCSTM.o lodepng.o Title.o TitleManager.o cache.o smdh.o utils.o Menu.o main.o fs.o 
 # environment
 LOCALAPPDATA = C:\Users\Tobi\AppData\Local
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-3a0ff899-0bdb-408f-bb8b-2550d81a3a9b-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-845f7ca6-a0d3-4b36-8a49-8a19ddf3d43e-sock
 # makefile (from 'Makefile', line 123)
 VPATH := /home/Tobi/BCSTM-Player/RenderD7 /home/Tobi/BCSTM-Player/RenderD7/internal /home/Tobi/BCSTM-Player/BCSTM /home/Tobi/BCSTM-Player/RenderD7/external /home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/include/ /home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/include/TweenEngine /home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/source /home/Tobi/BCSTM-Player/D7-Menu-Core /home/Tobi/BCSTM-Player/source /home/Tobi/BCSTM-Player/gfx /home/Tobi/BCSTM-Player/data
 # makefile (from 'Makefile', line 129)
-CFILES := $(subst ,,        )
+CFILES :=    fs.c     
 # environment
 VSCODE_CWD = C:\Users\Tobi\AppData\Local\Programs\Microsoft VS Code
 # makefile (from 'Makefile', line 40)
@@ -62,9 +61,9 @@ OFILES_BIN := $(subst ,,  )
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_6868_QPKSDSLDFNHTWWUL
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_4960_KOLQCYMXZVDBCIPN
 # makefile (from 'Makefile', line 130)
-CPPFILES :=   BCSTM.cpp     Title.cpp TitleManager.cpp cache.cpp smdh.cpp utils.cpp Menu.cpp main.cpp
+CPPFILES := log.cpp renderd7.cpp sound.cpp Clock.cpp Time.cpp lang.cpp thread.cpp BCSTM.cpp lodepng.cpp    Title.cpp TitleManager.cpp cache.cpp smdh.cpp utils.cpp Menu.cpp main.cpp
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
@@ -130,7 +129,7 @@ ASFLAGS := -g -march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 6868
+VSCODE_PID = 4960
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # makefile (from '/opt/devkitpro/devkitARM/base_tools', line 28)
@@ -143,6 +142,7 @@ HFILES := $(subst ,,  )
 APP_AUTHOR := Tobi-D7
 # makefile (from 'Makefile', line 73)
 INCLUDES := RenderD7 RenderD7/internal BCSTM RenderD7/external RenderD7/external/tween-engine/include/ RenderD7/external/tween-engine/include/TweenEngine RenderD7/external/tween-engine/source D7-Menu-Core source 
+ 
 # automatic
 *F = $(notdir $*)
 # automatic
@@ -168,7 +168,7 @@ HOMEPATH = \Users\Tobi
 # default
 MAKECMDGOALS := all
 # makefile (from 'Makefile', line 164)
-OFILES_SOURCES := BCSTM.o Title.o TitleManager.o cache.o smdh.o utils.o Menu.o main.o  
+OFILES_SOURCES := log.o renderd7.o sound.o Clock.o Time.o lang.o thread.o BCSTM.o lodepng.o Title.o TitleManager.o cache.o smdh.o utils.o Menu.o main.o fs.o 
 # environment
 DRIVERDATA = C:\Windows\System32\Drivers\DriverData
 # environment
@@ -207,6 +207,7 @@ PREFIX := arm-none-eabi-
 LIBDIRS := /opt/devkitpro/portlibs/3ds /opt/devkitpro/libctru /home/Tobi/BCSTM-PlayerRenderD7/external/tween-engine/
 # environment
 LOGONSERVER = \\PC
+ 
 # environment
 VSCODE_LOG_NATIVE = false
 # environment
@@ -263,7 +264,6 @@ GFXBUILD := romfs/gfx
 LDFLAGS = -specs=3dsx.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)
 # environment
 USERDOMAIN_ROAMINGPROFILE = PC
- 
 # environment
 NUMBER_OF_PROCESSORS = 12
 # makefile (from '/opt/devkitpro/devkitARM/base_tools', line 30)
@@ -277,7 +277,7 @@ BNR_AUDIO := app/BannerAudio.wav
 # environment
 APPDATA = C:\Users\Tobi\AppData\Roaming
 # makefile (from 'Makefile', line 97)
-CFLAGS := -g -Wall -Wno-psabi -O2 -mword-relocations -DV_STRING=\"1d444c4\" -fomit-frame-pointer -ffunction-sections -march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft  -D__3DS__ -D_GNU_SOURCE=1
+CFLAGS := -g -Wall -Wno-psabi -O2 -mword-relocations -DV_STRING=\"2a07828\" -fomit-frame-pointer -ffunction-sections -march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft  -D__3DS__ -D_GNU_SOURCE=1
 # environment
 HOMEDRIVE = C:
 # makefile (from 'Makefile', line 70)
@@ -327,9 +327,9 @@ LD := arm-none-eabi-g++
 # environment
 SESSIONNAME = Console
 # makefile (from 'Makefile', line 52)
-GIT_VER := 1d444c4
+GIT_VER := 2a07828
 # makefile (from 'Makefile', line 99)
-CXXFLAGS := -g -Wall -Wno-psabi -O2 -mword-relocations -DV_STRING=\"1d444c4\" -fomit-frame-pointer -ffunction-sections -march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft  -D__3DS__ -D_GNU_SOURCE=1 -fno-rtti -fno-exceptions -std=gnu++20 
+CXXFLAGS := -g -Wall -Wno-psabi -O2 -mword-relocations -DV_STRING=\"2a07828\" -fomit-frame-pointer -ffunction-sections -march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft  -D__3DS__ -D_GNU_SOURCE=1 -fno-rtti -fno-exceptions -std=gnu++20 
 # makefile (from '/opt/devkitpro/devkitARM/base_tools', line 26)
 STRIP := arm-none-eabi-strip
 # default
@@ -342,6 +342,7 @@ CXX := arm-none-eabi-g++
 CC := arm-none-eabi-gcc
 # makefile (from '/opt/devkitpro/devkitARM/base_tools', line 25)
 OBJCOPY := arm-none-eabi-objcopy
+ 
 # makefile (from 'Makefile', line 159)
 T3XHFILES :=  build/sprites.h
 # makefile (from 'Makefile', line 71)
@@ -357,40 +358,41 @@ _3DSXDEPS := /home/Tobi/BCSTM-Player/BCSTM-Player.smdh
 # environment
 PROCESSOR_IDENTIFIER = AMD64 Family 25 Model 33 Stepping 0, AuthenticAMD
 # variable set hash-table stats:
+ 
 # Load=171/1024=17%, Rehash=0, Collisions=35/378=9%
 
 # Pattern-specific Variable Values
 
 # No pattern-specific variable values.
+ 
 
 # Directories
 
 # RenderD7/external/tween-engine/include/: could not be stat'd.
-# /home/Tobi/BCSTM-Player/RenderD7 (device 1820687712, inode 562949953526354): 2 files, no impossibilities.
-# D7-Menu-Core (device 1820687712, inode 562949953526340): 12 files, no impossibilities.
+# /home/Tobi/BCSTM-Player/RenderD7 (device 1820687712, inode 562949953526354): 18 files, no impossibilities.
+# D7-Menu-Core (device 1820687712, inode 1407374883588695): 15 files, no impossibilities.
 # /home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/include: could not be stat'd.
- 
-# RenderD7/external: could not be stat'd.
-# /home/Tobi/BCSTM-Player/RenderD7/internal: could not be stat'd.
-# RenderD7 (device 1820687712, inode 562949953526354): 2 files, no impossibilities.
+# RenderD7/external (device 1820687712, inode 2533274790614253): 9 files, no impossibilities.
+# /home/Tobi/BCSTM-Player/RenderD7/internal (device 1820687712, inode 2251799813910619): 15 files, no impossibilities.
+# RenderD7 (device 1820687712, inode 562949953526354): 18 files, no impossibilities.
 # BCSTM (device 1820687712, inode 562949953526335): 5 files, no impossibilities.
 # /home/Tobi/BCSTM-Player/source (device 1820687712, inode 562949953526391): 5 files, no impossibilities.
 # /home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/source: could not be stat'd.
-# /home/Tobi/BCSTM-Player/D7-Menu-Core (device 1820687712, inode 562949953526340): 12 files, no impossibilities.
+# /home/Tobi/BCSTM-Player/D7-Menu-Core (device 1820687712, inode 1407374883588695): 15 files, no impossibilities.
 # /home/Tobi/BCSTM-Player/gfx (device 1820687712, inode 562949953526364): 4 files, no impossibilities.
 # . (device 1820687712, inode 1688849860368724): 21 files, no impossibilities.
 # RenderD7/external/tween-engine/include/TweenEngine: could not be stat'd.
 # source (device 1820687712, inode 562949953526391): 5 files, no impossibilities.
 # data: could not be stat'd.
 # gfx (device 1820687712, inode 562949953526364): 4 files, no impossibilities.
-# /home/Tobi/BCSTM-Player/RenderD7/external: could not be stat'd.
+# /home/Tobi/BCSTM-Player/RenderD7/external (device 1820687712, inode 2533274790614253): 9 files, no impossibilities.
 # RenderD7/external/tween-engine/source: could not be stat'd.
 # /home/Tobi/BCSTM-Player/BCSTM (device 1820687712, inode 562949953526335): 5 files, no impossibilities.
 # /home/Tobi/BCSTM-Player/data: could not be stat'd.
-# RenderD7/internal: could not be stat'd.
+# RenderD7/internal (device 1820687712, inode 2251799813910619): 15 files, no impossibilities.
 # /home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/include/TweenEngine: could not be stat'd.
 
-# 77 files, no impossibilities in 23 directories.
+# 163 files, no impossibilities in 23 directories.
 
 # Implicit Rules
 
@@ -496,6 +498,7 @@ PROCESSOR_IDENTIFIER = AMD64 Family 25 Model 33 Stepping 0, AuthenticAMD
 	$(SILENTMSG) built ... $(notdir $@)
 
 %.elf:
+ 
 #  recipe to execute (from '/opt/devkitpro/devkitARM/3ds_rules', line 41):
 	$(SILENTMSG) linking $(notdir $@)
 	$(SILENTCMD)$(LD) $(LDFLAGS) $(OFILES) $(LIBPATHS) $(LIBS) -o $@
@@ -512,7 +515,6 @@ romfs/gfx/%.t3x build/%.h: %.t3s
 # Not a target:
 romfs/gfx/sprites.t3x:
 #  Implicit rule search has not been done.
- 
 #  Modification time never checked.
 #  File has not been updated.
 
@@ -671,14 +673,13 @@ send:
 
 # General ('VPATH' variable) search path:
 # /home/Tobi/BCSTM-Player/RenderD7:/home/Tobi/BCSTM-Player/RenderD7/internal:/home/Tobi/BCSTM-Player/BCSTM:/home/Tobi/BCSTM-Player/RenderD7/external:/home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/include:/home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/include/TweenEngine:/home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/source:/home/Tobi/BCSTM-Player/D7-Menu-Core:/home/Tobi/BCSTM-Player/source:/home/Tobi/BCSTM-Player/gfx:/home/Tobi/BCSTM-Player/data
- 
 
-# strcache buffers: 1 (0) / strings = 106 / storage = 1576 B / avg = 14 B
-# current buf: size = 8162 B / used = 1576 B / count = 106 / avg = 14 B
+# strcache buffers: 1 (0) / strings = 138 / storage = 1896 B / avg = 13 B
+# current buf: size = 8162 B / used = 1896 B / count = 138 / avg = 13 B
 
-# strcache performance: lookups = 174 / hit rate = 39%
+# strcache performance: lookups = 217 / hit rate = 36%
 # hash-table stats:
-# Load=106/8192=1%, Rehash=0, Collisions=5/174=3%
-# Finished Make data base on Mon May  9 21:56:44 2022
+# Load=138/8192=2%, Rehash=0, Collisions=5/217=2%
+# Finished Make data base on Thu May 12 21:41:44 2022
 
  

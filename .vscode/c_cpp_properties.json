@@ -11,9 +11,9 @@
                 "${workspaceFolder}/RenderD7/**"
             ],
             "intelliSenseMode": "gcc-arm",
-            
             "cStandard": "c17",
-            "cppStandard": "c++20"
+            "cppStandard": "c++20",
+            "configurationProvider": "ms-vscode.makefile-tools"
         }
     ],
     "version": 4

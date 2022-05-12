@@ -82,6 +82,10 @@ void MMM::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
     {
         RenderD7::ExitApp();
     }
+    if ((hDown & KEY_A && Selection == 6))
+    {
+        RenderD7::LoadSettings();
+    }
     if (hDown & KEY_START)
     {
         RenderD7::ExitApp();
@@ -101,6 +105,10 @@ void MMM::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
     if (RenderD7::touchTObj(touch, buttons[3]))
     {
         RenderD7::ExitApp();
+    }
+    if (RenderD7::touchTObj(touch, buttons[6]))
+    {
+        RenderD7::LoadSettings();
     }
     if(hDown & KEY_Y)
     {
@@ -357,7 +365,7 @@ void Titles::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
         romfsUnmount("h");
         romfsMountFromTitle(TitleManager::sdtitles[selection]->ID(), TitleManager::sdtitles[selection]->mediatype(), "h");
     }
-    if (hDown & KEY_DOWN && selection < maxtitles)
+    if (hDown & KEY_DOWN && selection < (int)TitleManager::sdtitles.size())
     {
         selection++;
     }
