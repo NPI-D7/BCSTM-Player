@@ -322,8 +322,8 @@ Titles::Titles()
 {
     TitleManager::ScanSD("sdmc:/BCSTM-Player/");
     maxtitles = (int)TitleManager::sdtitles.size();
-    TitleManager::ScanNand("sdmc:/BCSTM-Player/");
-    abc = (int)TitleManager::nandtitles.size();
+    /*TitleManager::ScanNand("sdmc:/BCSTM-Player/");
+    abc = (int)TitleManager::nandtitles.size();*/
 }
 
 void Titles::Draw(void) const
