@@ -7,10 +7,12 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # There is NO WARRANTY, to the extent permitted by law.
  
 
-# Make data base, printed on Sat May 14 23:52:50 2022
+# Make data base, printed on Tue May 17 00:49:57 2022
 
 # Variables
 
+# environment
+FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
 # makefile (from '/home/Tobi/BCSTM-Player/Makefile', line 39)
 MAKEROM = C:/devkitpro/tools/bin/makerom.exe
 # environment
@@ -32,14 +34,14 @@ USERPROFILE = C:\Users\Tobi
 # environment
 OFILES =    log.o renderd7.o sound.o Clock.o Time.o lang.o thread.o BCSTM.o lodepng.o Title.o TitleManager.o cache.o smdh.o utils.o Menu.o main.o fs.o 
 # environment
+ 
 LOCALAPPDATA = C:\Users\Tobi\AppData\Local
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-094c7226-0358-4c52-8c1a-b28c53c2b757-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-0aa224e3-ce25-44d2-b4e9-e2f5c66da008-sock
 # environment
 VPATH = /home/Tobi/BCSTM-Player/RenderD7 /home/Tobi/BCSTM-Player/RenderD7/internal /home/Tobi/BCSTM-Player/BCSTM /home/Tobi/BCSTM-Player/RenderD7/external /home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/include/ /home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/include/TweenEngine /home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/source /home/Tobi/BCSTM-Player/D7-Menu-Core /home/Tobi/BCSTM-Player/source /home/Tobi/BCSTM-Player/gfx /home/Tobi/BCSTM-Player/data
 # environment
 VSCODE_CWD = C:\Users\Tobi\AppData\Local\Programs\Microsoft VS Code
- 
 # makefile (from '/home/Tobi/BCSTM-Player/Makefile', line 40)
 BANNERTOOL = C:/devkitpro/tools/bin/bannertool.exe
 # environment
@@ -59,7 +61,9 @@ OFILES_BIN = $(subst ,,  )
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_4612_EVGTYQNUVXQTBQUP
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_12904_AMYMVPYCVDJFWZTJ
+# environment
+FPS_BROWSER_USER_PROFILE_STRING = Default
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
@@ -134,10 +138,11 @@ ASFLAGS := -g -march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 4612
+VSCODE_PID = 12904
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # makefile (from '/opt/devkitpro/devkitARM/base_tools', line 28)
+ 
 RANLIB := arm-none-eabi-gcc-ranlib
 # environment
 DEVKITPPC = /opt/devkitpro/devkitPPC
@@ -184,8 +189,7 @@ LIBPATHS = -L/opt/devkitpro/portlibs/3ds/lib -L/opt/devkitpro/libctru/lib -L/hom
 # default
 MAKE = $(MAKE_COMMAND)
 # makefile (from '/opt/devkitpro/devkitARM/3ds_rules', line 9)
- 
-PATH := /opt/devkitpro/portlibs/3ds/bin:/opt/devkitpro/tools/bin:/opt/devkitpro/devkitARM/bin:/opt/devkitpro/portlibs/3ds/bin:/opt/devkitpro/tools/bin:/opt/devkitpro/devkitARM/bin:/opt/devkitpro/msys2/usr/bin:/c/Windows/system32:/c/Windows:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0:/c/Windows/System32/OpenSSH:/c/Program Files/Git/cmd:/opt/devkitpro/tools/bin:/home/Tobi/AppData/Local/Programs/Python/Python310/Scripts:/home/Tobi/AppData/Local/Programs/Python/Python310:/home/Tobi/AppData/Local/Microsoft/WindowsApps:/home/Tobi/AppData/Local/Programs/Microsoft VS Code/bin
+PATH := /opt/devkitpro/portlibs/3ds/bin:/opt/devkitpro/tools/bin:/opt/devkitpro/devkitARM/bin:/opt/devkitpro/portlibs/3ds/bin:/opt/devkitpro/tools/bin:/opt/devkitpro/devkitARM/bin:/opt/devkitpro/msys2/usr/bin:/c/Windows/system32:/c/Windows:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0:/c/Windows/System32/OpenSSH:/c/Program Files/Git/cmd:/opt/devkitpro/tools/bin:/c/Program Files/CMake/bin:/c/Program Files/Meson:/home/Tobi/AppData/Local/Programs/Python/Python310/Scripts:/home/Tobi/AppData/Local/Programs/Python/Python310:/home/Tobi/AppData/Local/Microsoft/WindowsApps:/home/Tobi/AppData/Local/Programs/Microsoft VS Code/bin:/home/Tobi/AppData/Local/GitHubDesktop/bin
 # environment
 COMPUTERNAME = PC
 # default
@@ -228,6 +232,7 @@ PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
 +F = $(notdir $+)
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+ 
 # environment
 USERDOMAIN = PC
 # 'override' directive
@@ -273,8 +278,7 @@ BNR_AUDIO := app/BannerAudio.wav
 # environment
 APPDATA = C:\Users\Tobi\AppData\Roaming
 # makefile (from '/home/Tobi/BCSTM-Player/Makefile', line 97)
- 
-CFLAGS := -g -Wall -Wno-psabi -O2 -mword-relocations -DV_STRING=\"4dbbcbd\" -fomit-frame-pointer -ffunction-sections -march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft -I/home/Tobi/BCSTM-Player/RenderD7 -I/home/Tobi/BCSTM-Player/RenderD7/internal -I/home/Tobi/BCSTM-Player/BCSTM -I/home/Tobi/BCSTM-Player/RenderD7/external -I/home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/include/ -I/home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/include/TweenEngine -I/home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/source -I/home/Tobi/BCSTM-Player/D7-Menu-Core -I/home/Tobi/BCSTM-Player/source -I/opt/devkitpro/portlibs/3ds/include -I/opt/devkitpro/libctru/include -I/home/Tobi/BCSTM-PlayerRenderD7/external/tween-engine//include -I/home/Tobi/BCSTM-Player/build -D__3DS__ -D_GNU_SOURCE=1
+CFLAGS := -g -Wall -Wno-psabi -O2 -mword-relocations -DV_STRING=\"ddef7e0\" -fomit-frame-pointer -ffunction-sections -march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft -I/home/Tobi/BCSTM-Player/RenderD7 -I/home/Tobi/BCSTM-Player/RenderD7/internal -I/home/Tobi/BCSTM-Player/BCSTM -I/home/Tobi/BCSTM-Player/RenderD7/external -I/home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/include/ -I/home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/include/TweenEngine -I/home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/source -I/home/Tobi/BCSTM-Player/D7-Menu-Core -I/home/Tobi/BCSTM-Player/source -I/opt/devkitpro/portlibs/3ds/include -I/opt/devkitpro/libctru/include -I/home/Tobi/BCSTM-PlayerRenderD7/external/tween-engine//include -I/home/Tobi/BCSTM-Player/build -D__3DS__ -D_GNU_SOURCE=1
 # environment
 HOMEDRIVE = C:
 # makefile (from '/home/Tobi/BCSTM-Player/Makefile', line 70)
@@ -322,9 +326,10 @@ TARGET := BCSTM-Player
 # environment
 SESSIONNAME = Console
 # makefile (from '/home/Tobi/BCSTM-Player/Makefile', line 52)
-GIT_VER := 4dbbcbd
+GIT_VER := ddef7e0
 # makefile (from '/home/Tobi/BCSTM-Player/Makefile', line 99)
-CXXFLAGS := -g -Wall -Wno-psabi -O2 -mword-relocations -DV_STRING=\"4dbbcbd\" -fomit-frame-pointer -ffunction-sections -march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft -I/home/Tobi/BCSTM-Player/RenderD7 -I/home/Tobi/BCSTM-Player/RenderD7/internal -I/home/Tobi/BCSTM-Player/BCSTM -I/home/Tobi/BCSTM-Player/RenderD7/external -I/home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/include/ -I/home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/include/TweenEngine -I/home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/source -I/home/Tobi/BCSTM-Player/D7-Menu-Core -I/home/Tobi/BCSTM-Player/source -I/opt/devkitpro/portlibs/3ds/include -I/opt/devkitpro/libctru/include -I/home/Tobi/BCSTM-PlayerRenderD7/external/tween-engine//include -I/home/Tobi/BCSTM-Player/build -D__3DS__ -D_GNU_SOURCE=1 -fno-rtti -fno-exceptions -std=gnu++20 
+ 
+CXXFLAGS := -g -Wall -Wno-psabi -O2 -mword-relocations -DV_STRING=\"ddef7e0\" -fomit-frame-pointer -ffunction-sections -march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft -I/home/Tobi/BCSTM-Player/RenderD7 -I/home/Tobi/BCSTM-Player/RenderD7/internal -I/home/Tobi/BCSTM-Player/BCSTM -I/home/Tobi/BCSTM-Player/RenderD7/external -I/home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/include/ -I/home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/include/TweenEngine -I/home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/source -I/home/Tobi/BCSTM-Player/D7-Menu-Core -I/home/Tobi/BCSTM-Player/source -I/opt/devkitpro/portlibs/3ds/include -I/opt/devkitpro/libctru/include -I/home/Tobi/BCSTM-PlayerRenderD7/external/tween-engine//include -I/home/Tobi/BCSTM-Player/build -D__3DS__ -D_GNU_SOURCE=1 -fno-rtti -fno-exceptions -std=gnu++20 
 # makefile (from '/opt/devkitpro/devkitARM/base_tools', line 26)
 STRIP := arm-none-eabi-strip
 # default
@@ -352,7 +357,7 @@ _3DSXDEPS = /home/Tobi/BCSTM-Player/BCSTM-Player.smdh
 # environment
 PROCESSOR_IDENTIFIER = AMD64 Family 25 Model 33 Stepping 0, AuthenticAMD
 # variable set hash-table stats:
-# Load=164/1024=16%, Rehash=0, Collisions=22/341=6%
+# Load=166/1024=16%, Rehash=0, Collisions=25/343=7%
 
 # Pattern-specific Variable Values
 
@@ -372,7 +377,6 @@ PROCESSOR_IDENTIFIER = AMD64 Family 25 Model 33 Stepping 0, AuthenticAMD
 # /home/Tobi/BCSTM-Player/RenderD7/internal (device 1820687712, inode 2251799813910619): 15 files, no impossibilities.
 # /home/Tobi/BCSTM-Player/app (device 1820687712, inode 562949953526355): 8 files, no impossibilities so far.
 # C:/devkitPro/libctru/include/3ds/ndsp (device 1820687712, inode 281474976860712): 4 files, 2 impossibilities.
- 
 # C:/devkitPro/libctru/include/3ds/util (device 1820687712, inode 281474976860769): 5 files, 2 impossibilities.
 # C:/devkitPro/libctru/include/3ds/applets (device 1820687712, inode 281474976860689): 5 files, 3 impossibilities.
 # /home/Tobi/BCSTM-Player (device 1820687712, inode 1688849860368724): No files, no impossibilities so far.
@@ -397,6 +401,7 @@ PROCESSOR_IDENTIFIER = AMD64 Family 25 Model 33 Stepping 0, AuthenticAMD
 # Implicit Rules
 
 %.a:
+ 
 #  recipe to execute (from '/opt/devkitpro/devkitARM/base_rules', line 12):
 	$(SILENTMSG) $(notdir $@)
 	@rm -f $@
@@ -473,7 +478,6 @@ PROCESSOR_IDENTIFIER = AMD64 Family 25 Model 33 Stepping 0, AuthenticAMD
 	$(SILENTCMD)$(CC) -MMD -MP -MF $(DEPSDIR)/$*.d $(CFLAGS) -c $< -o $@ $(ERROR_FILTER)
 
 %.o: %.m
- 
 #  recipe to execute (from '/opt/devkitpro/devkitARM/base_rules', line 89):
 	$(SILENTMSG) $(notdir $<)
 	$(SILENTCMD)$(CC) -MMD -MP -MF $(DEPSDIR)/$*.d $(OBJCFLAGS) -c $< -o $@ $(ERROR_FILTER)
@@ -522,6 +526,7 @@ PROCESSOR_IDENTIFIER = AMD64 Family 25 Model 33 Stepping 0, AuthenticAMD
 %.shbin.o %_shbin.h: %.v.pica
 #  recipe to execute (from '/home/Tobi/BCSTM-Player/Makefile', line 294):
 	@echo $(notdir $<)
+ 
 	@$(call shader-as,$<)
 
 %.shbin.o %_shbin.h: %.shlist
@@ -558,7 +563,7 @@ C:/devkitPro/libctru/include/3ds/services/gsplcd.h:
 /home/Tobi/BCSTM-Player/BCSTM-Player.elf: log.o renderd7.o sound.o Clock.o Time.o lang.o thread.o BCSTM.o lodepng.o Title.o TitleManager.o cache.o smdh.o utils.o Menu.o main.o fs.o
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: '/home/Tobi/BCSTM-Player/BCSTM-Player'
-#  Last modified 2022-05-14 02:25:41.9520986
+#  Last modified 2022-05-14 23:59:09.0985058
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from '/opt/devkitpro/devkitARM/3ds_rules', line 41):
@@ -637,6 +642,7 @@ C:/Users/Tobi/BCSTM-Player/source/Menu.hpp:
 C:/devkitPro/libctru/include/3ds/services/pmdbg.h:
 #  Implicit rule search has been done.
 #  Last modified 2022-01-27 00:17:39
+ 
 #  File has been updated.
 #  Successfully updated.
 
@@ -650,7 +656,6 @@ C:/devkitPro/libctru/include/3ds/font.h:
 /home/Tobi/BCSTM-Player/build/Menu.d:
 #  Implicit rule search has been done.
 #  Last modified 2022-05-14 02:12:00.9077133
- 
 #  File has been updated.
 #  Successfully updated.
 
@@ -725,9 +730,10 @@ C:/devkitPro/libctru/include/3ds/ndsp/ndsp.h:
 #  Successfully updated.
 
 # Not a target:
+ 
 /home/Tobi/BCSTM-Player/build/renderd7.d:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-14 02:25:40.8558516
+#  Last modified 2022-05-14 23:54:08.3311568
 #  File has been updated.
 #  Successfully updated.
 
@@ -747,7 +753,7 @@ C:/Users/Tobi/BCSTM-Player/BCSTM/BCSTM.hpp:
 /home/Tobi/BCSTM-Player/BCSTM-Player.3dsx: /home/Tobi/BCSTM-Player/BCSTM-Player.elf
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: '/home/Tobi/BCSTM-Player/BCSTM-Player'
-#  Last modified 2022-05-14 02:25:45.0045106
+#  Last modified 2022-05-14 23:59:12.1600184
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from '/opt/devkitpro/devkitARM/3ds_rules', line 36):
@@ -781,7 +787,6 @@ C:/Users/Tobi/BCSTM-Player/D7-Menu-Core/smdh.cpp:
 #  Successfully updated.
 
 C:/devkitPro/libctru/include/c3d/fog.h:
- 
 #  Implicit rule search has been done.
 #  Last modified 2022-01-29 00:02:14
 #  File has been updated.
@@ -808,6 +813,7 @@ lodepng.o: /home/Tobi/BCSTM-Player/RenderD7/external/lodepng.cpp C:/Users/Tobi/B
 	$(SILENTCMD)$(CXX) -MMD -MP -MF $(DEPSDIR)/$*.d $(CXXFLAGS) -c $< -o $@ $(ERROR_FILTER)
 
 # Not a target:
+ 
 C:/Users/Tobi/BCSTM-Player/D7-Menu-Core/TitleManager.cpp:
 #  Implicit rule search has been done.
 #  Last modified 2022-05-09 22:06:01.5220252
@@ -882,7 +888,7 @@ C:/devkitPro/libctru/include/3ds/services/uds.h:
 # Not a target:
 /home/Tobi/BCSTM-Player/build/cache.d:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-14 02:11:52.6915097
+#  Last modified 2022-05-14 23:59:08.4522856
 #  File has been updated.
 #  Successfully updated.
 
@@ -904,6 +910,7 @@ C:/devkitPro/libctru/include/c3d/framebuffer.h:
 #  Successfully updated.
 
 C:/devkitPro/libctru/include/3ds/gpu/shbin.h:
+ 
 #  Implicit rule search has been done.
 #  Last modified 2022-01-27 00:17:39
 #  File has been updated.
@@ -917,7 +924,6 @@ C:/devkitPro/libctru/include/3ds/gpu/shbin.h:
 #  Successfully updated.
 
 # Not a target:
- 
 C:/Users/Tobi/BCSTM-Player/RenderD7/external/fs.c:
 #  Implicit rule search has been done.
 #  Last modified 2022-05-09 21:57:55.4578502
@@ -957,7 +963,7 @@ C:/devkitPro/libctru/include/3ds/applets/miiselector.h:
 
 /home/Tobi/BCSTM-Player/BCSTM-Player.cia: /home/Tobi/BCSTM-Player/BCSTM-Player.elf /home/Tobi/BCSTM-Player/BCSTM-Player.smdh
 #  Implicit rule search has not been done.
-#  Last modified 2022-05-14 02:25:44.9855067
+#  Last modified 2022-05-14 23:59:12.1340593
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from '/home/Tobi/BCSTM-Player/Makefile', line 254):
@@ -981,7 +987,7 @@ C:/devkitPro/libctru/include/3ds/services/y2r.h:
 # Not a target:
 C:/Users/Tobi/BCSTM-Player/D7-Menu-Core/cache.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-09 22:13:07.120207
+#  Last modified 2022-05-14 23:58:59.4908405
 #  File has been updated.
 #  Successfully updated.
 
@@ -1068,6 +1074,7 @@ C:/devkitPro/libctru/include/c3d/base.h:
 
 C:/devkitPro/libctru/include/3ds.h:
 #  Implicit rule search has been done.
+ 
 #  Last modified 2022-01-27 00:17:39
 #  File has been updated.
 #  Successfully updated.
@@ -1136,7 +1143,6 @@ C:/devkitPro/libctru/include/3ds/services/frd.h:
 #  Last modified 2022-01-27 00:17:39
 #  File has been updated.
 #  Successfully updated.
- 
 
 C:/devkitPro/libctru/include/3ds/services/apt.h:
 #  Implicit rule search has been done.
@@ -1182,6 +1188,7 @@ C:/devkitPro/libctru/include/3ds/services/pxidev.h:
 
 C:/devkitPro/libctru/include/3ds/services/ampxi.h:
 #  Implicit rule search has been done.
+ 
 #  Last modified 2022-01-27 00:17:39
 #  File has been updated.
 #  Successfully updated.
@@ -1268,7 +1275,6 @@ C:/devkitPro/libctru/include/3ds/services/mic.h:
 #  Implicit rule search has been done.
 #  Last modified 2022-01-27 00:17:39
 #  File has been updated.
- 
 #  Successfully updated.
 
 Menu.o: /home/Tobi/BCSTM-Player/source/Menu.cpp C:/Users/Tobi/BCSTM-Player/source/Menu.cpp C:/Users/Tobi/BCSTM-Player/source/Menu.hpp C:/Users/Tobi/BCSTM-Player/RenderD7/renderd7.hpp C:/devkitPro/libctru/include/3ds.h C:/devkitPro/libctru/include/3ds/types.h C:/devkitPro/libctru/include/3ds/result.h C:/devkitPro/libctru/include/3ds/ipc.h C:/devkitPro/libctru/include/3ds/svc.h C:/devkitPro/libctru/include/3ds/exheader.h C:/devkitPro/libctru/include/3ds/srv.h C:/devkitPro/libctru/include/3ds/errf.h C:/devkitPro/libctru/include/3ds/os.h C:/devkitPro/libctru/include/3ds/synchronization.h C:/devkitPro/libctru/include/3ds/thread.h C:/devkitPro/libctru/include/3ds/gfx.h C:/devkitPro/libctru/include/3ds/services/gspgpu.h C:/devkitPro/libctru/include/3ds/console.h C:/devkitPro/libctru/include/3ds/env.h C:/devkitPro/libctru/include/3ds/util/decompress.h C:/devkitPro/libctru/include/3ds/util/utf.h C:/devkitPro/libctru/include/3ds/allocator/linear.h C:/devkitPro/libctru/include/3ds/allocator/mappable.h C:/devkitPro/libctru/include/3ds/allocator/vram.h C:/devkitPro/libctru/include/3ds/services/ac.h C:/devkitPro/libctru/include/3ds/services/am.h C:/devkitPro/libctru/include/3ds/services/fs.h C:/devkitPro/libctru/include/3ds/services/ampxi.h C:/devkitPro/libctru/include/3ds/services/apt.h C:/devkitPro/libctru/include/3ds/services/boss.h C:/devkitPro/libctru/include/3ds/services/cam.h C:/devkitPro/libctru/include/3ds/services/y2r.h C:/devkitPro/libctru/include/3ds/services/cfgnor.h C:/devkitPro/libctru/include/3ds/services/cfgu.h C:/devkitPro/libctru/include/3ds/services/csnd.h C:/devkitPro/libctru/include/3ds/services/dsp.h C:/devkitPro/libctru/include/3ds/services/fspxi.h C:/devkitPro/libctru/include/3ds/services/fsreg.h C:/devkitPro/libctru/include/3ds/services/frd.h C:/devkitPro/libctru/include/3ds/mii.h C:/devkitPro/libctru/include/3ds/services/gsplcd.h C:/devkitPro/libctru/include/3ds/services/hid.h C:/devkitPro/libctru/include/3ds/services/irrst.h C:/devkitPro/libctru/include/3ds/services/sslc.h C:/devkitPro/libctru/include/3ds/services/httpc.h C:/devkitPro/libctru/include/3ds/services/uds.h C:/devkitPro/libctru/include/3ds/services/ndm.h C:/devkitPro/libctru/include/3ds/services/nim.h C:/devkitPro/libctru/include/3ds/services/nwmext.h C:/devkitPro/libctru/include/3ds/services/ir.h C:/devkitPro/libctru/include/3ds/services/ns.h C:/devkitPro/libctru/include/3ds/services/pmapp.h C:/devkitPro/libctru/include/3ds/services/pmdbg.h C:/devkitPro/libctru/include/3ds/services/ps.h C:/devkitPro/libctru/include/3ds/services/ptmu.h C:/devkitPro/libctru/include/3ds/services/ptmsysm.h C:/devkitPro/libctru/include/3ds/services/ptmgets.h C:/devkitPro/libctru/include/3ds/services/ptmsets.h C:/devkitPro/libctru/include/3ds/services/pxidev.h C:/devkitPro/libctru/include/3ds/services/pxipm.h C:/devkitPro/libctru/include/3ds/services/soc.h C:/devkitPro/libctru/include/netinet/in.h C:/devkitPro/libctru/include/sys/socket.h C:/devkitPro/libctru/include/3ds/services/mic.h C:/devkitPro/libctru/include/3ds/services/mvd.h C:/devkitPro/libctru/include/3ds/services/nfc.h C:/devkitPro/libctru/include/3ds/services/news.h C:/devkitPro/libctru/include/3ds/services/qtm.h C:/devkitPro/libctru/include/3ds/services/srvpm.h C:/devkitPro/libctru/include/3ds/services/loader.h C:/devkitPro/libctru/include/3ds/services/mcuhwc.h C:/devkitPro/libctru/include/3ds/gpu/gx.h C:/devkitPro/libctru/include/3ds/gpu/gpu.h C:/devkitPro/libctru/include/3ds/gpu/registers.h C:/devkitPro/libctru/include/3ds/gpu/enums.h C:/devkitPro/libctru/include/3ds/gpu/shbin.h C:/devkitPro/libctru/include/3ds/gpu/shaderProgram.h C:/devkitPro/libctru/include/3ds/ndsp/ndsp.h C:/devkitPro/libctru/include/3ds/ndsp/channel.h C:/devkitPro/libctru/include/3ds/applets/swkbd.h C:/devkitPro/libctru/include/3ds/applets/error.h C:/devkitPro/libctru/include/3ds/applets/miiselector.h C:/devkitPro/libctru/include/3ds/archive.h C:/devkitPro/libctru/include/3ds/romfs.h C:/devkitPro/libctru/include/3ds/font.h C:/devkitPro/libctru/include/3ds/gdbhio_dev.h C:/devkitPro/libctru/include/3ds/3dslink.h C:/devkitPro/libctru/include/citro2d.h C:/devkitPro/libctru/include/citro3d.h C:/devkitPro/libctru/include/c3d/types.h C:/devkitPro/libctru/include/c3d/maths.h C:/devkitPro/libctru/include/c3d/mtxstack.h C:/devkitPro/libctru/include/c3d/uniforms.h C:/devkitPro/libctru/include/c3d/attribs.h C:/devkitPro/libctru/include/c3d/buffers.h C:/devkitPro/libctru/include/c3d/base.h C:/devkitPro/libctru/include/c3d/texenv.h C:/devkitPro/libctru/include/c3d/effect.h C:/devkitPro/libctru/include/c3d/texture.h C:/devkitPro/libctru/include/c3d/proctex.h C:/devkitPro/libctru/include/c3d/light.h C:/devkitPro/libctru/include/c3d/lightlut.h C:/devkitPro/libctru/include/c3d/fog.h C:/devkitPro/libctru/include/c3d/framebuffer.h C:/devkitPro/libctru/include/c3d/renderqueue.h C:/devkitPro/libctru/include/tex3ds.h C:/devkitPro/libctru/include/c2d/base.h C:/devkitPro/libctru/include/c2d/spritesheet.h C:/devkitPro/libctru/include/c2d/sprite.h C:/devkitPro/libctru/include/c2d/text.h C:/devkitPro/libctru/include/c2d/font.h C:/Users/Tobi/BCSTM-Player/RenderD7/external/lodepng.h C:/Users/Tobi/BCSTM-Player/RenderD7/internal/lang.hpp C:/Users/Tobi/BCSTM-Player/RenderD7/external/json.hpp C:/Users/Tobi/BCSTM-Player/RenderD7/internal/parameter.hpp C:/Users/Tobi/BCSTM-Player/RenderD7/internal/thread.hpp C:/Users/Tobi/BCSTM-Player/RenderD7/internal/ini.hpp C:/Users/Tobi/BCSTM-Player/RenderD7/internal/stringtool.hpp C:/Users/Tobi/BCSTM-Player/RenderD7/internal/Clock.hpp C:/Users/Tobi/BCSTM-Player/RenderD7/internal/Time.hpp C:/Users/Tobi/BCSTM-Player/RenderD7/external/fs.h C:/Users/Tobi/BCSTM-Player/BCSTM/BCSTM.hpp C:/devkitPro/libctru/include/arpa/inet.h C:/Users/Tobi/BCSTM-Player/BCSTM/LinearAllocator.hpp C:/Users/Tobi/BCSTM-Player/D7-Menu-Core/TitleManager.hpp C:/Users/Tobi/BCSTM-Player/D7-Menu-Core/title.hpp
@@ -1301,6 +1307,7 @@ C:/devkitPro/libctru/include/3ds/svc.h:
 #  Successfully updated.
 
 C:/devkitPro/libctru/include/3ds/gpu/enums.h:
+ 
 #  Implicit rule search has been done.
 #  Last modified 2022-01-27 00:17:39
 #  File has been updated.
@@ -1374,7 +1381,7 @@ C:/devkitPro/libctru/include/c3d/buffers.h:
 # Not a target:
 /home/Tobi/BCSTM-Player/RenderD7/renderd7.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-14 02:25:31.513322
+#  Last modified 2022-05-14 23:53:54.5556486
 #  File has been updated.
 #  Successfully updated.
 
@@ -1386,7 +1393,6 @@ C:/devkitPro/libctru/include/c3d/buffers.h:
 
 C:/Users/Tobi/BCSTM-Player/D7-Menu-Core/utils.hpp:
 #  Implicit rule search has been done.
- 
 #  Last modified 2022-05-09 21:57:36.1916643
 #  File has been updated.
 #  Successfully updated.
@@ -1431,6 +1437,7 @@ all: /home/Tobi/BCSTM-Player/BCSTM-Player.cia /home/Tobi/BCSTM-Player/BCSTM-Play
 #  File has been updated.
 #  Successfully updated.
 
+ 
 # Not a target:
 /home/Tobi/BCSTM-Player/build/sound.d:
 #  Implicit rule search has been done.
@@ -1459,7 +1466,7 @@ C:/devkitPro/libctru/include/3ds/services/qtm.h:
 # Not a target:
 /home/Tobi/BCSTM-Player/D7-Menu-Core/cache.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-09 22:13:07.120207
+#  Last modified 2022-05-14 23:58:59.4908405
 #  File has been updated.
 #  Successfully updated.
 
@@ -1483,10 +1490,9 @@ C:/devkitPro/libctru/include/3ds/types.h:
 #  Successfully updated.
 
 cache.o: /home/Tobi/BCSTM-Player/D7-Menu-Core/cache.cpp C:/Users/Tobi/BCSTM-Player/D7-Menu-Core/cache.cpp C:/Users/Tobi/BCSTM-Player/D7-Menu-Core/cache.hpp C:/Users/Tobi/BCSTM-Player/D7-Menu-Core/TitleManager.hpp C:/Users/Tobi/BCSTM-Player/D7-Menu-Core/title.hpp C:/devkitPro/libctru/include/3ds.h C:/devkitPro/libctru/include/3ds/types.h C:/devkitPro/libctru/include/3ds/result.h C:/devkitPro/libctru/include/3ds/ipc.h C:/devkitPro/libctru/include/3ds/svc.h C:/devkitPro/libctru/include/3ds/exheader.h C:/devkitPro/libctru/include/3ds/srv.h C:/devkitPro/libctru/include/3ds/errf.h C:/devkitPro/libctru/include/3ds/os.h C:/devkitPro/libctru/include/3ds/synchronization.h C:/devkitPro/libctru/include/3ds/thread.h C:/devkitPro/libctru/include/3ds/gfx.h C:/devkitPro/libctru/include/3ds/services/gspgpu.h C:/devkitPro/libctru/include/3ds/console.h C:/devkitPro/libctru/include/3ds/env.h C:/devkitPro/libctru/include/3ds/util/decompress.h C:/devkitPro/libctru/include/3ds/util/utf.h C:/devkitPro/libctru/include/3ds/allocator/linear.h C:/devkitPro/libctru/include/3ds/allocator/mappable.h C:/devkitPro/libctru/include/3ds/allocator/vram.h C:/devkitPro/libctru/include/3ds/services/ac.h C:/devkitPro/libctru/include/3ds/services/am.h C:/devkitPro/libctru/include/3ds/services/fs.h C:/devkitPro/libctru/include/3ds/services/ampxi.h C:/devkitPro/libctru/include/3ds/services/apt.h C:/devkitPro/libctru/include/3ds/services/boss.h C:/devkitPro/libctru/include/3ds/services/cam.h C:/devkitPro/libctru/include/3ds/services/y2r.h C:/devkitPro/libctru/include/3ds/services/cfgnor.h C:/devkitPro/libctru/include/3ds/services/cfgu.h C:/devkitPro/libctru/include/3ds/services/csnd.h C:/devkitPro/libctru/include/3ds/services/dsp.h C:/devkitPro/libctru/include/3ds/services/fspxi.h C:/devkitPro/libctru/include/3ds/services/fsreg.h C:/devkitPro/libctru/include/3ds/services/frd.h C:/devkitPro/libctru/include/3ds/mii.h C:/devkitPro/libctru/include/3ds/services/gsplcd.h C:/devkitPro/libctru/include/3ds/services/hid.h C:/devkitPro/libctru/include/3ds/services/irrst.h C:/devkitPro/libctru/include/3ds/services/sslc.h C:/devkitPro/libctru/include/3ds/services/httpc.h C:/devkitPro/libctru/include/3ds/services/uds.h C:/devkitPro/libctru/include/3ds/services/ndm.h C:/devkitPro/libctru/include/3ds/services/nim.h C:/devkitPro/libctru/include/3ds/services/nwmext.h C:/devkitPro/libctru/include/3ds/services/ir.h C:/devkitPro/libctru/include/3ds/services/ns.h C:/devkitPro/libctru/include/3ds/services/pmapp.h C:/devkitPro/libctru/include/3ds/services/pmdbg.h C:/devkitPro/libctru/include/3ds/services/ps.h C:/devkitPro/libctru/include/3ds/services/ptmu.h C:/devkitPro/libctru/include/3ds/services/ptmsysm.h C:/devkitPro/libctru/include/3ds/services/ptmgets.h C:/devkitPro/libctru/include/3ds/services/ptmsets.h C:/devkitPro/libctru/include/3ds/services/pxidev.h C:/devkitPro/libctru/include/3ds/services/pxipm.h C:/devkitPro/libctru/include/3ds/services/soc.h C:/devkitPro/libctru/include/netinet/in.h C:/devkitPro/libctru/include/sys/socket.h C:/devkitPro/libctru/include/3ds/services/mic.h C:/devkitPro/libctru/include/3ds/services/mvd.h C:/devkitPro/libctru/include/3ds/services/nfc.h C:/devkitPro/libctru/include/3ds/services/news.h C:/devkitPro/libctru/include/3ds/services/qtm.h C:/devkitPro/libctru/include/3ds/services/srvpm.h C:/devkitPro/libctru/include/3ds/services/loader.h C:/devkitPro/libctru/include/3ds/services/mcuhwc.h C:/devkitPro/libctru/include/3ds/gpu/gx.h C:/devkitPro/libctru/include/3ds/gpu/gpu.h C:/devkitPro/libctru/include/3ds/gpu/registers.h C:/devkitPro/libctru/include/3ds/gpu/enums.h C:/devkitPro/libctru/include/3ds/gpu/shbin.h C:/devkitPro/libctru/include/3ds/gpu/shaderProgram.h C:/devkitPro/libctru/include/3ds/ndsp/ndsp.h C:/devkitPro/libctru/include/3ds/ndsp/channel.h C:/devkitPro/libctru/include/3ds/applets/swkbd.h C:/devkitPro/libctru/include/3ds/applets/error.h C:/devkitPro/libctru/include/3ds/applets/miiselector.h C:/devkitPro/libctru/include/3ds/archive.h C:/devkitPro/libctru/include/3ds/romfs.h C:/devkitPro/libctru/include/3ds/font.h C:/devkitPro/libctru/include/3ds/gdbhio_dev.h C:/devkitPro/libctru/include/3ds/3dslink.h C:/devkitPro/libctru/include/citro2d.h C:/devkitPro/libctru/include/citro3d.h C:/devkitPro/libctru/include/c3d/types.h C:/devkitPro/libctru/include/c3d/maths.h C:/devkitPro/libctru/include/c3d/mtxstack.h C:/devkitPro/libctru/include/c3d/uniforms.h C:/devkitPro/libctru/include/c3d/attribs.h C:/devkitPro/libctru/include/c3d/buffers.h C:/devkitPro/libctru/include/c3d/base.h C:/devkitPro/libctru/include/c3d/texenv.h C:/devkitPro/libctru/include/c3d/effect.h C:/devkitPro/libctru/include/c3d/texture.h C:/devkitPro/libctru/include/c3d/proctex.h C:/devkitPro/libctru/include/c3d/light.h C:/devkitPro/libctru/include/c3d/lightlut.h C:/devkitPro/libctru/include/c3d/fog.h C:/devkitPro/libctru/include/c3d/framebuffer.h C:/devkitPro/libctru/include/c3d/renderqueue.h C:/devkitPro/libctru/include/tex3ds.h C:/devkitPro/libctru/include/c2d/base.h C:/devkitPro/libctru/include/c2d/spritesheet.h C:/devkitPro/libctru/include/c2d/sprite.h C:/devkitPro/libctru/include/c2d/text.h C:/devkitPro/libctru/include/c2d/font.h C:/Users/Tobi/BCSTM-Player/RenderD7/renderd7.hpp C:/Users/Tobi/BCSTM-Player/RenderD7/external/lodepng.h C:/Users/Tobi/BCSTM-Player/RenderD7/internal/lang.hpp C:/Users/Tobi/BCSTM-Player/RenderD7/external/json.hpp C:/Users/Tobi/BCSTM-Player/RenderD7/internal/parameter.hpp C:/Users/Tobi/BCSTM-Player/RenderD7/internal/thread.hpp C:/Users/Tobi/BCSTM-Player/RenderD7/internal/ini.hpp C:/Users/Tobi/BCSTM-Player/RenderD7/internal/stringtool.hpp C:/Users/Tobi/BCSTM-Player/RenderD7/internal/Clock.hpp C:/Users/Tobi/BCSTM-Player/RenderD7/internal/Time.hpp C:/Users/Tobi/BCSTM-Player/RenderD7/external/fs.h C:/Users/Tobi/BCSTM-Player/RenderD7/log.hpp C:/Users/Tobi/BCSTM-Player/D7-Menu-Core/utils.hpp C:/Users/Tobi/BCSTM-Player/D7-Menu-Core/smdh.hpp
- 
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'cache'
-#  Last modified 2022-05-14 02:11:52.9625706
+#  Last modified 2022-05-14 23:59:08.7063422
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from '/opt/devkitpro/devkitARM/base_rules', line 79):
@@ -1561,6 +1567,7 @@ Clock.o: /home/Tobi/BCSTM-Player/RenderD7/internal/Clock.cpp C:/Users/Tobi/BCSTM
 	$(SILENTMSG) $(notdir $<)
 	$(SILENTCMD)$(CXX) -MMD -MP -MF $(DEPSDIR)/$*.d $(CXXFLAGS) -c $< -o $@ $(ERROR_FILTER)
 
+ 
 C:/devkitPro/libctru/include/c2d/font.h:
 #  Implicit rule search has been done.
 #  Last modified 2022-01-29 00:23:34
@@ -1607,7 +1614,6 @@ C:/Users/Tobi/BCSTM-Player/RenderD7/internal/lang.hpp:
 
 # Not a target:
 /home/Tobi/BCSTM-Player/build/Time.d:
- 
 #  Implicit rule search has been done.
 #  Last modified 2022-05-14 00:08:31.8007982
 #  File has been updated.
@@ -1650,6 +1656,7 @@ C:/devkitPro/libctru/include/3ds/services/ptmgets.h:
 
 C:/devkitPro/libctru/include/3ds/errf.h:
 #  Implicit rule search has been done.
+ 
 #  Last modified 2022-01-27 00:17:39
 #  File has been updated.
 #  Successfully updated.
@@ -1663,7 +1670,7 @@ C:/devkitPro/libctru/include/3ds/services/nwmext.h:
 # Not a target:
 C:/Users/Tobi/BCSTM-Player/RenderD7/renderd7.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-14 02:25:31.513322
+#  Last modified 2022-05-14 23:53:54.5556486
 #  File has been updated.
 #  Successfully updated.
 
@@ -1716,7 +1723,6 @@ log.o: /home/Tobi/BCSTM-Player/RenderD7/log.cpp C:/Users/Tobi/BCSTM-Player/Rende
 	$(SILENTCMD)$(CXX) -MMD -MP -MF $(DEPSDIR)/$*.d $(CXXFLAGS) -c $< -o $@ $(ERROR_FILTER)
 
 C:/devkitPro/libctru/include/3ds/gpu/registers.h:
- 
 #  Implicit rule search has been done.
 #  Last modified 2022-01-27 00:17:39
 #  File has been updated.
@@ -1761,6 +1767,7 @@ C:/Users/Tobi/BCSTM-Player/RenderD7/external/fs.h:
 
 C:/devkitPro/libctru/include/3ds/util/decompress.h:
 #  Implicit rule search has been done.
+ 
 #  Last modified 2022-01-27 00:17:39
 #  File has been updated.
 #  Successfully updated.
@@ -1849,11 +1856,10 @@ C:/devkitPro/libctru/include/3ds/result.h:
 #  File has been updated.
 #  Successfully updated.
 
-renderd7.o: /home/Tobi/BCSTM-Player/RenderD7/renderd7.cpp C:/Users/Tobi/BCSTM-Player/RenderD7/renderd7.cpp C:/Users/Tobi/BCSTM-Player/RenderD7/renderd7.hpp C:/devkitPro/libctru/include/3ds.h C:/devkitPro/libctru/include/3ds/types.h C:/devkitPro/libctru/include/3ds/result.h C:/devkitPro/libctru/include/3ds/ipc.h C:/devkitPro/libctru/include/3ds/svc.h C:/devkitPro/libctru/include/3ds/exheader.h C:/devkitPro/libctru/include/3ds/srv.h C:/devkitPro/libctru/include/3ds/errf.h C:/devkitPro/libctru/include/3ds/os.h C:/devkitPro/libctru/include/3ds/synchronization.h C:/devkitPro/libctru/include/3ds/thread.h C:/devkitPro/libctru/include/3ds/gfx.h C:/devkitPro/libctru/include/3ds/services/gspgpu.h C:/devkitPro/libctru/include/3ds/console.h C:/devkitPro/libctru/include/3ds/env.h C:/devkitPro/libctru/include/3ds/util/decompress.h C:/devkitPro/libctru/include/3ds/util/utf.h C:/devkitPro/libctru/include/3ds/allocator/linear.h C:/devkitPro/libctru/include/3ds/allocator/mappable.h C:/devkitPro/libctru/include/3ds/allocator/vr 
-am.h C:/devkitPro/libctru/include/3ds/services/ac.h C:/devkitPro/libctru/include/3ds/services/am.h C:/devkitPro/libctru/include/3ds/services/fs.h C:/devkitPro/libctru/include/3ds/services/ampxi.h C:/devkitPro/libctru/include/3ds/services/apt.h C:/devkitPro/libctru/include/3ds/services/boss.h C:/devkitPro/libctru/include/3ds/services/cam.h C:/devkitPro/libctru/include/3ds/services/y2r.h C:/devkitPro/libctru/include/3ds/services/cfgnor.h C:/devkitPro/libctru/include/3ds/services/cfgu.h C:/devkitPro/libctru/include/3ds/services/csnd.h C:/devkitPro/libctru/include/3ds/services/dsp.h C:/devkitPro/libctru/include/3ds/services/fspxi.h C:/devkitPro/libctru/include/3ds/services/fsreg.h C:/devkitPro/libctru/include/3ds/services/frd.h C:/devkitPro/libctru/include/3ds/mii.h C:/devkitPro/libctru/include/3ds/services/gsplcd.h C:/devkitPro/libctru/include/3ds/services/hid.h C:/devkitPro/libctru/include/3ds/services/irrst.h C:/devkitPro/libctru/include/3ds/services/sslc.h C:/devkitPro/libctru/include/3ds/services/httpc.h C:/devkitPro/libctru/include/3ds/services/uds.h C:/devkitPro/libctru/include/3ds/services/ndm.h C:/devkitPro/libctru/include/3ds/services/nim.h C:/devkitPro/libctru/include/3ds/services/nwmext.h C:/devkitPro/libctru/include/3ds/services/ir.h C:/devkitPro/libctru/include/3ds/services/ns.h C:/devkitPro/libctru/include/3ds/services/pmapp.h C:/devkitPro/libctru/include/3ds/services/pmdbg.h C:/devkitPro/libctru/include/3ds/services/ps.h C:/devkitPro/libctru/include/3ds/services/ptmu.h C:/devkitPro/libctru/include/3ds/services/ptmsysm.h C:/devkitPro/libctru/include/3ds/services/ptmgets.h C:/devkitPro/libctru/include/3ds/services/ptmsets.h C:/devkitPro/libctru/include/3ds/services/pxidev.h C:/devkitPro/libctru/include/3ds/services/pxipm.h C:/devkitPro/libctru/include/3ds/services/soc.h C:/devkitPro/libctru/include/netinet/in.h C:/devkitPro/libctru/include/sys/socket.h C:/devkitPro/libctru/include/3ds/services/mic.h C:/devkitPro/libctru/include/3ds/services/mvd.h C:/devkitPro/libctru/include/3ds/services/nfc.h C:/devkitPro/libctru/include/3ds/services/news.h C:/devkitPro/libctru/include/3ds/services/qtm.h C:/devkitPro/libctru/include/3ds/services/srvpm.h C:/devkitPro/libctru/include/3ds/services/loader.h C:/devkitPro/libctru/include/3ds/services/mcuhwc.h C:/devkitPro/libctru/include/3ds/gpu/gx.h C:/devkitPro/libctru/include/3ds/gpu/gpu.h C:/devkitPro/libctru/include/3ds/gpu/registers.h C:/devkitPro/libctru/include/3ds/gpu/enums.h C:/devkitPro/libctru/include/3ds/gpu/shbin.h C:/devkitPro/libctru/include/3ds/gpu/shaderProgram.h C:/devkitPro/libctru/include/3ds/ndsp/ndsp.h C:/devkitPro/libctru/include/3ds/ndsp/channel.h C:/devkitPro/libctru/include/3ds/applets/swkbd.h C:/devkitPro/libctru/include/3ds/applets/error.h C:/devkitPro/libctru/include/3ds/applets/miiselector.h C:/devkitPro/libctru/include/3ds/archive.h C:/devkitPro/libctru/include/3ds/romfs.h C:/devkitPro/libctru/include/3ds/font.h C:/devkitPro/libctru/include/3ds/gdbhio_dev.h C:/devkitPro/libctru/include/3ds/3dslink.h C:/devkitPro/libctru/include/citro2d.h C:/devkitPro/libctru/include/citro3d.h C:/devkitPro/libctru/include/c3d/types.h C:/devkitPro/libctru/include/c3d/maths.h C:/devkitPro/libctru/include/c3d/mtxstack.h C:/devkitPro/libctru/include/c3d/uniforms.h C:/devkitPro/libctru/include/c3d/attribs.h C:/devkitPro/libctru/include/c3d/buffers.h C:/devkitPro/libctru/include/c3d/base.h C:/devkitPro/libctru/include/c3d/texenv.h C:/devkitPro/libctru/include/c3d/effect.h C:/devkitPro/libctru/include/c3d/texture.h C:/devkitPro/libctru/include/c3d/proctex.h C:/devkitPro/libctru/include/c3d/light.h C:/devkitPro/libctru/include/c3d/lightlut.h C:/devkitPro/libctru/include/c3d/fog.h C:/devkitPro/libctru/include/c3d/framebuffer.h C:/devkitPro/libctru/include/c3d/renderqueue.h C:/devkitPro/libctru/include/tex3ds.h C:/devkitPro/libctru/include/c2d/base.h C:/devkitPro/libctru/include/c2d/spritesheet.h C:/devkitPro/libctru/include/c2d/sprite.h C:/devkitPro/libctru/include/c2d/text.h C:/devkitPro/libctru/include/c2d/font.h C:/Users/Tobi/BCSTM-Player/RenderD7/external/lodepng.h C:/Users/Tobi/BCSTM-Player/RenderD7/internal/lang.hpp C:/Users/Tobi/BCSTM-Player/RenderD7/external/json.hpp C:/Users/Tobi/BCSTM-Player/RenderD7/internal/parameter.hpp C:/Users/Tobi/BCSTM-Player/RenderD7/internal/thread.hpp C:/Users/Tobi/BCSTM-Player/RenderD7/internal/ini.hpp C:/Users/Tobi/BCSTM-Player/RenderD7/internal/stringtool.hpp C:/Users/Tobi/BCSTM-Player/RenderD7/internal/Clock.hpp C:/Users/Tobi/BCSTM-Player/RenderD7/internal/Time.hpp C:/Users/Tobi/BCSTM-Player/RenderD7/external/fs.h C:/Users/Tobi/BCSTM-Player/RenderD7/log.hpp
+renderd7.o: /home/Tobi/BCSTM-Player/RenderD7/renderd7.cpp C:/Users/Tobi/BCSTM-Player/RenderD7/renderd7.cpp C:/Users/Tobi/BCSTM-Player/RenderD7/renderd7.hpp C:/devkitPro/libctru/include/3ds.h C:/devkitPro/libctru/include/3ds/types.h C:/devkitPro/libctru/include/3ds/result.h C:/devkitPro/libctru/include/3ds/ipc.h C:/devkitPro/libctru/include/3ds/svc.h C:/devkitPro/libctru/include/3ds/exheader.h C:/devkitPro/libctru/include/3ds/srv.h C:/devkitPro/libctru/include/3ds/errf.h C:/devkitPro/libctru/include/3ds/os.h C:/devkitPro/libctru/include/3ds/synchronization.h C:/devkitPro/libctru/include/3ds/thread.h C:/devkitPro/libctru/include/3ds/gfx.h C:/devkitPro/libctru/include/3ds/services/gspgpu.h C:/devkitPro/libctru/include/3ds/console.h C:/devkitPro/libctru/include/3ds/env.h C:/devkitPro/libctru/include/3ds/util/decompress.h C:/devkitPro/libctru/include/3ds/util/utf.h C:/devkitPro/libctru/include/3ds/allocator/linear.h C:/devkitPro/libctru/include/3ds/allocator/mappable.h C:/devkitPro/libctru/include/3ds/allocator/vram.h C:/devkitPro/libctru/include/3ds/services/ac.h C:/devkitPro/libctru/include/3ds/services/am.h C:/devkitPro/libctru/include/3ds/services/fs.h C:/devkitPro/libctru/include/3ds/services/ampxi.h C:/devkitPro/libctru/include/3ds/services/apt.h C:/devkitPro/libctru/include/3ds/services/boss.h C:/devkitPro/libctru/include/3ds/services/cam.h C:/devkitPro/libctru/include/3ds/services/y2r.h C:/devkitPro/libctru/include/3ds/services/cfgnor.h C:/devkitPro/libctru/include/3ds/services/cfgu.h C:/devkitPro/libctru/include/3ds/services/csnd.h C:/devkitPro/libctru/include/3ds/services/dsp.h C:/devkitPro/libctru/include/3ds/services/fspxi.h C:/devkitPro/libctru/include/3ds/services/fsreg.h C:/devkitPro/libctru/include/3ds/services/frd.h C:/devkitPro/libctru/include/3ds/mii.h C:/devkitPro/libctru/include/3ds/services/gsplcd.h C:/devkitPro/libctru/include/3ds/services/hid.h C:/devkitPro/libctru/include/3ds/services/irrst.h C:/devkitPro/libctru/include/3ds/services/sslc.h C:/devkitPro/libctru/include/3ds/services/httpc.h C:/devkitPro/libctru/include/3ds/services/uds.h C:/devkitPro/libctru/include/3ds/services/ndm.h C:/devkitPro/libctru/include/3ds/services/nim.h C:/devkitPro/libctru/include/3ds/services/nwmext.h C:/devkitPro/libctru/include/3ds/services/ir.h C:/devkitPro/libctru/include/3ds/services/ns.h C:/devkitPro/libctru/include/3ds/services/pmapp.h C:/devkitPro/libctru/include/3ds/services/pmdbg.h C:/devkitPro/libctru/include/3ds/services/ps.h C:/devkitPro/libctru/include/3ds/services/ptmu.h C:/devkitPro/libctru/include/3ds/services/ptmsysm.h C:/devkitPro/libctru/include/3ds/services/ptmgets.h C:/devkitPro/libctru/include/3ds/services/ptmsets.h C:/devkitPro/libctru/include/3ds/services/pxidev.h C:/devkitPro/libctru/include/3ds/services/pxipm.h C:/devkitPro/libctru/include/3ds/services/soc.h C:/devkitPro/libctru/include/netinet/in.h C:/devkitPro/libctru/include/sys/socket.h C:/devkitPro/libctru/include/3ds/services/mic.h C:/devkitPro/libctru/include/3ds/services/mvd.h C:/devkitPro/libctru/include/3ds/services/nfc.h C:/devkitPro/libctru/include/3ds/services/news.h C:/devkitPro/libctru/include/3ds/services/qtm.h C:/devkitPro/libctru/include/3ds/services/srvpm.h C:/devkitPro/libctru/include/3ds/services/loader.h C:/devkitPro/libctru/include/3ds/services/mcuhwc.h C:/devkitPro/libctru/include/3ds/gpu/gx.h C:/devkitPro/libctru/include/3ds/gpu/gpu.h C:/devkitPro/libctru/include/3ds/gpu/registers.h C:/devkitPro/libctru/include/3ds/gpu/enums.h C:/devkitPro/libctru/include/3ds/gpu/shbin.h C:/devkitPro/libctru/include/3ds/gpu/shaderProgram.h C:/devkitPro/libctru/include/3ds/ndsp/ndsp.h C:/devkitPro/libctru/include/3ds/ndsp/channel.h C:/devkitPro/libctru/include/3ds/applets/swkbd.h C:/devkitPro/libctru/include/3ds/applets/error.h C:/devkitPro/libctru/include/3ds/applets/miiselector.h C:/devkitPro/libctru/include/3ds/archive.h C:/devkitPro/libctru/include/3ds/romfs.h C:/devkitPro/libctru/include/3ds/font.h C:/devkitPro/libctru/include/3ds/gdbhio_dev.h C:/devkitPro/libctru/include/3ds/3dslink.h C:/devkitPro/libctru/include/citro2d.h C:/devkitPro/libctru/include/citro3d.h C:/devkitPro/libctru/include/c3d/types.h C:/devkitPro/libctru/include/c3d/maths.h C:/devkitPro/libctru/include/c3d/mtxstack.h C:/devkitPro/libctru/include/c3d/uniforms.h C:/devkitPro/libctru/include/c3d/attribs.h C:/devkitPro/libctru/include/c3d/buffers.h C:/devkitPro/libctru/include/c3d/base.h C:/devkitPro/libctru/include/c3d/texenv.h C:/devkitPro/libctru/include/c3d/effect.h C:/devkitPro/libctru/include/c3d/texture.h C:/devkitPro/libctru/include/c3d/proctex.h C:/devkitPro/libctru/include/c3d/light.h C:/devkitPro/libctru/include/c3d/lightlut.h C:/devkitPro/libctru/include/c3d/fog.h C:/devkitPro/libctru/include/c3d/framebuffer.h C:/devkitPro/libctru/include/c3d/renderqueue.h C:/devkitPro/libctru/include/tex3ds.h C:/devkitPro/libctru/include/c2d/base.h C:/devkitPro/libctru/include/c2d/spritesheet.h C:/devkitPro/libctru/include/c2d/sprite.h C:/devkitPro/libctru/include/c2d/text.h C:/devkitPro/libctru/include/c2d/font.h C:/Users/Tobi/BCSTM-Player/RenderD7/external/lodepng.h C:/Users/Tobi/BCSTM-Player/RenderD7/internal/lang.hpp C:/Users/Tobi/BCSTM-Player/RenderD7/external/json.hpp C:/Users/Tobi/BCSTM-Player/RenderD7/internal/parameter.hpp C:/Users/Tobi/BCSTM-Player/RenderD7/internal/thread.hpp C:/Users/Tobi/BCSTM-Player/RenderD7/internal/ini.hpp C:/Users/Tobi/BCSTM-Player/RenderD7/internal/stringtool.hpp C:/Users/Tobi/BCSTM-Player/RenderD7/internal/Clock.hpp C:/Users/Tobi/BCSTM-Player/RenderD7/internal/Time.hpp C:/Users/Tobi/BCSTM-Player/RenderD7/external/fs.h C:/Users/Tobi/BCSTM-Player/RenderD7/log.hpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'renderd7'
-#  Last modified 2022-05-14 02:25:41.5860155
+#  Last modified 2022-05-14 23:54:09.4017395
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from '/opt/devkitpro/devkitARM/base_rules', line 79):
@@ -1872,6 +1878,7 @@ utils.o: /home/Tobi/BCSTM-Player/D7-Menu-Core/utils.cpp C:/Users/Tobi/BCSTM-Play
 
 C:/devkitPro/libctru/include/3ds/services/pxipm.h:
 #  Implicit rule search has been done.
+ 
 #  Last modified 2022-01-27 00:17:39
 #  File has been updated.
 #  Successfully updated.
@@ -1949,7 +1956,6 @@ C:/devkitPro/libctru/include/3ds/allocator/linear.h:
 
 C:/devkitPro/libctru/include/c3d/types.h:
 #  Implicit rule search has been done.
- 
 #  Last modified 2022-01-29 00:02:14
 #  File has been updated.
 #  Successfully updated.
@@ -1983,6 +1989,7 @@ thread.o: /home/Tobi/BCSTM-Player/RenderD7/internal/thread.cpp C:/Users/Tobi/BCS
 
 # No 'vpath' search paths.
 
+ 
 # General ('VPATH' variable) search path:
 # /home/Tobi/BCSTM-Player/RenderD7:/home/Tobi/BCSTM-Player/RenderD7/internal:/home/Tobi/BCSTM-Player/BCSTM:/home/Tobi/BCSTM-Player/RenderD7/external:/home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/include:/home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/include/TweenEngine:/home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/source:/home/Tobi/BCSTM-Player/D7-Menu-Core:/home/Tobi/BCSTM-Player/source:/home/Tobi/BCSTM-Player/gfx:/home/Tobi/BCSTM-Player/data
 
@@ -1994,7 +2001,7 @@ thread.o: /home/Tobi/BCSTM-Player/RenderD7/internal/thread.cpp C:/Users/Tobi/BCS
 # strcache performance: lookups = 4919 / hit rate = 85%
 # hash-table stats:
 # Load=727/8192=9%, Rehash=0, Collisions=62/4919=1%
-# Finished Make data base on Sat May 14 23:52:50 2022
+# Finished Make data base on Tue May 17 00:49:57 2022
 
  
 # GNU Make 4.3
@@ -2006,11 +2013,13 @@ thread.o: /home/Tobi/BCSTM-Player/RenderD7/internal/thread.cpp C:/Users/Tobi/BCS
 # There is NO WARRANTY, to the extent permitted by law.
  
 
-# Make data base, printed on Sat May 14 23:52:50 2022
+# Make data base, printed on Tue May 17 00:49:57 2022
 
 # Variables
 
  
+# environment
+FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
 # makefile (from 'Makefile', line 39)
 MAKEROM = C:/devkitpro/tools/bin/makerom.exe
 # environment
@@ -2034,7 +2043,7 @@ OFILES :=    log.o renderd7.o sound.o Clock.o Time.o lang.o thread.o BCSTM.o lod
 # environment
 LOCALAPPDATA = C:\Users\Tobi\AppData\Local
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-094c7226-0358-4c52-8c1a-b28c53c2b757-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-0aa224e3-ce25-44d2-b4e9-e2f5c66da008-sock
 # makefile (from 'Makefile', line 123)
 VPATH := /home/Tobi/BCSTM-Player/RenderD7 /home/Tobi/BCSTM-Player/RenderD7/internal /home/Tobi/BCSTM-Player/BCSTM /home/Tobi/BCSTM-Player/RenderD7/external /home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/include/ /home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/include/TweenEngine /home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/source /home/Tobi/BCSTM-Player/D7-Menu-Core /home/Tobi/BCSTM-Player/source /home/Tobi/BCSTM-Player/gfx /home/Tobi/BCSTM-Player/data
 # makefile (from 'Makefile', line 129)
@@ -2060,9 +2069,11 @@ OFILES_BIN := $(subst ,,  )
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_4612_EVGTYQNUVXQTBQUP
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_12904_AMYMVPYCVDJFWZTJ
 # makefile (from 'Makefile', line 130)
 CPPFILES := log.cpp renderd7.cpp sound.cpp Clock.cpp Time.cpp lang.cpp thread.cpp BCSTM.cpp lodepng.cpp    Title.cpp TitleManager.cpp cache.cpp smdh.cpp utils.cpp Menu.cpp main.cpp
+# environment
+FPS_BROWSER_USER_PROFILE_STRING = Default
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
@@ -2088,6 +2099,7 @@ TMP = /home/Tobi/AppData/Local/Temp
 # makefile
 MAKEFLAGS = pqrR
 # makefile (from 'Makefile', line 131)
+ 
 SFILES := $(subst ,,        )
 # makefile (from 'Makefile', line 80)
 ICON := app/icon.png
@@ -2117,7 +2129,6 @@ MFLAGS = -pqrR
 COMMONPROGRAMW6432 = C:\Program Files\Common Files
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
- 
 # makefile (from 'Makefile', line 200)
 _3DSXFLAGS = --smdh=$(CURDIR)/$(TARGET).smdh --romfs=$(CURDIR)/$(ROMFS)
 # makefile (from '/opt/devkitpro/devkitARM/base_tools', line 1)
@@ -2129,7 +2140,7 @@ ASFLAGS := -g -march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 4612
+VSCODE_PID = 12904
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # makefile (from '/opt/devkitpro/devkitARM/base_tools', line 28)
@@ -2182,10 +2193,11 @@ MAKELEVEL := 0
 LIBPATHS := -L/opt/devkitpro/portlibs/3ds/lib -L/opt/devkitpro/libctru/lib -L/home/Tobi/BCSTM-PlayerRenderD7/external/tween-engine//lib
 # default
 MAKE = $(MAKE_COMMAND)
+ 
 # makefile (from 'Makefile', line 133)
 SHLISTFILES := $(subst ,,        )
 # makefile (from '/opt/devkitpro/devkitARM/3ds_rules', line 9)
-PATH := /opt/devkitpro/portlibs/3ds/bin:/opt/devkitpro/tools/bin:/opt/devkitpro/devkitARM/bin:/opt/devkitpro/msys2/usr/bin:/c/Windows/system32:/c/Windows:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0:/c/Windows/System32/OpenSSH:/c/Program Files/Git/cmd:/opt/devkitpro/tools/bin:/home/Tobi/AppData/Local/Programs/Python/Python310/Scripts:/home/Tobi/AppData/Local/Programs/Python/Python310:/home/Tobi/AppData/Local/Microsoft/WindowsApps:/home/Tobi/AppData/Local/Programs/Microsoft VS Code/bin
+PATH := /opt/devkitpro/portlibs/3ds/bin:/opt/devkitpro/tools/bin:/opt/devkitpro/devkitARM/bin:/opt/devkitpro/msys2/usr/bin:/c/Windows/system32:/c/Windows:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0:/c/Windows/System32/OpenSSH:/c/Program Files/Git/cmd:/opt/devkitpro/tools/bin:/c/Program Files/CMake/bin:/c/Program Files/Meson:/home/Tobi/AppData/Local/Programs/Python/Python310/Scripts:/home/Tobi/AppData/Local/Programs/Python/Python310:/home/Tobi/AppData/Local/Microsoft/WindowsApps:/home/Tobi/AppData/Local/Programs/Microsoft VS Code/bin:/home/Tobi/AppData/Local/GitHubDesktop/bin
 # environment
 COMPUTERNAME = PC
 # default
@@ -2216,7 +2228,6 @@ COMMONPROGRAMFILES = C:\Program Files\Common Files
 ?F = $(notdir $?)
 # makefile (from '/opt/devkitpro/devkitARM/base_tools', line 50)
 bin2o = 	bin2s -a 4 -H `(echo $(<F) | tr . _)`.h $< | $(AS) -o $(<F).o
- 
 # environment
 PROGRAMW6432 = C:\Program Files
 # environment
@@ -2276,7 +2287,7 @@ BNR_AUDIO := app/BannerAudio.wav
 # environment
 APPDATA = C:\Users\Tobi\AppData\Roaming
 # makefile (from 'Makefile', line 97)
-CFLAGS := -g -Wall -Wno-psabi -O2 -mword-relocations -DV_STRING=\"4dbbcbd\" -fomit-frame-pointer -ffunction-sections -march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft  -D__3DS__ -D_GNU_SOURCE=1
+CFLAGS := -g -Wall -Wno-psabi -O2 -mword-relocations -DV_STRING=\"ddef7e0\" -fomit-frame-pointer -ffunction-sections -march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft  -D__3DS__ -D_GNU_SOURCE=1
 # environment
 HOMEDRIVE = C:
 # makefile (from 'Makefile', line 70)
@@ -2289,6 +2300,7 @@ VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 HOME = /home/Tobi
 # environment
 COMMONPROGRAMFILES(X86) = C:\Program Files (x86)\Common Files
+ 
 # makefile (from '/opt/devkitpro/devkitARM/base_tools', line 13)
 DEVKITPATH = $(shell echo "$(DEVKITPRO)" | sed -e 's/^\([a-zA-Z]\):/\/\1/')
 # makefile (from '/opt/devkitpro/devkitARM/3ds_rules', line 7)
@@ -2324,12 +2336,11 @@ TARGET := BCSTM-Player
 # makefile (from 'Makefile', line 146)
 LD := arm-none-eabi-g++
 # environment
- 
 SESSIONNAME = Console
 # makefile (from 'Makefile', line 52)
-GIT_VER := 4dbbcbd
+GIT_VER := ddef7e0
 # makefile (from 'Makefile', line 99)
-CXXFLAGS := -g -Wall -Wno-psabi -O2 -mword-relocations -DV_STRING=\"4dbbcbd\" -fomit-frame-pointer -ffunction-sections -march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft  -D__3DS__ -D_GNU_SOURCE=1 -fno-rtti -fno-exceptions -std=gnu++20 
+CXXFLAGS := -g -Wall -Wno-psabi -O2 -mword-relocations -DV_STRING=\"ddef7e0\" -fomit-frame-pointer -ffunction-sections -march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft  -D__3DS__ -D_GNU_SOURCE=1 -fno-rtti -fno-exceptions -std=gnu++20 
 # makefile (from '/opt/devkitpro/devkitARM/base_tools', line 26)
 STRIP := arm-none-eabi-strip
 # default
@@ -2357,7 +2368,7 @@ _3DSXDEPS := /home/Tobi/BCSTM-Player/BCSTM-Player.smdh
 # environment
 PROCESSOR_IDENTIFIER = AMD64 Family 25 Model 33 Stepping 0, AuthenticAMD
 # variable set hash-table stats:
-# Load=171/1024=17%, Rehash=0, Collisions=35/386=9%
+# Load=173/1024=17%, Rehash=0, Collisions=38/388=10%
 
 # Pattern-specific Variable Values
 
@@ -2385,6 +2396,7 @@ PROCESSOR_IDENTIFIER = AMD64 Family 25 Model 33 Stepping 0, AuthenticAMD
 # /home/Tobi/BCSTM-Player/RenderD7/external (device 1820687712, inode 2533274790614253): 9 files, no impossibilities.
 # RenderD7/external/tween-engine/source: could not be stat'd.
 # /home/Tobi/BCSTM-Player/BCSTM (device 1820687712, inode 562949953526335): 5 files, no impossibilities.
+ 
 # /home/Tobi/BCSTM-Player/data: could not be stat'd.
 # RenderD7/internal (device 1820687712, inode 2251799813910619): 15 files, no impossibilities.
 # /home/Tobi/BCSTM-Player/RenderD7/external/tween-engine/include/TweenEngine: could not be stat'd.
@@ -2423,7 +2435,6 @@ PROCESSOR_IDENTIFIER = AMD64 Family 25 Model 33 Stepping 0, AuthenticAMD
 #  recipe to execute (from '/opt/devkitpro/devkitARM/base_rules', line 38):
 	$(SILENTMSG) $(notdir $<)
 	$(SILENTCMD)$(CC) -MMD -MP -MF $(DEPSDIR)/$*.thumb.d $(CFLAGS) -mthumb -c $< -o $@ $(ERROR_FILTER)
- 
 
 %.thumb.o: %.thumb.m
 #  recipe to execute (from '/opt/devkitpro/devkitARM/base_rules', line 43):
@@ -2538,6 +2549,7 @@ andsend:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+ 
 #  recipe to execute (from 'Makefile', line 223):
 	@make all
 	@3dslink -a $(IP) $(TARGET).3dsx
@@ -2578,7 +2590,6 @@ clean:
 #  Successfully updated.
 
 # Not a target:
- 
 /opt/devkitpro/devkitARM/3ds_rules:
 #  Implicit rule search has been done.
 #  Last modified 2020-07-28 04:27:14
@@ -2588,7 +2599,7 @@ clean:
 # Not a target:
 /home/Tobi/BCSTM-Player/build:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-14 02:25:40.8878593
+#  Last modified 2022-05-14 23:59:08.477291
 #  File has been updated.
 #  Successfully updated.
 
@@ -2643,7 +2654,7 @@ run:
 
 build:
 #  Implicit rule search has not been done.
-#  Last modified 2022-05-14 02:25:40.8878593
+#  Last modified 2022-05-14 23:59:08.477291
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 241):
@@ -2675,6 +2686,7 @@ send:
 #  Modification time never checked.
 #  File has not been updated.
 
+ 
 .PHONY: all clean
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -2695,6 +2707,6 @@ send:
 # strcache performance: lookups = 235 / hit rate = 38%
 # hash-table stats:
 # Load=145/8192=2%, Rehash=0, Collisions=5/235=2%
-# Finished Make data base on Sat May 14 23:52:50 2022
+# Finished Make data base on Tue May 17 00:49:58 2022
 
  
