@@ -20,7 +20,7 @@ void CardScan(RenderD7::Parameter param) {
 
 int main()
 {
-    cobj___ = 6000;
+    cobj___ = 15000;
     RenderD7::Init::Main("BCSTM-Player");
     mkdir("sdmc:/BCSTM-Player/", 0777);
     mkdir("sdmc:/BCSTM-Player/cache/", 0777);
