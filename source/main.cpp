@@ -1,6 +1,6 @@
 #include "Menu.hpp"
 #include "BCSTM.hpp"
-#include "log.hpp"
+#include <renderd7/log.hpp>
 #include "TitleManager.hpp"
 
 //RenderD7::Image img;

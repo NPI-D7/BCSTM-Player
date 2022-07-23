@@ -1,4 +1,4 @@
-#include "renderd7.hpp"
+#include <rd7.hpp>
 
 class MMM : public RenderD7::Scene
 {

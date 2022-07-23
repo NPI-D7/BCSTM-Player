@@ -66,11 +66,9 @@ VERSION_MICRO := 0
 #---------------------------------------------------------------------------------
 TARGET		:=	BCSTM-Player
 BUILD		:=	build
-LIBTWEEN	:=  $(CURDIR)RenderD7/external/tween-engine/
-UNIVCORE	:=	RenderD7 RenderD7/internal BCSTM RenderD7/external RenderD7/external/tween-engine/include/ RenderD7/external/tween-engine/include/TweenEngine RenderD7/external/tween-engine/source D7-Menu-Core
-SOURCES		:=	$(UNIVCORE) source
+SOURCES		:=	source BCSTM D7-Menu-Core
 DATA		:=	data
-INCLUDES	:=	$(UNIVCORE) source 
+INCLUDES	:=	source BCSTM D7-Menu-Core
 GRAPHICS	:=	gfx
 #GFXBUILD	:=	$(BUILD)
 ROMFS		:=	romfs
@@ -101,7 +99,7 @@ CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++20
 ASFLAGS	:=	-g $(ARCH)
 LDFLAGS	=	-specs=3dsx.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)
 
-LIBS	:= -lcurl -lstdc++ -lm -lcitro2d -lcitro3d -lctru -ljpeg
+LIBS	:= -lrenderd7 -lcurl -lstdc++ -lm -lcitro2d -lcitro3d -lctru -ljpeg
 
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
