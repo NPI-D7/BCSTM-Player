@@ -41,7 +41,7 @@ jobs:
           rm makerom-v0.17-ubuntu_x86_64.zip
           curl -L https://github.com/NPI-D7/RenderD7/releases/download/v0.8.0-pre1/renderd7-0.8.0.tar.bz2 -o renderd7-0.8.0.tar.bz2
           mkdir -p /opt/devkitpro/libctru
-	  bzip2 -cd renderd7-0.8.0.tar.bz2 | tar -xf - -C /opt/devkitpro/libctru
+          bzip2 -cd renderd7-0.8.0.tar.bz2 | tar -xf - -C /opt/devkitpro/libctru
 
       - name: Build
         id: build
