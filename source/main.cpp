@@ -4,6 +4,7 @@
 extern BCSTM player;
 RenderD7::Sheet sheet;
 
+//Thread
 void PlayerT(RenderD7::Parameter m_parameter)
 {
      while (true) {
