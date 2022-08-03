@@ -1,5 +1,6 @@
 #include "Menu.hpp"
 #include "BCSTM.hpp"
+
 extern BCSTM player;
 RenderD7::Sheet sheet;
 
@@ -11,8 +12,9 @@ void PlayerT(RenderD7::Parameter m_parameter)
     }
 }
 
-int main()
+int main(int argc, char* argv[])
 {
+    RenderD7::FileSystem::Init(argv[0]);
     RenderD7::Init::Main("BCSTM-Player");
     RenderD7::Init::NdspFirm(true);
     aptSetSleepAllowed(false);

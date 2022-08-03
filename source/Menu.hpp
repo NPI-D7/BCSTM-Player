@@ -1,4 +1,5 @@
-#include "renderd7.hpp"
+#include <rd7.hpp>
+#include <renderd7/FileSystem.hpp>
 
 class MMM : public RenderD7::Scene
 {
@@ -21,8 +22,10 @@ class Browse : public RenderD7::Scene
     void Draw(void) const override;
     void Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch) override;
     Browse();
+    void Update(std::string path);
     private:
-    std::vector<RenderD7::DirContent> dircontent;
+    //std::vector<RenderD7::DirContent> dircontent;
+    std::vector<std::string> items;
     int dirsel = 0;
     bool changeddir = false;
 };
