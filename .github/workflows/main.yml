@@ -22,7 +22,7 @@ jobs:
       commit_message: ${{ steps.build.outputs.commit_message }}
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
         with:
           submodules: recursive
       - name: Install tools
@@ -39,6 +39,12 @@ jobs:
           sudo chmod +x makerom
           mv makerom /usr/local/bin
           rm makerom-v0.17-ubuntu_x86_64.zip
+          git clone https://github.com/NPI-D7/RenderD7.git
+          cd RenderD7
+          export DEVKITARM=/opt/devkitpro/devkitARM/
+          export DEVKITPRO=/opt/devkitpro/
+          make install
+          cd ..
       - name: Build
         id: build
         run: |
@@ -105,7 +111,7 @@ jobs:
           cd nightlys
           sudo chmod +x nightlytool
           echo running
-          ./nightlytool management/BCSTM-Player.ini BCSTM-Player NPI-D7 nightlys v$CURRENT_DATE $COMMIT_HASH "\\$COMMIT_SUBJECT\\$COMMIT_MESSAGE\\\\1.1.0 Update\\\\" 0 "$AUTHOR_NAME"
+          ./nightlytool management/BCSTM-Player.ini BCSTM-Player NPI-D7 nightlys v$CURRENT_DATE $COMMIT_HASH "\\$COMMIT_SUBJECT\\$COMMIT_MESSAGE\\\\" 0 "$AUTHOR_NAME"
           echo creating dirs
           ls -R
           mkdir -p builds/BCSTM-Player/
@@ -134,28 +140,3 @@ jobs:
             curl -XPOST -H "$AUTH_HEADER" -H "$CONTENT_LENGTH" -H "$CONTENT_TYPE" --upload-file "$file" "$UPLOAD_URL"
           done
 # lol
-  send_webhook:
-    runs-on: ubuntu-latest
-    needs: [publish_build, build]
-    name: Send Discord webhook
-    if: ${{ !startsWith(github.ref, 'refs/pull') }}
-    env:
-      CURRENT_DATE: ${{ needs.publish_build.outputs.current_date }}
-      AUTHOR_NAME: ${{ needs.build.outputs.author_name }}
-      COMMITTER_NAME: ${{ needs.build.outputs.committer_name }}
-      COMMIT_SUBJECT: ${{ needs.build.outputs.commit_subject }}
-      COMMIT_MESSAGE: ${{ needs.build.outputs.commit_message }}
-    steps:
-      - name: Send success webhook
-        if: ${{ success() }}
-        run: |
-          curl -o send.sh https://raw.githubusercontent.com/NPI-D7/discord-webhooks/master/send-ghactions.sh
-          chmod +x send.sh
-          export IMAGE=https://raw.githubusercontent.com/NPI-D7/nigtlys/v$CURRENT_DATE/builds/BCSTM-Player/BCSTM-Player.png
-          ./send.sh success ${{ secrets.WEBHOOK_URL }}
-      - name: Send failure webhook
-        if: ${{ failure() }}
-        run: |
-          curl -o send.sh https://raw.githubusercontent.com/NPI-D7/discord-webhooks/master/send-ghactions.sh
-          chmod +x send.sh
-          ./send.sh failure ${{ secrets.WEBHOOK_URL }}
