@@ -239,7 +239,7 @@ void BCSTM::fillBuffers()
 		if (m_channelCount == 2 && m_waveBuf[1][bufIndex].status != NDSP_WBUF_DONE)
 			continue;
 
-		if (m_currentBlock == m_blockLoopEnd)
+		if (m_looping && m_currentBlock == m_blockLoopEnd)
 		{
 			m_currentBlock = m_blockLoopStart;
 			fseek(m_file, static_cast<size_t>(m_dataOffset + 0x20 + m_blockSize*m_channelCount*m_blockLoopStart), SEEK_SET);
