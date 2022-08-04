@@ -97,9 +97,18 @@ void Browse::Update(std::string path)
 
 Browse::Browse()
 {
-    RenderD7::FileSystem::SetSource("test");
     RenderD7::Msg::Display("BCSTM-Player", "Loading Directory", Top);
+    RenderD7::FileSystem::SetSource("game");
+    RenderD7::FileSystem::SetIdentity("game", true);
+    RenderD7::FileSystem::File ff{};
+    RenderD7::FileSystem::OpenFile(ff, "cd.txt", RenderD7::FileSystem::FileMode::FileMode_Write);
+    const char* message = "HELLO WORLD!";
+    size_t length       = strlen(message);
+
+    RenderD7::FileSystem::WriteFile(ff, message, length);
+    RenderD7::FileSystem::CloseFile(ff);
     Update("");
+    RenderD7::FileSystem::CreateDirectory("THETEST");
     
     this->changeddir = false;
 } 
