@@ -15,13 +15,11 @@ void PlayerT(RenderD7::Parameter m_parameter)
 
 int main(int argc, char* argv[])
 {
-    if(!RenderD7::FileSystem::Init(argv[0]))
-    {
-        RenderD7::AddOvl(std::make_unique<RenderD7::Toast>("PHYSFS Error", RenderD7::FileSystem::GetPhysfsError()));
-    }
+    RenderD7::FileSystem::Init(argv[0]);
+    
     RenderD7::Init::Main("BCSTM-Player");
     RenderD7::Init::NdspFirm(true);
-    aptSetSleepAllowed(false);
+    aptSetSleepAllowed(false); 
     sheet.Load("romfs:/gfx/sprites.t3x");
     RenderD7::Thread t1(PlayerT, 1);
     t1.start();

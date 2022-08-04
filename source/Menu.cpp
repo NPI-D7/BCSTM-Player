@@ -39,10 +39,10 @@ void MMM::Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch)
     {
         Selection ++;
     }
-    if ((hDown & KEY_UP && Selection > 0))
+    if ((hDown & KEY_UP && Selection > 0)) 
     {
         Selection--;
-    }
+    } 
     if ((hDown & KEY_A && Selection == 0))
     {
         RenderD7::Scene::Load(std::make_unique<Browse>());
@@ -89,19 +89,20 @@ void Browse::Update(std::string path)
     for (const auto& content : temp)
     {
         /*if(RenderD7::NameIsEndingWith(this->items[this->dirsel], {"bcstm"}) || RD7_FSYS_GETINFO(this->items[this->dirsel].c_str()).type == RenderD7::FileSystem::FileType::FileType_Directory)
-        {*/
+        {*/ 
             this->items.push_back(content.c_str());
-        //}
+        //} 
     } 
 }
 
 Browse::Browse()
 {
+    RenderD7::FileSystem::SetSource("test");
     RenderD7::Msg::Display("BCSTM-Player", "Loading Directory", Top);
-    Update("/");
+    Update("");
     
     this->changeddir = false;
-}
+} 
 
 void Browse::Draw(void) const
 {
