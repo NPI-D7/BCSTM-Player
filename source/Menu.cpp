@@ -88,10 +88,10 @@ void Browse::Update(std::string path)
     RenderD7::FileSystem::GetDirectoryItems(path.c_str(), temp);
     for (const auto& content : temp)
     {
-        if(RenderD7::NameIsEndingWith(this->items[this->dirsel], {"bcstm"}) || RD7_FSYS_GETINFO(this->items[this->dirsel].c_str()).type == RenderD7::FileSystem::FileType::FileType_Directory)
-        {
+        /*if(RenderD7::NameIsEndingWith(this->items[this->dirsel], {"bcstm"}) || RD7_FSYS_GETINFO(this->items[this->dirsel].c_str()).type == RenderD7::FileSystem::FileType::FileType_Directory)
+        {*/
             this->items.push_back(content.c_str());
-        }
+        //}
     } 
 }
 

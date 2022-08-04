@@ -15,7 +15,10 @@ void PlayerT(RenderD7::Parameter m_parameter)
 
 int main(int argc, char* argv[])
 {
-    RenderD7::FileSystem::Init(argv[0]);
+    if(!RenderD7::FileSystem::Init(argv[0]))
+    {
+        RenderD7::AddOvl(std::make_unique<RenderD7::Toast>("PHYSFS Error", RenderD7::FileSystem::GetPhysfsError()));
+    }
     RenderD7::Init::Main("BCSTM-Player");
     RenderD7::Init::NdspFirm(true);
     aptSetSleepAllowed(false);
