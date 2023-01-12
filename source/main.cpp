@@ -1,50 +1,64 @@
-#include "Menu.hpp"
 #include "BCSTM.hpp"
-#include <renderd7/log.hpp>
-#include "TitleManager.hpp"
+#include "Menu.hpp"
+#include <citro3d.h>
+#include <stdio.h>
+//#include "TitleManager.hpp"
 
-//RenderD7::Image img;
-extern BCSTM player;
-RenderD7::Sheet sheet;
-extern Log cachelog;
+// RenderD7::Image img;
 
-extern int cobj___;
-
-void CardScan(RenderD7::Parameter param) {
-    while (true) {
-        D7TM::CardLoop();
-        player.tick();
-        RenderD7::Thread::sleep(1000 * 1);
-    }
+void InitColors() {
+  nlc::color_storage::Add(nlc::color_t("#ffffff"), "white");
+  nlc::color_storage::Add(nlc::color_t("#eeeeee"), "style_white");
+  nlc::color_storage::Add(nlc::color_t("#111111"), "style_black");
+  nlc::color_storage::Add(nlc::color_t("#222222"), "style_black2");
+  nlc::color_storage::Add(nlc::color_t("#333333"), "style_black3");
+  nlc::color_storage::Add(nlc::color_t("#666666"), "style_black4");
+  nlc::color_storage::Add(nlc::color_t("#cccccc"), "style_grey");
 }
 
-int main()
-{
-    cobj___ = 15000;
-    RenderD7::Init::Main("BCSTM-Player");
-    mkdir("sdmc:/BCSTM-Player/", 0777);
-    mkdir("sdmc:/BCSTM-Player/cache/", 0777);
-    RenderD7::Lang::load(RenderD7::Lang::getSys());
-    //img.LoadPng("romfs:/gfx/bg.png");
-    cachelog.Init("sdmc:/BCSTM-Player/cache.log");
-    RenderD7::Init::NdspFirm(true);
-    aptSetSleepAllowed(false);
-    sheet.Load("romfs:/gfx/sprites.t3x");
-    D7TM::IconLoading(false);
-    RenderD7::Scene::Load(std::make_unique<MMM>());
-    RenderD7::Thread t1(CardScan, 1);
-    t1.start();
-    while(RenderD7::MainLoop())
-    {
-        //RenderD7::Scene::doDraw();
-        //RenderD7::Scene::doLogic(d7_hDown, d7_hHeld, d7_hUp, d7_touch);
-        //player.tick();
-        
-        RenderD7::FrameEnd();
-    }
-    player.stop();
-    t1.kill();
-    sheet.Free();
-    RenderD7::Exit::NdspFirm();
-    RenderD7::Exit::Main();
+extern BCSTM player;
+bool exit_ = false;
+
+void Bcstm_Loop() {
+  while (!exit_) {
+    player.tick();
+    nlc::worker::sleep(1 * 1000);
+  }
+  return;
+}
+
+int main() {
+  nlc::napp app("BCSTM-Player");
+  //  nlc::ntrace::init("sdmc:/bcstm.trace");
+  app.InitNdsp();
+  InitColors();
+  nlc::nr::Init();
+  nlc::nr2::AddFont("romfs:/roboto_regular.bcfnt", "sans");
+  nlc::nr2::AddFont("romfs:/roboto_bold.bcfnt", "sans_bold");
+  nlc::nr2::AddFont("romfs:/roboto_medium.bcfnt", "sans_medium");
+  nlc::nr2::AddFont("romfs:/roboto_medium_italic.bcfnt", "sans_medil");
+  std::filesystem::create_directories(
+      std::filesystem::path("sdmc:/BCSTM-Player/cache/"));
+  nlc::lang::load(app.GetSysLangKey());
+  aptSetSleepAllowed(false);
+
+  nlc::worker::push(Bcstm_Loop, "bcstm_loop");
+  nlc::scene::Load(std::make_unique<MMM>());
+
+  while (app.Running() && !exit_) {
+    hidScanInput();
+    nlc::nr::DrawBeg();
+    nlc::scene::doDraw();
+    nlc::scene::doLogic();
+    nlc::nr2::DrawOnScreen(1);
+    nlc::nr2::DrawText(0, 0, 0.7, nlc::color_storage::Get("white"),
+                       std::to_string(C3D_GetProcessingTime()) + "ms");
+    nlc::nr::DrawEnd();
+  }
+  exit_ = true;
+  // nlc::ntrace::exit();
+  nlc::nr2::UnloadFonts();
+  nlc::nr::Exit();
+  player.stop();
+  return 0;
 }

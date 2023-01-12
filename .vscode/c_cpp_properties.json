@@ -3,17 +3,18 @@
         {
             "name": "3DS",
             "includePath": [
-                "${workspaceFolder}",
-                "${workspaceFolder}/BCSTM/**",
-                "${workspaceFolder}/D7-Menu-Core/**",
-                "/devkitpro/libctru/include/**",
-                "/devkitpro/portlibs/3ds/include/**",
-                "${workspaceFolder}/RenderD7/**"
+                "${workspaceFolder}/**",
+                "C:/devkitpro/devkitARM/include/**",
+                "C:/devkitpro/devkitARM/arm-none-eabi/include/**",
+                "C:/devkitpro/libctru/include/**",
+                "C:/devkitpro/portlibs/3ds/include/**",
+                "/opt/devkitpro/devkitARM/include/**",
+                "/opt/devkitpro/devkitARM/arm-none-eabi/include/**",
+                "/opt/devkitpro/libctru/include/**",
+                "/opt/devkitpro/portlibs/3ds/include/**"
             ],
-            "intelliSenseMode": "gcc-arm",
             "cStandard": "c17",
-            "cppStandard": "c++17",
-            "configurationProvider": "ms-vscode.makefile-tools"
+            "cppStandard": "c++20"
         }
     ],
     "version": 4

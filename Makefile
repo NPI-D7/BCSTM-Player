@@ -66,9 +66,9 @@ VERSION_MICRO := 0
 #---------------------------------------------------------------------------------
 TARGET		:=	BCSTM-Player
 BUILD		:=	build
-SOURCES		:=	source BCSTM D7-Menu-Core
+SOURCES		:=	source BCSTM nlc/source/napp nlc/source/nr nlc/source/nr2 nlc/source/nuseful nlc/source/nconfig nlc/source/ndfa
 DATA		:=	data
-INCLUDES	:=	source BCSTM D7-Menu-Core
+INCLUDES	:=	source BCSTM nlc/include
 GRAPHICS	:=	gfx
 #GFXBUILD	:=	$(BUILD)
 ROMFS		:=	romfs

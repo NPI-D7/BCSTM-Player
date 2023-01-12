@@ -1,69 +1,81 @@
-#include <rd7.hpp>
+#pragma once
+#include <nlc.hpp>
+#include <nuseful/stringtools.hpp>
 
-class MMM : public RenderD7::Scene
+#define getcol(col) nlc::color_storage::Get(col)
+
+struct TObject
+{
+    int x;
+    int y;
+    int w;
+    int h;
+    std::string name;
+    int ftx;
+    int fty;
+};
+
+class MMM : public nlc::scene
 {
     public:
     void Draw(void) const override;
-    void Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch) override;
+    void Logic() override;
     MMM();
     private:
-    std::vector<RenderD7::TObject> buttons = 
+    std::vector<TObject> buttons = 
     {
-        {20, 35, 120, 35, "Browse", -11, 10},
-        {20, 85, 120, 35, "Titles", 0, 12},
-        {20, 135, 120, 35, "Credits", -8, 12},
-        {20, 185, 120, 35, "Exit", 8, 10},
-        {180, 35, 120, 35, "Settings(X)", -15, 10},
-        {180, 85, 120, 35, "Update(X)", -15, 10},
-        {180, 135, 120, 35, "RD7", 0, 10},
-        {180, 185, 120, 35, "Nothing(X)", -15, 10}
+        {100, 35, 120, 35, "Browse", 0, 0},
+        {100, 85, 120, 35, "Titles", 0, 0},
+        {100, 135, 120, 35, "Credits", 0, 0},
+        {100, 185, 120, 35, "Exit", 0, 0},
     };
     int Selection = 0;
 };
 
-class Browse : public RenderD7::Scene
+class Browse : public nlc::scene
 {
     public:
     void Draw(void) const override;
-    void Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch) override;
+    void Logic() override;
     Browse();
    // static void FS_Thread(RenderD7::Parameter param);
     private:
-    std::vector<RenderD7::DirContent> dircontent;
+    std::string dir;
+    std::vector<nlc::fsys::DirEntry> dircontent;
     int dirsel = 0;
     bool changeddir = false;
 };
 
-class Credits : public RenderD7::Scene
+class Credits : public nlc::scene
 {
     public:
     void Draw(void) const override;
-    void Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch) override;
+    void Logic() override;
     Credits();
     private:
     int n = 0;
 };
 
-class Titles : public RenderD7::Scene
-{
-    public:
-    void Draw(void) const override;
-    void Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch) override;
-    Titles();
-    
-    private:
-    int selection = 0;  
-    int maxtitles = 0;  
-};
+//class Titles : public nlc::scene
+//{
+//    public:
+//    void Draw(void) const override;
+//    void Logic() override;
+//    Titles();
+//    
+//    private:
+//    int selection = 0;  
+//    int maxtitles = 0;  
+//};
 
-class RomfsBrowse : public RenderD7::Scene
-{
-    public:
-    void Draw(void) const override;
-    void Logic(u32 hDown, u32 hHeld, u32 hUp, touchPosition touch) override;
-    RomfsBrowse();
-    private:
-    std::vector<RenderD7::DirContent> dircontent;
-    int dirsel = 0;
-    bool changeddir = false;
-};
+//class RomfsBrowse : public nlc::scene
+//{
+//    public:
+//    void Draw(void) const override;
+//    void Logic() override;
+//    RomfsBrowse();
+//    private:
+//    std::vector<RenderD7::DirContent> dircontent;
+//    int dirsel = 0;
+//    bool changeddir = false;
+//};
