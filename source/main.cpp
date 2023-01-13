@@ -70,6 +70,14 @@ int main() {
     nlc::nr::DrawBeg();
     nlc::scene::doDraw();
     nlc::scene::doLogic();
+    nlc::nr2::DrawOnScreen(0);
+    if (!app.IsNdspLoadet())
+      nlc::nr2::DrawText(5, 155, 0.6f, getcol("style_black"),
+                         "<sdmc:/3ds/dspfirm.cdc> not found!\nThis means that "
+                         "audio does not work!\nTo Fix this: Go "
+                         "to\nRosalinamenu->Miscellaneous options...->Dump DSP "
+                         "Firmware\nAnd Restart this App",
+                         0, 0, "sans_medil");
     nlc::nr2::DrawOnScreen(1);
     // nlc::nr2::DrawText(0, 0, 0.7, nlc::color_storage::Get("white"),
     //                    std::to_string(C3D_GetProcessingTime()) + "ms");

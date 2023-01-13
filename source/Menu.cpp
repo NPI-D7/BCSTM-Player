@@ -55,6 +55,9 @@ void MMM::Draw(void) const {
   nlc::nr2::DrawText(5, 2, 0.7f, getcol("white"),
                      "BCSTM-Player->" + nlc::lang::get("MAINMENU"), 0, 0,
                      "sans_bold");
+  nlc::nr2::DrawText(
+      5, 30, 0.7f, getcol("style_black"),
+      "\uE003: Stop Player!\n\uE002 or \uE001: Back to MainMenu");
   // std::vector<std::string> tsks = nlc::worker::GetTasks();
   // for (size_t i = 0; i < tsks.size(); i++) {
   //   nlc::nr2::DrawText(5, 30 + i * 30, 0.7f, getcol("style_black"), tsks[i]);
@@ -250,7 +253,7 @@ void Credits::Draw(void) const {
   // img.Draw(0, 0);
   nlc::nr2::DrawRectSolid(0, 0, 400, 26, getcol("style_black2"));
   nlc::nr2::DrawRectSolid(0, 240, 400, -26, getcol("style_black2"));
-  std::string stdzeitverschwendung = "Version: 1.2.0";
+  std::string stdzeitverschwendung = "Version: 1.2.1";
   std::string stdzeitverschwendung2 = "nightly: " V_STRING;
   nlc::nr2::DrawText(0, 2, 0.7f, getcol("white"), "BCSTM-Player->Credits", 0, 0,
                      "sans_bold");
