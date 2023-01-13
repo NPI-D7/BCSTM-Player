@@ -9,6 +9,14 @@
 #define V_STRING ""
 #endif
 
+bool touchTObj(touchPosition touch, TObject button) {
+  if (touch.px >= button.x && touch.px <= (button.x + button.w) &&
+      touch.py >= button.y && touch.py <= (button.y + button.h))
+    return true;
+  else
+    return false;
+}
+
 BCSTM player;
 
 extern bool exit_;
@@ -45,8 +53,13 @@ void MMM::Draw(void) const {
   // img.Draw(0, 0);
   nlc::nr2::DrawRectSolid(0, 0, 400, 26, getcol("style_black"));
   nlc::nr2::DrawText(5, 2, 0.7f, getcol("white"),
-                     "BCSTM-Player->" + nlc::lang::get("MAINMENU"));
-  nlc::ntrace::trace_end("bcstm", "TextT");
+                     "BCSTM-Player->" + nlc::lang::get("MAINMENU"), 0, 0,
+                     "sans_bold");
+  // std::vector<std::string> tsks = nlc::worker::GetTasks();
+  // for (size_t i = 0; i < tsks.size(); i++) {
+  //   nlc::nr2::DrawText(5, 30 + i * 30, 0.7f, getcol("style_black"), tsks[i]);
+  // }
+
   if (playing) {
     nlc::nr2::DrawText(5, 218, 0.7f, getcol("style_black"),
                        "Playing: " + currentlypl);
@@ -65,28 +78,39 @@ void MMM::Draw(void) const {
   }
 }
 void MMM::Logic() {
+  touchPosition touch_;
+  hidTouchRead(&touch_);
   if (((hidKeysDown() & KEY_DOWN && Selection < 4 && Selection != 3))) {
     Selection++;
   }
   if (((hidKeysDown() & KEY_UP && Selection > 0 && Selection != 4))) {
     Selection--;
   }
-   if ((hidKeysDown() & KEY_A && Selection == 0)) {
+  if ((hidKeysDown() & KEY_A && Selection == 0)) {
     nlc::scene::Load(std::make_unique<Browse>());
   }
   // if (hidKeysDown() & KEY_A && Selection == 1)
   //{
   //     nlc::scene::Load(std::make_unique<Titles>());
   // }
-  if ((hidKeysDown() & KEY_A && Selection == 2)) {
+  if ((hidKeysDown() & KEY_A && Selection == 1)) {
     nlc::scene::Load(std::make_unique<Credits>());
   }
-  // if ((hidKeysDown() & KEY_A && Selection == 3))
+  if ((hidKeysDown() & KEY_A && Selection == 2)) {
+    exit_ = true;
+  }
+  if ((hidKeysDown() & KEY_TOUCH && touchTObj(touch_, buttons[0]))) {
+    nlc::scene::Load(std::make_unique<Browse>());
+  }
+  // if (hidKeysDown() & KEY_TOUCH && touchTObj(touch_, buttons[1]))
   //{
-  //     RenderD7::ExitApp();
+  //     nlc::scene::Load(std::make_unique<Titles>());
   // }
-  if ((hidKeysDown() & KEY_A && Selection == 6)) {
-    // RenderD7::LoadSettings();
+  if ((hidKeysDown() & KEY_TOUCH && touchTObj(touch_, buttons[1]))) {
+    nlc::scene::Load(std::make_unique<Credits>());
+  }
+  if ((hidKeysDown() & KEY_TOUCH && touchTObj(touch_, buttons[2]))) {
+    exit_ = true;
   }
   if (hidKeysDown() & KEY_START) {
     exit_ = true;
@@ -98,10 +122,6 @@ void MMM::Logic() {
       playing = false;
     }
   }
-  // if(hidKeysDown() & KEY_L)
-  //{
-  //     nlc::scene::Load(std::make_unique<RomfsBrowse>());
-  // }
 }
 
 Browse::Browse() {
@@ -141,7 +161,7 @@ void Browse::Draw(void) const {
     dirs += it;
   }
 
-  nlc::nr2::DrawText(10, 30, 0.7f, getcol("style_black"), dirs.c_str(), 0, 0,
+  nlc::nr2::DrawText(10, 28, 0.7f, getcol("style_black"), dirs.c_str(), 0, 0,
                      "sans");
   nlc::nr2::DrawOnScreen(1);
   nlc::nr2::DrawRectSolid(0, 0, 320, 240, getcol("style_white"));
@@ -230,7 +250,7 @@ void Credits::Draw(void) const {
   // img.Draw(0, 0);
   nlc::nr2::DrawRectSolid(0, 0, 400, 26, getcol("style_black2"));
   nlc::nr2::DrawRectSolid(0, 240, 400, -26, getcol("style_black2"));
-  std::string stdzeitverschwendung = "Version: 1.0.0";
+  std::string stdzeitverschwendung = "Version: 1.2.0";
   std::string stdzeitverschwendung2 = "nightly: " V_STRING;
   nlc::nr2::DrawText(0, 2, 0.7f, getcol("white"), "BCSTM-Player->Credits", 0, 0,
                      "sans_bold");

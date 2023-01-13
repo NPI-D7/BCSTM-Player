@@ -16,11 +16,29 @@ void InitColors() {
   nlc::color_storage::Add(nlc::color_t("#cccccc"), "style_grey");
 }
 
+bool splash = true;
+
+void DoSplash() {
+  while (splash) {
+    nlc::nr::DrawBeg();
+    nlc::nr2::DrawOnScreen();
+
+    nlc::nr2::DrawRectSolid(0, 0, 400, 240, getcol("style_white"));
+    nlc::nr2::DrawRectSolid(0, 0, 400, 26, getcol("style_black"));
+    nlc::nr2::DrawText(5, 2, 0.7f, 0xffffffff, "BCSTM-Player -> Loading...");
+
+    nlc::nr2::DrawOnScreen(1);
+    nlc::nr2::DrawRectSolid(0, 0, 320, 240, getcol("style_black2"));
+    C3D_FrameEnd(0);
+    gspWaitForVBlank();
+  }
+}
+
 extern BCSTM player;
 bool exit_ = false;
 
 void Bcstm_Loop() {
-  while (!exit_) {
+  while (true) {
     player.tick();
     nlc::worker::sleep(1 * 1000);
   }
@@ -31,8 +49,9 @@ int main() {
   nlc::napp app("BCSTM-Player");
   //  nlc::ntrace::init("sdmc:/bcstm.trace");
   app.InitNdsp();
-  InitColors();
   nlc::nr::Init();
+  nlc::worker::push(DoSplash, "splash");
+  InitColors();
   nlc::nr2::AddFont("romfs:/roboto_regular.bcfnt", "sans");
   nlc::nr2::AddFont("romfs:/roboto_bold.bcfnt", "sans_bold");
   nlc::nr2::AddFont("romfs:/roboto_medium.bcfnt", "sans_medium");
@@ -43,6 +62,7 @@ int main() {
   aptSetSleepAllowed(false);
 
   nlc::worker::push(Bcstm_Loop, "bcstm_loop");
+  splash = false;
   nlc::scene::Load(std::make_unique<MMM>());
 
   while (app.Running() && !exit_) {
@@ -51,12 +71,12 @@ int main() {
     nlc::scene::doDraw();
     nlc::scene::doLogic();
     nlc::nr2::DrawOnScreen(1);
-    nlc::nr2::DrawText(0, 0, 0.7, nlc::color_storage::Get("white"),
-                       std::to_string(C3D_GetProcessingTime()) + "ms");
+    // nlc::nr2::DrawText(0, 0, 0.7, nlc::color_storage::Get("white"),
+    //                    std::to_string(C3D_GetProcessingTime()) + "ms");
     nlc::nr::DrawEnd();
   }
-  exit_ = true;
-  // nlc::ntrace::exit();
+  // exit_ = true;
+  //  nlc::ntrace::exit();
   nlc::nr2::UnloadFonts();
   nlc::nr::Exit();
   player.stop();
