@@ -2,7 +2,7 @@
 #include "Menu.hpp"
 #include "BCSTM.hpp"
 #include <log.hpp>
-//#include "TitleManager.hpp"
+// #include "TitleManager.hpp"
 
 #ifdef V_STRING
 #else
@@ -28,16 +28,18 @@ nlc::image background;
 
 // RenderD7::Checkbox box{40, 60, 20};
 
+extern bool is3dsx;
+
 void clearCache() {
   remove("sdmc:/BCSTM-Player/cache/sd");
   remove("sdmc:/BCSTM-Player/cache/nand");
 }
 void DrawFMBG() {
-  nlc::nr2::DrawRectSolid(0, 49, 400, 18, getcol("style_grey"));
-  nlc::nr2::DrawRectSolid(0, 85, 400, 18, getcol("style_grey"));
-  nlc::nr2::DrawRectSolid(0, 121, 400, 18, getcol("style_grey"));
-  nlc::nr2::DrawRectSolid(0, 157, 400, 18, getcol("style_grey"));
-  nlc::nr2::DrawRectSolid(0, 193, 400, 18, getcol("style_grey"));
+  nlc::nr2::DrawRectSolid(0, 46, 400, 18, getcol("style_grey"));
+  nlc::nr2::DrawRectSolid(0, 82, 400, 18, getcol("style_grey"));
+  nlc::nr2::DrawRectSolid(0, 118, 400, 18, getcol("style_grey"));
+  nlc::nr2::DrawRectSolid(0, 154, 400, 18, getcol("style_grey"));
+  nlc::nr2::DrawRectSolid(0, 190, 400, 18, getcol("style_grey"));
 }
 
 Log llg;
@@ -58,10 +60,11 @@ void MMM::Draw(void) const {
   nlc::nr2::DrawText(
       5, 30, 0.7f, getcol("style_black"),
       "\uE003: Stop Player!\n\uE002 or \uE001: Back to MainMenu");
-  // std::vector<std::string> tsks = nlc::worker::GetTasks();
-  // for (size_t i = 0; i < tsks.size(); i++) {
-  //   nlc::nr2::DrawText(5, 30 + i * 30, 0.7f, getcol("style_black"), tsks[i]);
-  // }
+  if (is3dsx)
+    nlc::nr2::DrawText(5, 75, 0.7f, getcol("style_black"),
+                       "The 3dsx Version does not Work currently!\nPlease Use "
+                       "The Cia Version!",
+                       0, 0, "sans_bold");
 
   if (playing) {
     nlc::nr2::DrawText(5, 218, 0.7f, getcol("style_black"),
@@ -140,32 +143,34 @@ void Browse::Draw(void) const {
   nlc::nr2::DrawRectSolid(0, 0, 400, 26, getcol("style_black2"));
   nlc::nr2::DrawText(5, 2, 0.7f, getcol("white"), "BCSTM-Player->FileManager",
                      0, 0, "sans_bold");
-  DrawFMBG();
+  // DrawFMBG();
+  nlc::nr2::DrawRectSolid(0, 27, 400, 188, getcol("style_grey"));
   nlc::nr2::DrawText(5, 216, 0.7f, getcol("style_black"), dir, 0, 0,
                      "sans_medil");
-  std::string dirs;
-  std::vector<std::string> dlst;
-  for (int i = this->dirsel < 9 ? 0 : this->dirsel - 9;
-       (int)dircontent.size() &&
-       i < ((this->dirsel < 9) ? 10 : this->dirsel + 1);
-       i++) {
-    if (i == dirsel) {
-      dlst.push_back("> " + dircontent[i].name + "\n");
-    } else {
-      dlst.push_back(dircontent[i].name + "\n");
-    }
-  }
-  // for (int i = 0;
-  //      i < (((int)dircontent.size() < 10) ? 10 - (int)dircontent.size() : 0);
+
+  // std::vector<std::string> dlst;
+  // for (int i = this->dirsel < 9 ? 0 : this->dirsel - 9;
+  //      (int)dircontent.size() &&
+  //      i < ((this->dirsel < 9) ? 10 : this->dirsel + 1);
   //      i++) {
-  //   dirs += "\n\n";
-  // }
-  for (auto const &it : dlst) {
-    dirs += it;
+  //   if (i == dirsel) {
+  //     dlst.push_back("> " + dircontent[i].name + "\n");
+  //   } else {
+  //     dlst.push_back(dircontent[i].name + "\n");
+  //   }
+  // }s
+  for (size_t i = 0; i < ((dircontent.size() < 9) ? dircontent.size() : 10);
+       i++) {
+    if (dirsel == (dirsel < 9 ? (int)i : (int)i + (dirsel - 9))) {
+      nlc::nr2::DrawRectSolid(0, 30 + (i * 18), 400, 18,
+                              getcol("style_black4"));
+    }
+    nlc::nr2::DrawText(
+        10, 28 + i * 18, 0.7f, getcol("style_black"),
+        dircontent[(dirsel < 9 ? i : i + (dirsel - 9))].name.c_str(), 0, 0,
+        "sans");
   }
 
-  nlc::nr2::DrawText(10, 28, 0.7f, getcol("style_black"), dirs.c_str(), 0, 0,
-                     "sans");
   nlc::nr2::DrawOnScreen(1);
   nlc::nr2::DrawRectSolid(0, 0, 320, 240, getcol("style_white"));
   if (playing) {
@@ -187,7 +192,7 @@ void Browse::Logic() {
     std::vector<nlc::fsys::DirEntry> temp =
         nlc::fsys::GetDirContentsExt(dir, {"bcstm"});
 
-    for (uint i = 0; i < temp.size(); i++) {
+    for (int i = 0; i < (int)temp.size(); i++) {
       this->dircontent.push_back(temp[i]);
     }
 
@@ -253,7 +258,7 @@ void Credits::Draw(void) const {
   // img.Draw(0, 0);
   nlc::nr2::DrawRectSolid(0, 0, 400, 26, getcol("style_black2"));
   nlc::nr2::DrawRectSolid(0, 240, 400, -26, getcol("style_black2"));
-  std::string stdzeitverschwendung = "Version: 1.2.1";
+  std::string stdzeitverschwendung = "Version: 1.3.0";
   std::string stdzeitverschwendung2 = "nightly: " V_STRING;
   nlc::nr2::DrawText(0, 2, 0.7f, getcol("white"), "BCSTM-Player->Credits", 0, 0,
                      "sans_bold");

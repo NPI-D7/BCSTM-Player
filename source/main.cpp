@@ -2,7 +2,7 @@
 #include "Menu.hpp"
 #include <citro3d.h>
 #include <stdio.h>
-//#include "TitleManager.hpp"
+// #include "TitleManager.hpp"
 
 // RenderD7::Image img;
 
@@ -14,6 +14,14 @@ void InitColors() {
   nlc::color_storage::Add(nlc::color_t("#333333"), "style_black3");
   nlc::color_storage::Add(nlc::color_t("#666666"), "style_black4");
   nlc::color_storage::Add(nlc::color_t("#cccccc"), "style_grey");
+}
+
+bool is3dsx = false;
+
+static void getCurrentUsage() {
+  u64 id;
+  APT_GetProgramID(&id);
+  is3dsx = (id != 0x0004000007893300);
 }
 
 bool splash = true;
@@ -37,19 +45,20 @@ void DoSplash() {
 extern BCSTM player;
 bool exit_ = false;
 
-void Bcstm_Loop() {
-  while (true) {
-    player.tick();
-    nlc::worker::sleep(1 * 1000);
-  }
-  return;
-}
+// void Bcstm_Loop() {
+//   while (true) {
+//     player.tick();
+//     nlc::worker::sleep(1 * 1000);
+//   }
+//   player.stop();
+// }
 
 int main() {
   nlc::napp app("BCSTM-Player");
   //  nlc::ntrace::init("sdmc:/bcstm.trace");
   app.InitNdsp();
   nlc::nr::Init();
+  getCurrentUsage();
   nlc::worker::push(DoSplash, "splash");
   InitColors();
   nlc::nr2::AddFont("romfs:/roboto_regular.bcfnt", "sans");
@@ -61,7 +70,7 @@ int main() {
   nlc::lang::load(app.GetSysLangKey());
   aptSetSleepAllowed(false);
 
-  nlc::worker::push(Bcstm_Loop, "bcstm_loop");
+  // nlc::worker::push(Bcstm_Loop, "bcstm_loop");
   splash = false;
   nlc::scene::Load(std::make_unique<MMM>());
 
@@ -82,11 +91,12 @@ int main() {
     // nlc::nr2::DrawText(0, 0, 0.7, nlc::color_storage::Get("white"),
     //                    std::to_string(C3D_GetProcessingTime()) + "ms");
     nlc::nr::DrawEnd();
+    player.tick();
   }
   // exit_ = true;
   //  nlc::ntrace::exit();
+  player.stop();
   nlc::nr2::UnloadFonts();
   nlc::nr::Exit();
-  player.stop();
   return 0;
 }
