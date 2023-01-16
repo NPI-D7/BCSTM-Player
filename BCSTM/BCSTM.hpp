@@ -17,14 +17,15 @@ public:
   void pause();
   void stop();
   inline std::string GetLoop() { return this->m_looping ? "True" : "False"; }
+  inline bool IsLoadet() { return isLoaded; }
   inline std::string GetLoopStart() {
     return std::to_string(this->m_blockLoopStart);
   }
   inline std::string GetLoopEnd() {
     return std::to_string(this->m_blockLoopEnd);
   }
-  inline float GetTotal() { return (float)this->lastTime; }
-  inline float GetCurrent() { return (float)this->currTime; }
+  inline float GetTotal() { return (float)this->m_blockCount; }
+  inline float GetCurrent() { return (float)this->m_currentBlock; }
 
 protected:
   void streamData();

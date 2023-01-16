@@ -9,6 +9,24 @@
 #define V_STRING ""
 #endif
 
+std::string shortstring(std::string in, float size, std::string font,
+                        int maxlen) {
+  if (nlc::nr2::GetTextWidth(size, in, font) > maxlen) {
+    std::string out;
+    for (size_t i = 0; i < in.size(); i++) {
+      out += in[i];
+      if ((nlc::nr2::GetTextWidth(size, out, font) +
+           nlc::nr2::GetTextWidth(size, "(...)", font) +
+           nlc::nr2::GetTextWidth(size, ".bcstm", font)) > maxlen) {
+        out += "(...)";
+        out += ".bcstm";
+        return out;
+      }
+    }
+  }
+  return in;
+}
+
 bool touchTObj(touchPosition touch, TObject button) {
   if (touch.px >= button.x && touch.px <= (button.x + button.w) &&
       touch.py >= button.y && touch.py <= (button.y + button.h))
@@ -67,9 +85,17 @@ void MMM::Draw(void) const {
                        0, 0, "sans_bold");
 
   if (playing) {
-    nlc::nr2::DrawText(5, 218, 0.7f, getcol("style_black"),
-                       "Playing: " + currentlypl);
+    nlc::nr2::DrawText(5, 188, 0.7f, getcol("style_black"),
+                       "Playing: " +
+                           shortstring(currentlypl, 0.7f, "sans_medium", 400),
+                       0, 0, "sans_medium");
+    nlc::nr2::DrawRectSolid(2, 214, 396, 24, getcol("style_black"));
+    nlc::nr2::DrawRectSolid(4, 216, 392, 20, getcol("style_grey"));
+    nlc::nr2::DrawRectSolid(4, 216,
+                            (player.GetCurrent() / player.GetTotal()) * 392, 20,
+                            getcol("green"));
   }
+
   nlc::nr2::DrawOnScreen(1);
   nlc::nr2::DrawRectSolid(0, 0, 320, 240, getcol("style_black2"));
   int hsel__ = 0;
@@ -141,11 +167,12 @@ void Browse::Draw(void) const {
   nlc::nr2::DrawOnScreen(0);
   nlc::nr2::DrawRectSolid(0, 0, 400, 240, getcol("style_white"));
   nlc::nr2::DrawRectSolid(0, 0, 400, 26, getcol("style_black2"));
+  nlc::nr2::DrawRectSolid(0, 216, 400, 26, getcol("style_black2"));
   nlc::nr2::DrawText(5, 2, 0.7f, getcol("white"), "BCSTM-Player->FileManager",
                      0, 0, "sans_bold");
   // DrawFMBG();
   nlc::nr2::DrawRectSolid(0, 27, 400, 188, getcol("style_grey"));
-  nlc::nr2::DrawText(5, 216, 0.7f, getcol("style_black"), dir, 0, 0,
+  nlc::nr2::DrawText(5, 216, 0.7f, getcol("style_white"), dir, 0, 0,
                      "sans_medil");
 
   // std::vector<std::string> dlst;
@@ -167,21 +194,48 @@ void Browse::Draw(void) const {
     }
     nlc::nr2::DrawText(
         10, 28 + i * 18, 0.7f, getcol("style_black"),
-        dircontent[(dirsel < 9 ? i : i + (dirsel - 9))].name.c_str(), 0, 0,
-        "sans");
+        shortstring(
+            dircontent[(dirsel < 9 ? i : i + (dirsel - 9))].name.c_str(), 0.7f,
+            "sans", 400),
+        0, 0, "sans");
   }
 
   nlc::nr2::DrawOnScreen(1);
   nlc::nr2::DrawRectSolid(0, 0, 320, 240, getcol("style_white"));
-  if (playing) {
-    nlc::nr2::DrawText(5, 218, 0.7f, getcol("style_black"),
-                       "Playing: " + currentlypl);
-  }
+  nlc::nr2::DrawText(5, 20, 0.7f, getcol("style_black"),
+                     "Playing: " +
+                         shortstring((playing ? currentlypl : "Nothing"), 0.7f,
+                                     "sans_medium", 310),
+                     0, 0, "sans_medium");
   nlc::nr2::DrawText(5, 2, 0.7f, getcol("style_black"),
                      "DirContents: " + std::to_string(dircontent.size()), 0, 0,
                      "sans_medium");
-  nlc::nr2::DrawText(5, 2, 0.7f, getcol("style_black"),
-                     "\nLoop: " + player.GetLoop(), 0, 0, "sans_medium");
+  nlc::nr2::DrawText(5, 20, 0.7f, getcol("style_black"),
+                     "\nLoadet: " +
+                         (std::string)(player.IsLoadet() ? "True" : "False"),
+                     0, 0, "sans_medium");
+  nlc::nr2::DrawText(5, 20, 0.7f, getcol("style_black"),
+                     "\n\nLoop: " + player.GetLoop(), 0, 0, "sans_medium");
+  nlc::nr2::DrawText(5, 20, 0.7f, getcol("style_black"),
+                     "\n\n\nLoopStart: " + player.GetLoopStart(), 0, 0,
+                     "sans_medium");
+  nlc::nr2::DrawText(5, 20, 0.7f, getcol("style_black"),
+                     "\n\n\n\nLoopEnd: " + player.GetLoopEnd(), 0, 0,
+                     "sans_medium");
+  nlc::nr2::DrawText(5, 20, 0.7f, getcol("style_black"),
+                     "\n\n\n\n\nCurrent: " +
+                         std::to_string((int)player.GetCurrent()),
+                     0, 0, "sans_medium");
+  nlc::nr2::DrawText(5, 20, 0.7f, getcol("style_black"),
+                     "\n\n\n\n\n\nTotal: " +
+                         std::to_string((int)player.GetTotal()),
+                     0, 0, "sans_medium");
+
+  nlc::nr2::DrawRectSolid(2, 214, 316, 24, getcol("style_black"));
+  nlc::nr2::DrawRectSolid(4, 216, 312, 20, getcol("style_grey"));
+  nlc::nr2::DrawRectSolid(4, 216,
+                          (player.GetCurrent() / player.GetTotal()) * 312, 20,
+                          getcol("green"));
   // nlc::ntrace::trace_end("Browse", "Draw");
 }
 
@@ -258,7 +312,7 @@ void Credits::Draw(void) const {
   // img.Draw(0, 0);
   nlc::nr2::DrawRectSolid(0, 0, 400, 26, getcol("style_black2"));
   nlc::nr2::DrawRectSolid(0, 240, 400, -26, getcol("style_black2"));
-  std::string stdzeitverschwendung = "Version: 1.3.0";
+  std::string stdzeitverschwendung = "Version: 1.4.0";
   std::string stdzeitverschwendung2 = "nightly: " V_STRING;
   nlc::nr2::DrawText(0, 2, 0.7f, getcol("white"), "BCSTM-Player->Credits", 0, 0,
                      "sans_bold");

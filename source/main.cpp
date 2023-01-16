@@ -14,6 +14,7 @@ void InitColors() {
   nlc::color_storage::Add(nlc::color_t("#333333"), "style_black3");
   nlc::color_storage::Add(nlc::color_t("#666666"), "style_black4");
   nlc::color_storage::Add(nlc::color_t("#cccccc"), "style_grey");
+  nlc::color_storage::Add(nlc::color_t("#00ff00"), "green");
 }
 
 bool is3dsx = false;
@@ -45,13 +46,13 @@ void DoSplash() {
 extern BCSTM player;
 bool exit_ = false;
 
-// void Bcstm_Loop() {
-//   while (true) {
-//     player.tick();
-//     nlc::worker::sleep(1 * 1000);
-//   }
-//   player.stop();
-// }
+void Bcstm_Loop() {
+  while (true) {
+    player.tick();
+    nlc::worker::sleep(1 * 1000);
+  }
+  player.stop();
+}
 
 int main() {
   nlc::napp app("BCSTM-Player");
@@ -70,7 +71,7 @@ int main() {
   nlc::lang::load(app.GetSysLangKey());
   aptSetSleepAllowed(false);
 
-  // nlc::worker::push(Bcstm_Loop, "bcstm_loop");
+  nlc::worker::push(Bcstm_Loop, "bcstm_loop");
   splash = false;
   nlc::scene::Load(std::make_unique<MMM>());
 
@@ -91,11 +92,11 @@ int main() {
     // nlc::nr2::DrawText(0, 0, 0.7, nlc::color_storage::Get("white"),
     //                    std::to_string(C3D_GetProcessingTime()) + "ms");
     nlc::nr::DrawEnd();
-    player.tick();
+    // player.tick();
   }
   // exit_ = true;
   //  nlc::ntrace::exit();
-  player.stop();
+  // player.stop();
   nlc::nr2::UnloadFonts();
   nlc::nr::Exit();
   return 0;

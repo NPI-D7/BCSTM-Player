@@ -58,7 +58,7 @@ endif
 
 VERSION_MAJOR := 1
 
-VERSION_MINOR := 3
+VERSION_MINOR := 4
 
 VERSION_MICRO := 0
 
@@ -66,7 +66,7 @@ VERSION_MICRO := 0
 #---------------------------------------------------------------------------------
 TARGET		:=	BCSTM-Player
 BUILD		:=	build
-SOURCES		:=	source BCSTM nlc/source/napp nlc/source/nr nlc/source/nr2 nlc/source/nuseful nlc/source/nconfig nlc/source/ndfa
+SOURCES		:=	source BCSTM nlc/source/napp nlc/source/nr nlc/source/nr2 nlc/source/nuseful nlc/source/nconfig nlc/source/lithium
 DATA		:=	data
 INCLUDES	:=	source BCSTM nlc/include
 GRAPHICS	:=	gfx
