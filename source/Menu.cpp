@@ -161,8 +161,8 @@ void Browse::Draw(void) const {
   // nlc::ntrace::trace_begin("Browse", "Draw");
   nlc::nr2::DrawOnScreen(0);
   nlc::nr2::DrawRectSolid(0, 0, 400, 240, getcol("style_white"));
-  nlc::nr2::DrawRectSolid(0, 0, 400, 26, getcol("style_black2"));
-  nlc::nr2::DrawRectSolid(0, 216, 400, 26, getcol("style_black2"));
+  nlc::nr2::DrawRectSolid(0, 0, 400, 26, getcol("style_black"));
+  nlc::nr2::DrawRectSolid(0, 216, 400, 26, getcol("style_black"));
   nlc::nr2::DrawText(5, 2, 0.7f, getcol("white"), "BCSTM-Player->FileManager",
                      0, 0, "sans_bold");
   // DrawFMBG();
@@ -306,9 +306,9 @@ void Credits::Draw(void) const {
   nlc::nr2::DrawOnScreen(0);
   nlc::nr2::DrawRectSolid(0, 0, 400, 240, getcol("style_white"));
   // img.Draw(0, 0);
-  nlc::nr2::DrawRectSolid(0, 0, 400, 26, getcol("style_black2"));
-  nlc::nr2::DrawRectSolid(0, 240, 400, -26, getcol("style_black2"));
-  std::string stdzeitverschwendung = "Version: 1.4.0";
+  nlc::nr2::DrawRectSolid(0, 0, 400, 26, getcol("style_black"));
+  nlc::nr2::DrawRectSolid(0, 240, 400, -26, getcol("style_black"));
+  std::string stdzeitverschwendung = "Version: 1.5.0";
   std::string stdzeitverschwendung2 = "nightly: " V_STRING;
   nlc::nr2::DrawText(0, 2, 0.7f, getcol("white"), "BCSTM-Player->Credits", 0, 0,
                      "sans_bold");
@@ -321,10 +321,6 @@ void Credits::Draw(void) const {
                      0, 0, "sans_medium");
   nlc::nr2::DrawOnScreen(1);
   nlc::nr2::DrawRectSolid(0, 0, 320, 240, getcol("style_black2"));
-  // RenderD7::DrawText(5, 2, 0.6f, nlc::color_t("#FFFFFF"), "Framerate: " +
-  // RenderD7::GetFramerate());
-  // RenderD7::DrawCheckbox(box);
-  // RenderD7::DrawNFRect(20, 20, 50, 50, C2D_Color32(255, 255, 255, 255), 3);
 }
 
 void Credits::Logic() {
