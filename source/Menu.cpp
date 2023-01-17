@@ -78,11 +78,6 @@ void MMM::Draw(void) const {
   nlc::nr2::DrawText(
       5, 30, 0.7f, getcol("style_black"),
       "\uE003: Stop Player!\n\uE002 or \uE001: Back to MainMenu");
-  if (is3dsx)
-    nlc::nr2::DrawText(5, 75, 0.7f, getcol("style_black"),
-                       "The 3dsx Version does not Work currently!\nPlease Use "
-                       "The Cia Version!",
-                       0, 0, "sans_bold");
 
   if (playing) {
     nlc::nr2::DrawText(5, 188, 0.7f, getcol("style_black"),
@@ -267,7 +262,8 @@ void Browse::Logic() {
                                       {"bcstm"})) {
           playing = false;
           player.stop();
-          player.openFromFile(this->dircontent[this->dirsel].name);
+          player.openFromFile(this->dircontent[this->dirsel].path);
+
           player.play();
           currentlypl = this->dircontent[this->dirsel].name;
           playing = true;

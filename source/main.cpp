@@ -48,8 +48,9 @@ bool exit_ = false;
 
 void Bcstm_Loop() {
   while (true) {
-    player.tick();
-    nlc::worker::sleep(1 * 1000);
+    if (player.IsLoadet())
+      player.tick();
+    nlc::worker::sleep(1 * 100);
   }
   player.stop();
 }
@@ -89,8 +90,8 @@ int main() {
                          "Firmware\nAnd Restart this App",
                          0, 0, "sans_medil");
     nlc::nr2::DrawOnScreen(1);
-    // nlc::nr2::DrawText(0, 0, 0.7, nlc::color_storage::Get("white"),
-    //                    std::to_string(C3D_GetProcessingTime()) + "ms");
+    nlc::nr2::DrawText(0, 0, 0.7, nlc::color_storage::Get("white"),
+                       std::to_string(C3D_GetProcessingTime()) + "ms");
     nlc::nr::DrawEnd();
     // player.tick();
   }
