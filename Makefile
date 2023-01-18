@@ -66,9 +66,9 @@ VERSION_MICRO := 0
 #---------------------------------------------------------------------------------
 TARGET		:=	BCSTM-Player
 BUILD		:=	build
-SOURCES		:=	source BCSTM nlc/source/napp nlc/source/nr nlc/source/nr2 nlc/source/nuseful nlc/source/nconfig nlc/source/lithium
+SOURCES		:=	source BCSTM nlc/source/napp nlc/source/nr nlc/source/nr2 nlc/source/nuseful nlc/source/nconfig nlc/source/lithium source/d7-scan
 DATA		:=	data
-INCLUDES	:=	source BCSTM nlc/include
+INCLUDES	:=	source BCSTM nlc/include source/d7-scan
 GRAPHICS	:=	gfx
 #GFXBUILD	:=	$(BUILD)
 ROMFS		:=	romfs

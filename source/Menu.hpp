@@ -22,12 +22,12 @@ public:
 
 private:
   std::vector<TObject> buttons = {
-      {100, 52, 120, 35, "Browse", 3, 0},
-      {100, 102, 120, 35, "Credits", 8, 0},
-      {100, 152, 120, 35, "Exit", 18, 0},
-      //{100, 85, 120, 35, "Titles", 0, 0},
-      //{100, 135, 120, 35, "Credits", 0, 0},
-      //{100, 185, 120, 35, "Exit", 0, 0},
+      {100, 32, 120, 35, "Browse", 3, 0},
+      //{100, 102, 120, 35, "Credits", 8, 0},
+      //{100, 152, 120, 35, "Exit", 18, 0},
+      {100, 85, 120, 35, "Titles", 10, 0},
+      {100, 135, 120, 35, "Credits", 4, 0},
+      {100, 185, 120, 35, "Exit", 18, 0},
   };
   int Selection = 0;
 };
@@ -55,26 +55,26 @@ private:
   int n = 0;
 };
 
-// class Titles : public nlc::scene
-//{
-//     public:
-//     void Draw(void) const override;
-//     void Logic() override;
-//     Titles();
-//
-//     private:
-//     int selection = 0;
-//     int maxtitles = 0;
-// };
+class Titles : public nlc::scene {
+public:
+  void Draw(void) const override;
+  void Logic() override;
+  Titles();
 
-// class RomfsBrowse : public nlc::scene
-//{
-//     public:
-//     void Draw(void) const override;
-//     void Logic() override;
-//     RomfsBrowse();
-//     private:
-//     std::vector<RenderD7::DirContent> dircontent;
-//     int dirsel = 0;
-//     bool changeddir = false;
-// };
+private:
+  int selection = 0;
+  int maxtitles = 0;
+};
+
+class RomfsBrowse : public nlc::scene {
+public:
+  void Draw(void) const override;
+  void Logic() override;
+  RomfsBrowse();
+  // static void FS_Thread(RenderD7::Parameter param);
+private:
+  std::string dir;
+  std::vector<nlc::fsys::DirEntry> dircontent;
+  int dirsel = 0;
+  bool changeddir = false;
+};
