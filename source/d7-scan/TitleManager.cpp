@@ -3,7 +3,6 @@
 #include <array>
 #include <msg.hpp>
 
-
 static bool isValidId(u64 id) {
   // check for invalid titles.
   switch ((u32)id) {

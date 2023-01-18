@@ -175,17 +175,6 @@ void Browse::Draw(void) const {
   nlc::nr2::DrawText(5, 216, 0.7f, getcol("style_white"), dir, 0, 0,
                      "sans_medil");
 
-  // std::vector<std::string> dlst;
-  // for (int i = this->dirsel < 9 ? 0 : this->dirsel - 9;
-  //      (int)dircontent.size() &&
-  //      i < ((this->dirsel < 9) ? 10 : this->dirsel + 1);
-  //      i++) {
-  //   if (i == dirsel) {
-  //     dlst.push_back("> " + dircontent[i].name + "\n");
-  //   } else {
-  //     dlst.push_back(dircontent[i].name + "\n");
-  //   }
-  // }s
   for (size_t i = 0; i < ((dircontent.size() < 9) ? dircontent.size() : 10);
        i++) {
     if (dirsel == (dirsel < 9 ? (int)i : (int)i + (dirsel - 9))) {
@@ -399,7 +388,7 @@ void Titles::Logic() {
     }
   }
   if (hidKeysDown() & KEY_DOWN &&
-      selection < (int)TitleManager::sdtitles.size()) {
+      selection < (int)TitleManager::sdtitles.size() - 1) {
     selection++;
   }
   if (hidKeysDown() & KEY_UP && selection > 0) {
@@ -545,140 +534,3 @@ void RomfsBrowse::Logic() {
     dirsel += 6;
   }
 }
-
-// RomfsBrowse::RomfsBrowse()
-//{
-//     RenderD7::Msg::Display("BCSTM-Player", "Loading Directory: h:/", Top);
-//     chdir("romfs:/");
-//     std::vector<nlc::fsys::DirEntry> temp;
-//     RenderD7::GetDirContentsExt(temp, {"bcstm"});
-//     for (uint i = 0; i < temp.size(); i++)
-//     {
-//         this->dircontent.push_back(temp[i]);
-//     }
-//     this->changeddir = false;
-// }
-//
-// void RomfsBrowse::Draw(void) const
-//{
-//     RenderD7::OnScreen(Top);
-//     char path[PATH_MAX];
-//     getcwd(path, PATH_MAX);
-//     nlc::nr2::DrawRectSolid(0, 0, 400, 240, getcol("style_white"));
-//     nlc::nr2::DrawRectSolid(0, 0, 400, 26, getcol("style_black2"));
-//     RenderD7::DrawText(5, 2, 0.7f, nlc::color_t("#FFFFFF"),
-//     "BCSTM-Player->FileManager"); DrawFMBG(); RenderD7::DrawTextCentered(30,
-//     216, 0.7f, getcol("style_black"), path, 390); std::string dirs; for
-//     (int i = this->dirsel < 9 ? 0 : this->dirsel - 9; (int)dircontent.size()
-//     && i < ((this->dirsel < 9) ? 10 : this->dirsel + 1); i++)
-//     {
-//         if (i == dirsel)
-//         {
-//             dirs += "> " + this->dircontent[i].name + "\n";
-//         }
-//         else
-//         {
-//             dirs += this->dircontent[i].name + "\n";
-//         }
-//     }
-//     for (uint i = 0; i < ((this->dircontent.size() < 10) ? 10 -
-//     this->dircontent.size() : 0); i++) {
-//		dirs += "\n\n";
-//	}
-//
-//     RenderD7::DrawText(10, 30, 0.6f, getcol("style_black"), dirs.c_str());
-//     RenderD7::OnScreen(Bottom);
-//     nlc::nr2::DrawRectSolid(0, 0, 320, 240, getcol("style_white"));
-//     if(playing)
-//     {
-//         RenderD7::DrawText(5, 218, 0.7f, getcol("style_black"), "Playing: "
-//         + currentlypl);
-//     }
-// }
-//
-// void RomfsBrowse::Logic()
-//{
-//     if (this->changeddir) {
-//         RenderD7::Msg::Display("BCSTM-Player", "Loading Directory", Top);
-//
-//		this->dircontent.clear();
-//		std::vector<nlc::fsys::DirEntry> temp;
-//		RenderD7::GetDirContentsExt(temp, {"bcstm"});
-//
-//		for(uint i = 0; i < temp.size(); i++) {
-//			this->dircontent.push_back(temp[i]);
-//		}
-//
-//		this->changeddir = false;
-//	}
-//     if (hidKeysDown() & KEY_A)
-//     {
-//         char path[PATH_MAX];
-//		getcwd(path, PATH_MAX);
-//         if (this->dircontent.size() > 0)
-//         {
-//			if (this->dircontent[dirsel].isDir)
-//             {
-//				chdir(this->dircontent[this->dirsel].name.c_str());
-//				this->dirsel = 0;
-//				this->changeddir = true;
-//			}
-//             else
-//             {
-//                 if
-//                 (RenderD7::NameIsEndingWith(this->dircontent[this->dirsel].name,
-//                 {"bcstm"}))
-//                 {
-//                     playing = false;
-//                     player.stop();
-//                     player.openFromFile(this->dircontent[this->dirsel].name);
-//                     player.play();
-//                     currentlypl = this->dircontent[this->dirsel].name;
-//                     playing = true;
-//                 }
-//			}
-//		}
-//         else if (this->dircontent.size() == 0)
-//         {
-//             RenderD7::Msg::Display("BCSTM_Player->Error", "What are you
-//             trying to do?\nThis Directory is empty.", Top);
-//         }
-//     }
-//     if (hidKeysDown() & KEY_B)
-//     {
-//         char path[PATH_MAX];
-//		getcwd(path, PATH_MAX);
-//
-//		if (strcmp(path, "romfs:/") == 0 || strcmp(path, "/") == 0)
-//         {
-//			nlc::scene::Back();
-//		}
-//         else
-//         {
-//			chdir("..");
-//			dirsel = 0;
-//			changeddir = true;
-//		}
-//     }
-//     if (hidKeysDown() & KEY_X)
-//     {
-//         nlc::scene::Load(std::make_unique<MMM>());
-//     }
-//     if (hidKeysDown() & KEY_UP && dirsel > 0)
-//     {
-//         dirsel--;
-//     }
-//     if (hidKeysDown() & KEY_DOWN && dirsel < (int)dircontent.size() - 1)
-//     {
-//         dirsel++;
-//     }
-//     if (hidKeysDown() & KEY_LEFT && dirsel - 6 > 0)
-//     {
-//         dirsel -= 6;
-//     }
-//     if (hidKeysDown() & KEY_RIGHT && dirsel + 6 < (int)dircontent.size() - 1)
-//     {
-//         dirsel += 6;
-//     }
-// }
-//
