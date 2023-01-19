@@ -219,6 +219,10 @@ void Browse::Draw(void) const {
                      "\n\n\n\n\n\nTotal: " +
                          std::to_string((int)player.GetTotal()),
                      0, 0, "sans_medium");
+  nlc::nr2::DrawText(5, 20, 0.7f, getcol("style_black"),
+                     "\n\n\n\n\n\n\nChannelCount: " +
+                         std::to_string((int)player.GetChannelCount()),
+                     0, 0, "sans_medium");
 
   nlc::nr2::DrawRectSolid(2, 214, 316, 24, getcol("style_black"));
   nlc::nr2::DrawRectSolid(4, 216, 312, 20, getcol("style_grey"));
@@ -458,6 +462,10 @@ void RomfsBrowse::Draw(void) const {
   nlc::nr2::DrawText(5, 20, 0.7f, getcol("style_black"),
                      "\n\n\n\n\n\nTotal: " +
                          std::to_string((int)player.GetTotal()),
+                     0, 0, "sans_medium");
+  nlc::nr2::DrawText(5, 20, 0.7f, getcol("style_black"),
+                     "\n\n\n\n\n\n\nChannelCount: " +
+                         std::to_string((int)player.GetChannelCount()),
                      0, 0, "sans_medium");
 
   nlc::nr2::DrawRectSolid(2, 214, 316, 24, getcol("style_black"));

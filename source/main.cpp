@@ -60,9 +60,10 @@ int main() {
   //  nlc::ntrace::init("sdmc:/bcstm.trace");
   app.InitNdsp();
   nlc::nr::Init();
+  
   getCurrentUsage();
+  nlc::worker::push(InitColors, "colors");
   nlc::worker::push(DoSplash, "splash");
-  InitColors();
   nlc::nr2::AddFont("romfs:/roboto_regular.bcfnt", "sans");
   nlc::nr2::AddFont("romfs:/roboto_bold.bcfnt", "sans_bold");
   nlc::nr2::AddFont("romfs:/roboto_medium.bcfnt", "sans_medium");

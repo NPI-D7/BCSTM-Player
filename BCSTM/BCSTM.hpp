@@ -24,6 +24,7 @@ public:
   inline std::string GetLoopEnd() {
     return std::to_string(this->m_blockLoopEnd);
   }
+  inline int GetChannelCount() { return (int)m_channelCount; }
   inline float GetTotal() { return (float)this->m_blockCount; }
   inline float GetCurrent() { return (float)this->m_currentBlock; }
 
