@@ -60,7 +60,7 @@ int main() {
   //  nlc::ntrace::init("sdmc:/bcstm.trace");
   app.InitNdsp();
   nlc::nr::Init();
-  
+
   getCurrentUsage();
   nlc::worker::push(InitColors, "colors");
   nlc::worker::push(DoSplash, "splash");
@@ -93,6 +93,12 @@ int main() {
     nlc::nr2::DrawOnScreen(1);
     // nlc::nr2::DrawText(0, 0, 0.7, nlc::color_storage::Get("white"),
     //                    std::to_string(C3D_GetProcessingTime()) + "ms");
+    nlc::nr2::DrawText(
+        0, 0, 0.7, nlc::color_storage::Get("white"),
+        "Memory Usage: " + nlc::st::FormatBytes(nlc::mem::GetCurrent()) +
+            "\nAllocated: " +
+            nlc::st::FormatBytes(nlc::mem::GetTotalAllocated())
+        +"\nFreed: " + nlc::st::FormatBytes(nlc::mem::GetTotalFreed()));
     nlc::nr::DrawEnd();
     // player.tick();
   }
