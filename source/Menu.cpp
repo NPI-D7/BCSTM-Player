@@ -314,7 +314,7 @@ void Credits::Draw(void) const {
                      "sans_bold");
   nlc::nr2::DrawTextRight(395, 218, 0.7f, getcol("white"),
                           stdzeitverschwendung2, 0, 0, "sans_bold");
-  nlc::nr2::DrawText(5, 30, 0.7f, nlc::color_t("#000000").GetRGBA(),
+  nlc::nr2::DrawText(5, 30, 0.7f, getcol("style_black"),
                      "- Tobi-D7\n- devkitpro\n- citro2d\n- citro3d\n- nlc-libs",
                      0, 0, "sans_medium");
   nlc::nr2::DrawOnScreen(1);
