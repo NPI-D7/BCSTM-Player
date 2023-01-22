@@ -1,7 +1,9 @@
 #include "BCSTM.hpp"
 #include "Menu.hpp"
+#include <ResultDecoder.hpp>
 #include <citro3d.h>
 #include <stdio.h>
+
 // #include "TitleManager.hpp"
 
 // RenderD7::Image img;
@@ -93,12 +95,6 @@ int main() {
     nlc::nr2::DrawOnScreen(1);
     // nlc::nr2::DrawText(0, 0, 0.7, nlc::color_storage::Get("white"),
     //                    std::to_string(C3D_GetProcessingTime()) + "ms");
-    nlc::nr2::DrawText(
-        0, 0, 0.7, nlc::color_storage::Get("white"),
-        "Memory Usage: " + nlc::st::FormatBytes(nlc::mem::GetCurrent()) +
-            "\nAllocated: " +
-            nlc::st::FormatBytes(nlc::mem::GetTotalAllocated())
-        +"\nFreed: " + nlc::st::FormatBytes(nlc::mem::GetTotalFreed()));
     nlc::nr::DrawEnd();
     // player.tick();
   }

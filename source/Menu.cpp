@@ -2,7 +2,9 @@
 #include "Menu.hpp"
 #include "BCSTM.hpp"
 #include "TitleManager.hpp"
+#include <ResultDecoder.hpp>
 #include <log.hpp>
+
 
 #ifdef V_STRING
 #else
@@ -375,18 +377,9 @@ void Titles::Logic() {
         TitleManager::sdtitles[selection]->ID(),
         TitleManager::sdtitles[selection]->mediatype(), "title");
     if (R_FAILED(mntres)) {
-      std::ofstream ffs("sdmc:/BCSTM-Player/error-out.txt", std::ios::app);
-      ffs << "Module: " << R_MODULE(mntres);
-      ffs << std::endl;
-      ffs << "Level: " << R_LEVEL(mntres);
-      ffs << std::endl;
-      ffs << "Summary: " << R_SUMMARY(mntres);
-      ffs << std::endl;
-      ffs << "Description: " << R_DESCRIPTION(mntres);
-      ffs << std::endl;
-      ffs << "Code: " << nlc::st::int2hex(mntres);
-      ffs << std::endl;
-      ffs.close();
+      ResultDecoder decc;
+      decc.Load(mntres);
+      decc.WriteLog();
     } else {
       romfs_is_mount = true;
     }
