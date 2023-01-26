@@ -250,7 +250,6 @@ void Browse::Logic() {
   if (hidKeysDown() & KEY_A) {
     if (this->dircontent.size() > 0) {
       if (this->dircontent[dirsel]._is_dir) {
-        chdir(this->dircontent[this->dirsel].name.c_str());
         if (dir.substr(dir.length() - 1, 1) != "/")
           dir += "/";
         dir += this->dircontent[this->dirsel].name;
