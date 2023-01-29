@@ -4,7 +4,6 @@
 <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/NPI-D7/BCSTM-Player?style=for-the-badge" height="22">
 
 <a href="https://github.com/NPI-D7/BCSTM-Player/actions?query=workflow%3A%22Build+BCSTM-Player%22">
-   <img src="https://img.shields.io/github/workflow/status/NPI-D7/BCSTM-Player/Build%20BCSTM-Player.svg?logo=github&style=for-the-badge" height="22" alt="Build status on GitHub Actions"></a>&nbsp;
 <a href="https://www.codefactor.io/repository/github/npi-d7/bcstm-player"><img src="https://www.codefactor.io/repository/github/npi-d7/bcstm-player/badge?logo=github&style=for-the-badge" alt="CodeFactor" height="22"/></a>
  
 
