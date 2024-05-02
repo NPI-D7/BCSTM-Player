@@ -1,6 +1,6 @@
 // Menu.cpp
 #include "Menu.hpp"
-#include "BCSTM.hpp"
+#include "bcstm.hpp"
 
 #ifdef V_STRING
 #else
@@ -9,12 +9,10 @@
 
 bool romfs_is_mount = false;
 
-BCSTM player;
+D7::BCSTM player;
 
 bool playing = false;
 std::string currentlypl;
-
-extern bool is3dsx;
 
 void clearCache() {
   remove("sdmc:/BCSTM-Player/cache/sd");
@@ -28,18 +26,19 @@ void MMM::Draw(void) const {
     UI7::Label(RD7::Lang::Get("STOP"));
     UI7::Label(RenderD7::Lang::Get("XORB"));
     if (playing) {
-        UI7::Label("Player Info: ");
-        UI7::Label("Playing: " + currentlypl, RD7TextFlags_Short);
-        UI7::Label("Loadet: " + std::string(player.IsLoadet() ? "True" : "False"));
-        UI7::Label("Loop: " + player.GetLoop());
-        UI7::Label("LoopStart: " + player.GetLoopStart());
-        UI7::Label("LoopEnd: " + player.GetLoopEnd());
-        UI7::Label("Current: " + std::to_string((int)player.GetCurrent()));
-        UI7::Label("Total: " + std::to_string((int)player.GetTotal()));
-        UI7::Label("Channels: " + std::to_string(player.GetChannelCount()));
-        UI7::SetCursorPos(R7Vec2(5, 215));
-        UI7::Progressbar(player.GetCurrent() / player.GetTotal());
-        UI7::RestoreCursor();
+      UI7::Label("Player Info: ");
+      UI7::Label("Playing: " + currentlypl, RD7TextFlags_Short);
+      UI7::Label("Loadet: " +
+                 std::string(player.IsLoaded() ? "True" : "False"));
+      UI7::Label("Loop: " + std::string(player.IsLooping() ? "True" : "False"));
+      UI7::Label("LoopStart: " + std::to_string(player.GetLoopStart()));
+      UI7::Label("LoopEnd: " + std::to_string(player.GetLoopEnd()));
+      UI7::Label("Current: " + std::to_string(player.GetCurrent()));
+      UI7::Label("Total: " + std::to_string(player.GetTotal()));
+      UI7::Label("Channels: " + std::to_string(player.GetChannelCount()));
+      UI7::SetCursorPos(R7Vec2(5, 215));
+      UI7::Progressbar((float)player.GetCurrent() / (float)player.GetTotal());
+      UI7::RestoreCursor();
     }
     UI7::EndMenu();
   }
@@ -73,7 +72,7 @@ void MMM::Logic() {
   if (hidKeysDown() & KEY_Y) {
     if (playing) {
       currentlypl.clear();
-      player.stop();
+      player.Stop();
       playing = false;
     }
   }
@@ -98,17 +97,18 @@ void Browse::Draw(void) const {
 
   RenderD7::OnScreen(Bottom);
   if (UI7::BeginMenu("Info")) {
-    UI7::Label("Playing: " + std::string(playing ? currentlypl : "Nothing"), RD7TextFlags_Short);
+    UI7::Label("Playing: " + std::string(playing ? currentlypl : "Nothing"),
+               RD7TextFlags_Short);
     UI7::Label("DirEntrys: " + std::to_string(this->dircontent.size()));
-    UI7::Label("Loadet: " + std::string(player.IsLoadet() ? "True" : "False"));
-    UI7::Label("Loop: " + player.GetLoop());
-    UI7::Label("LoopStart: " + player.GetLoopStart());
-    UI7::Label("LoopEnd: " + player.GetLoopEnd());
-    UI7::Label("Current: " + std::to_string((int)player.GetCurrent()));
-    UI7::Label("Total: " + std::to_string((int)player.GetTotal()));
+    UI7::Label("Loadet: " + std::string(player.IsLoaded() ? "True" : "False"));
+    UI7::Label("Loop: " + std::string(player.IsLooping() ? "True" : "False"));
+    UI7::Label("LoopStart: " + std::to_string(player.GetLoopStart()));
+    UI7::Label("LoopEnd: " + std::to_string(player.GetLoopEnd()));
+    UI7::Label("Current: " + std::to_string(player.GetCurrent()));
+    UI7::Label("Total: " + std::to_string(player.GetTotal()));
     UI7::Label("Channels: " + std::to_string(player.GetChannelCount()));
     UI7::SetCursorPos(R7Vec2(5, 215));
-    UI7::Progressbar(player.GetCurrent() / player.GetTotal());
+    UI7::Progressbar((float)player.GetCurrent() / (float)player.GetTotal());
     UI7::RestoreCursor();
     UI7::EndMenu();
   }
@@ -140,10 +140,10 @@ void Browse::Logic() {
         if (RenderD7::NameIsEndingWith(this->dircontent[this->dirsel].name,
                                        {"bcstm"})) {
           playing = false;
-          player.stop();
-          player.openFromFile(this->dircontent[this->dirsel].path);
+          player.Stop();
+          player.LoadFile(this->dircontent[this->dirsel].path);
 
-          player.play();
+          player.Play();
           currentlypl = this->dircontent[this->dirsel].name;
           playing = true;
         }
@@ -181,7 +181,7 @@ Settings::Settings() {
   auto dc = RD7::FileSystem::GetDirContent("romfs:/lang");
   int n = 0;
   for (auto &it : dc) {
-    if(it.name == RD7::Lang::GetShortcut()) {
+    if (it.name == RD7::Lang::GetShortcut()) {
       lang_sel = n;
     }
     if (it.dir) {
@@ -292,17 +292,18 @@ void RomfsBrowse::Draw(void) const {
   }
   RenderD7::OnScreen(Bottom);
   if (UI7::BeginMenu("Info")) {
-    UI7::Label("Playing: " + std::string(playing ? currentlypl : "Nothing"), RD7TextFlags_Short);
+    UI7::Label("Playing: " + std::string(playing ? currentlypl : "Nothing"),
+               RD7TextFlags_Short);
     UI7::Label("DirEntrys: " + std::to_string(this->dircontent.size()));
-    UI7::Label("Loadet: " + std::string(player.IsLoadet() ? "True" : "False"));
-    UI7::Label("Loop: " + player.GetLoop());
-    UI7::Label("LoopStart: " + player.GetLoopStart());
-    UI7::Label("LoopEnd: " + player.GetLoopEnd());
-    UI7::Label("Current: " + std::to_string((int)player.GetCurrent()));
-    UI7::Label("Total: " + std::to_string((int)player.GetTotal()));
+    UI7::Label("Loadet: " + std::string(player.IsLoaded() ? "True" : "False"));
+    UI7::Label("Loop: " + std::string(player.IsLooping() ? "True" : "False"));
+    UI7::Label("LoopStart: " + std::to_string(player.GetLoopStart()));
+    UI7::Label("LoopEnd: " + std::to_string(player.GetLoopEnd()));
+    UI7::Label("Current: " + std::to_string(player.GetCurrent()));
+    UI7::Label("Total: " + std::to_string(player.GetTotal()));
     UI7::Label("Channels: " + std::to_string(player.GetChannelCount()));
     UI7::SetCursorPos(R7Vec2(5, 215));
-    UI7::Progressbar(player.GetCurrent() / player.GetTotal());
+    UI7::Progressbar((float)player.GetCurrent() / (float)player.GetTotal());
     UI7::RestoreCursor();
     UI7::EndMenu();
   }
@@ -335,10 +336,10 @@ void RomfsBrowse::Logic() {
         if (RenderD7::NameIsEndingWith(this->dircontent[this->dirsel].name,
                                        {"bcstm"})) {
           playing = false;
-          player.stop();
-          player.openFromFile(this->dircontent[this->dirsel].path);
+          player.Stop();
+          player.LoadFile(this->dircontent[this->dirsel].path);
 
-          player.play();
+          player.Play();
           currentlypl = this->dircontent[this->dirsel].name;
           playing = true;
         }

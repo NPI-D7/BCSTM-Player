@@ -1,25 +1,17 @@
-#include "BCSTM.hpp"
+#include "bcstm.hpp"
 #include "Menu.hpp"
 #include <citro3d.h>
 #include <stdio.h>
 
-bool is3dsx = false;
-
-void CheckRunType() {
-  u64 id;
-  APT_GetProgramID(&id);
-  is3dsx = (id != 0x0004000007893300);
-}
-
-extern BCSTM player;
+extern D7::BCSTM player;
 
 void Bcstm_Loop() {
   while (true) {
-    if (player.IsLoadet())
-      player.tick();
-    RenderD7::Thread::sleep(1 * 100);
+    if (player.IsLoaded())
+      player.Update();
+    RenderD7::Thread::sleep(1 * 10);
   }
-  player.stop();
+  player.Stop();
 }
 
 int main() {
@@ -28,7 +20,6 @@ int main() {
   RenderD7::Init::Main("BCSTM-Player");
   RenderD7::Init::NdspFirm();
   RenderD7::FadeIn();
-  CheckRunType();
   std::filesystem::create_directories(
       std::filesystem::path("sdmc:/BCSTM-Player/cache/"));
   RenderD7::Lang::Load(RenderD7::Lang::GetSys());
