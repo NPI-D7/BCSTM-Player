@@ -10,8 +10,8 @@
 
  ### if you find any bug, report it in an issue!
 # Todo:
-- add pause/play feature.
-- mount romfs from installed Titles / Gamecard using D7-Menu-Core.
+- support more channels
+- mount romfs from installed Titles / Gamecard using D7-Menu-Core. (works in citra but not on real hardware for some reason)
 
 # Nightly builds
 

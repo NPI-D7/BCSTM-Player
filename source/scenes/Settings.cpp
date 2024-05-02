@@ -25,7 +25,7 @@ void Settings::Draw(void) const {
   if (UI7::BeginMenu(RD7::Lang::Get("HEAD_SETTINGS"))) {
     UI7::Label(RD7::Lang::Get("CREDITSL"));
     UI7::SetCursorPos(R7Vec2(5, 222));
-    UI7::Label("Version: 1.5.0");
+    UI7::Label("Version: 2.0.0 preview");
     UI7::RestoreCursor();
 #ifndef RELASE
     UI7::SetCursorPos(R7Vec2(395, 222));

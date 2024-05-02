@@ -56,9 +56,9 @@ endif
 # Version number
 #---------------------------------------------------------------------------------
 
-VERSION_MAJOR := 1
+VERSION_MAJOR := 2
 
-VERSION_MINOR := 5
+VERSION_MINOR := 0
 
 VERSION_MICRO := 0
 
