@@ -9,16 +9,10 @@
 
 
  ### if you find any bug, report it in an issue!
-# Known Bugs:
-There is a Bug in the Filebrowser
-
 # Todo:
 - add pause/play feature.
-- mount romfs from installed Titles / Gamecard using D7-Menu Core.
+- mount romfs from installed Titles / Gamecard using D7-Menu-Core.
 
 # Nightly builds
-
-
-
 
 <img src="https://raw.githubusercontent.com/NPI-D7/nightlys/master/builds/BCSTM-Player/BCSTM-Player.png">

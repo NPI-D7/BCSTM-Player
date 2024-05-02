@@ -1,53 +1,18 @@
 // Menu.cpp
 #include "Menu.hpp"
 #include "BCSTM.hpp"
-#include "TitleManager.hpp"
-#include <ResultDecoder.hpp>
-#include <log.hpp>
-
 
 #ifdef V_STRING
 #else
-#define V_STRING ""
+#define V_STRING "none"
 #endif
 
 bool romfs_is_mount = false;
-std::string shortstring(std::string in, float size, std::string font,
-                        int maxlen) {
-  if (nlc::nr2::GetTextWidth(size, in, font) > maxlen) {
-    std::string out;
-    for (size_t i = 0; i < in.size(); i++) {
-      out += in[i];
-      if ((nlc::nr2::GetTextWidth(size, out, font) +
-           nlc::nr2::GetTextWidth(size, "(...)", font) +
-           nlc::nr2::GetTextWidth(size, ".bcstm", font)) > maxlen) {
-        out += "(...)";
-        out += ".bcstm";
-        return out;
-      }
-    }
-  }
-  return in;
-}
-
-bool touchTObj(touchPosition touch, TObject button) {
-  if (touch.px >= button.x && touch.px <= (button.x + button.w) &&
-      touch.py >= button.y && touch.py <= (button.y + button.h))
-    return true;
-  else
-    return false;
-}
 
 BCSTM player;
 
-extern bool exit_;
-
 bool playing = false;
 std::string currentlypl;
-
-nlc::image background;
-
-// RenderD7::Checkbox box{40, 60, 20};
 
 extern bool is3dsx;
 
@@ -55,99 +20,55 @@ void clearCache() {
   remove("sdmc:/BCSTM-Player/cache/sd");
   remove("sdmc:/BCSTM-Player/cache/nand");
 }
-void DrawFMBG() {
-  nlc::nr2::DrawRectSolid(0, 46, 400, 18, getcol("style_grey"));
-  nlc::nr2::DrawRectSolid(0, 82, 400, 18, getcol("style_grey"));
-  nlc::nr2::DrawRectSolid(0, 118, 400, 18, getcol("style_grey"));
-  nlc::nr2::DrawRectSolid(0, 154, 400, 18, getcol("style_grey"));
-  nlc::nr2::DrawRectSolid(0, 190, 400, 18, getcol("style_grey"));
-}
 
-Log llg;
-
-MMM::MMM() {
-  llg.Init("sdmc:/log.lg");
-  llg.Write(std::string(__FILE__) + ":" + std::to_string(__LINE__));
-  background.LoadFile("romfs:/gfx/bg.png");
-}
+MMM::MMM() {}
 void MMM::Draw(void) const {
-  nlc::nr2::DrawOnScreen(0);
-  nlc::nr2::DrawRectSolid(0, 0, 400, 240, getcol("style_white"));
-  // img.Draw(0, 0);
-  nlc::nr2::DrawRectSolid(0, 0, 400, 26, getcol("style_black"));
-  nlc::nr2::DrawText(5, 2, 0.7f, getcol("white"),
-                     "BCSTM-Player->" + nlc::lang::get("MAINMENU"), 0, 0,
-                     "sans_bold");
-  nlc::nr2::DrawText(
-      5, 30, 0.7f, getcol("style_black"),
-      "\uE003: Stop Player!\n\uE002 or \uE001: Back to MainMenu");
-
-  if (playing) {
-    nlc::nr2::DrawText(5, 188, 0.7f, getcol("style_black"),
-                       "Playing: " +
-                           shortstring(currentlypl, 0.7f, "sans_medium", 400),
-                       0, 0, "sans_medium");
-    nlc::nr2::DrawRectSolid(2, 214, 396, 24, getcol("style_black"));
-    nlc::nr2::DrawRectSolid(4, 216, 392, 20, getcol("style_grey"));
-    nlc::nr2::DrawRectSolid(4, 216,
-                            (player.GetCurrent() / player.GetTotal()) * 392, 20,
-                            getcol("green"));
+  RenderD7::OnScreen(Top);
+  if (UI7::BeginMenu(RD7::Lang::Get("HEAD_MAINMENU"))) {
+    UI7::Label(RD7::Lang::Get("STOP"));
+    UI7::Label(RenderD7::Lang::Get("XORB"));
+    if (playing) {
+        UI7::Label("Player Info: ");
+        UI7::Label("Playing: " + currentlypl, RD7TextFlags_Short);
+        UI7::Label("Loadet: " + std::string(player.IsLoadet() ? "True" : "False"));
+        UI7::Label("Loop: " + player.GetLoop());
+        UI7::Label("LoopStart: " + player.GetLoopStart());
+        UI7::Label("LoopEnd: " + player.GetLoopEnd());
+        UI7::Label("Current: " + std::to_string((int)player.GetCurrent()));
+        UI7::Label("Total: " + std::to_string((int)player.GetTotal()));
+        UI7::Label("Channels: " + std::to_string(player.GetChannelCount()));
+        UI7::SetCursorPos(R7Vec2(5, 215));
+        UI7::Progressbar(player.GetCurrent() / player.GetTotal());
+        UI7::RestoreCursor();
+    }
+    UI7::EndMenu();
   }
-
-  nlc::nr2::DrawOnScreen(1);
-  nlc::nr2::DrawRectSolid(0, 0, 320, 240, getcol("style_black2"));
-  int hsel__ = 0;
-  for (auto const &it : buttons) {
-    if (hsel__ == Selection)
-      nlc::nr2::DrawRectSolid(it.x - 2, it.y - 2, it.w + 4, it.h + 4,
-                              getcol("style_black4"));
-    nlc::nr2::DrawRectSolid(it.x, it.y, it.w, it.h, getcol("style_black3"));
-    nlc::nr2::DrawText(it.ftx + it.x + it.w / 4, it.fty + it.y + it.h / 4, 0.7f,
-                       getcol("white"), it.name, 0, 0, "sans_bold");
-    hsel__++;
+  RenderD7::OnScreen(Bottom);
+  if (UI7::BeginMenu(RD7::Lang::Get("CONTROLCENTER"))) {
+    if (UI7::Button(RD7::Lang::Get("BROWSE"))) {
+      RenderD7::Scene::Load(std::make_unique<Browse>(), true);
+    }
+    if (UI7::Button("Titles")) {
+      RenderD7::Scene::Load(std::make_unique<Titles>(), true);
+    }
+    if (UI7::Button(RD7::Lang::Get("SETTINGS"))) {
+      RenderD7::Scene::Load(std::make_unique<Settings>(), true);
+    }
+    if (UI7::Button("Exit")) {
+      RenderD7::ExitApp();
+    }
+    UI7::EndMenu();
   }
 }
 void MMM::Logic() {
-  touchPosition touch_;
-  hidTouchRead(&touch_);
-  if (((hidKeysDown() & KEY_DOWN && Selection < 4 && Selection != 3))) {
-    Selection++;
-  }
-  if (((hidKeysDown() & KEY_UP && Selection > 0 && Selection != 4))) {
-    Selection--;
-  }
-  if ((hidKeysDown() & KEY_A && Selection == 0)) {
-    nlc::scene::Load(std::make_unique<Browse>());
-  }
-  if (hidKeysDown() & KEY_A && Selection == 1) {
-    nlc::scene::Load(std::make_unique<Titles>());
-  }
-  if ((hidKeysDown() & KEY_A && Selection == 2)) {
-    nlc::scene::Load(std::make_unique<Credits>());
-  }
-  if ((hidKeysDown() & KEY_A && Selection == 3)) {
-    exit_ = true;
-  }
-  if ((hidKeysDown() & KEY_TOUCH && touchTObj(touch_, buttons[0]))) {
-    nlc::scene::Load(std::make_unique<Browse>());
-  }
-  if (hidKeysDown() & KEY_TOUCH && touchTObj(touch_, buttons[1])) {
-    nlc::scene::Load(std::make_unique<Titles>());
-  }
-  if ((hidKeysDown() & KEY_TOUCH && touchTObj(touch_, buttons[2]))) {
-    nlc::scene::Load(std::make_unique<Credits>());
-  }
-  if ((hidKeysDown() & KEY_TOUCH && touchTObj(touch_, buttons[3]))) {
-    exit_ = true;
-  }
   if (hidKeysDown() & KEY_START) {
-    exit_ = true;
+    RenderD7::ExitApp();
   }
   if (hidKeysDown() & KEY_SELECT) {
     clearCache();
   }
   if (hidKeysDown() & KEY_L && romfs_is_mount) {
-    nlc::scene::Load(std::make_unique<RomfsBrowse>());
+    RenderD7::Scene::Load(std::make_unique<RomfsBrowse>());
   }
   if (hidKeysDown() & KEY_Y) {
     if (playing) {
@@ -159,97 +80,56 @@ void MMM::Logic() {
 }
 
 Browse::Browse() {
-  dir = "sdmc:/";
-  dircontent = nlc::fsys::GetDirContentsExt(dir, {"bcstm"});
+  this->dir = "sdmc:/";
+  this->dircontent = RenderD7::FileSystem::GetDirContentsExt(dir, {"bcstm"});
+  this->reload_list();
   this->changeddir = false;
 }
 
 void Browse::Draw(void) const {
-  // nlc::ntrace::trace_begin("Browse", "Draw");
-  nlc::nr2::DrawOnScreen(0);
-  nlc::nr2::DrawRectSolid(0, 0, 400, 240, getcol("style_white"));
-  nlc::nr2::DrawRectSolid(0, 0, 400, 26, getcol("style_black"));
-  nlc::nr2::DrawRectSolid(0, 216, 400, 26, getcol("style_black"));
-  nlc::nr2::DrawText(5, 2, 0.7f, getcol("white"), "BCSTM-Player->FileManager",
-                     0, 0, "sans_bold");
-  // DrawFMBG();
-  nlc::nr2::DrawRectSolid(0, 27, 400, 188, getcol("style_grey"));
-  nlc::nr2::DrawText(5, 216, 0.7f, getcol("style_white"), dir, 0, 0,
-                     "sans_medil");
-
-  for (size_t i = 0; i < ((dircontent.size() < 9) ? dircontent.size() : 10);
-       i++) {
-    if (dirsel == (dirsel < 9 ? (int)i : (int)i + (dirsel - 9))) {
-      nlc::nr2::DrawRectSolid(0, 30 + (i * 18), 400, 18,
-                              getcol("style_black4"));
-    }
-    nlc::nr2::DrawText(
-        10, 28 + i * 18, 0.7f, getcol("style_black"),
-        shortstring(
-            dircontent[(dirsel < 9 ? i : i + (dirsel - 9))].name.c_str(), 0.7f,
-            "sans", 400),
-        0, 0, "sans");
+  RenderD7::OnScreen(Top);
+  if (UI7::BeginMenu(RD7::Lang::Get("HEAD_FILEMANAGER"))) {
+    UI7::BrowserList(namelist, this->dirsel);
+    UI7::SetCursorPos(R7Vec2(5, 222));
+    UI7::Label(this->dir);
+    UI7::RestoreCursor();
+    UI7::EndMenu();
   }
 
-  nlc::nr2::DrawOnScreen(1);
-  nlc::nr2::DrawRectSolid(0, 0, 320, 240, getcol("style_white"));
-  nlc::nr2::DrawText(5, 20, 0.7f, getcol("style_black"),
-                     "Playing: " +
-                         shortstring((playing ? currentlypl : "Nothing"), 0.7f,
-                                     "sans_medium", 310),
-                     0, 0, "sans_medium");
-  nlc::nr2::DrawText(5, 2, 0.7f, getcol("style_black"),
-                     "DirContents: " + std::to_string(dircontent.size()), 0, 0,
-                     "sans_medium");
-  nlc::nr2::DrawText(5, 20, 0.7f, getcol("style_black"),
-                     "\nLoadet: " +
-                         (std::string)(player.IsLoadet() ? "True" : "False"),
-                     0, 0, "sans_medium");
-  nlc::nr2::DrawText(5, 20, 0.7f, getcol("style_black"),
-                     "\n\nLoop: " + player.GetLoop(), 0, 0, "sans_medium");
-  nlc::nr2::DrawText(5, 20, 0.7f, getcol("style_black"),
-                     "\n\n\nLoopStart: " + player.GetLoopStart(), 0, 0,
-                     "sans_medium");
-  nlc::nr2::DrawText(5, 20, 0.7f, getcol("style_black"),
-                     "\n\n\n\nLoopEnd: " + player.GetLoopEnd(), 0, 0,
-                     "sans_medium");
-  nlc::nr2::DrawText(5, 20, 0.7f, getcol("style_black"),
-                     "\n\n\n\n\nCurrent: " +
-                         std::to_string((int)player.GetCurrent()),
-                     0, 0, "sans_medium");
-  nlc::nr2::DrawText(5, 20, 0.7f, getcol("style_black"),
-                     "\n\n\n\n\n\nTotal: " +
-                         std::to_string((int)player.GetTotal()),
-                     0, 0, "sans_medium");
-  nlc::nr2::DrawText(5, 20, 0.7f, getcol("style_black"),
-                     "\n\n\n\n\n\n\nChannelCount: " +
-                         std::to_string((int)player.GetChannelCount()),
-                     0, 0, "sans_medium");
-
-  nlc::nr2::DrawRectSolid(2, 214, 316, 24, getcol("style_black"));
-  nlc::nr2::DrawRectSolid(4, 216, 312, 20, getcol("style_grey"));
-  nlc::nr2::DrawRectSolid(4, 216,
-                          (player.GetCurrent() / player.GetTotal()) * 312, 20,
-                          getcol("green"));
-  // nlc::ntrace::trace_end("Browse", "Draw");
+  RenderD7::OnScreen(Bottom);
+  if (UI7::BeginMenu("Info")) {
+    UI7::Label("Playing: " + std::string(playing ? currentlypl : "Nothing"), RD7TextFlags_Short);
+    UI7::Label("DirEntrys: " + std::to_string(this->dircontent.size()));
+    UI7::Label("Loadet: " + std::string(player.IsLoadet() ? "True" : "False"));
+    UI7::Label("Loop: " + player.GetLoop());
+    UI7::Label("LoopStart: " + player.GetLoopStart());
+    UI7::Label("LoopEnd: " + player.GetLoopEnd());
+    UI7::Label("Current: " + std::to_string((int)player.GetCurrent()));
+    UI7::Label("Total: " + std::to_string((int)player.GetTotal()));
+    UI7::Label("Channels: " + std::to_string(player.GetChannelCount()));
+    UI7::SetCursorPos(R7Vec2(5, 215));
+    UI7::Progressbar(player.GetCurrent() / player.GetTotal());
+    UI7::RestoreCursor();
+    UI7::EndMenu();
+  }
 }
 
 void Browse::Logic() {
   if (this->changeddir) {
 
     this->dircontent.clear();
-    std::vector<nlc::fsys::DirEntry> temp =
-        nlc::fsys::GetDirContentsExt(dir, {"bcstm"});
+    std::vector<RenderD7::FileSystem::Entry> temp =
+        RenderD7::FileSystem::GetDirContentsExt(dir, {"bcstm"});
 
     for (int i = 0; i < (int)temp.size(); i++) {
       this->dircontent.push_back(temp[i]);
     }
-
+    this->reload_list();
     this->changeddir = false;
   }
   if (hidKeysDown() & KEY_A) {
     if (this->dircontent.size() > 0) {
-      if (this->dircontent[dirsel]._is_dir) {
+      if (this->dircontent[dirsel].dir) {
         if (dir.substr(dir.length() - 1, 1) != "/")
           dir += "/";
         dir += this->dircontent[this->dirsel].name;
@@ -257,8 +137,8 @@ void Browse::Logic() {
         this->dirsel = 0;
         this->changeddir = true;
       } else {
-        if (nlc::st::NameIsEndingWith(this->dircontent[this->dirsel].name,
-                                      {"bcstm"})) {
+        if (RenderD7::NameIsEndingWith(this->dircontent[this->dirsel].name,
+                                       {"bcstm"})) {
           playing = false;
           player.stop();
           player.openFromFile(this->dircontent[this->dirsel].path);
@@ -268,23 +148,20 @@ void Browse::Logic() {
           playing = true;
         }
       }
-    } else if (this->dircontent.size() == 0) {
-      // RenderD7::Msg::Display("BCSTM_Player->Error", "What are you trying to
-      // do?\nThis Directory is empty.", Top);
     }
   }
   if (hidKeysDown() & KEY_B) {
 
     if (strcmp(dir.c_str(), "sdmc:/") == 0 || strcmp(dir.c_str(), "/") == 0) {
-      nlc::scene::Back();
+      RenderD7::Scene::Back();
     } else {
-      dir = nlc::fsys::GetParentPath(dir, "sdmc:/");
+      dir = RenderD7::FileSystem::GetParentPath(dir, "sdmc:/");
       dirsel = 0;
       changeddir = true;
     }
   }
   if (hidKeysDown() & KEY_X) {
-    nlc::scene::Load(std::make_unique<MMM>());
+    RenderD7::Scene::Load(std::make_unique<MMM>(), true);
   }
   if (hidKeysDown() & KEY_UP && dirsel > 0) {
     dirsel--;
@@ -300,83 +177,88 @@ void Browse::Logic() {
   }
 }
 
-Credits::Credits() {}
-void Credits::Draw(void) const {
-  nlc::nr2::DrawOnScreen(0);
-  nlc::nr2::DrawRectSolid(0, 0, 400, 240, getcol("style_white"));
-  // img.Draw(0, 0);
-  nlc::nr2::DrawRectSolid(0, 0, 400, 26, getcol("style_black"));
-  nlc::nr2::DrawRectSolid(0, 240, 400, -26, getcol("style_black"));
-  std::string stdzeitverschwendung = "Version: 1.5.0";
-  std::string stdzeitverschwendung2 = "nightly: " V_STRING;
-  nlc::nr2::DrawText(0, 2, 0.7f, getcol("white"), "BCSTM-Player->Credits", 0, 0,
-                     "sans_bold");
-  nlc::nr2::DrawText(5, 218, 0.7f, getcol("white"), stdzeitverschwendung, 0, 0,
-                     "sans_bold");
-  nlc::nr2::DrawTextRight(395, 218, 0.7f, getcol("white"),
-                          stdzeitverschwendung2, 0, 0, "sans_bold");
-  nlc::nr2::DrawText(5, 30, 0.7f, getcol("style_black"),
-                     "- Tobi-D7\n- devkitpro\n- citro2d\n- citro3d\n- nlc-libs",
-                     0, 0, "sans_medium");
-  nlc::nr2::DrawOnScreen(1);
-  nlc::nr2::DrawRectSolid(0, 0, 320, 240, getcol("style_black2"));
+Settings::Settings() {
+  auto dc = RD7::FileSystem::GetDirContent("romfs:/lang");
+  int n = 0;
+  for (auto &it : dc) {
+    if(it.name == RD7::Lang::GetShortcut()) {
+      lang_sel = n;
+    }
+    if (it.dir) {
+      languages.push_back(it.name);
+    }
+    n++;
+  }
 }
 
-void Credits::Logic() {
+void Settings::Draw(void) const {
+  RenderD7::OnScreen(Top);
+  if (UI7::BeginMenu(RD7::Lang::Get("HEAD_SETTINGS"))) {
+    UI7::Label(RD7::Lang::Get("CREDITSL"));
+    UI7::SetCursorPos(R7Vec2(5, 222));
+    UI7::Label("Version: 1.5.0");
+    UI7::RestoreCursor();
+#ifndef RELASE
+    UI7::SetCursorPos(R7Vec2(395, 222));
+    UI7::Label("nightly: " + std::string(V_STRING), RD7TextFlags_AlignRight);
+    UI7::RestoreCursor();
+#endif
+    UI7::EndMenu();
+  }
+  RD7::OnScreen(Bottom);
+  if (UI7::BeginMenu(RD7::Lang::Get("BGB"))) {
+    if (languages.size() != 0) {
+      if (UI7::Button(RD7::Lang::Get("LANGUAGE") + languages[lang_sel])) {
+        lang_sel++;
+        if (lang_sel + 1 > (int)languages.size()) {
+          lang_sel = 0;
+        }
+        RD7::Lang::Load(languages[lang_sel]);
+      }
+    }
+    UI7::EndMenu();
+  }
+}
+
+void Settings::Logic() {
   if (hidKeysDown() & KEY_B) {
-    nlc::scene::Back();
+    RenderD7::Scene::Back();
   }
 }
 int abc = 0;
 Titles::Titles() {
-  TitleManager::ScanSD("sdmc:/BCSTM-Player/");
-  maxtitles = (int)TitleManager::sdtitles.size();
-  /*TitleManager::ScanNand("sdmc:/BCSTM-Player/");
-  abc = (int)TitleManager::nandtitles.size();*/
+  D7MC::TitleManager::ScanSD("sdmc:/BCSTM-Player/");
+  maxtitles = (int)D7MC::TitleManager::sdtitles.size();
+  for (const auto &it : D7MC::TitleManager::sdtitles)
+    namelist.push_back(it->name());
+  /*D7MC::TitleManager::ScanNand("sdmc:/BCSTM-Player/");
+  abc = (int)D7MC::TitleManager::nandtitles.size();*/
 }
 
 void Titles::Draw(void) const {
-  nlc::nr2::DrawOnScreen(0);
-  nlc::nr2::DrawRectSolid(0, 0, 400, 240, getcol("style_white"));
-  DrawFMBG();
-  std::string titles;
-  for (int i = this->selection < 9 ? 0 : this->selection - 9;
-       TitleManager::sdtitles.size() &&
-       i < ((this->selection < 9) ? 10 : this->selection + 1);
-       i++) {
-    if (i == selection) {
-      titles += "> " + TitleManager::sdtitles[i]->name() + "\n";
-    } else {
-      titles += TitleManager::sdtitles[i]->name() + "\n";
-    }
+  RenderD7::OnScreen(Top);
+  if (UI7::BeginMenu("BCSTM-Player -> Titles")) {
+    UI7::BrowserList(namelist, selection);
+    UI7::EndMenu();
   }
-  for (size_t i = 0; i < ((TitleManager::sdtitles.size() < 10)
-                              ? 10 - TitleManager::sdtitles.size()
-                              : 0);
-       i++) {
-    titles += "\n\n";
+  RD7::OnScreen(Bottom);
+  if (UI7::BeginMenu(RD7::Lang::Get("BGB"))) {
+    UI7::EndMenu();
   }
-
-  nlc::nr2::DrawText(10, 30, 0.6f, getcol("style_black"), titles.c_str());
-  nlc::nr2::DrawOnScreen(1);
-  nlc::nr2::DrawText(5, 2, 0.7f, getcol("white"),
-                     "Titles:\n"
-                     "SD: " +
-                         std::to_string(maxtitles));
 }
 
 void Titles::Logic() {
   if (hidKeysDown() & KEY_B) {
-    nlc::scene::Back();
+    RenderD7::Scene::Back();
   }
   if (hidKeysDown() & KEY_A) {
     romfsUnmount("title");
     romfs_is_mount = false;
     Result mntres = romfsMountFromTitle(
-        TitleManager::sdtitles[selection]->ID(),
-        TitleManager::sdtitles[selection]->mediatype(), "title");
+        D7MC::TitleManager::sdtitles[selection]->id(),
+        D7MC::TitleManager::sdtitles[selection]->mediatype(), "title");
     if (R_FAILED(mntres)) {
-      ResultDecoder decc;
+      RenderD7::ResultDecoder decc;
       decc.Load(mntres);
       decc.WriteLog();
     } else {
@@ -384,7 +266,7 @@ void Titles::Logic() {
     }
   }
   if (hidKeysDown() & KEY_DOWN &&
-      selection < (int)TitleManager::sdtitles.size() - 1) {
+      selection < (int)D7MC::TitleManager::sdtitles.size() - 1) {
     selection++;
   }
   if (hidKeysDown() & KEY_UP && selection > 0) {
@@ -394,96 +276,54 @@ void Titles::Logic() {
 
 RomfsBrowse::RomfsBrowse() {
   dir = "title:/";
-  dircontent = nlc::fsys::GetDirContentsExt(dir, {"bcstm"});
+  dircontent = RenderD7::FileSystem::GetDirContentsExt(dir, {"bcstm"});
+  this->reload_list();
   this->changeddir = false;
 }
 
 void RomfsBrowse::Draw(void) const {
-  // nlc::ntrace::trace_begin("RomfsBrowse", "Draw");
-  nlc::nr2::DrawOnScreen(0);
-  nlc::nr2::DrawRectSolid(0, 0, 400, 240, getcol("style_white"));
-  nlc::nr2::DrawRectSolid(0, 0, 400, 26, getcol("style_black"));
-  nlc::nr2::DrawRectSolid(0, 216, 400, 26, getcol("style_black"));
-  nlc::nr2::DrawText(5, 2, 0.7f, getcol("white"), "BCSTM-Player->FileManager",
-                     0, 0, "sans_bold");
-  // DrawFMBG();
-  nlc::nr2::DrawRectSolid(0, 27, 400, 188, getcol("style_grey"));
-  nlc::nr2::DrawText(5, 216, 0.7f, getcol("style_white"), dir, 0, 0,
-                     "sans_medil");
-
-  for (size_t i = 0; i < ((dircontent.size() < 9) ? dircontent.size() : 10);
-       i++) {
-    if (dirsel == (dirsel < 9 ? (int)i : (int)i + (dirsel - 9))) {
-      nlc::nr2::DrawRectSolid(0, 30 + (i * 18), 400, 18,
-                              getcol("style_black4"));
-    }
-    nlc::nr2::DrawText(
-        10, 28 + i * 18, 0.7f, getcol("style_black"),
-        shortstring(
-            dircontent[(dirsel < 9 ? i : i + (dirsel - 9))].name.c_str(), 0.7f,
-            "sans", 400),
-        0, 0, "sans");
+  RenderD7::OnScreen(Top);
+  if (UI7::BeginMenu(RD7::Lang::Get("HEAD_FILEMANAGER"))) {
+    UI7::BrowserList(namelist, this->dirsel);
+    UI7::SetCursorPos(R7Vec2(5, 222));
+    UI7::Label(this->dir);
+    UI7::RestoreCursor();
+    UI7::EndMenu();
   }
-
-  nlc::nr2::DrawOnScreen(1);
-  nlc::nr2::DrawRectSolid(0, 0, 320, 240, getcol("style_white"));
-  nlc::nr2::DrawText(5, 20, 0.7f, getcol("style_black"),
-                     "Playing: " +
-                         shortstring((playing ? currentlypl : "Nothing"), 0.7f,
-                                     "sans_medium", 310),
-                     0, 0, "sans_medium");
-  nlc::nr2::DrawText(5, 2, 0.7f, getcol("style_black"),
-                     "DirContents: " + std::to_string(dircontent.size()), 0, 0,
-                     "sans_medium");
-  nlc::nr2::DrawText(5, 20, 0.7f, getcol("style_black"),
-                     "\nLoadet: " +
-                         (std::string)(player.IsLoadet() ? "True" : "False"),
-                     0, 0, "sans_medium");
-  nlc::nr2::DrawText(5, 20, 0.7f, getcol("style_black"),
-                     "\n\nLoop: " + player.GetLoop(), 0, 0, "sans_medium");
-  nlc::nr2::DrawText(5, 20, 0.7f, getcol("style_black"),
-                     "\n\n\nLoopStart: " + player.GetLoopStart(), 0, 0,
-                     "sans_medium");
-  nlc::nr2::DrawText(5, 20, 0.7f, getcol("style_black"),
-                     "\n\n\n\nLoopEnd: " + player.GetLoopEnd(), 0, 0,
-                     "sans_medium");
-  nlc::nr2::DrawText(5, 20, 0.7f, getcol("style_black"),
-                     "\n\n\n\n\nCurrent: " +
-                         std::to_string((int)player.GetCurrent()),
-                     0, 0, "sans_medium");
-  nlc::nr2::DrawText(5, 20, 0.7f, getcol("style_black"),
-                     "\n\n\n\n\n\nTotal: " +
-                         std::to_string((int)player.GetTotal()),
-                     0, 0, "sans_medium");
-  nlc::nr2::DrawText(5, 20, 0.7f, getcol("style_black"),
-                     "\n\n\n\n\n\n\nChannelCount: " +
-                         std::to_string((int)player.GetChannelCount()),
-                     0, 0, "sans_medium");
-
-  nlc::nr2::DrawRectSolid(2, 214, 316, 24, getcol("style_black"));
-  nlc::nr2::DrawRectSolid(4, 216, 312, 20, getcol("style_grey"));
-  nlc::nr2::DrawRectSolid(4, 216,
-                          (player.GetCurrent() / player.GetTotal()) * 312, 20,
-                          getcol("green"));
-  // nlc::ntrace::trace_end("RomfsBrowse", "Draw");
+  RenderD7::OnScreen(Bottom);
+  if (UI7::BeginMenu("Info")) {
+    UI7::Label("Playing: " + std::string(playing ? currentlypl : "Nothing"), RD7TextFlags_Short);
+    UI7::Label("DirEntrys: " + std::to_string(this->dircontent.size()));
+    UI7::Label("Loadet: " + std::string(player.IsLoadet() ? "True" : "False"));
+    UI7::Label("Loop: " + player.GetLoop());
+    UI7::Label("LoopStart: " + player.GetLoopStart());
+    UI7::Label("LoopEnd: " + player.GetLoopEnd());
+    UI7::Label("Current: " + std::to_string((int)player.GetCurrent()));
+    UI7::Label("Total: " + std::to_string((int)player.GetTotal()));
+    UI7::Label("Channels: " + std::to_string(player.GetChannelCount()));
+    UI7::SetCursorPos(R7Vec2(5, 215));
+    UI7::Progressbar(player.GetCurrent() / player.GetTotal());
+    UI7::RestoreCursor();
+    UI7::EndMenu();
+  }
 }
 
 void RomfsBrowse::Logic() {
   if (this->changeddir) {
 
     this->dircontent.clear();
-    std::vector<nlc::fsys::DirEntry> temp =
-        nlc::fsys::GetDirContentsExt(dir, {"bcstm"});
+    std::vector<RenderD7::FileSystem::Entry> temp =
+        RenderD7::FileSystem::GetDirContentsExt(dir, {"bcstm"});
 
     for (int i = 0; i < (int)temp.size(); i++) {
       this->dircontent.push_back(temp[i]);
     }
-
+    this->reload_list();
     this->changeddir = false;
   }
   if (hidKeysDown() & KEY_A) {
     if (this->dircontent.size() > 0) {
-      if (this->dircontent[dirsel]._is_dir) {
+      if (this->dircontent[dirsel].dir) {
         chdir(this->dircontent[this->dirsel].name.c_str());
         if (dir.substr(dir.length() - 1, 1) != "/")
           dir += "/";
@@ -492,8 +332,8 @@ void RomfsBrowse::Logic() {
         this->dirsel = 0;
         this->changeddir = true;
       } else {
-        if (nlc::st::NameIsEndingWith(this->dircontent[this->dirsel].name,
-                                      {"bcstm"})) {
+        if (RenderD7::NameIsEndingWith(this->dircontent[this->dirsel].name,
+                                       {"bcstm"})) {
           playing = false;
           player.stop();
           player.openFromFile(this->dircontent[this->dirsel].path);
@@ -503,23 +343,20 @@ void RomfsBrowse::Logic() {
           playing = true;
         }
       }
-    } else if (this->dircontent.size() == 0) {
-      // RenderD7::Msg::Display("BCSTM_Player->Error", "What are you trying to
-      // do?\nThis Directory is empty.", Top);
     }
   }
   if (hidKeysDown() & KEY_B) {
 
     if (strcmp(dir.c_str(), "title:/") == 0 || strcmp(dir.c_str(), "/") == 0) {
-      nlc::scene::Back();
+      RenderD7::Scene::Back();
     } else {
-      dir = nlc::fsys::GetParentPath(dir, "title:/");
+      dir = RenderD7::FileSystem::GetParentPath(dir, "title:/");
       dirsel = 0;
       changeddir = true;
     }
   }
   if (hidKeysDown() & KEY_X) {
-    nlc::scene::Load(std::make_unique<MMM>());
+    RenderD7::Scene::Load(std::make_unique<MMM>());
   }
   if (hidKeysDown() & KEY_UP && dirsel > 0) {
     dirsel--;

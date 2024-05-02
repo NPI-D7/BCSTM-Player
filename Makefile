@@ -66,15 +66,15 @@ VERSION_MICRO := 0
 #---------------------------------------------------------------------------------
 TARGET		:=	BCSTM-Player
 BUILD		:=	build
-SOURCES		:=	source BCSTM nlc/source/napp nlc/source/nr nlc/source/nr2 nlc/source/nuseful nlc/source/nconfig nlc/source/lithium source/d7-scan
+SOURCES		:=	source BCSTM RenderD7/source D7-Menu-Core
 DATA		:=	data
-INCLUDES	:=	source BCSTM nlc/include source/d7-scan
+INCLUDES	:=	source BCSTM RenderD7/include D7-Menu-Core
 GRAPHICS	:=	gfx
 #GFXBUILD	:=	$(BUILD)
 ROMFS		:=	romfs
 GFXBUILD	:=	$(ROMFS)/gfx
-APP_AUTHOR	:=	Tobi-D7
-APP_DESCRIPTION :=      BCSTM MusicPlayer for the 3ds.
+APP_AUTHOR	:=	NPI-D7
+APP_DESCRIPTION := BCSTM MusicPlayer for the 3ds.
 ICON		:=	app/icon.png
 BNR_IMAGE	:=  app/banner.png
 BNR_AUDIO	:=	app/BannerAudio.wav
@@ -99,13 +99,13 @@ CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++20
 ASFLAGS	:=	-g $(ARCH)
 LDFLAGS	=	-specs=3dsx.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)
 
-LIBS	:= -lrenderd7 -lcurl -lstdc++ -lm -lcitro2d -lcitro3d -lctru -ljpeg
+LIBS	:= -lcurl -lstdc++ -lm -lcitro2d -lcitro3d -lctru -ljpeg
 
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
 # include and lib
 #---------------------------------------------------------------------------------
-LIBDIRS	:= $(PORTLIBS) $(CTRULIB) $(LIBTWEEN)
+LIBDIRS	:= $(PORTLIBS) $(CTRULIB)
 
 
 #---------------------------------------------------------------------------------

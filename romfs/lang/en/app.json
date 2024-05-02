@@ -1,7 +1,22 @@
 {
-    "NDSP_STATUS": "NdspFirmStatus: ",
-    "MAINMENU": "MainMenu",
-    "XORB": "\uE002 or \uE001: Back to MainMenu",
-    "STOP": "\uE003: Stop Player!",
-    "TPWMR": "This Project was made with RenderD7."
+    "info": {
+        "name": "English",
+        "author": "tobid7",
+        "shortcut": "en"
+    },
+    "keys": {
+        "HEAD_FILEMANAGER": "BCSTM-Player -> Filemanager",
+        "NDSP_STATUS": "NdspFirmStatus: ",
+        "HEAD_MAINMENU": "BCSTM-Player -> Main Menu",
+        "HEAD_SETTINGS": "BCSTM-Player -> Settings",
+        "XORB": "\uE002 or \uE001: Back to Main Menu",
+        "STOP": "\uE003: Stop Player",
+        "BGB": "Press \uE001 to go back!",
+        "TPWMR": "This Project was made with RenderD7.",
+        "BROWSE": "Browse",
+        "LANGUAGE": "Language: ",
+        "SETTINGS": "Settings",
+        "CONTROLCENTER": "Contol Center",
+        "CREDITSL": "- tobid7\n  lead developer\n- devkitpro\n  libctru,- citro3d, citro2d"
+    }
 }

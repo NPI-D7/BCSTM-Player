@@ -1,7 +1,22 @@
 {
-    "NDSP_STATUS": "NdspFirmStatus: ",
-    "MAINMENU": "HauptMenü",
-    "XORB": "\uE002 oder \uE001: Zurück zum HauptMenü",
-    "STOP": "\uE003: Stoppe Player!",
-    "TPWMR": "Dieses Projekt wurde mit RenderD7 erstellt."
+    "info": {
+        "name": "Deutsch",
+        "author": "tobid7",
+        "shortcut": "de"
+    },
+    "keys": {
+        "HEAD_FILEMANAGER": "BCSTM-Player -> Dateimanager",
+        "NDSP_STATUS": "NdspFirmStatus: ",
+        "HEAD_MAINMENU": "BCSTM-Player -> Hauptmenü",
+        "HEAD_SETTINGS": "BCSTM-Player -> Einstellungen",
+        "XORB": "\uE002 oder \uE001: Zurück zum Hauptmenü",
+        "STOP": "\uE003: Wiedergabe beenden",
+        "BGB": "Drücke \uE001 um zurückzugehen!",
+        "TPWMR": "Dieses Projekt wurde mit RenderD7 erstellt.",
+        "BROWSE": "Durchsuchen",
+        "LANGUAGE": "Sprache: ",
+        "SETTINGS": "Einstellungen",
+        "CONTROLCENTER": "Kontrollzentrum",
+        "CREDITSL": "- tobid7\n  Leitender Entwickler\n- devkitpro\n  libctru,- citro3d, citro2d"
+    }
 }
