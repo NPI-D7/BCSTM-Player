@@ -66,9 +66,9 @@ VERSION_MICRO := 0
 #---------------------------------------------------------------------------------
 TARGET		:=	BCSTM-Player
 BUILD		:=	build
-SOURCES		:=	source RenderD7/source D7-Menu-Core
+SOURCES		:=	source RenderD7/source D7-Menu-Core source/scenes
 DATA		:=	data
-INCLUDES	:=	source RenderD7/include D7-Menu-Core
+INCLUDES	:=	source RenderD7/include D7-Menu-Core source/scenes
 GRAPHICS	:=	gfx
 #GFXBUILD	:=	$(BUILD)
 ROMFS		:=	romfs
