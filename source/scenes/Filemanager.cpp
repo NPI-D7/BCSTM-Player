@@ -32,6 +32,18 @@ void Filemanager::Draw(void) const {
     UI7::Label("Total: " + std::to_string(player.GetTotal()));
     UI7::Label("Channels: " + std::to_string(player.GetChannelCount()));
     UI7::Label("Error: " + player.GetErrorMessage());
+    if (UI7::Button("Play")) {
+      player.Play();
+    }
+    UI7::SameLine();
+    if (UI7::Button("Pause")) {
+      player.Pause();
+    }
+    UI7::SameLine();
+    if (UI7::Button("Stop")) {
+      playing = false;
+      player.Stop();
+    }
     UI7::SetCursorPos(R7Vec2(5, 215));
     UI7::Progressbar((float)player.GetCurrent() / (float)player.GetTotal());
     UI7::RestoreCursor();
@@ -65,7 +77,7 @@ void Filemanager::Logic() {
         if (RenderD7::NameIsEndingWith(this->dircontent[this->dirsel].name,
                                        {"bcstm"})) {
           playing = false;
-          if(player.LoadFile(this->dircontent[this->dirsel].path)) {
+          if (player.LoadFile(this->dircontent[this->dirsel].path)) {
             player.Play();
             playing = true;
           }

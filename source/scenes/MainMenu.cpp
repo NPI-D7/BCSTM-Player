@@ -26,6 +26,18 @@ void MainMenu::Draw(void) const {
   }
   RenderD7::OnScreen(Bottom);
   if (UI7::BeginMenu(RD7::Lang::Get("CONTROLCENTER"))) {
+    if (UI7::Button("Play")) {
+      player.Play();
+    }
+    UI7::SameLine();
+    if (UI7::Button("Pause")) {
+      player.Pause();
+    }
+    UI7::SameLine();
+    if (UI7::Button("Stop")) {
+        playing = false;
+      player.Stop();
+    }
     if (UI7::Button(RD7::Lang::Get("BROWSE"))) {
       RenderD7::Scene::Load(std::make_unique<Filemanager>(), true);
     }

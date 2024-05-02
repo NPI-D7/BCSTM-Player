@@ -2,21 +2,6 @@
 #include <bcstm.hpp>
 
 bool D7::BCSTM::LoadFile(const std::string &path) {
-  channel_count = 0;
-  sample_rate = 0;
-  loop_start = 0;
-  loop_end = 0;
-  num_blocks = 0;
-  block_size = 0;
-  block_samples = 0;
-  last_block_size = 0;
-  last_block_samples = 0;
-  current_block = 0;
-  info_offset = 0;
-  data_offset = 0;
-  active_channels = 0;
-  err_msg = "None";
-
   Stop();
   file.open(path, std::ios::in | std::ios::binary);
   if (!file) {
@@ -114,7 +99,7 @@ void D7::BCSTM::Play() {
     return;
   }
   if (is_streaming)
-    Stop();
+    return;
   for (unsigned int i = 0; i < channel_count; i++) {
     {
       channel[i] = 0;
@@ -172,6 +157,20 @@ void D7::BCSTM::Pause() {
 void D7::BCSTM::Stop() {
   if (file)
     file.close();
+  channel_count = 0;
+  sample_rate = 0;
+  loop_start = 0;
+  loop_end = 0;
+  num_blocks = 0;
+  block_size = 0;
+  block_samples = 0;
+  last_block_size = 0;
+  last_block_samples = 0;
+  current_block = 0;
+  info_offset = 0;
+  data_offset = 0;
+  active_channels = 0;
+  err_msg = "None";
   is_loaded = false;
   if (!is_streaming)
     return;
@@ -185,14 +184,9 @@ void D7::BCSTM::Stop() {
 void D7::BCSTM::stream() {
   current_time = svcGetSystemTick();
   if (current_time - last_time >= 100000000 && is_loaded) {
-    static bool paused = false;
-    {
-      paused = is_paused;
-      if (!is_streaming)
-        return;
-    }
-
-    if (!paused)
+    if (!is_streaming)
+      return;
+    if (!is_paused)
       fill_buffers();
     last_time = current_time;
   }
