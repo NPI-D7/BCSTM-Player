@@ -15,6 +15,7 @@ bool D7::BCSTM::LoadFile(const std::string &path) {
   info_offset = 0;
   data_offset = 0;
   active_channels = 0;
+  err_msg = "None";
 
   Stop();
   file.open(path, std::ios::in | std::ios::binary);
@@ -169,6 +170,8 @@ void D7::BCSTM::Pause() {
 }
 
 void D7::BCSTM::Stop() {
+  if (file)
+    file.close();
   is_loaded = false;
   if (!is_streaming)
     return;
@@ -177,7 +180,6 @@ void D7::BCSTM::Stop() {
     ndspChnWaveBufClear(channel[i]);
     active_channels &= ~(1 << channel[i]);
   }
-  file.close();
 }
 
 void D7::BCSTM::stream() {

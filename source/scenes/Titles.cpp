@@ -25,8 +25,10 @@ void Titles::Logic() {
     RenderD7::Scene::Back();
   }
   if (hidKeysDown() & KEY_A) {
-    romfsUnmount("title");
-    romfs_is_mount = false;
+    if (romfs_is_mount) {
+      romfsUnmount("title");
+      romfs_is_mount = false;
+    }
     Result mntres = romfsMountFromTitle(
         D7MC::TitleManager::sdtitles[selection]->id(),
         D7MC::TitleManager::sdtitles[selection]->mediatype(), "title");
