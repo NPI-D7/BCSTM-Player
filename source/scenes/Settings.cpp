@@ -24,8 +24,11 @@ void Settings::Draw(void) const {
   RenderD7::OnScreen(Top);
   if (UI7::BeginMenu(RD7::Lang::Get("HEAD_SETTINGS"))) {
     UI7::Label(RD7::Lang::Get("CREDITSL"));
+    UI7::Label(RD7::Lang::Get("TPWMR"));
+    UI7::Label("  - " + RenderD7::Lang::Get("VERSION") + ": " +
+               std::string(RENDERD7VSTRING));
     UI7::SetCursorPos(R7Vec2(5, 222));
-    UI7::Label("Version: 2.0.0 preview");
+    UI7::Label(RenderD7::Lang::Get("VERSION") + ": 2.0.0 preview");
     UI7::RestoreCursor();
 #ifndef RELASE
     UI7::SetCursorPos(R7Vec2(395, 222));
@@ -54,4 +57,4 @@ void Settings::Logic() {
     RenderD7::Scene::Back();
   }
 }
-} // namespace BP
+}  // namespace BP

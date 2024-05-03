@@ -1,4 +1,5 @@
 #include <arpa/inet.h>
+
 #include <bcstm.hpp>
 
 bool D7::BCSTM::LoadFile(const std::string &path) {
@@ -8,13 +9,13 @@ bool D7::BCSTM::LoadFile(const std::string &path) {
     err_msg = "Unable to load File!";
     return false;
   }
-  is_little_endian = true; // default to true
+  is_little_endian = true;  // default to true
 
   auto magic = read32();
   if (!(is_little_endian = (read16() == 0xFEFF))) {
     magic = htonl(magic);
   }
-  if (magic != 0x4D545343) { // CSTM
+  if (magic != 0x4D545343) {  // CSTM
     file.close();
     err_msg = "File is invalid!";
     return false;
@@ -25,9 +26,9 @@ bool D7::BCSTM::LoadFile(const std::string &path) {
 
   for (unsigned short i = 0; i < sbc; i++) {
     auto sec = read16();
-    read16(); // padding
+    read16();  // padding
     auto off = read32();
-    read32(); // size
+    read32();  // size
     if (sec == InfoBlock)
       info_offset = off;
     else if (sec == DataBlock)
@@ -56,7 +57,7 @@ bool D7::BCSTM::LoadFile(const std::string &path) {
   num_blocks = read32();
   block_size = read32();
   block_samples = read32();
-  read32(); // last block used bytes
+  read32();  // last block used bytes
   last_block_samples = read32();
   last_block_size = read32();
 
@@ -98,8 +99,7 @@ void D7::BCSTM::Play() {
     is_paused = false;
     return;
   }
-  if (is_streaming)
-    return;
+  if (is_streaming) return;
   for (unsigned int i = 0; i < channel_count; i++) {
     {
       channel[i] = 0;
@@ -146,8 +146,7 @@ void D7::BCSTM::Play() {
 }
 
 void D7::BCSTM::Pause() {
-  if (!is_streaming)
-    return;
+  if (!is_streaming) return;
   is_paused = true;
   for (unsigned int i = 0; i < channel_count; i++) {
     ndspChnSetPaused(channel[i], true);
@@ -155,8 +154,7 @@ void D7::BCSTM::Pause() {
 }
 
 void D7::BCSTM::Stop() {
-  if (file)
-    file.close();
+  if (file) file.close();
   channel_count = 0;
   sample_rate = 0;
   loop_start = 0;
@@ -172,8 +170,7 @@ void D7::BCSTM::Stop() {
   active_channels = 0;
   err_msg = "None";
   is_loaded = false;
-  if (!is_streaming)
-    return;
+  if (!is_streaming) return;
   is_streaming = false;
   for (unsigned int i = 0; i < channel_count; i++) {
     ndspChnWaveBufClear(channel[i]);
@@ -184,18 +181,15 @@ void D7::BCSTM::Stop() {
 void D7::BCSTM::stream() {
   current_time = svcGetSystemTick();
   if (current_time - last_time >= 100000000 && is_loaded) {
-    if (!is_streaming)
-      return;
-    if (!is_paused)
-      fill_buffers();
+    if (!is_streaming) return;
+    if (!is_paused) fill_buffers();
     last_time = current_time;
   }
 }
 
 void D7::BCSTM::fill_buffers() {
   for (unsigned int bufIndex = 0; bufIndex < buffer_count; ++bufIndex) {
-    if (wave_buf[0][bufIndex].status != NDSP_WBUF_DONE)
-      continue;
+    if (wave_buf[0][bufIndex].status != NDSP_WBUF_DONE) continue;
     if (channel_count == 2 && wave_buf[1][bufIndex].status != NDSP_WBUF_DONE)
       continue;
 
@@ -214,9 +208,9 @@ void D7::BCSTM::fill_buffers() {
 
       memset(buf, 0, sizeof(ndspWaveBuf));
       buf->data_adpcm = buffer_data[channelIndex][bufIndex].data();
-      file.read(reinterpret_cast<char *>(buf->data_adpcm),
-                (current_block == num_blocks - 1) ? last_block_size
-                                                  : block_size);
+      file.read(
+          reinterpret_cast<char *>(buf->data_adpcm),
+          (current_block == num_blocks - 1) ? last_block_size : block_size);
       DSP_FlushDataCache(buf->data_adpcm, block_size);
 
       if (current_block == 0)

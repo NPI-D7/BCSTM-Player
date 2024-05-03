@@ -4,11 +4,11 @@
 
 namespace BP {
 class MainMenu : public RenderD7::Scene {
-public:
+ public:
   void Draw(void) const override;
   void Logic() override;
   MainMenu();
 
-private:
+ private:
 };
-} // namespace BP
+}  // namespace BP

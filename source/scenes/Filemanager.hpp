@@ -4,16 +4,15 @@
 
 namespace BP {
 class Filemanager : public RenderD7::Scene {
-public:
+ public:
   void Draw(void) const override;
   void Logic() override;
   Filemanager(std::string idevice = "sdmc:/");
 
-private:
+ private:
   void reload_list() {
     namelist.clear();
-    for (const auto &it : dircontent)
-      namelist.push_back(it.name);
+    for (const auto &it : dircontent) namelist.push_back(it.name);
   }
   std::string device;
   std::string dir;
@@ -22,4 +21,4 @@ private:
   mutable int dirsel = 0;
   bool changeddir = false;
 };
-} // namespace BP
+}  // namespace BP

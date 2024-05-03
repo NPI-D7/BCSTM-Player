@@ -3,8 +3,7 @@
 
 void Bcstm_Loop() {
   while (true) {
-    if (BP::player.IsLoaded())
-      BP::player.Update();
+    if (BP::player.IsLoaded()) BP::player.Update();
     RenderD7::Thread::sleep(1 * 10);
   }
   BP::player.Stop();
@@ -27,6 +26,6 @@ int main() {
   while (RenderD7::MainLoop()) {
     RenderD7::FrameEnd();
   }
-  
+
   return 0;
 }

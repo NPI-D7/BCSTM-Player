@@ -33,9 +33,16 @@ void Titles::Logic() {
         D7MC::TitleManager::sdtitles[selection]->id(),
         D7MC::TitleManager::sdtitles[selection]->mediatype(), "title");
     if (R_FAILED(mntres)) {
-      RenderD7::ResultDecoder decc;
-      decc.Load(mntres);
-      decc.WriteLog();
+      RenderD7::ResultDecoder d;
+      d.Load(mntres);
+      d.WriteLog();
+      std::stringstream ss;
+      ss << "Failed to mount romfs: " << d.GetCode() << std::endl;
+      ss << "Module: " << d.GetModule() << std::endl;
+      ss << "Level: " << d.GetLevel() << std::endl;
+      ss << "Summary: " << d.GetSummary() << std::endl;
+      ss << "Description: " << d.GetDescription() << std::endl;
+      RenderD7::Error(ss.str());
     } else {
       romfs_is_mount = true;
     }
@@ -48,4 +55,4 @@ void Titles::Logic() {
     selection--;
   }
 }
-} // namespace BP
+}  // namespace BP
