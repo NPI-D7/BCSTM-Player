@@ -5,4 +5,5 @@ D7::BCSTM player;
 bool playing = false;
 std::string now_playing = "";
 bool romfs_is_mount = false;
+Config config;
 }  // namespace BP

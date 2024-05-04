@@ -3,7 +3,7 @@
 #include <common.hpp>
 
 namespace BP {
-class Filemanager : public RenderD7::Scene {
+class Filemanager : public RD7::Scene {
  public:
   void Draw(void) const override;
   void Logic() override;
@@ -16,7 +16,7 @@ class Filemanager : public RenderD7::Scene {
   }
   std::string device;
   std::string dir;
-  std::vector<RenderD7::FileSystem::Entry> dircontent;
+  std::vector<RD7::FileSystem::Entry> dircontent;
   std::vector<std::string> namelist;
   mutable int dirsel = 0;
   bool changeddir = false;

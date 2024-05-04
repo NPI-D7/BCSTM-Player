@@ -3,7 +3,7 @@
 #include <common.hpp>
 
 namespace BP {
-class Settings : public RenderD7::Scene {
+class Settings : public RD7::Scene {
  public:
   void Draw(void) const override;
   void Logic() override;
@@ -12,5 +12,8 @@ class Settings : public RenderD7::Scene {
  private:
   std::vector<std::string> languages;
   mutable int lang_sel = 0;
+  // do fade effects
+  mutable bool dfe = false;
+  mutable bool rd7tf_theme = false;
 };
 }  // namespace BP

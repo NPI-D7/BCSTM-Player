@@ -57,11 +57,10 @@ endif
 #---------------------------------------------------------------------------------
 
 VERSION_MAJOR := 2
-
 VERSION_MINOR := 0
-
 VERSION_MICRO := 0
 
+VERSION_STRING := $(VERSION_MAJOR).$(VERSION_MINOR).$(VERSION_MICRO)
 
 #---------------------------------------------------------------------------------
 TARGET		:=	BCSTM-Player
@@ -88,7 +87,8 @@ IP			:=  0.0.0.0
 ARCH	:=	-march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft
 
 CFLAGS	:=	-g -Wall -Wno-psabi -O2 -mword-relocations \
-			-DV_STRING=\"$(GIT_VER)\" \
+			-DN_STRING=\"$(GIT_VER)\" \
+			-DV_STRING=\"$(VERSION_STRING)\" \
 			-fomit-frame-pointer -ffunction-sections \
 			$(ARCH)
 
@@ -99,7 +99,7 @@ CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++20
 ASFLAGS	:=	-g $(ARCH)
 LDFLAGS	=	-specs=3dsx.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)
 
-LIBS	:= -lcurl -lstdc++ -lm -lcitro2d -lcitro3d -lctru -ljpeg
+LIBS	:= -lstdc++ -lm -lcitro2d -lcitro3d -lctru
 
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing

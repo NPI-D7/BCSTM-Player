@@ -21,6 +21,7 @@ class BCSTM {
   inline unsigned int GetChannelCount() { return this->channel_count; }
   inline unsigned int GetTotal() { return this->num_blocks; }
   inline unsigned int GetCurrent() { return this->current_block; }
+  inline unsigned int GetSampleRate() { return this->sample_rate; }
   inline std::string GetErrorMessage() { return this->err_msg; }
 
  private:

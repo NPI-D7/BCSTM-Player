@@ -168,6 +168,8 @@ void D7::BCSTM::Stop() {
   info_offset = 0;
   data_offset = 0;
   active_channels = 0;
+  is_paused = false;
+  is_looping = false;
   err_msg = "None";
   is_loaded = false;
   if (!is_streaming) return;

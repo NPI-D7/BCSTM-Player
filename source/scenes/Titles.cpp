@@ -9,8 +9,10 @@ Titles::Titles() {
 }
 
 void Titles::Draw(void) const {
-  RenderD7::OnScreen(Top);
-  if (UI7::BeginMenu("BCSTM-Player -> Titles")) {
+  RD7::OnScreen(Top);
+  if (config.GetBool("rd7tf_theme"))
+    DrawWavedBg(R7Vec2(), R7Vec2(400, 240), RenderD7::GetTime());
+  if (UI7::BeginMenu(RD7::Lang::Get("HEAD_TITLES"))) {
     UI7::BrowserList(namelist, selection);
     UI7::EndMenu();
   }
@@ -22,7 +24,7 @@ void Titles::Draw(void) const {
 
 void Titles::Logic() {
   if (hidKeysDown() & KEY_B) {
-    RenderD7::Scene::Back();
+    RD7::Scene::Back();
   }
   if (hidKeysDown() & KEY_A) {
     if (romfs_is_mount) {
@@ -33,7 +35,7 @@ void Titles::Logic() {
         D7MC::TitleManager::sdtitles[selection]->id(),
         D7MC::TitleManager::sdtitles[selection]->mediatype(), "title");
     if (R_FAILED(mntres)) {
-      RenderD7::ResultDecoder d;
+      RD7::ResultDecoder d;
       d.Load(mntres);
       d.WriteLog();
       std::stringstream ss;
@@ -42,7 +44,7 @@ void Titles::Logic() {
       ss << "Level: " << d.GetLevel() << std::endl;
       ss << "Summary: " << d.GetSummary() << std::endl;
       ss << "Description: " << d.GetDescription() << std::endl;
-      RenderD7::Error(ss.str());
+      RD7::Error(ss.str());
     } else {
       romfs_is_mount = true;
     }

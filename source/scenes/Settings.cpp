@@ -1,8 +1,12 @@
 #include <scenes/scenes.hpp>
 
-#ifdef V_STRING
-#else
-#define V_STRING "none"
+// #define RELEASE
+#ifndef N_STRING
+#define N_STRING "unknown"
+#endif
+
+#ifndef V_STRING
+#define V_STRING "unknown"
 #endif
 
 namespace BP {
@@ -18,21 +22,25 @@ Settings::Settings() {
     }
     n++;
   }
+  dfe = config.GetBool("fade");
+  rd7tf_theme = config.GetBool("rd7tf_theme");
 }
 
 void Settings::Draw(void) const {
-  RenderD7::OnScreen(Top);
+  RD7::OnScreen(Top);
+  if (config.GetBool("rd7tf_theme"))
+    DrawWavedBg(R7Vec2(), R7Vec2(400, 240), RenderD7::GetTime());
   if (UI7::BeginMenu(RD7::Lang::Get("HEAD_SETTINGS"))) {
     UI7::Label(RD7::Lang::Get("CREDITSL"));
     UI7::Label(RD7::Lang::Get("TPWMR"));
-    UI7::Label("  - " + RenderD7::Lang::Get("VERSION") + ": " +
+    UI7::Label("  - " + RD7::Lang::Get("VERSION") + ": " +
                std::string(RENDERD7VSTRING));
     UI7::SetCursorPos(R7Vec2(5, 222));
-    UI7::Label(RenderD7::Lang::Get("VERSION") + ": 2.0.0 preview");
+    UI7::Label(RD7::Lang::Get("VERSION") + V_STRING);
     UI7::RestoreCursor();
-#ifndef RELASE
+#ifndef RELEASE
     UI7::SetCursorPos(R7Vec2(395, 222));
-    UI7::Label("nightly: " + std::string(V_STRING), RD7TextFlags_AlignRight);
+    UI7::Label("nightly: " + std::string(N_STRING), RD7TextFlags_AlignRight);
     UI7::RestoreCursor();
 #endif
     UI7::EndMenu();
@@ -40,21 +48,44 @@ void Settings::Draw(void) const {
   RD7::OnScreen(Bottom);
   if (UI7::BeginMenu(RD7::Lang::Get("BGB"))) {
     if (languages.size() != 0) {
-      if (UI7::Button(RD7::Lang::Get("LANGUAGE") + languages[lang_sel])) {
+      UI7::Label(RD7::Lang::Get("LANGUAGE") + RD7::Lang::GetName());
+      UI7::Label("  " + RD7::Lang::Get("AUTHOR") + RD7::Lang::GetAuthor());
+      if (UI7::Button(RD7::Lang::Get("NEXT") +
+                      (lang_sel < (int)languages.size() - 1
+                           ? languages[lang_sel + 1]
+                           : languages[0]))) {
         lang_sel++;
         if (lang_sel + 1 > (int)languages.size()) {
           lang_sel = 0;
         }
         RD7::Lang::Load(languages[lang_sel]);
+        config.Set("lang", languages[lang_sel]);
       }
+    }
+    UI7::Checkbox(RD7::Lang::Get("TRANSISIONS"), dfe);
+    UI7::Checkbox(RD7::Lang::Get("RD7TF_THEME"), rd7tf_theme);
+    if (UI7::Button("RenderD7")) {
+      RD7::LoadSettings();
     }
     UI7::EndMenu();
   }
 }
 
 void Settings::Logic() {
+  if (dfe != config.GetBool("fade")) {
+    config.Set("fade", dfe);
+  }
+  if (rd7tf_theme != config.GetBool("rd7tf_theme")) {
+    config.Set("rd7tf_theme", rd7tf_theme);
+    if (rd7tf_theme == true) {
+      RD7::ThemeLoad("romfs:/themes/rd7tf.theme");
+    } else {
+      RD7::ThemeDefault();
+    }
+  }
   if (hidKeysDown() & KEY_B) {
-    RenderD7::Scene::Back();
+    config.Save();
+    RD7::Scene::Back();
   }
 }
 }  // namespace BP
