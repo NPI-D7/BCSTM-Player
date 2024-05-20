@@ -9,7 +9,7 @@ void MainMenu::Draw(void) const {
   if (UI7::BeginMenu(RD7::Lang::Get("HEAD_MAINMENU"))) {
     if (config.GetBool("clock")) {
       UI7::SetCursorPos(R7Vec2(395, 2));
-      UI7::Label(Clock(config.GetBool("24h")), RD7TextFlags_AlignRight);
+      UI7::Label(Clock(), RD7TextFlags_AlignRight);
       UI7::RestoreCursor();
     }
     UI7::Label(
@@ -57,14 +57,14 @@ void MainMenu::Logic() {
     } else if (this->sel == 3) {
       RD7::Scene::Load(std::make_unique<Filemanager>(), fade);
     } else if (this->sel == 4) {
-      RD7::Scene::Load(std::make_unique<Titles>(), fade);
-    } else if (this->sel == 5 && romfs_is_mount) {
-      RD7::Scene::Load(std::make_unique<Filemanager>("title:/"), fade);
-    } else if (this->sel == 6) {
       RD7::Scene::Load(std::make_unique<Settings>(), fade);
-    } else if (this->sel == 7) {
+    } else if (this->sel == 5) {
       if (fade) RD7::FadeOut();
       RD7::ExitApp();
+    } else if (this->sel == 6) {
+      RD7::Scene::Load(std::make_unique<Titles>(), fade);
+    } else if (this->sel == 7 && romfs_is_mount) {
+      RD7::Scene::Load(std::make_unique<Filemanager>("title:/"), fade);
     }
   }
   if (hidKeysDown() & KEY_START) {
@@ -77,22 +77,26 @@ void MainMenu::Logic() {
   if (hidKeysDown() & KEY_DOWN && sel < (int)menu.size() - 1) {
     sel++;
   }
-  if (current_lang != RD7::Lang::GetShortcut()) {
+  if (current_lang != RD7::Lang::GetShortcut() ||
+      rfsopt != config.GetBool("romfs_browse")) {
     this->load_menu();
   }
 }
 
 void MainMenu::load_menu() {
+  this->rfsopt = config.GetBool("romfs_browse");
+  this->current_lang = RD7::Lang::GetShortcut();
   this->sel = 0;
   menu.clear();
   menu.push_back(RD7::Lang::Get("PLAY"));
   menu.push_back(RD7::Lang::Get("PAUSE"));
   menu.push_back(RD7::Lang::Get("STOP"));
   menu.push_back(RD7::Lang::Get("BROWSE"));
-  menu.push_back(RD7::Lang::Get("TITLES") + " (Citra only)");
-  menu.push_back("RomFS (Citra only)");
   menu.push_back(RD7::Lang::Get("SETTINGS"));
   menu.push_back(RD7::Lang::Get("EXIT"));
-  this->current_lang = RD7::Lang::GetShortcut();
+  if (rfsopt) {
+    menu.push_back(RD7::Lang::Get("TITLES") + " (Citra only)");
+    menu.push_back("RomFS (Citra only)");
+  }
 }
 }  // namespace BP

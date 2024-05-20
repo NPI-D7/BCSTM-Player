@@ -44,6 +44,10 @@
         "NEXT": "Next: ",
         "RD7TF_THEME": "rd7tf Theme",
         "CLOCK": "Clock",
-        "24HRS": "24 hours"
+        "24HRS": "24 hours",
+        "SHOWSECONDS": "Show Seconds",
+        "APPEARANCE": "Appearance: ",
+        "DEVELOPER": "Developer: ",
+        "SHOWTITLEOPT": "Show Titlemanager"
     }
 }

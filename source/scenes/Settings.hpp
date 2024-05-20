@@ -17,5 +17,7 @@ class Settings : public RD7::Scene {
   mutable bool rd7tf_theme = false;
   mutable bool dispc = false;
   mutable bool h24 = false;
+  mutable bool dps = false;
+  mutable bool romfsb = false;
 };
 }  // namespace BP

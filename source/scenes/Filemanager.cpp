@@ -16,7 +16,7 @@ void Filemanager::Draw(void) const {
   if (UI7::BeginMenu(RD7::Lang::Get("HEAD_FILEMANAGER"))) {
     if (config.GetBool("clock")) {
       UI7::SetCursorPos(R7Vec2(395, 2));
-      UI7::Label(Clock(config.GetBool("24h")), RD7TextFlags_AlignRight);
+      UI7::Label(Clock(), RD7TextFlags_AlignRight);
       UI7::RestoreCursor();
     }
     UI7::BrowserList(namelist, this->dirsel);

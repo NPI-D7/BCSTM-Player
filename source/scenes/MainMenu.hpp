@@ -14,5 +14,6 @@ class MainMenu : public RD7::Scene {
   std::vector<std::string> menu;
   mutable int sel = 0;
   std::string current_lang;
+  bool rfsopt;
 };
 }  // namespace BP

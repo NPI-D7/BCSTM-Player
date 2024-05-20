@@ -36,5 +36,7 @@ void BP::Config::make_new() {
   config["rd7tf_theme"] = false;
   config["clock"] = true;
   config["24h"] = false;
+  config["disp_seconds"] = true;
+  config["romfs_browse"] = false;
   Save();
 }

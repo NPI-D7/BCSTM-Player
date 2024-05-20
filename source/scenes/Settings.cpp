@@ -26,6 +26,8 @@ Settings::Settings() {
   rd7tf_theme = config.GetBool("rd7tf_theme");
   dispc = config.GetBool("clock");
   h24 = config.GetBool("24h");
+  dps = config.GetBool("disp_seconds");
+  romfsb = config.GetBool("romfs_browse");
 }
 
 void Settings::Draw(void) const {
@@ -35,7 +37,7 @@ void Settings::Draw(void) const {
   if (UI7::BeginMenu(RD7::Lang::Get("HEAD_SETTINGS"))) {
     if (config.GetBool("clock")) {
       UI7::SetCursorPos(R7Vec2(395, 2));
-      UI7::Label(Clock(config.GetBool("24h")), RD7TextFlags_AlignRight);
+      UI7::Label(Clock(), RD7TextFlags_AlignRight);
       UI7::RestoreCursor();
     }
     UI7::Label(RD7::Lang::Get("CREDITSL"));
@@ -53,10 +55,12 @@ void Settings::Draw(void) const {
     UI7::EndMenu();
   }
   RD7::OnScreen(Bottom);
-  if (UI7::BeginMenu(RD7::Lang::Get("BGB"))) {
+  if (UI7::BeginMenu(RD7::Lang::Get("BGB"), R7Vec2(), UI7MenuFlags_Scrolling)) {
     if (languages.size() != 0) {
-      UI7::Label(RD7::Lang::Get("LANGUAGE") + RD7::Lang::GetName());
-      UI7::Label("  " + RD7::Lang::Get("AUTHOR") + RD7::Lang::GetAuthor());
+      UI7::Label(RD7::Lang::Get("LANGUAGE"));
+      UI7::Label("  - " + RD7::Lang::GetName() + " (" +
+                 RD7::Lang::GetShortcut() + ")");
+      UI7::Label("  - " + RD7::Lang::Get("AUTHOR") + RD7::Lang::GetAuthor());
       if (UI7::Button(RD7::Lang::Get("NEXT") +
                       (lang_sel < (int)languages.size() - 1
                            ? languages[lang_sel + 1]
@@ -69,10 +73,14 @@ void Settings::Draw(void) const {
         config.Set("lang", languages[lang_sel]);
       }
     }
+    UI7::Label(RD7::Lang::Get("APPEARANCE"));
     UI7::Checkbox(RD7::Lang::Get("TRANSISIONS"), dfe);
     UI7::Checkbox(RD7::Lang::Get("RD7TF_THEME"), rd7tf_theme);
     UI7::Checkbox(RD7::Lang::Get("CLOCK"), dispc);
     UI7::Checkbox(RD7::Lang::Get("24HRS"), h24);
+    UI7::Checkbox(RD7::Lang::Get("SHOWSECONDS"), dps);
+    UI7::Label(RD7::Lang::Get("DEVELOPER"));
+    UI7::Checkbox(RD7::Lang::Get("SHOWTITLEOPT"), romfsb);
     if (UI7::Button("RenderD7")) {
       RD7::LoadSettings();
     }
@@ -89,6 +97,12 @@ void Settings::Logic() {
   }
   if (h24 != config.GetBool("24h")) {
     config.Set("24h", h24);
+  }
+  if (dps != config.GetBool("disp_seconds")) {
+    config.Set("disp_seconds", dps);
+  }
+  if (romfsb != config.GetBool("romfs_browse")) {
+    config.Set("romfs_browse", romfsb);
   }
   if (rd7tf_theme != config.GetBool("rd7tf_theme")) {
     config.Set("rd7tf_theme", rd7tf_theme);
