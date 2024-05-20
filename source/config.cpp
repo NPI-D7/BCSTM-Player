@@ -34,5 +34,7 @@ void BP::Config::make_new() {
   config["lang"] = RD7::Lang::GetSys();
   config["fade"] = true;
   config["rd7tf_theme"] = false;
+  config["clock"] = true;
+  config["24h"] = false;
   Save();
 }

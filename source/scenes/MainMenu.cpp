@@ -7,6 +7,11 @@ void MainMenu::Draw(void) const {
   if (config.GetBool("rd7tf_theme"))
     DrawWavedBg(R7Vec2(), R7Vec2(400, 240), RenderD7::GetTime());
   if (UI7::BeginMenu(RD7::Lang::Get("HEAD_MAINMENU"))) {
+    if (config.GetBool("clock")) {
+      UI7::SetCursorPos(R7Vec2(395, 2));
+      UI7::Label(Clock(config.GetBool("24h")), RD7TextFlags_AlignRight);
+      UI7::RestoreCursor();
+    }
     UI7::Label(
         RD7::Lang::Get("PLAYING") +
             std::string(playing ? now_playing : RD7::Lang::Get("NOTHING")),

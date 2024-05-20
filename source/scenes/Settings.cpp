@@ -24,6 +24,8 @@ Settings::Settings() {
   }
   dfe = config.GetBool("fade");
   rd7tf_theme = config.GetBool("rd7tf_theme");
+  dispc = config.GetBool("clock");
+  h24 = config.GetBool("24h");
 }
 
 void Settings::Draw(void) const {
@@ -31,9 +33,14 @@ void Settings::Draw(void) const {
   if (config.GetBool("rd7tf_theme"))
     DrawWavedBg(R7Vec2(), R7Vec2(400, 240), RenderD7::GetTime());
   if (UI7::BeginMenu(RD7::Lang::Get("HEAD_SETTINGS"))) {
+    if (config.GetBool("clock")) {
+      UI7::SetCursorPos(R7Vec2(395, 2));
+      UI7::Label(Clock(config.GetBool("24h")), RD7TextFlags_AlignRight);
+      UI7::RestoreCursor();
+    }
     UI7::Label(RD7::Lang::Get("CREDITSL"));
     UI7::Label(RD7::Lang::Get("TPWMR"));
-    UI7::Label("  - " + RD7::Lang::Get("VERSION") + ": " +
+    UI7::Label("  - " + RD7::Lang::Get("VERSION") +
                std::string(RENDERD7VSTRING));
     UI7::SetCursorPos(R7Vec2(5, 222));
     UI7::Label(RD7::Lang::Get("VERSION") + V_STRING);
@@ -64,6 +71,8 @@ void Settings::Draw(void) const {
     }
     UI7::Checkbox(RD7::Lang::Get("TRANSISIONS"), dfe);
     UI7::Checkbox(RD7::Lang::Get("RD7TF_THEME"), rd7tf_theme);
+    UI7::Checkbox(RD7::Lang::Get("CLOCK"), dispc);
+    UI7::Checkbox(RD7::Lang::Get("24HRS"), h24);
     if (UI7::Button("RenderD7")) {
       RD7::LoadSettings();
     }
@@ -74,6 +83,12 @@ void Settings::Draw(void) const {
 void Settings::Logic() {
   if (dfe != config.GetBool("fade")) {
     config.Set("fade", dfe);
+  }
+  if (dispc != config.GetBool("clock")) {
+    config.Set("clock", dispc);
+  }
+  if (h24 != config.GetBool("24h")) {
+    config.Set("24h", h24);
   }
   if (rd7tf_theme != config.GetBool("rd7tf_theme")) {
     config.Set("rd7tf_theme", rd7tf_theme);

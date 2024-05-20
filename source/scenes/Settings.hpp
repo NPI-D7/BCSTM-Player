@@ -15,5 +15,7 @@ class Settings : public RD7::Scene {
   // do fade effects
   mutable bool dfe = false;
   mutable bool rd7tf_theme = false;
+  mutable bool dispc = false;
+  mutable bool h24 = false;
 };
 }  // namespace BP

@@ -29,8 +29,10 @@ class Config {
     return config[key].get<bool>();
   }
 
+  void Reset() { make_new(); }
+
  private:
-  const int config_version = 0;
+  const int config_version = 1;
   void make_new();
   nlohmann::json config;
 };

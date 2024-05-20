@@ -42,6 +42,8 @@
         "AUTHOR": "Autor: ",
         "TRANSISIONS": "Übergänge",
         "NEXT": "Nächste: ",
-        "RD7TF_THEME": "rd7tf Theme"
+        "RD7TF_THEME": "rd7tf Theme",
+        "CLOCK": "Uhr",
+        "24HRS": "24 Stunden"
     }
 }
