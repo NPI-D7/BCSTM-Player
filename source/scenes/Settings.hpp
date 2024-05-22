@@ -19,5 +19,8 @@ class Settings : public RD7::Scene {
   mutable bool h24 = false;
   mutable bool dps = false;
   mutable bool romfsb = false;
+  mutable bool downloading = false;
+  mutable bool use_nightly = false;
+  mutable bool search_updates = false;
 };
 }  // namespace BP

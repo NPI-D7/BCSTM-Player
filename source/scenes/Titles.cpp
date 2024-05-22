@@ -2,7 +2,8 @@
 
 namespace BP {
 Titles::Titles() {
-  D7MC::TitleManager::ScanSD("sdmc:/BCSTM-Player/");
+  std::filesystem::create_directories(RenderD7::GetAppDirectory() + "/cache");
+  D7MC::TitleManager::ScanSD(RenderD7::GetAppDirectory() + "/");
   maxtitles = (int)D7MC::TitleManager::sdtitles.size();
   for (const auto &it : D7MC::TitleManager::sdtitles)
     namelist.push_back(it->name());

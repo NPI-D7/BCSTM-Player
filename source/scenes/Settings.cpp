@@ -1,13 +1,6 @@
 #include <scenes/scenes.hpp>
 
 // #define RELEASE
-#ifndef N_STRING
-#define N_STRING "unknown"
-#endif
-
-#ifndef V_STRING
-#define V_STRING "unknown"
-#endif
 
 namespace BP {
 Settings::Settings() {
@@ -28,6 +21,8 @@ Settings::Settings() {
   h24 = config.GetBool("24h");
   dps = config.GetBool("disp_seconds");
   romfsb = config.GetBool("romfs_browse");
+  search_updates = config.GetBool("search_updates");
+  use_nightly = config.GetBool("use_nightly");
 }
 
 void Settings::Draw(void) const {
@@ -79,7 +74,65 @@ void Settings::Draw(void) const {
     UI7::Checkbox(RD7::Lang::Get("CLOCK"), dispc);
     UI7::Checkbox(RD7::Lang::Get("24HRS"), h24);
     UI7::Checkbox(RD7::Lang::Get("SHOWSECONDS"), dps);
+    UI7::Label(RD7::Lang::Get("UPDATER"));
+    UI7::Checkbox(RD7::Lang::Get("AUTOSEARCHUPDATE"), search_updates);
+    UI7::Checkbox(RD7::Lang::Get("USENIGHTLY"), use_nightly);
+    if (UI7::Button(RD7::Lang::Get("CHECK"))) {
+      BP::CheckForUpdate(true);
+    }
+    if (update_info.valid) {
+      if (!update_info.nightly &&
+          update_info.version.substr(1).compare(V_STRING) < 0) {
+        UI7::Label("Already Up to date!");
+      } else {
+        UI7::Label("Update: " + update_info.version);
+        UI7::Label("Info/Changelog: \n" + update_info.text);
+        if (UI7::Button("Download")) {
+          RenderD7::Tasks::Create([&]() {
+            downloading = true;
+            std::string fname = "BCSTM-Player.";
+            fname += hb_mode ? "3dsx" : "cia";
+            if (update_info.nightly) {
+              auto ret = RD7::Net::Download2File(
+                  "https://raw.githubusercontent.com/NPI-D7/nightlys/master/"
+                  "builds/BCSTM-Player/" +
+                      fname,
+                  hb_mode ? thiz_path : "sdmc:/BCSTM-Player.cia");
+              if (ret) {
+                RD7::PushMessage(RD7::Lang::Get("UPDATER"),
+                                 "Update Failed!\n" +
+                                     std::to_string(RD7::Net::ErrorCode(ret)) +
+                                     "/" +
+                                     std::to_string(RD7::Net::StatusCode(ret)));
+              }
+            } else {
+              auto ret = RD7::Net::GitDownloadRelease(
+                  "https://github.com/NPI-D7/BCSTM-Player", fname,
+                  hb_mode ? thiz_path : "sdmc:/BCSTM-Player.cia");
+              if (ret) {
+                RD7::PushMessage(RD7::Lang::Get("UPDATER"),
+                                 "Update Failed!\n" +
+                                     std::to_string(RD7::Net::ErrorCode(ret)) +
+                                     "/" +
+                                     std::to_string(RD7::Net::StatusCode(ret)));
+              }
+            }
+            RD7::PushMessage(RD7::Lang::Get("UPDATER"),
+                             "Done, Restart to\nApply Changes!");
+            downloading = false;
+          });
+        }
+      }
+    }
+    if (downloading) {
+      UI7::Label(
+          "Download: " + RD7::FormatBytes(RD7::Net::GetProgressCurrent()) +
+          "/" + RD7::FormatBytes(RD7::Net::GetProgressTotal()));
+      UI7::Progressbar((float)RD7::Net::GetProgressCurrent() /
+                       (float)RD7::Net::GetProgressTotal());
+    }
     UI7::Label(RD7::Lang::Get("DEVELOPER"));
+    UI7::Label("Exec Mode: " + std::string(hb_mode ? "3dsx" : "cia"));
     UI7::Checkbox(RD7::Lang::Get("SHOWTITLEOPT"), romfsb);
     if (UI7::Button("RenderD7")) {
       RD7::LoadSettings();
@@ -103,6 +156,12 @@ void Settings::Logic() {
   }
   if (romfsb != config.GetBool("romfs_browse")) {
     config.Set("romfs_browse", romfsb);
+  }
+  if (use_nightly != config.GetBool("use_nightly")) {
+    config.Set("use_nightly", use_nightly);
+  }
+  if (search_updates != config.GetBool("search_updates")) {
+    config.Set("search_updates", search_updates);
   }
   if (rd7tf_theme != config.GetBool("rd7tf_theme")) {
     config.Set("rd7tf_theme", rd7tf_theme);

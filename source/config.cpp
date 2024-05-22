@@ -38,5 +38,7 @@ void BP::Config::make_new() {
   config["24h"] = false;
   config["disp_seconds"] = true;
   config["romfs_browse"] = false;
+  config["search_updates"] = true;
+  config["use_nightly"] = false;
   Save();
 }

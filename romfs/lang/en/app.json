@@ -9,7 +9,7 @@
         "NDSP_STATUS": "NdspFirmStatus: ",
         "HEAD_MAINMENU": "BCSTM-Player -> Main Menu",
         "HEAD_SETTINGS": "BCSTM-Player -> Settings",
-        "HEAD_TITLES": "BCSTM-Palyer -> Titles",
+        "HEAD_TITLES": "BCSTM-Player -> Titles",
         "BGB": "Press \uE001 to go back!",
         "TPWMR": "This Project was made with RenderD7.",
         "BROWSE": "Browse",
@@ -48,6 +48,10 @@
         "SHOWSECONDS": "Show Seconds",
         "APPEARANCE": "Appearance: ",
         "DEVELOPER": "Developer: ",
-        "SHOWTITLEOPT": "Show Titlemanager"
+        "SHOWTITLEOPT": "Show Titlemanager",
+        "UPDATER": "Updater: ",
+        "AUTOSEARCHUPDATE": "Auto Check for Update",
+        "USENIGHTLY": "Use Nightly Version",
+        "CHECK": "Check"
     }
 }
