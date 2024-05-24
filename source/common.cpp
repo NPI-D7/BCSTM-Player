@@ -32,8 +32,9 @@ std::string Clock() {
   return std::format("{}:{:02}:{:02}", ts->tm_hour, ts->tm_min, ts->tm_sec);
 }
 void CheckForUpdate(bool is_auto) {
+  // Dont create infinite tasks
+  if (checking_for_update) return;
   RenderD7::Tasks::Create([&]() {
-    if (checking_for_update) return;
     checking_for_update = true;
     update_info = Update();
     update_info.nightly = config.GetBool("use_nightly");
@@ -69,6 +70,7 @@ void CheckForUpdate(bool is_auto) {
       checking_for_update = false;
       return;
     }
+    checking_for_update = false;
   });
 }
 }  // namespace BP

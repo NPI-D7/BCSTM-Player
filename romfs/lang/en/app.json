@@ -52,6 +52,10 @@
         "UPDATER": "Updater: ",
         "AUTOSEARCHUPDATE": "Auto Check for Update",
         "USENIGHTLY": "Use Nightly Version",
-        "CHECK": "Check"
+        "CHECK": "Check",
+        "UPDATE": "Update: ",
+        "DOWNLOAD": "Download",
+        "UPDFAILED": "Update failed!",
+        "UPDDONE": "Done, restart app\nto apply changes!"
     }
 }

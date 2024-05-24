@@ -52,6 +52,10 @@
         "UPDATER": "Updater: ",
         "AUTOSEARCHUPDATE": "Suche Automatisch nach Updates",
         "USENIGHTLY": "Nutze Nightly Version",
-        "CHECK": "Überprüfen"
+        "CHECK": "Überprüfen",
+        "UPDATE": "Update: ",
+        "DOWNLOAD": "Herunterladen",
+        "UPDFAILED": "Update fehlgeschlagen!",
+        "UPDDONE": "Fertig, App neu starten\num abzuschließen!"
     }
 }

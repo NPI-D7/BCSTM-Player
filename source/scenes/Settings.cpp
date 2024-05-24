@@ -64,8 +64,7 @@ void Settings::Draw(void) const {
         if (lang_sel + 1 > (int)languages.size()) {
           lang_sel = 0;
         }
-        RD7::Lang::Load(languages[lang_sel]);
-        config.Set("lang", languages[lang_sel]);
+        lang_reload = true;
       }
     }
     UI7::Label(RD7::Lang::Get("APPEARANCE"));
@@ -85,49 +84,64 @@ void Settings::Draw(void) const {
           update_info.version.substr(1).compare(V_STRING) < 0) {
         UI7::Label("Already Up to date!");
       } else {
-        UI7::Label("Update: " + update_info.version);
-        UI7::Label("Info/Changelog: \n" + update_info.text);
-        if (UI7::Button("Download")) {
-          RenderD7::Tasks::Create([&]() {
-            downloading = true;
-            std::string fname = "BCSTM-Player.";
-            fname += hb_mode ? "3dsx" : "cia";
-            if (update_info.nightly) {
-              auto ret = RD7::Net::Download2File(
-                  "https://raw.githubusercontent.com/NPI-D7/nightlys/master/"
-                  "builds/BCSTM-Player/" +
-                      fname,
-                  hb_mode ? thiz_path : "sdmc:/BCSTM-Player.cia");
-              if (ret) {
-                RD7::PushMessage(RD7::Lang::Get("UPDATER"),
-                                 "Update Failed!\n" +
-                                     std::to_string(RD7::Net::ErrorCode(ret)) +
-                                     "/" +
-                                     std::to_string(RD7::Net::StatusCode(ret)));
+        UI7::Label(RD7::Lang::Get("UPDATE") + update_info.version);
+        UI7::Label(RD7::Lang::Get("INFO") + ":\n" + update_info.text);
+        if (!downloading) {
+          if (UI7::Button(RD7::Lang::Get("DOWNLOAD"))) {
+            RenderD7::Tasks::Create([&]() {
+              downloading = true;
+              std::string fname = "BCSTM-Player.";
+              fname += hb_mode ? "3dsx" : "cia";
+              if (update_info.nightly) {
+                auto ret = RD7::Net::Download2File(
+                    "https://raw.githubusercontent.com/NPI-D7/nightlys/master/"
+                    "builds/BCSTM-Player/" +
+                        fname,
+                    hb_mode ? thiz_path : "sdmc:/BCSTM-Player.cia");
+                if (ret) {
+                  RD7::PushMessage(
+                      RD7::Lang::Get("UPDATER"),
+                      RD7::Lang::Get("UPDFAILED") + "\n" +
+                          std::to_string(RD7::Net::ErrorCode(ret)) + "/" +
+                          std::to_string(RD7::Net::StatusCode(ret)));
+                }
+                if (!hb_mode) {
+                  Result r =
+                      RenderD7::InstallCia("sdmc:/BCSTM-Player.cia", true);
+                  if (R_FAILED(r)) {
+                    RenderD7::ResultDecoder rd;
+                    rd.Load(r);
+                    rd.WriteLog();
+                    RD7::PushMessage(RD7::Lang::Get("UPDATER"),
+                                     RD7::Lang::Get("UPDFAILED") + "\n" +
+                                         "Unable to install Cia!");
+                  }
+                }
+
+              } else {
+                auto ret = RD7::Net::GitDownloadRelease(
+                    "https://github.com/NPI-D7/BCSTM-Player", fname,
+                    hb_mode ? thiz_path : "sdmc:/BCSTM-Player.cia");
+                if (ret) {
+                  RD7::PushMessage(
+                      RD7::Lang::Get("UPDATER"),
+                      RD7::Lang::Get("UPDFAILED") + "\n" +
+                          std::to_string(RD7::Net::ErrorCode(ret)) + "/" +
+                          std::to_string(RD7::Net::StatusCode(ret)));
+                }
               }
-            } else {
-              auto ret = RD7::Net::GitDownloadRelease(
-                  "https://github.com/NPI-D7/BCSTM-Player", fname,
-                  hb_mode ? thiz_path : "sdmc:/BCSTM-Player.cia");
-              if (ret) {
-                RD7::PushMessage(RD7::Lang::Get("UPDATER"),
-                                 "Update Failed!\n" +
-                                     std::to_string(RD7::Net::ErrorCode(ret)) +
-                                     "/" +
-                                     std::to_string(RD7::Net::StatusCode(ret)));
-              }
-            }
-            RD7::PushMessage(RD7::Lang::Get("UPDATER"),
-                             "Done, Restart to\nApply Changes!");
-            downloading = false;
-          });
+              RD7::PushMessage(RD7::Lang::Get("UPDATER"),
+                               RD7::Lang::Get("UPDDONE"));
+              downloading = false;
+            });
+          }
         }
       }
     }
     if (downloading) {
-      UI7::Label(
-          "Download: " + RD7::FormatBytes(RD7::Net::GetProgressCurrent()) +
-          "/" + RD7::FormatBytes(RD7::Net::GetProgressTotal()));
+      UI7::Label(RD7::Lang::Get("DOWNLOAD") + ": " +
+                 RD7::FormatBytes(RD7::Net::GetProgressCurrent()) + "/" +
+                 RD7::FormatBytes(RD7::Net::GetProgressTotal()));
       UI7::Progressbar((float)RD7::Net::GetProgressCurrent() /
                        (float)RD7::Net::GetProgressTotal());
     }
@@ -170,6 +184,11 @@ void Settings::Logic() {
     } else {
       RD7::ThemeDefault();
     }
+  }
+  if (lang_reload) {
+    RD7::Lang::Load(languages[lang_sel]);
+    config.Set("lang", languages[lang_sel]);
+    lang_reload = false;
   }
   if (hidKeysDown() & KEY_B) {
     config.Save();
