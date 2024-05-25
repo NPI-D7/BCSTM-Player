@@ -11,7 +11,6 @@ Update update_info;
 bool checking_for_update = false;
 std::string thiz_path;
 bool hb_mode;
-bool c_is_auto = false;
 std::string Clock() {
   const time_t ut = time(0);
   bool h24 = config.GetBool("24h");
@@ -32,12 +31,9 @@ std::string Clock() {
   }
   return std::format("{}:{:02}:{:02}", ts->tm_hour, ts->tm_min, ts->tm_sec);
 }
-void CheckForUpdate(bool is_auto) {
+void CheckForUpdate() {
   // Dont create infinite tasks
   if (checking_for_update) return;
-  if (!c_is_auto && is_auto) {
-    c_is_auto = is_auto;
-  }
   RenderD7::Tasks::Create([&]() {
     checking_for_update = true;
     update_info = Update();
@@ -60,7 +56,7 @@ void CheckForUpdate(bool is_auto) {
           js[0]["sha"].get_ref<const std::string&>().substr(0, 7);
       update_info.text = js[0]["commit"]["message"];
       update_info.valid = true;
-      if (update_info.version.compare(N_STRING) != 0 && c_is_auto) {
+      if (update_info.version.compare(N_STRING) != 0) {
         RenderD7::PushMessage(RD7::Lang::Get("UPDATER"),
                               RD7::Lang::Get("UPTFND"));
       }
@@ -73,7 +69,7 @@ void CheckForUpdate(bool is_auto) {
       }
       update_info.text = js["body"];
       update_info.valid = true;
-      if (update_info.version.compare(V_STRING) > 0 && c_is_auto) {
+      if (update_info.version.substr(1).compare(V_STRING) > 0) {
         RenderD7::PushMessage(RD7::Lang::Get("UPDATER"),
                               RD7::Lang::Get("UPTFND"));
       }

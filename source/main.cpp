@@ -24,7 +24,7 @@ int main(int argc, char* argv[]) {
   aptSetSleepAllowed(false);
 
   RD7::Tasks::Create(Bcstm_Loop);
-  if (BP::config.GetBool("search_updates")) BP::CheckForUpdate(true);
+  if (BP::config.GetBool("search_updates")) BP::CheckForUpdate();
   BP::player.Stop();  // for ui
   RD7::Scene::Load(std::make_unique<BP::MainMenu>());
 

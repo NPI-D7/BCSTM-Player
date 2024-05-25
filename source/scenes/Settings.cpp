@@ -77,7 +77,7 @@ void Settings::Draw(void) const {
     UI7::Checkbox(RD7::Lang::Get("AUTOSEARCHUPDATE"), search_updates);
     UI7::Checkbox(RD7::Lang::Get("USENIGHTLY"), use_nightly);
     if (UI7::Button(RD7::Lang::Get("CHECK"))) {
-      BP::CheckForUpdate(true);
+      BP::CheckForUpdate();
     }
     if (update_info.valid) {
       if (!update_info.nightly &&

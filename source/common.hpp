@@ -31,5 +31,5 @@ extern Config config;
 extern std::string thiz_path;
 extern bool hb_mode;
 std::string Clock();
-void CheckForUpdate(bool is_auto = false);
+void CheckForUpdate();
 }  // namespace BP
