@@ -141,14 +141,20 @@ void Settings::Draw(void) const {
       }
     }
     if (downloading) {
-      UI7::Label(RD7::Lang::Get("DOWNLOAD") + ": " +
-                 RD7::FormatBytes(RD7::Net::GetProgressCurrent()) + "/" +
-                 RD7::FormatBytes(RD7::Net::GetProgressTotal()));
-      UI7::Progressbar((float)RD7::Net::GetProgressCurrent() /
-                       (float)RD7::Net::GetProgressTotal());
+      auto current = RD7::Net::GetProgressCurrent();
+      auto total = RD7::Net::GetProgressTotal();
+      UI7::Label(RD7::Lang::Get("DOWNLOAD") + ": " + RD7::FormatBytes(current) +
+                 "/" + RD7::FormatBytes(total));
+      UI7::Progressbar((float)current / (float)total);
+    } else if (installing) {
+      auto current = RD7::InstallGetInfo().current;
+      auto total = RD7::InstallGetInfo().total;
+      UI7::Label(RD7::Lang::Get("INSTALLING") + ": " +
+                 RD7::FormatBytes(current) + "/" + RD7::FormatBytes(total));
+      UI7::Progressbar((float)current / (float)total);
     }
     UI7::Label(RD7::Lang::Get("DEVELOPER"));
-    UI7::Label("Exec Mode: " + std::string(hb_mode ? "3dsx" : "cia"));
+    UI7::Label(RD7::Lang::Get("EXECMODE") + (hb_mode ? "3dsx" : "cia"));
     UI7::Checkbox(RD7::Lang::Get("SHOWTITLEOPT"), romfsb);
     if (UI7::Button("RenderD7")) {
       RD7::LoadSettings();

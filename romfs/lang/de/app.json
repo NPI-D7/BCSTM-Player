@@ -57,6 +57,9 @@
         "DOWNLOAD": "Herunterladen",
         "UPDFAILED": "Update fehlgeschlagen!",
         "UPDDONE": "Fertig, App neu starten\num abzuschließen!",
-        "INSTERR": "Installer Fehler"
+        "INSTERR": "Installer Fehler",
+        "INSTALLING": "Installiere",
+        "EXECMODE": "Ausgeführt als: ",
+        "UPTFND": "Update verfügbar!"
     }
 }

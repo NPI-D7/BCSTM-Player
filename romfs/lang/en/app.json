@@ -57,6 +57,9 @@
         "DOWNLOAD": "Download",
         "UPDFAILED": "Update failed!",
         "UPDDONE": "Done, restart app\nto apply changes!",
-        "INSTERR": "Installer error"
+        "INSTERR": "Installer error",
+        "INSTALLING": "Installing",
+        "EXECMODE": "Executed as: ",
+        "UPTFND": "Update available!"
     }
 }
