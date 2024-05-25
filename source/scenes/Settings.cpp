@@ -86,10 +86,11 @@ void Settings::Draw(void) const {
       } else {
         UI7::Label(RD7::Lang::Get("UPDATE") + update_info.version);
         UI7::Label(RD7::Lang::Get("INFO") + ":\n" + update_info.text);
-        if (!downloading) {
+        if (!downloading && !installing) {
           if (UI7::Button(RD7::Lang::Get("DOWNLOAD"))) {
             RenderD7::Tasks::Create([&]() {
               downloading = true;
+              bool fail = false;
               std::string fname = "BCSTM-Player.";
               fname += hb_mode ? "3dsx" : "cia";
               if (update_info.nightly) {
@@ -99,36 +100,37 @@ void Settings::Draw(void) const {
                         fname,
                     hb_mode ? thiz_path : "sdmc:/BCSTM-Player.cia");
                 if (ret) {
+                  fail = true;
                   RD7::PushMessage(
                       RD7::Lang::Get("UPDATER"),
                       RD7::Lang::Get("UPDFAILED") + "\n" +
                           std::to_string(RD7::Net::ErrorCode(ret)) + "/" +
                           std::to_string(RD7::Net::StatusCode(ret)));
                 }
-                if (!hb_mode) {
-                  Result r =
-                      RenderD7::InstallCia("sdmc:/BCSTM-Player.cia", true);
-                  if (R_FAILED(r)) {
-                    RenderD7::ResultDecoder rd;
-                    rd.Load(r);
-                    rd.WriteLog();
-                    RD7::PushMessage(RD7::Lang::Get("UPDATER"),
-                                     RD7::Lang::Get("UPDFAILED") + "\n" +
-                                         "Unable to install Cia!");
-                  }
-                }
-
               } else {
                 auto ret = RD7::Net::GitDownloadRelease(
                     "https://github.com/NPI-D7/BCSTM-Player", fname,
                     hb_mode ? thiz_path : "sdmc:/BCSTM-Player.cia");
                 if (ret) {
+                  fail = true;
                   RD7::PushMessage(
                       RD7::Lang::Get("UPDATER"),
                       RD7::Lang::Get("UPDFAILED") + "\n" +
                           std::to_string(RD7::Net::ErrorCode(ret)) + "/" +
                           std::to_string(RD7::Net::StatusCode(ret)));
                 }
+              }
+              if (!hb_mode && !fail) {
+                downloading = false;
+                installing = true;
+                Result r = RenderD7::InstallCia("sdmc:/BCSTM-Player.cia", true);
+                if (R_FAILED(r)) {
+                  RD7::PushMessage(RD7::Lang::Get("UPDATER"),
+                                   RD7::Lang::Get("UPDFAILED") + "\n" +
+                                       RD7::Lang::Get("INSTERR"));
+                }
+                std::filesystem::remove("sdmc:/BCSTM-Player.cia");
+                installing = false;
               }
               RD7::PushMessage(RD7::Lang::Get("UPDATER"),
                                RD7::Lang::Get("UPDDONE"));

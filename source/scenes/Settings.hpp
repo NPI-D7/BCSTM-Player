@@ -23,5 +23,6 @@ class Settings : public RD7::Scene {
   mutable bool use_nightly = false;
   mutable bool search_updates = false;
   mutable bool lang_reload = false;
+  mutable bool installing = false;
 };
 }  // namespace BP
