@@ -11,10 +11,10 @@ Filemanager::Filemanager(std::string idevice) {
 
 void Filemanager::Draw(void) const {
   RD7::OnScreen(Top);
-  if (config.GetBool("rd7tf_theme"))
+  if (config.rd7tf_theme())
     DrawWavedBg(R7Vec2(), R7Vec2(400, 240), RenderD7::GetTime());
-  if (UI7::BeginMenu(RD7::Lang::Get("HEAD_FILEMANAGER"))) {
-    if (config.GetBool("clock")) {
+  if (UI7::BeginMenu(Lang::HEAD_FILEMANAGER)) {
+    if (config.clock()) {
       UI7::SetCursorPos(R7Vec2(395, 2));
       UI7::Label(Clock(), RD7TextFlags_AlignRight);
       UI7::RestoreCursor();
@@ -27,36 +27,30 @@ void Filemanager::Draw(void) const {
   }
 
   RD7::OnScreen(Bottom);
-  if (UI7::BeginMenu(RD7::Lang::Get("INFO"))) {
+  if (UI7::BeginMenu(Lang::INFO)) {
     UI7::Label(
-        RD7::Lang::Get("PLAYING") +
-            std::string(playing ? now_playing : RD7::Lang::Get("NOTHING")),
+        Lang::PLAYING + std::string(playing ? now_playing : Lang::NOTHING),
         RD7TextFlags_Short);
-    UI7::Label(RD7::Lang::Get("DIRENTRYS") +
-               std::to_string(this->dircontent.size()));
-    UI7::Label(RD7::Lang::Get("LOADED") +
-               std::string(player.IsLoaded() ? RD7::Lang::Get("YES")
-                                             : RD7::Lang::Get("NO")));
-    UI7::Label(RD7::Lang::Get("LOOP") +
-               std::string(player.IsLooping() ? RD7::Lang::Get("YES")
-                                              : RD7::Lang::Get("NO")));
-    UI7::Label(RD7::Lang::Get("LOOPSTART") +
-               std::to_string(player.GetLoopStart()));
-    UI7::Label(RD7::Lang::Get("LOOPEND") + std::to_string(player.GetLoopEnd()));
-    UI7::Label(RD7::Lang::Get("CURRENT") + std::to_string(player.GetCurrent()));
-    UI7::Label(RD7::Lang::Get("TOTAL") + std::to_string(player.GetTotal()));
-    UI7::Label(RD7::Lang::Get("CHANNELS") +
-               std::to_string(player.GetChannelCount()));
-    UI7::Label(RD7::Lang::Get("ERROR") + player.GetErrorMessage());
-    if (UI7::Button(RD7::Lang::Get("PLAY"))) {
+    UI7::Label(Lang::DIRENTRYS + std::to_string(this->dircontent.size()));
+    UI7::Label(Lang::LOADED +
+               std::string(player.IsLoaded() ? Lang::YES : Lang::NO));
+    UI7::Label(Lang::LOOP +
+               std::string(player.IsLooping() ? Lang::YES : Lang::NO));
+    UI7::Label(Lang::LOOPSTART + std::to_string(player.GetLoopStart()));
+    UI7::Label(Lang::LOOPEND + std::to_string(player.GetLoopEnd()));
+    UI7::Label(Lang::CURRENT + std::to_string(player.GetCurrent()));
+    UI7::Label(Lang::TOTAL + std::to_string(player.GetTotal()));
+    UI7::Label(Lang::CHANNELS + std::to_string(player.GetChannelCount()));
+    UI7::Label(Lang::ERROR + player.GetErrorMessage());
+    if (UI7::Button(Lang::PLAY)) {
       player.Play();
     }
     UI7::SameLine();
-    if (UI7::Button(RD7::Lang::Get("PAUSE"))) {
+    if (UI7::Button(Lang::PAUSE)) {
       player.Pause();
     }
     UI7::SameLine();
-    if (UI7::Button(RD7::Lang::Get("STOP"))) {
+    if (UI7::Button(Lang::STOP)) {
       playing = false;
       player.Stop();
     }

@@ -17,14 +17,14 @@ int main(int argc, char* argv[]) {
   BP::hb_mode = argc != 0;
   RD7::Init::NdspFirm();
   BP::config.Load();
-  if (BP::config.GetBool("fade")) RD7::FadeIn();
-  RD7::Lang::Load(BP::config.GetString("lang"));
-  if (BP::config.GetBool("rd7tf_theme"))
-    RD7::ThemeLoad("romfs:/themes/rd7tf.theme");
+  if (BP::config.fade()) RD7::FadeIn();
+  RD7::Lang::Load(BP::config.lang());
+  BP::Lang::Update();
+  if (BP::config.rd7tf_theme()) RD7::ThemeLoad("romfs:/themes/rd7tf.theme");
   aptSetSleepAllowed(false);
 
   RD7::Tasks::Create(Bcstm_Loop);
-  if (BP::config.GetBool("search_updates")) BP::CheckForUpdate();
+  if (BP::config.search_updates()) BP::CheckForUpdate();
   BP::player.Stop();  // for ui
   RD7::Scene::Load(std::make_unique<BP::MainMenu>());
 

@@ -11,10 +11,10 @@ Titles::Titles() {
 
 void Titles::Draw(void) const {
   RD7::OnScreen(Top);
-  if (config.GetBool("rd7tf_theme"))
+  if (config.rd7tf_theme())
     DrawWavedBg(R7Vec2(), R7Vec2(400, 240), RenderD7::GetTime());
-  if (UI7::BeginMenu(RD7::Lang::Get("HEAD_TITLES"))) {
-    if (config.GetBool("clock")) {
+  if (UI7::BeginMenu(Lang::HEAD_TITLES)) {
+    if (config.clock()) {
       UI7::SetCursorPos(R7Vec2(395, 2));
       UI7::Label(Clock(), RD7TextFlags_AlignRight);
       UI7::RestoreCursor();
@@ -23,7 +23,7 @@ void Titles::Draw(void) const {
     UI7::EndMenu();
   }
   RD7::OnScreen(Bottom);
-  if (UI7::BeginMenu(RD7::Lang::Get("BGB"))) {
+  if (UI7::BeginMenu(Lang::BGB)) {
     UI7::EndMenu();
   }
 }
