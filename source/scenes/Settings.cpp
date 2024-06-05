@@ -51,7 +51,6 @@ void Settings::Draw(void) const {
   }
   RD7::OnScreen(Bottom);
   if (UI7::BeginMenu(Lang::BGB, R7Vec2(), UI7MenuFlags_Scrolling)) {
-    UI7::Label(Lang::BGB);
     if (languages.size() != 0) {
       UI7::Label(Lang::LANGUAGE);
       UI7::Label("  - " + RD7::Lang::GetName() + " (" +
@@ -186,9 +185,9 @@ void Settings::Logic() {
   if (rd7tf_theme != config.rd7tf_theme()) {
     config.Set("rd7tf_theme", rd7tf_theme);
     if (rd7tf_theme == true) {
-      RD7::ThemeLoad("romfs:/themes/rd7tf.theme");
+      RD7::ThemeActive()->Load("romfs:/themes/rd7tf.theme");
     } else {
-      RD7::ThemeDefault();
+      RD7::ThemeActive()->Default();
     }
   }
   if (lang_reload) {
