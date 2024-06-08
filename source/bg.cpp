@@ -23,8 +23,7 @@ static void Wave(int index, R7Vec2 position, R7Vec2 size, float time) {
   }
   // Just to make sure...
   y_position = std::min(y_position, position.y + size.y - (90 - shrink));
-
-  DV2::TriangleSolid(
+  UI7::GetBackgroundList()->AddTriangle(
       R7Vec2(x_position, y_position),
       R7Vec2(x_position + 300, y_position + (90 - shrink)),
       R7Vec2(x_position - 300, y_position + (90 - shrink)),
@@ -34,7 +33,7 @@ static void Wave(int index, R7Vec2 position, R7Vec2 size, float time) {
 }
 
 void DrawWavedBg(R7Vec2 position, R7Vec2 size, float time) {
-  DV2::RectFilledSolid(position, size, 0xff64c9fd);
+  UI7::GetBackgroundList()->AddRectangle(position, size, 0xff64c9fd);
   int i = 0;
   for (; i < 44; i++) Wave(i, position, size, time);
 }
