@@ -10,7 +10,7 @@ Filemanager::Filemanager(std::string idevice) {
 }
 
 void Filemanager::Draw(void) const {
-  RD7::OnScreen(Top);
+  RD7::R2()->OnScreen(R2Screen_Top);
   if (config.rd7tf_theme())
     DrawWavedBg(R7Vec2(), R7Vec2(400, 240), RenderD7::GetTime());
   if (UI7::BeginMenu(Lang::HEAD_FILEMANAGER)) {
@@ -26,7 +26,7 @@ void Filemanager::Draw(void) const {
     UI7::EndMenu();
   }
 
-  RD7::OnScreen(Bottom);
+  RD7::R2()->OnScreen(R2Screen_Bottom);
   if (UI7::BeginMenu(Lang::INFO)) {
     UI7::Label(
         Lang::PLAYING + std::string(playing ? now_playing : Lang::NOTHING),

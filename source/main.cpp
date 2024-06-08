@@ -20,7 +20,8 @@ int main(int argc, char* argv[]) {
   if (BP::config.fade()) RD7::FadeIn();
   RD7::Lang::Load(BP::config.lang());
   BP::Lang::Update();
-  if (BP::config.rd7tf_theme()) RD7::ThemeActive()->Load("romfs:/themes/rd7tf.theme");
+  if (BP::config.rd7tf_theme())
+    RD7::ThemeActive()->Load("romfs:/themes/rd7tf.theme");
   aptSetSleepAllowed(false);
 
   RD7::Tasks::Create(Bcstm_Loop);

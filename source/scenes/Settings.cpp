@@ -26,7 +26,7 @@ Settings::Settings() {
 }
 
 void Settings::Draw(void) const {
-  RD7::OnScreen(Top);
+  RD7::R2()->OnScreen(R2Screen_Top);
   if (config.rd7tf_theme()) {
     DrawWavedBg(R7Vec2(), R7Vec2(400, 240), RenderD7::GetTime());
   }
@@ -49,7 +49,7 @@ void Settings::Draw(void) const {
 #endif
     UI7::EndMenu();
   }
-  RD7::OnScreen(Bottom);
+  RD7::R2()->OnScreen(R2Screen_Bottom);
   if (UI7::BeginMenu(Lang::BGB, R7Vec2(), UI7MenuFlags_Scrolling)) {
     if (languages.size() != 0) {
       UI7::Label(Lang::LANGUAGE);

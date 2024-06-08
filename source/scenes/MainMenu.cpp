@@ -3,7 +3,7 @@
 namespace BP {
 MainMenu::MainMenu() { this->load_menu(); }
 void MainMenu::Draw(void) const {
-  RD7::OnScreen(Top);
+  RD7::R2()->OnScreen(R2Screen_Top);
   if (config.rd7tf_theme())
     DrawWavedBg(R7Vec2(), R7Vec2(400, 240), RenderD7::GetTime());
   if (UI7::BeginMenu(Lang::HEAD_MAINMENU)) {
@@ -31,7 +31,7 @@ void MainMenu::Draw(void) const {
     UI7::RestoreCursor();
     UI7::EndMenu();
   }
-  RD7::OnScreen(Bottom);
+  RD7::R2()->OnScreen(R2Screen_Bottom);
   if (UI7::BeginMenu(Lang::CONTROLCENTER)) {
     UI7::BrowserList(this->menu, this->sel);
     UI7::EndMenu();
