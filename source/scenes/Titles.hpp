@@ -3,10 +3,9 @@
 #include <common.hpp>
 
 namespace BP {
-class Titles : public RD7::Scene {
+class Titles : public PD::Scene {
  public:
-  void Draw(void) const override;
-  void Logic() override;
+  void Update() override;
   Titles();
 
  private:

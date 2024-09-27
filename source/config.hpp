@@ -1,6 +1,6 @@
 #pragma once
 
-#include <rd7.hpp>
+#include <pd.hpp>
 
 namespace BP {
 class Config {
@@ -41,8 +41,6 @@ class Config {
 
   int cfg_ver() { return m_cfg_ver; }
   std::string lang() { return m_lang; }
-  bool fade() { return m_fade; }
-  bool rd7tf_theme() { return m_rd7tf_theme; }
   bool clock() { return m_clock; }
   bool is24h() { return m_24h; }
   bool disp_seconds() { return m_disp_seconds; }

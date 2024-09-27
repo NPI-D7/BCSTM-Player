@@ -1,13 +1,14 @@
+#include <common.hpp>
 #include <scenes/scenes.hpp>
 
 // #define RELEASE
 
 namespace BP {
 Settings::Settings() {
-  auto dc = RD7::FileSystem::GetDirContent("romfs:/lang");
+  auto dc = PD::FileSystem::GetDirContent("romfs:/lang");
   int n = 0;
   for (auto &it : dc) {
-    if (it.name == RD7::Lang::GetShortcut()) {
+    if (it.name == PD::Lang::GetShortcut()) {
       lang_sel = n;
     }
     if (it.dir) {
@@ -15,8 +16,6 @@ Settings::Settings() {
     }
     n++;
   }
-  dfe = config.fade();
-  rd7tf_theme = config.rd7tf_theme();
   dispc = config.clock();
   h24 = config.is24h();
   dps = config.disp_seconds();
@@ -25,40 +24,39 @@ Settings::Settings() {
   use_nightly = config.use_nightly();
 }
 
-void Settings::Draw(void) const {
-  RD7::R2()->OnScreen(R2Screen_Top);
-  if (config.rd7tf_theme()) {
-    DrawWavedBg(R7Vec2(), R7Vec2(400, 240), RenderD7::GetTime());
-  }
-  if (UI7::BeginMenu(Lang::HEAD_SETTINGS)) {
+void Settings::Update() {
+  // Render
+  PD::LI::OnScreen(false);
+  if (UI7::BeginMenu(PD::Lang::Get("HEAD_SETTINGS"))) {
     if (config.clock()) {
-      UI7::SetCursorPos(R7Vec2(395, 2));
-      UI7::Label(Clock(), RD7TextFlags_AlignRight);
+      UI7::SetCursorPos(NVec2(395, 2));
+      UI7::Label(Clock(), PDTextFlags_AlignRight);
       UI7::RestoreCursor();
     }
-    UI7::Label(Lang::CREDITSL);
-    UI7::Label(Lang::TPWMR);
-    UI7::Label("  - " + Lang::VERSION + std::string(RENDERD7VSTRING));
-    UI7::SetCursorPos(R7Vec2(5, 222));
-    UI7::Label(Lang::VERSION + V_STRING);
+    UI7::Label(PD::Lang::Get("CREDITSL"));
+    UI7::Label(PD::Lang::Get("TPWMR"));
+    UI7::Label("  - " + PD::Lang::Get("VERSION") + std::string(PDVSTRING));
+    UI7::SetCursorPos(NVec2(5, 222));
+    UI7::Label(PD::Lang::Get("VERSION") + V_STRING);
     UI7::RestoreCursor();
 #ifndef RELEASE
-    UI7::SetCursorPos(R7Vec2(395, 222));
-    UI7::Label("nightly: " + std::string(N_STRING), RD7TextFlags_AlignRight);
+    UI7::SetCursorPos(NVec2(395, 222));
+    UI7::Label("nightly: " + std::string(N_STRING), PDTextFlags_AlignRight);
     UI7::RestoreCursor();
 #endif
     UI7::EndMenu();
   }
-  RD7::R2()->OnScreen(R2Screen_Bottom);
-  if (UI7::BeginMenu(Lang::BGB, R7Vec2(), UI7MenuFlags_Scrolling)) {
+  PD::LI::OnScreen(true);
+  if (UI7::BeginMenu(PD::Lang::Get("BGB"), NVec2(), UI7MenuFlags_Scrolling)) {
     if (languages.size() != 0) {
-      UI7::Label(Lang::LANGUAGE);
-      UI7::Label("  - " + RD7::Lang::GetName() + " (" +
-                 RD7::Lang::GetShortcut() + ")");
-      UI7::Label("  - " + Lang::AUTHOR + RD7::Lang::GetAuthor());
-      if (UI7::Button(Lang::NEXT + (lang_sel < (int)languages.size() - 1
-                                        ? languages[lang_sel + 1]
-                                        : languages[0]))) {
+      UI7::Label(PD::Lang::Get("LANGUAGE"));
+      UI7::Label("  - " + PD::Lang::GetName() + " (" + PD::Lang::GetShortcut() +
+                 ")");
+      UI7::Label("  - " + PD::Lang::Get("AUTHOR") + PD::Lang::GetAuthor());
+      if (UI7::Button(PD::Lang::Get("NEXT") +
+                      (lang_sel < (int)languages.size() - 1
+                           ? languages[lang_sel + 1]
+                           : languages[0]))) {
         lang_sel++;
         if (lang_sel + 1 > (int)languages.size()) {
           lang_sel = 0;
@@ -66,16 +64,14 @@ void Settings::Draw(void) const {
         lang_reload = true;
       }
     }
-    UI7::Label(Lang::APPEARANCE);
-    UI7::Checkbox(Lang::TRANSISIONS, dfe);
-    UI7::Checkbox(Lang::RD7TF_THEME, rd7tf_theme);
-    UI7::Checkbox(Lang::CLOCK, dispc);
-    UI7::Checkbox(Lang::i24HRS, h24);
-    UI7::Checkbox(Lang::SHOWSECONDS, dps);
-    UI7::Label(Lang::UPDATER);
-    UI7::Checkbox(Lang::AUTOSEARCHUPDATE, search_updates);
-    UI7::Checkbox(Lang::USENIGHTLY, use_nightly);
-    if (UI7::Button(Lang::CHECK)) {
+    UI7::Label(PD::Lang::Get("APPEARANCE"));
+    UI7::Checkbox(PD::Lang::Get("CLOCK"), dispc);
+    UI7::Checkbox(PD::Lang::Get("24HRS"), h24);
+    UI7::Checkbox(PD::Lang::Get("SHOWSECONDS"), dps);
+    UI7::Label(PD::Lang::Get("UPDATER"));
+    UI7::Checkbox(PD::Lang::Get("AUTOSEARCHUPDATE"), search_updates);
+    UI7::Checkbox(PD::Lang::Get("USENIGHTLY"), use_nightly);
+    if (UI7::Button(PD::Lang::Get("CHECK"))) {
       BP::CheckForUpdate();
     }
     if (update_info.valid) {
@@ -83,54 +79,56 @@ void Settings::Draw(void) const {
           update_info.version.substr(1).compare(V_STRING) < 0) {
         UI7::Label("Already Up to date!");
       } else {
-        UI7::Label(Lang::UPDATE + update_info.version);
-        UI7::Label(Lang::INFO + ":\n" + update_info.text);
+        UI7::Label(PD::Lang::Get("UPDATE") + update_info.version);
+        UI7::Label(PD::Lang::Get("INFO") + ":\n" + update_info.text);
         if (!downloading && !installing) {
-          if (UI7::Button(Lang::DOWNLOAD)) {
-            RenderD7::Tasks::Create([&]() {
+          if (UI7::Button(PD::Lang::Get("DOWNLOAD"))) {
+            PD::Tasks::Create([&]() {
               downloading = true;
               bool fail = false;
               std::string fname = "BCSTM-Player.";
               fname += hb_mode ? "3dsx" : "cia";
               if (update_info.nightly) {
-                auto ret = RD7::Net::Download2File(
+                auto ret = PD::Net::Download2File(
                     "https://raw.githubusercontent.com/NPI-D7/nightlys/master/"
                     "builds/BCSTM-Player/" +
                         fname,
                     hb_mode ? thiz_path : "sdmc:/BCSTM-Player.cia");
                 if (ret) {
                   fail = true;
-                  RD7::PushMessage(
-                      Lang::UPDATER,
-                      Lang::UPDFAILED + "\n" +
-                          std::to_string(RD7::Net::ErrorCode(ret)) + "/" +
-                          std::to_string(RD7::Net::StatusCode(ret)));
+                  PD::PushMessage(PD::Lang::Get("UPDATER"),
+                                  PD::Lang::Get("UPDFAILED") + "\n" +
+                                      std::to_string(PD::Net::ErrorCode(ret)) +
+                                      "/" +
+                                      std::to_string(PD::Net::StatusCode(ret)));
                 }
               } else {
-                auto ret = RD7::Net::GitDownloadRelease(
+                auto ret = PD::Net::GitDownloadRelease(
                     "https://github.com/NPI-D7/BCSTM-Player", fname,
                     hb_mode ? thiz_path : "sdmc:/BCSTM-Player.cia");
                 if (ret) {
                   fail = true;
-                  RD7::PushMessage(
-                      Lang::UPDATER,
-                      Lang::UPDFAILED + "\n" +
-                          std::to_string(RD7::Net::ErrorCode(ret)) + "/" +
-                          std::to_string(RD7::Net::StatusCode(ret)));
+                  PD::PushMessage(PD::Lang::Get("UPDATER"),
+                                  PD::Lang::Get("UPDFAILED") + "\n" +
+                                      std::to_string(PD::Net::ErrorCode(ret)) +
+                                      "/" +
+                                      std::to_string(PD::Net::StatusCode(ret)));
                 }
               }
               if (!hb_mode && !fail) {
                 downloading = false;
                 installing = true;
-                Result r = RenderD7::InstallCia("sdmc:/BCSTM-Player.cia", true);
+                Result r = PD::InstallCia("sdmc:/BCSTM-Player.cia", true);
                 if (R_FAILED(r)) {
-                  RD7::PushMessage(Lang::UPDATER,
-                                   Lang::UPDFAILED + "\n" + Lang::INSTERR);
+                  PD::PushMessage(PD::Lang::Get("UPDATER"),
+                                  PD::Lang::Get("UPDFAILED") + "\n" +
+                                      PD::Lang::Get("INSTERR"));
                 }
                 std::filesystem::remove("sdmc:/BCSTM-Player.cia");
                 installing = false;
               }
-              RD7::PushMessage(Lang::UPDATER, Lang::UPDDONE);
+              PD::PushMessage(PD::Lang::Get("UPDATER"),
+                              PD::Lang::Get("UPDDONE"));
               downloading = false;
             });
           }
@@ -138,32 +136,27 @@ void Settings::Draw(void) const {
       }
     }
     if (downloading) {
-      auto current = RD7::Net::GetProgressCurrent();
-      auto total = RD7::Net::GetProgressTotal();
-      UI7::Label(Lang::DOWNLOAD + ": " + RD7::FormatBytes(current) + "/" +
-                 RD7::FormatBytes(total));
+      auto current = PD::Net::GetProgressCurrent();
+      auto total = PD::Net::GetProgressTotal();
+      UI7::Label(PD::Lang::Get("DOWNLOAD") + ": " + PD::FormatBytes(current) +
+                 "/" + PD::FormatBytes(total));
       UI7::Progressbar((float)current / (float)total);
     } else if (installing) {
-      auto current = RD7::InstallGetInfo().current;
-      auto total = RD7::InstallGetInfo().total;
-      UI7::Label(Lang::INSTALLING + ": " + RD7::FormatBytes(current) + "/" +
-                 RD7::FormatBytes(total));
+      auto current = PD::InstallGetInfo().current;
+      auto total = PD::InstallGetInfo().total;
+      UI7::Label(PD::Lang::Get("INSTALLING") + ": " + PD::FormatBytes(current) +
+                 "/" + PD::FormatBytes(total));
       UI7::Progressbar((float)current / (float)total);
     }
-    UI7::Label(Lang::DEVELOPER);
-    UI7::Label(Lang::EXECMODE + (hb_mode ? "3dsx" : "cia"));
-    UI7::Checkbox(Lang::SHOWTITLEOPT, romfsb);
-    if (UI7::Button("RenderD7")) {
-      RD7::LoadSettings();
+    UI7::Label(PD::Lang::Get("DEVELOPER"));
+    UI7::Label(PD::Lang::Get("EXECMODE") + (hb_mode ? "3dsx" : "cia"));
+    UI7::Checkbox(PD::Lang::Get("SHOWTITLEOPT"), romfsb);
+    if (UI7::Button("Palladium")) {
+      PD::LoadSettings();
     }
     UI7::EndMenu();
   }
-}
-
-void Settings::Logic() {
-  if (dfe != config.fade()) {
-    config.Set("fade", dfe);
-  }
+  // Logic
   if (dispc != config.clock()) {
     config.Set("clock", dispc);
   }
@@ -182,23 +175,14 @@ void Settings::Logic() {
   if (search_updates != config.search_updates()) {
     config.Set("search_updates", search_updates);
   }
-  if (rd7tf_theme != config.rd7tf_theme()) {
-    config.Set("rd7tf_theme", rd7tf_theme);
-    if (rd7tf_theme == true) {
-      RD7::ThemeActive()->Load("romfs:/themes/rd7tf.theme");
-    } else {
-      RD7::ThemeActive()->Default();
-    }
-  }
   if (lang_reload) {
-    RD7::Lang::Load(languages[lang_sel]);
+    PD::Lang::Load(languages[lang_sel]);
     config.Set("lang", languages[lang_sel]);
-    Lang::Update();
     lang_reload = false;
   }
   if (hidKeysDown() & KEY_B) {
     config.Save();
-    RD7::Scene::Back();
+    PD::Scene::Back();
   }
 }
 }  // namespace BP

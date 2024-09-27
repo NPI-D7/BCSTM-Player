@@ -4,33 +4,30 @@
 void Bcstm_Loop() {
   while (true) {
     if (BP::player.IsLoaded()) BP::player.Update();
-    RD7::Thread::sleep(1 * 10);
+    PD::Thread::sleep(1 * 10);
   }
   BP::player.Stop();
 }
 
 int main(int argc, char* argv[]) {
-  rd7_do_splash = true;
   d7mc_load_icons = false;
-  RD7::Init::Main("BCSTM-Player");
+  PD::Init::Main("BCSTM-Player");
   BP::thiz_path = argc == 0 ? "sdmc:/3ds/BCSTM-Player.3dsx" : argv[0];
   BP::hb_mode = argc != 0;
-  RD7::Init::NdspFirm();
+  PD::Init::NdspFirm();
   BP::config.Load();
-  if (BP::config.fade()) RD7::FadeIn();
-  RD7::Lang::Load(BP::config.lang());
-  BP::Lang::Update();
-  if (BP::config.rd7tf_theme())
-    RD7::ThemeActive()->Load("romfs:/themes/rd7tf.theme");
+  PD::Lang::Load(BP::config.lang());
   aptSetSleepAllowed(false);
+  // Enable LRS as the Systemfont Renders Faster with it
+  PD::LI::GetFeatures() |= PDLithiumFlags_LRS;
 
-  RD7::Tasks::Create(Bcstm_Loop);
+  PD::Tasks::Create(Bcstm_Loop);
   if (BP::config.search_updates()) BP::CheckForUpdate();
   BP::player.Stop();  // for ui
-  RD7::Scene::Load(std::make_unique<BP::MainMenu>());
+  PD::Scene::Load(std::make_unique<BP::MainMenu>());
 
-  while (RD7::MainLoop()) {
-    RD7::FrameEnd();
+  while (PD::MainLoop()) {
+    PD::FrameEnd();
   }
 
   return 0;

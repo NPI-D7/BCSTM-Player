@@ -3,10 +3,9 @@
 #include <common.hpp>
 
 namespace BP {
-class MainMenu : public RD7::Scene {
+class MainMenu : public PD::Scene {
  public:
-  void Draw(void) const override;
-  void Logic() override;
+  void Update() override;
   MainMenu();
 
  private:

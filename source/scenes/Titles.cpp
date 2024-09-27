@@ -1,36 +1,34 @@
+#include <common.hpp>
 #include <scenes/scenes.hpp>
 
 namespace BP {
 Titles::Titles() {
-  std::filesystem::create_directories(RenderD7::GetAppDirectory() + "/cache");
-  D7MC::TitleManager::ScanSD(RenderD7::GetAppDirectory() + "/");
+  std::filesystem::create_directories(PD::GetAppDirectory() + "/cache");
+  D7MC::TitleManager::ScanSD(PD::GetAppDirectory() + "/");
   maxtitles = (int)D7MC::TitleManager::sdtitles.size();
   for (const auto &it : D7MC::TitleManager::sdtitles)
     namelist.push_back(it->name());
 }
 
-void Titles::Draw(void) const {
-  RD7::R2()->OnScreen(R2Screen_Top);
-  if (config.rd7tf_theme())
-    DrawWavedBg(R7Vec2(), R7Vec2(400, 240), RenderD7::GetTime());
-  if (UI7::BeginMenu(Lang::HEAD_TITLES)) {
+void Titles::Update() {
+  // Render
+  PD::LI::OnScreen(false);
+  if (UI7::BeginMenu(PD::Lang::Get("HEAD_TITLES"))) {
     if (config.clock()) {
-      UI7::SetCursorPos(R7Vec2(395, 2));
-      UI7::Label(Clock(), RD7TextFlags_AlignRight);
+      UI7::SetCursorPos(NVec2(395, 2));
+      UI7::Label(Clock(), PDTextFlags_AlignRight);
       UI7::RestoreCursor();
     }
     UI7::BrowserList(namelist, selection);
     UI7::EndMenu();
   }
-  RD7::R2()->OnScreen(R2Screen_Bottom);
-  if (UI7::BeginMenu(Lang::BGB)) {
+  PD::LI::OnScreen(true);
+  if (UI7::BeginMenu(PD::Lang::Get("BGB"))) {
     UI7::EndMenu();
   }
-}
-
-void Titles::Logic() {
+  // Logic
   if (hidKeysDown() & KEY_B) {
-    RD7::Scene::Back();
+    PD::Scene::Back();
   }
   if (hidKeysDown() & KEY_A) {
     if (romfs_is_mount) {
@@ -41,7 +39,7 @@ void Titles::Logic() {
         D7MC::TitleManager::sdtitles[selection]->id(),
         D7MC::TitleManager::sdtitles[selection]->mediatype(), "title");
     if (R_FAILED(mntres)) {
-      RD7::ResultDecoder d;
+      PD::ResultDecoder d;
       d.Load(mntres);
       d.WriteLog();
       std::stringstream ss;
@@ -50,7 +48,7 @@ void Titles::Logic() {
       ss << "Level: " << d.GetLevel() << std::endl;
       ss << "Summary: " << d.GetSummary() << std::endl;
       ss << "Description: " << d.GetDescription() << std::endl;
-      RD7::Error(ss.str());
+      PD::Error(ss.str());
     } else {
       romfs_is_mount = true;
     }

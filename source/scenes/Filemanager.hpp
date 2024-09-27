@@ -3,10 +3,9 @@
 #include <common.hpp>
 
 namespace BP {
-class Filemanager : public RD7::Scene {
+class Filemanager : public PD::Scene {
  public:
-  void Draw(void) const override;
-  void Logic() override;
+  void Update() override;
   Filemanager(std::string idevice = "sdmc:/");
 
  private:
@@ -16,7 +15,7 @@ class Filemanager : public RD7::Scene {
   }
   std::string device;
   std::string dir;
-  std::vector<RD7::FileSystem::Entry> dircontent;
+  std::vector<PD::FileSystem::Entry> dircontent;
   std::vector<std::string> namelist;
   mutable int dirsel = 0;
   bool changeddir = false;

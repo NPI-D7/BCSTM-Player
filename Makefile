@@ -65,9 +65,9 @@ VERSION_STRING := $(VERSION_MAJOR).$(VERSION_MINOR).$(VERSION_MICRO)
 #---------------------------------------------------------------------------------
 TARGET		:=	BCSTM-Player
 BUILD		:=	build
-SOURCES		:=	source RenderD7/source D7-Menu-Core source/scenes
+SOURCES		:=	source palladium/source palladium/source/base D7-Menu-Core source/scenes
 DATA		:=	data
-INCLUDES	:=	source RenderD7/include D7-Menu-Core source/scenes
+INCLUDES	:=	source palladium/include D7-Menu-Core source/scenes
 GRAPHICS	:=	gfx
 #GFXBUILD	:=	$(BUILD)
 ROMFS		:=	romfs

@@ -1,11 +1,12 @@
 #include <config.hpp>
+#include <fstream>
 
 void BP::Config::Load() {
-  if (!RD7::FS::FileExist(RD7::GetAppDirectory() + "/config.json")) {
+  if (!PD::FS::FileExist(PD::GetAppDirectory() + "/config.json")) {
     make_new();
     return;
   }
-  std::ifstream iff(RD7::GetAppDirectory() + "/config.json", std::ios::in);
+  std::ifstream iff(PD::GetAppDirectory() + "/config.json", std::ios::in);
   if (!iff.is_open()) {
     make_new();
     return;
@@ -24,7 +25,7 @@ void BP::Config::Load() {
 }
 
 void BP::Config::Save() {
-  std::ofstream off(RD7::GetAppDirectory() + "/config.json", std::ios::out);
+  std::ofstream off(PD::GetAppDirectory() + "/config.json", std::ios::out);
   off << config.dump(4);
   off.close();
 }
@@ -32,9 +33,7 @@ void BP::Config::Save() {
 void BP::Config::make_new() {
   config.clear();
   config["cfg_ver"] = config_version;
-  config["lang"] = RD7::Lang::GetSys();
-  config["fade"] = true;
-  config["rd7tf_theme"] = false;
+  config["lang"] = PD::Lang::GetSys();
   config["clock"] = true;
   config["24h"] = false;
   config["disp_seconds"] = true;
@@ -48,8 +47,6 @@ void BP::Config::make_new() {
 void BP::Config::reload() {
   m_cfg_ver = GetInt("cfg_ver");
   m_lang = GetString("lang");
-  m_fade = GetBool("fade");
-  m_rd7tf_theme = GetBool("rd7tf_theme");
   m_clock = GetBool("clock");
   m_24h = GetBool("24h");
   m_disp_seconds = GetBool("disp_seconds");

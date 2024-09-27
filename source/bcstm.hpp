@@ -1,6 +1,7 @@
 #pragma once
 
-#include <rd7.hpp>
+#include <fstream>
+#include <pd.hpp>
 
 namespace D7 {
 class BCSTM {
@@ -77,10 +78,10 @@ class BCSTM {
 
   unsigned int active_channels = 0;
   unsigned short channel[2];
+
   ndspWaveBuf wave_buf[2][buffer_count];
   ndspAdpcmData adpcm_data[2][2];
-
-  std::vector<unsigned char, RD7::LinearAllocator<unsigned char>>
+  std::vector<unsigned char, PD::LinearAllocator<unsigned char>>
       buffer_data[2][buffer_count];
 };
 }  // namespace D7
